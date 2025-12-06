@@ -999,11 +999,7 @@ module IO_board(
         .opt_ck_div_g(2), // Make sure it divides the clock by 16 (parameter=2) like the original, previously had it set to 1 (divide by 8)
         .opt_type_g(1)
     ) cop421 (
-        `ifdef SIMULATION
-            .ck_i(C4M), // In simulation, just clock it with the 4MHz clock so we don't have to generate another clock
-        `else
-            .ck_i(COPCK), // In real life, clock it from the 3.9MHz COPCK for perfect RTC timing
-        `endif
+        .ck_i(COPCK), // Clock it from the 3.9MHz COPCK for perfect RTC timing
         .ck_en_i(1'b1), // The clock is always enabled
         .reset_n_i(1'b1), // Other than power-on reset, which is handled internally, we never reset the COP because that would wipe the RTC
         // .cko_i(), // We don't use the clock out pin for anything

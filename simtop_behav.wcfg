@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="simtop_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="\$unit_AM9512_FPU_sv_3443252536 " />
+            <top_module name="glbl" />
+            <top_module name="simtop" />
+            <top_module name="t400_io_pack" />
+            <top_module name="t400_mnemonic_pack" />
+            <top_module name="t400_opt_pack" />
+            <top_module name="t400_pack" />
+            <top_module name="tb_pack" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="41.341274188 ms"></ZoomStartTime>
+      <ZoomEndTime time="156.141274189 ms"></ZoomEndTime>
+      <Cursor1Time time="137.007940855 ms"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="397"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="84" />
+   <wvobject type="logic" fp_name="/simtop/dut/sysclk">
+      <obj_property name="ElementShortName">sysclk</obj_property>
+      <obj_property name="ObjectShortName">sysclk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/lisa_dotck">
+      <obj_property name="ElementShortName">lisa_dotck</obj_property>
+      <obj_property name="ObjectShortName">lisa_dotck</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/io_board/ON">
+      <obj_property name="ElementShortName">ON</obj_property>
+      <obj_property name="ObjectShortName">ON</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/_HDER_in">
+      <obj_property name="ElementShortName">_HDER_in</obj_property>
+      <obj_property name="ObjectShortName">_HDER_in</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/_HDER_out">
+      <obj_property name="ElementShortName">_HDER_out</obj_property>
+      <obj_property name="ObjectShortName">_HDER_out</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/HDER_OE">
+      <obj_property name="ElementShortName">HDER_OE</obj_property>
+      <obj_property name="ObjectShortName">HDER_OE</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/_SFER_in">
+      <obj_property name="ElementShortName">_SFER_in</obj_property>
+      <obj_property name="ObjectShortName">_SFER_in</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/_SFER_out">
+      <obj_property name="ElementShortName">_SFER_out</obj_property>
+      <obj_property name="ObjectShortName">_SFER_out</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/SFER_OE">
+      <obj_property name="ElementShortName">SFER_OE</obj_property>
+      <obj_property name="ObjectShortName">SFER_OE</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/_RESET">
+      <obj_property name="ElementShortName">_RESET</obj_property>
+      <obj_property name="ObjectShortName">_RESET</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/_PWRSW">
+      <obj_property name="ElementShortName">_PWRSW</obj_property>
+      <obj_property name="ObjectShortName">_PWRSW</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/_RSTSW">
+      <obj_property name="ElementShortName">_RSTSW</obj_property>
+      <obj_property name="ObjectShortName">_RSTSW</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/_NMISW">
+      <obj_property name="ElementShortName">_NMISW</obj_property>
+      <obj_property name="ObjectShortName">_NMISW</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/_RSTSW_int">
+      <obj_property name="ElementShortName">_RSTSW_int</obj_property>
+      <obj_property name="ObjectShortName">_RSTSW_int</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/BD_in">
+      <obj_property name="ElementShortName">BD_in[15:0]</obj_property>
+      <obj_property name="ObjectShortName">BD_in[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/BD_out">
+      <obj_property name="ElementShortName">BD_out[15:0]</obj_property>
+      <obj_property name="ObjectShortName">BD_out[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/BD_OE">
+      <obj_property name="ElementShortName">BD_OE</obj_property>
+      <obj_property name="ObjectShortName">BD_OE</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/BD">
+      <obj_property name="ElementShortName">BD[15:0]</obj_property>
+      <obj_property name="ObjectShortName">BD[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/BD_OE_int">
+      <obj_property name="ElementShortName">BD_OE_int</obj_property>
+      <obj_property name="ObjectShortName">BD_OE_int</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_DTACK_in">
+      <obj_property name="ElementShortName">_DTACK_in</obj_property>
+      <obj_property name="ObjectShortName">_DTACK_in</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_DTACK_out">
+      <obj_property name="ElementShortName">_DTACK_out</obj_property>
+      <obj_property name="ObjectShortName">_DTACK_out</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/MD_IN">
+      <obj_property name="ElementShortName">MD_IN[15:0]</obj_property>
+      <obj_property name="ObjectShortName">MD_IN[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/MD_OUT">
+      <obj_property name="ElementShortName">MD_OUT[15:0]</obj_property>
+      <obj_property name="ObjectShortName">MD_OUT[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/VIDEO">
+      <obj_property name="ElementShortName">VIDEO</obj_property>
+      <obj_property name="ObjectShortName">VIDEO</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_MDEN">
+      <obj_property name="ElementShortName">_MDEN</obj_property>
+      <obj_property name="ObjectShortName">_MDEN</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/DTACK_OE">
+      <obj_property name="ElementShortName">DTACK_OE</obj_property>
+      <obj_property name="ObjectShortName">DTACK_OE</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/MREAD">
+      <obj_property name="ElementShortName">MREAD</obj_property>
+      <obj_property name="ObjectShortName">MREAD</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/A16">
+      <obj_property name="ElementShortName">A16</obj_property>
+      <obj_property name="ObjectShortName">A16</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/A17">
+      <obj_property name="ElementShortName">A17</obj_property>
+      <obj_property name="ObjectShortName">A17</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/A18">
+      <obj_property name="ElementShortName">A18</obj_property>
+      <obj_property name="ObjectShortName">A18</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/A19">
+      <obj_property name="ElementShortName">A19</obj_property>
+      <obj_property name="ObjectShortName">A19</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/RA">
+      <obj_property name="ElementShortName">RA[8:1]</obj_property>
+      <obj_property name="ObjectShortName">RA[8:1]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_AS">
+      <obj_property name="ElementShortName">_AS</obj_property>
+      <obj_property name="ObjectShortName">_AS</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_CAS">
+      <obj_property name="ElementShortName">_CAS</obj_property>
+      <obj_property name="ObjectShortName">_CAS</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_LDS">
+      <obj_property name="ElementShortName">_LDS</obj_property>
+      <obj_property name="ObjectShortName">_LDS</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_UDS">
+      <obj_property name="ElementShortName">_UDS</obj_property>
+      <obj_property name="ObjectShortName">_UDS</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_RAS">
+      <obj_property name="ElementShortName">_RAS</obj_property>
+      <obj_property name="ObjectShortName">_RAS</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/_NMI">
+      <obj_property name="ElementShortName">_NMI</obj_property>
+      <obj_property name="ObjectShortName">_NMI</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/low_byte_matrix/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/slot1/low_byte_matrix/A">
+      <obj_property name="ElementShortName">A[7:0]</obj_property>
+      <obj_property name="ObjectShortName">A[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/slot1/low_byte_matrix/MD">
+      <obj_property name="ElementShortName">MD[7:0]</obj_property>
+      <obj_property name="ObjectShortName">MD[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/low_byte_matrix/PI">
+      <obj_property name="ElementShortName">PI</obj_property>
+      <obj_property name="ObjectShortName">PI</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/low_byte_matrix/R_W">
+      <obj_property name="ElementShortName">R_W</obj_property>
+      <obj_property name="ObjectShortName">R_W</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/slot1/low_byte_matrix/_CAS">
+      <obj_property name="ElementShortName">_CAS[3:0]</obj_property>
+      <obj_property name="ObjectShortName">_CAS[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/slot1/low_byte_matrix/_RAS">
+      <obj_property name="ElementShortName">_RAS[3:0]</obj_property>
+      <obj_property name="ObjectShortName">_RAS[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/slot1/low_byte_matrix/DO">
+      <obj_property name="ElementShortName">DO[7:0]</obj_property>
+      <obj_property name="ObjectShortName">DO[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/A_OUT">
+      <obj_property name="ElementShortName">A_OUT[12:1]</obj_property>
+      <obj_property name="ObjectShortName">A_OUT[12:1]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_clr_vid_clk">
+      <obj_property name="ElementShortName">_clr_vid_clk</obj_property>
+      <obj_property name="ObjectShortName">_clr_vid_clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/VA">
+      <obj_property name="ElementShortName">VA[14:1]</obj_property>
+      <obj_property name="ObjectShortName">VA[14:1]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/vid_addr_clr">
+      <obj_property name="ElementShortName">vid_addr_clr</obj_property>
+      <obj_property name="ObjectShortName">vid_addr_clr</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/vid_addr_clk">
+      <obj_property name="ElementShortName">vid_addr_clk</obj_property>
+      <obj_property name="ObjectShortName">vid_addr_clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/vid_addr_counter">
+      <obj_property name="ElementShortName">vid_addr_counter[15:0]</obj_property>
+      <obj_property name="ObjectShortName">vid_addr_counter[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/full_vid_addr_counter_clr">
+      <obj_property name="ElementShortName">full_vid_addr_counter_clr</obj_property>
+      <obj_property name="ObjectShortName">full_vid_addr_counter_clr</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/VAL_output">
+      <obj_property name="ElementShortName">VAL_output[7:0]</obj_property>
+      <obj_property name="ObjectShortName">VAL_output[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_VAL">
+      <obj_property name="ElementShortName">_VAL</obj_property>
+      <obj_property name="ObjectShortName">_VAL</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/VA_overflow">
+      <obj_property name="ElementShortName">VA_overflow</obj_property>
+      <obj_property name="ObjectShortName">VA_overflow</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/vid_shift_reg">
+      <obj_property name="ElementShortName">vid_shift_reg[15:0]</obj_property>
+      <obj_property name="ObjectShortName">vid_shift_reg[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/vid_shift_out">
+      <obj_property name="ElementShortName">vid_shift_out</obj_property>
+      <obj_property name="ObjectShortName">vid_shift_out</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/vid_shift_out_ff">
+      <obj_property name="ElementShortName">vid_shift_out_ff</obj_property>
+      <obj_property name="ObjectShortName">vid_shift_out_ff</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/CONT">
+      <obj_property name="ElementShortName">CONT[5:0]</obj_property>
+      <obj_property name="ObjectShortName">CONT[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/_VSYNC_int">
+      <obj_property name="ElementShortName">_VSYNC_int</obj_property>
+      <obj_property name="ObjectShortName">_VSYNC_int</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/_HSYNC">
+      <obj_property name="ElementShortName">_HSYNC</obj_property>
+      <obj_property name="ObjectShortName">_HSYNC</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/VID">
+      <obj_property name="ElementShortName">VID</obj_property>
+      <obj_property name="ObjectShortName">VID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/hsync_delay_counter">
+      <obj_property name="ElementShortName">hsync_delay_counter[1:0]</obj_property>
+      <obj_property name="ObjectShortName">hsync_delay_counter[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/end_line_overlap_counter">
+      <obj_property name="ElementShortName">end_line_overlap_counter[2:0]</obj_property>
+      <obj_property name="ObjectShortName">end_line_overlap_counter[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/start_line_overlap_counter">
+      <obj_property name="ElementShortName">start_line_overlap_counter[2:0]</obj_property>
+      <obj_property name="ObjectShortName">start_line_overlap_counter[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/byte_counter">
+      <obj_property name="ElementShortName">byte_counter[14:0]</obj_property>
+      <obj_property name="ObjectShortName">byte_counter[14:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/bit_counter">
+      <obj_property name="ElementShortName">bit_counter[2:0]</obj_property>
+      <obj_property name="ObjectShortName">bit_counter[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/current_byte">
+      <obj_property name="ElementShortName">current_byte[7:0]</obj_property>
+      <obj_property name="ObjectShortName">current_byte[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/rgb">
+      <obj_property name="ElementShortName">rgb[23:0]</obj_property>
+      <obj_property name="ObjectShortName">rgb[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/cx">
+      <obj_property name="ElementShortName">cx[11:0]</obj_property>
+      <obj_property name="ObjectShortName">cx[11:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/cy">
+      <obj_property name="ElementShortName">cy[10:0]</obj_property>
+      <obj_property name="ObjectShortName">cy[10:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/lisa_x">
+      <obj_property name="ElementShortName">lisa_x[9:0]</obj_property>
+      <obj_property name="ObjectShortName">lisa_x[9:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/lisa_y">
+      <obj_property name="ElementShortName">lisa_y[9:0]</obj_property>
+      <obj_property name="ObjectShortName">lisa_y[9:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/fb_index">
+      <obj_property name="ElementShortName">fb_index[18:0]</obj_property>
+      <obj_property name="ObjectShortName">fb_index[18:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/word_index">
+      <obj_property name="ElementShortName">word_index[14:0]</obj_property>
+      <obj_property name="ObjectShortName">word_index[14:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/bit_index">
+      <obj_property name="ElementShortName">bit_index[2:0]</obj_property>
+      <obj_property name="ObjectShortName">bit_index[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/lisa_hdmi_output/pixel">
+      <obj_property name="ElementShortName">pixel</obj_property>
+      <obj_property name="ObjectShortName">pixel</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/UA_CPU">
+      <obj_property name="ElementShortName">UA_CPU[23:1]</obj_property>
+      <obj_property name="ObjectShortName">UA_CPU[23:1]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/UD_CPU_out">
+      <obj_property name="ElementShortName">UD_CPU_out[15:0]</obj_property>
+      <obj_property name="ObjectShortName">UD_CPU_out[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/cpu_board/UD_CPU_in">
+      <obj_property name="ElementShortName">UD_CPU_in[15:0]</obj_property>
+      <obj_property name="ObjectShortName">UD_CPU_in[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_RSTSW">
+      <obj_property name="ElementShortName">_RSTSW</obj_property>
+      <obj_property name="ObjectShortName">_RSTSW</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_RSTHLT_555">
+      <obj_property name="ElementShortName">_RSTHLT_555</obj_property>
+      <obj_property name="ObjectShortName">_RSTHLT_555</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_RSTOUT_CPU">
+      <obj_property name="ElementShortName">_RSTOUT_CPU</obj_property>
+      <obj_property name="ObjectShortName">_RSTOUT_CPU</obj_property>
+   </wvobject>
+</wave_config>

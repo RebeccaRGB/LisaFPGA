@@ -87,16 +87,6 @@ module mem_board_512k(
     input logic [1:0] RAM_SEL
     );
 
-    /// TEMPORARY!!!!
-    assign _CE_SRAM = 1'b0;
-    assign _OE_SRAM = 1'b0;
-    assign _WE_SRAM = 1'b1;
-    assign _UDS_SRAM = 1'b0;
-    assign _LDS_SRAM = 1'b0;
-    assign A_SRAM = 20'b0;
-    assign DOUT_SRAM = 16'b0;
-    /// END TEMPORARY!!!!
-
     logic [15:0] MD;
     logic LBDSL_readop;
     assign MD = LBDSL_readop ? MD_OUT : MD_IN;
@@ -278,30 +268,55 @@ module mem_board_512k(
         end
     end*/
 
-    // Instantiate two RAM matrices, each of which is 256K x 8 Bits worth of 4164s
+    // If we're simulating, then we need to use block RAM
+    // So instantiate two RAM matrices, each of which is 256K x 8 Bits worth of 4164s
     // One's the low byte of the RAM board, and the other's the high byte
-    RAM_matrix low_byte_matrix(
-        .clk(DOTCK),
-        .A(buffered_RA),
-        .MD(MD_IN[7:0]),
-        .PI(PIL),
-        .R_W(LR_W),
-        ._CAS({_CAS3, _CAS2, _CAS1, _CAS0}),
-        ._RAS({_RAS3, _RAS2, _RAS1, _RAS0}),
-        .DO(MD_OUT[7:0]),
-        .PO(POL)
-    );
+    `ifdef SIMULATION
+        RAM_matrix low_byte_matrix(
+            .clk(DOTCK),
+            .A(buffered_RA),
+            .MD(MD_IN[7:0]),
+            .PI(PIL),
+            .R_W(LR_W),
+            ._CAS({_CAS3, _CAS2, _CAS1, _CAS0}),
+            ._RAS({_RAS3, _RAS2, _RAS1, _RAS0}),
+            .DO(MD_OUT[7:0]),
+            .PO(POL)
+        );
 
-     RAM_matrix high_byte_matrix(
-        .clk(DOTCK),
-        .A(buffered_RA),
-        .MD(MD_IN[15:8]),
-        .PI(PIU),
-        .R_W(UR_W),
-        ._CAS({_CAS3, _CAS2, _CAS1, _CAS0}),
-        ._RAS({_RAS3, _RAS2, _RAS1, _RAS0}),
-        .DO(MD_OUT[15:8]),
-        .PO(POU)
-    );
+        RAM_matrix high_byte_matrix(
+            .clk(DOTCK),
+            .A(buffered_RA),
+            .MD(MD_IN[15:8]),
+            .PI(PIU),
+            .R_W(UR_W),
+            ._CAS({_CAS3, _CAS2, _CAS1, _CAS0}),
+            ._RAS({_RAS3, _RAS2, _RAS1, _RAS0}),
+            .DO(MD_OUT[15:8]),
+            .PO(POU)
+        );
+    `else
+        // Otherwise, instantiate the SDRAM controller to drive real SDRAM chips
+        SDRAM_Controller SDRAM_2MB(
+            .clk(DOTCK),
+            .A(buffered_RA),
+            .MD(MD),
+            .R_W(MREAD),
+            ._CAS({_CAS3, _CAS2, _CAS1, _CAS0}),
+            ._RAS({_RAS3, _RAS2, _RAS1, _RAS0}),
+            ._UDS(_UDS),
+            ._LDS(_LDS),
+            .DO(MD_OUT),
+            .PO({POU, POL}),
+            ._CE_SRAM(_CE_SRAM),
+            ._OE_SRAM(_OE_SRAM),
+            ._WE_SRAM(_WE_SRAM),
+            ._UDS_SRAM(_UDS_SRAM),
+            ._LDS_SRAM(_LDS_SRAM),
+            .A_SRAM(A_SRAM),
+            .DIN_SRAM(DIN_SRAM),
+            .DOUT_SRAM(DOUT_SRAM)
+        );
+    `endif
 
 endmodule

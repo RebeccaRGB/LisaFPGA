@@ -21,20 +21,6 @@
 
 
 module top(
-    `ifdef SIMULATION
-        // In simulation, we need to be able to control C16M and the power switch from the testbench
-        input logic sysclk,
-        input logic C16M,
-        input logic [3:0] btn,
-        output logic [3:0] led,
-        output logic [4:0] ar,
-        output logic hdmi_tx_clk_n,
-        output logic hdmi_tx_clk_p,
-        output logic [2:0] hdmi_tx_d_n,
-        output logic [2:0] hdmi_tx_d_p,
-        input logic _PWRSW
-    `else
-        // And in real life, we just deal with them inside top.sv instead; no need to expose them to the outside world
         input logic sysclk,
 
         output logic _VSYNC,
@@ -199,7 +185,6 @@ module top(
         output logic hdmi_tx_clk_p,
         output logic [2:0] hdmi_tx_d_n,
         output logic [2:0] hdmi_tx_d_p*/
-    `endif
     );
 
     // The internal Verilog SCC isn't working yet, so disable the transceivers that hook it to the serial bus
@@ -273,7 +258,6 @@ module top(
     (* MARK_DEBUG = "TRUE" *) logic HDER_OE_CPU;
     (* MARK_DEBUG = "TRUE" *) logic _HDER_MEM;
     (* MARK_DEBUG = "TRUE" *) logic HDER_OE_MEM;
-    logic VSYNC_int;
     (* MARK_DEBUG = "TRUE" *) logic _SFER; // Original is open-collector, we're making it a regular logic signal instead that gets muxed here in the top module
     logic _SFER_CPU; // It gets muxed from these
     logic SFER_OE_CPU;
@@ -308,86 +292,89 @@ module top(
     logic SCCCK_ungated;
     logic SCCCK;
 
-    `ifdef SIMULATION
-        // In simulation, we just use the input sysclk directly as lisa_dotck since we don't care about frequency
-        assign lisa_dotck = sysclk_ibuf;
-        // And tie COPCK and SCCCK to 0 since we derive them from C16M in simulation, once again b/c we don't care about precise timing
-        assign COPCK = 1'b0;
-        assign SCCCK = 1'b0;
-    `else
-        // In real life, we need to generate the 20.37504MHz DOTCK from the 125MHz sysclk
-        // And the 3.9MHz COPCK, 3.68MHz SCCCK, and 16MHz C16M too
-        logic C16M_ungated;
-        logic C16M;
-        logic COPCK_2x;
-        logic SCCCK_2x;
-        logic C5M_ungated;
-        logic C5M;
+    // We need to generate the 20.37504MHz DOTCK from the 125MHz sysclk
+    // And the 3.9MHz COPCK, 3.68MHz SCCCK, and 16MHz C16M too
+    logic C16M_ungated;
+    logic C16M;
+    logic COPCK_2x;
+    logic SCCCK_2x;
+    logic C5M_ungated;
+    logic C5M;
 
-        // We use an MMCM for this, but there's a catch
-        // It can't generate either COPCK or SCCCK directly because the frequencies are too low
-        // So instead, we generate 2x the frequency of each and divide it by 2 with flip-flops
-        clock_divider clkdiv_125mhz_to_20mhz (
-            .lisa_dotck(lisa_dotck_ungated),
-            .sysclk(sysclk_ibuf),
-            .C16M(C16M_ungated),
-            .COPCK_2x(COPCK_2x),
-            .SCCCK_2x(SCCCK_2x),
-            .C5M(C5M_ungated)
-        );
+    // We use an MMCM for this, but there's a catch
+    // It can't generate either COPCK or SCCCK directly because the frequencies are too low
+    // So instead, we generate 2x the frequency of each and divide it by 2 with flip-flops
+    clock_divider clkdiv_125mhz_to_20mhz (
+        .lisa_dotck(lisa_dotck_ungated),
+        .sysclk(sysclk_ibuf),
+        .C16M(C16M_ungated),
+        .COPCK_2x(COPCK_2x),
+        .SCCCK_2x(SCCCK_2x),
+        .C5M(C5M_ungated)
+    );
 
-        //assign COPCK = rpio_24_r;
-        // Here's that division by 2
-        always_ff @(posedge COPCK_2x) begin
-            COPCK = ~COPCK;
-        end
-
-        always_ff @(posedge SCCCK_2x, negedge _RESET) begin
-            if (!_RESET) begin
-                SCCCK_ungated <= 1'b0;
+    //assign COPCK = rpio_24_r;
+    // Here's that division by 2
+    always_ff @(posedge COPCK_2x) begin
+        // In simulation, we need to give COPCK a defined state on reset
+        `ifdef SIMULATION
+            if (!_RSTSW) begin
+                COPCK <= 1'b0;
             end else begin
-                SCCCK_ungated <= ~SCCCK_ungated;
+                COPCK <= ~COPCK;
             end
-        end
+        // But in real life, we don't want to do this; the COP should run at all times when powered on
+        // And we just use whatever random state it happens to be in on power-up
+        `else
+            COPCK <= ~COPCK;
+        `endif
+    end
 
+    always_ff @(posedge SCCCK_2x, negedge _RESET) begin
+        if (!_RESET) begin
+            SCCCK_ungated <= 1'b0;
+        end else begin
+            SCCCK_ungated <= ~SCCCK_ungated;
+        end
+    end
+
+    `ifdef SIMULATION
+        assign lisa_dotck = lisa_dotck_ungated;
+        assign C16M = C16M_ungated;
+        assign SCCCK = SCCCK_ungated;
+        assign C5M = C5M_ungated;
+    `else
         assign lisa_dotck = (ON) ? lisa_dotck_ungated : 1'b0;
         assign C16M = (ON) ? C16M_ungated : 1'b0;
         assign SCCCK = (ON) ? SCCCK_ungated : 1'b0;
         assign C5M = (ON) ? C5M_ungated : 1'b0;
-
     `endif
 
     logic _RSTSW_int;
 
-    `ifdef SIMULATION
-        // In simulation, the only thing that can externally reset the system is the reset button
-        // We're never going to power-cycle the Lisa in simulation, so no need to worry about resetting when the COP turns things on
-        assign _RSTSW_int = ~btn[0];
-    `else
-        // But in real life, we need to be able to reset when the COP turns the Lisa on too
-        // Otherwise, many things will work, but some will be in bad states at power-on
-        // Like the 6504 for instance, which will pick up executing code wherever it left off when the Lisa was last powered down
-        logic ON_prev;
-        logic ON_rising;
+    // We need to be able to reset when the COP turns the Lisa on too, not just when the reset button is pressed
+    // Otherwise, many things will work, but some will be in bad states at power-on
+    // Like the 6504 for instance, which will pick up executing code wherever it left off when the Lisa was last powered down
+    logic ON_prev;
+    logic ON_rising;
 
-        always_ff @(posedge sysclk_ibuf) begin
-            ON_prev <= ON;
-        end
+    always_ff @(posedge sysclk_ibuf) begin
+        ON_prev <= ON;
+    end
 
-        // So we detect the rising edge of ON
-        assign ON_rising = ON & ~ON_prev;
+    // So we detect the rising edge of ON
+    assign ON_rising = ON & ~ON_prev;
 
-        // And use that to reset the system along with the reset button
-        assign _RSTSW_int = _RSTSW & ~ON_rising;
-    `endif
+    // And use that to reset the system along with the reset button
+    assign _RSTSW_int = _RSTSW & ~ON_rising;
 
     // Note the inversion of _VSYNC and VID here; the LS132 on the motherboard does this
-    assign _VSYNC = ~VSYNC_int;
+    assign _VSYNC = ~_VSYNC_int;
     assign VID = ~VID_int;
     // 1 means don't invert, 0 means invert
     // From the CPU board's perspective, a 1 actually inverts the video, but the aforementioned LS132 inverts it back again
     //assign INVID = 1'b1;
-    assign DOTCK = lisa_dotck; // 20.37504MHz clock from the PYNQ-Z2 board
+    assign DOTCK = lisa_dotck; // 20.37504MHz clock
 
     /*assign _RSIR = 1'b1;
     assign _KBIR = 1'b1;
@@ -397,16 +384,25 @@ module top(
     logic tmds_clock;
     logic [2:0] tmds;
 
-    HDMI_Interface lisa_hdmi_output(
-        .sysclk(sysclk_ibuf),
-        ._reset(_RESET),
-        .DOTCK(DOTCK),
-        ._VSYNC(_VSYNC_int),
-        ._HSYNC(_HSYNC),
-        .VID(VID_int),
-        .tmds_clock(tmds_clock),
-        .tmds(tmds)
-    );
+    logic VA_overflow;
+    logic _clr_vid_clk;
+
+    `ifndef SIMULATION
+        HDMI_Interface lisa_hdmi_output(
+            .sysclk(sysclk_ibuf),
+            ._reset(_RESET),
+            .DOTCK(DOTCK),
+            .VA_overflow(VA_overflow), // Replaces VSYNC; better reflects the VSYNC time which is actually longer than _VSYNC
+            ._clr_vid_clk(_clr_vid_clk), // Replaces _HSYNC; better reflects the HSYNC time which is actually shorter than _HSYNC
+            .VID(VID_int),
+            .CONT(CONT),
+            .INVID(INVID),
+            .TONE(TONE),
+            .VC(VC),
+            .tmds_clock(tmds_clock),
+            .tmds(tmds)
+        );
+    `endif
 
     genvar i;
     generate
@@ -490,7 +486,9 @@ module top(
         .E_pos_phase(E_pos_phase),
         .E_neg_phase(E_neg_phase),
         .E_either_edge(E_either_edge),
-        .CPU_ROM_SEL(CPU_ROM_SEL)
+        .CPU_ROM_SEL(CPU_ROM_SEL),
+        .VA_overflow(VA_overflow),
+        ._clr_vid_clk(_clr_vid_clk)
     );
 
     (* MARK_DEBUG = "TRUE" *) logic [3:0] PH;
@@ -524,41 +522,55 @@ module top(
     logic _CRES_in;
     logic _CRES_out;
 
-    `ifdef SIMULATION
-        assign KBD_in = 1'b1; // In simulation, just hard-wire the keyboard input to a known state
-    `else
-        // There are two different things that can drive the keyboard: USB and the actual Lisa keyboard interface
-        logic KBD_in_USB;
-        logic KBD_out_USB;
-        logic KBD_in_LISA;
-        logic KBD_out_LISA;
-        // Do the Lisa keyboard interface first
-        // Make an IOBUF for the bidirectional keyboard line
-        IOBUF (
-            // Any data received from the keyboard goes to KBD_in
-            .O(KBD_in_LISA),
-            // The actual bidirectional pin that goes to the keyboard connector is KBD
-            .IO(KBD),
-            // We hard-wire the data we want to send to the keyboard to 1'b0 (the keyboard line is open-collector, so we can only pull it low)
-            .I(1'b0),
-            // And we pull it low whenever KBD_out is low; otherwise the IOBUF makes the line high-z so the keyboard can drive it
-            .T(KBD_out_LISA)
-        );
-        // And now the USB one
 
-        // Now we have to mux between the two, depending on the KBD_SEL signal
-        always_comb begin
-            // If it's high, then use the USB keyboard
-            if (KBD_SEL) begin
-                KBD_in = KBD_in_USB;
-                KBD_out = KBD_out_USB;
-            // And if it's low, use the Lisa keyboard interface
-            end else begin
-                KBD_in = KBD_in_LISA;
-                KBD_out = KBD_out_LISA;
-            end
+    // There are two different things that can drive the keyboard: USB and the actual Lisa keyboard interface
+    logic KBD_in_USB;
+    logic KBD_out_USB;
+    logic KBD_in_LISA;
+    logic KBD_out_LISA;
+    // Do the Lisa keyboard interface first
+    // Make an IOBUF for the bidirectional keyboard line
+    IOBUF KBDBuf (
+        // Any data received from the keyboard goes to KBD_in
+        .O(KBD_in_LISA),
+        // The actual bidirectional pin that goes to the keyboard connector is KBD
+        .IO(KBD),
+        // We hard-wire the data we want to send to the keyboard to 1'b0 (the keyboard line is open-collector, so we can only pull it low)
+        .I(1'b0),
+        // And we pull it low whenever KBD_out is low; otherwise the IOBUF makes the line high-z so the keyboard can drive it
+        .T(KBD_out_LISA)
+    );
+    // And now the USB one
+
+/*
+    // Now we have to mux between the two, depending on the KBD_SEL signal
+    always_comb begin
+        // If it's high, then use the USB keyboard
+        if (KBD_SEL) begin
+            KBD_in = KBD_in_USB;
+            KBD_out_USB = KBD_out;
+            KBD_out_LISA = 1'b1; // Make sure the Lisa keyboard interface is inactive
+        // And if it's low, use the Lisa keyboard interface
+        end else begin
+            KBD_in = KBD_in_LISA;
+            KBD_out_LISA = KBD_out;
+            KBD_out_USB = 1'b1; // Make sure the USB keyboard interface is inactive
         end
-    `endif
+    end
+*/
+
+    // Now we have to mux between the two, depending on the KBD_SEL signal
+    always_comb begin
+        // If it's high, then use the USB keyboard
+        if (KBD_SEL) begin
+            KBD_in = KBD_in_USB;
+            //KBD_out = KBD_out_USB;
+        // And if it's low, use the Lisa keyboard interface
+        end else begin
+            KBD_in = KBD_in_LISA;
+            //KBD_out = KBD_out_LISA;
+        end
+    end
 
     // Here we mux VPA from the CPU board, I/O board, and expansion slots together
     always_comb begin
@@ -603,7 +615,7 @@ module top(
     always_comb begin
         if (NMI_OE_IO) begin
             _NMI = _NMI_IO;
-        end else if (_NMISW) begin
+        end else if (!_NMISW) begin
             _NMI = 1'b0;
         end else begin
             _NMI = 1'b1;
@@ -639,226 +651,210 @@ module top(
     assign _IRQ = 1'b1;
     //assign SPKRIN = 1'b0;
 
-    // In simulation, keep RDA/SNS high to make the Lisa think no floppy drive is connected
-    `ifdef SIMULATION
-        assign RDA = 1'b1;
-        assign SNS = 1'b1;
-    `else
-        // In real life, the floppy drive signals come from either the onboard ESFloppy or an external floppy drive
-        // This depends on the FLOPPY_SRC signal, so we need to mux between them
+    // The floppy drive signals come from either the onboard ESFloppy or an external floppy drive
+    // This depends on the FLOPPY_SRC signal, so we need to mux between them
 
-        // Set the ESFloppy comms bus to a random value for now
-        assign ESFLOPPY_COMM_BUS = 8'h55;
+    // Set the ESFloppy comms bus to a random value for now
+    assign ESFLOPPY_COMM_BUS = 8'h55;
 
-        // First generate the Sony drive's PWM motor control signal
-        // It's derived from MT0, but processed through the Lite Adapter
-        // So let's make a Lite adapter to generate it
-        (* MARK_DEBUG = "TRUE" *) logic PWM;
+    // First generate the Sony drive's PWM motor control signal
+    // It's derived from MT0, but processed through the Lite Adapter
+    // So let's make a Lite adapter to generate it
+    (* MARK_DEBUG = "TRUE" *) logic PWM;
 
-        Lite_Adapter lisa_lite (
-            .clk(C5M),
-            .rst(~_RSTSW_int),
-            .PH0(PH[0]),
-            .MT(MT1),
-            .PWM(PWM)
-        );
+    Lite_Adapter lisa_lite (
+        .clk(C5M),
+        .rst(~_RSTSW_int),
+        .PH0(PH[0]),
+        .MT(MT1),
+        .PWM(PWM)
+    );
 
-        always_comb begin
-            // If FLOPPY_SRC is high, use the external floppy drive signals
-            if (FLOPPY_SRC) begin
-                RDA = RDA_EXTFLOPPY;
-                WRD_EXTFLOPPY = WRD;
-                SNS = SNS_EXTFLOPPY;
-                _WRQ_EXTFLOPPY = _WRQ;
-                HDS_EXTFLOPPY = HDS;
-                PH_EXTFLOPPY = PH;
-                MT1_EXTFLOPPY = MT1;
-                MT0_EXTFLOPPY = MT0;
-                _DR1_EXTFLOPPY = _DR1;
-                _DR0_EXTFLOPPY = _DR0;
-                PWM_EXTFLOPPY = PWM;
-                // And make sure that the onboard ESFloppy signals are inactive
-                WRD_ESFLOPPY = 1'b0;
-                _WRQ_ESFLOPPY = 1'b1;
-                HDS_ESFLOPPY = 1'b0;
-                PH_ESFLOPPY = 4'b0000;
-                MT1_ESFLOPPY = 1'b0;
-                MT0_ESFLOPPY = 1'b0;
-                _DR1_ESFLOPPY = 1'b1;
-                _DR0_ESFLOPPY = 1'b1;
-                PWM_ESFLOPPY = 1'b0;
-            // Otherwise, use the onboard ESFloppy signals
-            end else begin
-                RDA = RDA_ESFLOPPY;
-                WRD_ESFLOPPY = WRD;
-                SNS = SNS_ESFLOPPY;
-                _WRQ_ESFLOPPY = _WRQ;
-                HDS_ESFLOPPY = HDS;
-                PH_ESFLOPPY = PH;
-                MT1_ESFLOPPY = MT1;
-                MT0_ESFLOPPY = MT0;
-                _DR1_ESFLOPPY = _DR1;
-                _DR0_ESFLOPPY = _DR0;
-                PWM_ESFLOPPY = PWM;
-                // And make sure that the external floppy drive signals are inactive
-                WRD_EXTFLOPPY = 1'b0;
-                _WRQ_EXTFLOPPY = 1'b1;
-                HDS_EXTFLOPPY = 1'b0;
-                PH_EXTFLOPPY = 4'b0000;
-                MT1_EXTFLOPPY = 1'b0;
-                MT0_EXTFLOPPY = 1'b0;
-                _DR1_EXTFLOPPY = 1'b1;
-                _DR0_EXTFLOPPY = 1'b1;
-                PWM_EXTFLOPPY = 1'b0;
-            end
+    always_comb begin
+        // If FLOPPY_SRC is high, use the external floppy drive signals
+        if (FLOPPY_SRC) begin
+            RDA = RDA_EXTFLOPPY;
+            WRD_EXTFLOPPY = WRD;
+            SNS = SNS_EXTFLOPPY;
+            _WRQ_EXTFLOPPY = _WRQ;
+            HDS_EXTFLOPPY = HDS;
+            PH_EXTFLOPPY = PH;
+            MT1_EXTFLOPPY = MT1;
+            MT0_EXTFLOPPY = MT0;
+            _DR1_EXTFLOPPY = _DR1;
+            _DR0_EXTFLOPPY = _DR0;
+            PWM_EXTFLOPPY = PWM;
+            // And make sure that the onboard ESFloppy signals are inactive
+            WRD_ESFLOPPY = 1'b0;
+            _WRQ_ESFLOPPY = 1'b1;
+            HDS_ESFLOPPY = 1'b0;
+            PH_ESFLOPPY = 4'b0000;
+            MT1_ESFLOPPY = 1'b0;
+            MT0_ESFLOPPY = 1'b0;
+            _DR1_ESFLOPPY = 1'b1;
+            _DR0_ESFLOPPY = 1'b1;
+            PWM_ESFLOPPY = 1'b0;
+        // Otherwise, use the onboard ESFloppy signals
+        end else begin
+            RDA = RDA_ESFLOPPY;
+            WRD_ESFLOPPY = WRD;
+            SNS = SNS_ESFLOPPY;
+            _WRQ_ESFLOPPY = _WRQ;
+            HDS_ESFLOPPY = HDS;
+            PH_ESFLOPPY = PH;
+            MT1_ESFLOPPY = MT1;
+            MT0_ESFLOPPY = MT0;
+            _DR1_ESFLOPPY = _DR1;
+            _DR0_ESFLOPPY = _DR0;
+            PWM_ESFLOPPY = PWM;
+            // And make sure that the external floppy drive signals are inactive
+            WRD_EXTFLOPPY = 1'b0;
+            _WRQ_EXTFLOPPY = 1'b1;
+            HDS_EXTFLOPPY = 1'b0;
+            PH_EXTFLOPPY = 4'b0000;
+            MT1_EXTFLOPPY = 1'b0;
+            MT0_EXTFLOPPY = 1'b0;
+            _DR1_EXTFLOPPY = 1'b1;
+            _DR0_EXTFLOPPY = 1'b1;
+            PWM_EXTFLOPPY = 1'b0;
         end
-    `endif
+    end
 
-    `ifdef SIMULATION
-        assign M = 7'b0001000; // In simulation, just hard-wire the mouse signals to a known state
-    `else
-        // In real life, the mouse can either be driven over USB or by a real Lisa/Mac mouse
-        logic [6:0] M_USB;
-        // Instantiate the USB mouse module
+    // The mouse can either be driven over USB or by a real Lisa/Mac mouse
+    logic [6:0] M_USB;
+    // Instantiate the USB mouse module
 
-        // The Lisa mouse interface is literally just the M_LISA line from the port declaration
-        // So now mux between them based on the MOUSE_SEL signal
-        always_comb begin
-            // If MOUSE_SEL is high, use the USB mouse
-            if (MOUSE_SEL) begin
-                M = M_USB;
-            // Otherwise, use the Lisa mouse interface
-            end else begin
-                M = M_LISA;
-            end
+    // The Lisa mouse interface is literally just the M_LISA line from the port declaration
+    // So now mux between them based on the MOUSE_SEL signal
+    always_comb begin
+        // If MOUSE_SEL is high, use the USB mouse
+        if (MOUSE_SEL) begin
+            M = M_USB;
+        // Otherwise, use the Lisa mouse interface
+        end else begin
+            M = M_LISA;
         end
-    `endif
+    end
 
-    `ifdef SIMULATION
-        assign PD_in = 8'h00; // In simulation, just hard-wire the ProFile data inputs to a known state
-        assign _BSY = 1'b1; // And same for BSY and PARITY and OCD
-        assign OCD = 1'b1;
-    `else
-        // In real life, the ProFile can either be a real ProFile, or an onboard ESProFile emulator
-        // We'll need to mux between them, but first let's worry about the ProFile's bidirectional data bus
-        logic [7:0] PD_in_ESProFile;
-        logic [7:0] PD_out_ESProFile;
-        logic _ProFile_EN_ESProFile;
-        logic PR_W_ungated_ESProFile;
-        // All the ProFile data bus signals are bidirectional, so we need IOBUFs for them
-        // We use a generate loop to make 8 of them at once, first for the ESProFile
-        generate
-            for (i = 0; i < 8; i++) begin
-                IOBUF (
-                    // Incoming data from the ProFile goes to PD_in_ESProFile[i]
-                    .O(PD_in_ESProFile[i]),
-                    // The bidirectional pins that go to the ProFile connector are PD_ESPROFILE[0] through PD_ESPROFILE[7]
-                    .IO(PD_ESPROFILE[i]),
-                    // The data to send to the ProFile is PD_out_ESProFile[i]
-                    .I(PD_out_ESProFile[i]),
-                    // The direction is controlled by the unbuffered DR_W; high means ProFile->Lisa, low means Lisa->ProFile
-                    // But only when _ProFile_EN is low; when it's high, make the lines high-Z
-                    .T(_ProFile_EN_ESProFile | PR_W_ungated_ESProFile)
-                );
-            end
-        endgenerate
-        // Oh yeah, CRES or PRES or whatever is bidirectional too
-        logic _CRES_in_ESProFile;
-        logic _CRES_out_ESProFile;
-        IOBUF (
-            // Resets from the ProFile go to _CRES_in
-            .O(_CRES_in_ESProFile),
-            // The bidirectional pin that goes to the ProFile connector is _PRES_ESPROFILE
-            .IO(_PRES_ESPROFILE),
-            // Since the data line is open collector, we hard-wire the data we want to send to the ProFile to 1'b0
-            .I(1'b0),
-            // Pull it low whenever _CRES_out is low; otherwise make it high-Z and a pullup will take it high
-            .T(_CRES_out_ESProFile)
-        );
-        // Now do the same thing for the external "real" ProFile
-        logic [7:0] PD_in_ExtProFile;
-        logic [7:0] PD_out_ExtProFile;
-        logic _ProFile_EN_ExtProFile;
-        logic PR_W_ungated_ExtProFile;
-        generate
-            for (i = 0; i < 8; i++) begin
-                IOBUF (
-                    // Incoming data from the ProFile goes to PD_in_ExtProFile[i]
-                    .O(PD_in_ExtProFile[i]),
-                    // The bidirectional pins that go to the ProFile connector are PD_EXTPROFILE[0] through PD_EXTPROFILE[7]
-                    .IO(PD_EXTPROFILE[i]),
-                    // The data to send to the ProFile is PD_out_ExtProFile[i]
-                    .I(PD_out_ExtProFile[i]),
-                    // The direction is controlled by the unbuffered DR_W; high means ProFile->Lisa, low means Lisa->ProFile
-                    // But only when _ProFile_EN is low; when it's high, make the lines high-Z
-                    .T(_ProFile_EN_ExtProFile | PR_W_ungated_ExtProFile)
-                );
-            end
-        endgenerate
-        logic _CRES_in_ExtProFile;
-        logic _CRES_out_ExtProFile;
-        IOBUF (
-            // Resets from the ProFile go to _CRES_in
-            .O(_CRES_in_ExtProFile),
-            // The bidirectional pin that goes to the ProFile connector is _PRES_EXTPROFILE
-            .IO(_PRES_EXTPROFILE),
-            // Since the data line is open collector, we hard-wire the data we want to send to the ProFile to 1'b0
-            .I(1'b0),
-            // Pull it low whenever _CRES_out is low; otherwise make it high-Z and a pullup will take it high
-            .T(_CRES_out_ExtProFile)
-        );
-        // For now, just hard-code something to the "ESProFile comm bus"
-        assign ESPROFILE_COMM_BUS = 3'b101;
-        // And now we just have to mux all that, along with some unidirectional control signals
-        // This depends on the state of the HDD_SRC switch
-        always_comb begin
-            // If HDD_SRC is low, use the ESProFile
-            if (!HDD_SRC) begin
-                PD_in = PD_in_ESProFile;
-                PD_out_ESProFile = PD_out;
-                _ProFile_EN_ESProFile = _ProFile_EN;
-                PR_W_ungated_ESProFile = PR_W_ungated;
-                _CRES_in = _CRES_in_ESProFile;
-                _CRES_out_ESProFile = _CRES_out;
-                _CMD_ESPROFILE = _CMD;
-                _BSY = _BSY_ESPROFILE;
-                R_W_ESPROFILE = DR_W;
-                _STRB_ESPROFILE = _PSTRB;
-                _PARITY = _PARITY_ESPROFILE;
-                OCD = OCD_ESPROFILE;
-                // But make sure that the external ProFile is left in a safe state (all outputs deasserted)
-                PD_out_ExtProFile = 8'b00000000;
-                _ProFile_EN_ExtProFile = 1'b1;
-                PR_W_ungated_ExtProFile = 1'b1;
-                _CRES_out_ExtProFile = 1'b1;
-                _CMD_EXTPROFILE = 1'b1;
-                R_W_EXTPROFILE = 1'b1;
-                _STRB_EXTPROFILE = 1'b1;
-            // Otherwise, use the external "real" ProFile
-            end else begin
-                PD_in = PD_in_ExtProFile;
-                PD_out_ExtProFile = PD_out;
-                _ProFile_EN_ExtProFile = _ProFile_EN;
-                PR_W_ungated_ExtProFile = PR_W_ungated;
-                _CRES_in = _CRES_in_ExtProFile;
-                _CRES_out_ExtProFile = _CRES_out;
-                _CMD_EXTPROFILE = _CMD;
-                _BSY = _BSY_EXTPROFILE;
-                R_W_EXTPROFILE = DR_W;
-                _STRB_EXTPROFILE = _PSTRB;
-                _PARITY = _PARITY_EXTPROFILE;
-                OCD = OCD_EXTPROFILE;
-                // And make sure that ESProFile is left in a safe state
-                PD_out_ESProFile = 8'b00000000;
-                _ProFile_EN_ESProFile = 1'b1;
-                PR_W_ungated_ESProFile = 1'b1;
-                _CRES_out_ESProFile = 1'b1;
-                _CMD_ESPROFILE = 1'b1;
-                R_W_ESPROFILE = 1'b1;
-                _STRB_ESPROFILE = 1'b1;
-            end
+    // In real life, the ProFile can either be a real ProFile, or an onboard ESProFile emulator
+    // We'll need to mux between them, but first let's worry about the ProFile's bidirectional data bus
+    logic [7:0] PD_in_ESProFile;
+    logic [7:0] PD_out_ESProFile;
+    logic _ProFile_EN_ESProFile;
+    logic PR_W_ungated_ESProFile;
+    // All the ProFile data bus signals are bidirectional, so we need IOBUFs for them
+    // We use a generate loop to make 8 of them at once, first for the ESProFile
+    generate
+        for (i = 0; i < 8; i++) begin
+            IOBUF PDBuf_ESProFile (
+                // Incoming data from the ProFile goes to PD_in_ESProFile[i]
+                .O(PD_in_ESProFile[i]),
+                // The bidirectional pins that go to the ProFile connector are PD_ESPROFILE[0] through PD_ESPROFILE[7]
+                .IO(PD_ESPROFILE[i]),
+                // The data to send to the ProFile is PD_out_ESProFile[i]
+                .I(PD_out_ESProFile[i]),
+                // The direction is controlled by the unbuffered DR_W; high means ProFile->Lisa, low means Lisa->ProFile
+                // But only when _ProFile_EN is low; when it's high, make the lines high-Z
+                .T(_ProFile_EN_ESProFile | PR_W_ungated_ESProFile)
+            );
         end
-    `endif
+    endgenerate
+    // Oh yeah, CRES or PRES or whatever is bidirectional too
+    logic _CRES_in_ESProFile;
+    logic _CRES_out_ESProFile;
+    IOBUF cresBuf_ESProFile (
+        // Resets from the ProFile go to _CRES_in
+        .O(_CRES_in_ESProFile),
+        // The bidirectional pin that goes to the ProFile connector is _PRES_ESPROFILE
+        .IO(_PRES_ESPROFILE),
+        // Since the data line is open collector, we hard-wire the data we want to send to the ProFile to 1'b0
+        .I(1'b0),
+        // Pull it low whenever _CRES_out is low; otherwise make it high-Z and a pullup will take it high
+        .T(_CRES_out_ESProFile)
+    );
+    // Now do the same thing for the external "real" ProFile
+    logic [7:0] PD_in_ExtProFile;
+    logic [7:0] PD_out_ExtProFile;
+    logic _ProFile_EN_ExtProFile;
+    logic PR_W_ungated_ExtProFile;
+    generate
+        for (i = 0; i < 8; i++) begin
+            IOBUF PDBuf_ExtProFile (
+                // Incoming data from the ProFile goes to PD_in_ExtProFile[i]
+                .O(PD_in_ExtProFile[i]),
+                // The bidirectional pins that go to the ProFile connector are PD_EXTPROFILE[0] through PD_EXTPROFILE[7]
+                .IO(PD_EXTPROFILE[i]),
+                // The data to send to the ProFile is PD_out_ExtProFile[i]
+                .I(PD_out_ExtProFile[i]),
+                // The direction is controlled by the unbuffered DR_W; high means ProFile->Lisa, low means Lisa->ProFile
+                // But only when _ProFile_EN is low; when it's high, make the lines high-Z
+                .T(_ProFile_EN_ExtProFile | PR_W_ungated_ExtProFile)
+            );
+        end
+    endgenerate
+    logic _CRES_in_ExtProFile;
+    logic _CRES_out_ExtProFile;
+    IOBUF cresBuf_ExtProFile (
+        // Resets from the ProFile go to _CRES_in
+        .O(_CRES_in_ExtProFile),
+        // The bidirectional pin that goes to the ProFile connector is _PRES_EXTPROFILE
+        .IO(_PRES_EXTPROFILE),
+        // Since the data line is open collector, we hard-wire the data we want to send to the ProFile to 1'b0
+        .I(1'b0),
+        // Pull it low whenever _CRES_out is low; otherwise make it high-Z and a pullup will take it high
+        .T(_CRES_out_ExtProFile)
+    );
+    // For now, just hard-code something to the "ESProFile comm bus"
+    assign ESPROFILE_COMM_BUS = 3'b101;
+    // And now we just have to mux all that, along with some unidirectional control signals
+    // This depends on the state of the HDD_SRC switch
+    always_comb begin
+        // If HDD_SRC is low, use the ESProFile
+        if (!HDD_SRC) begin
+            PD_in = PD_in_ESProFile;
+            PD_out_ESProFile = PD_out;
+            _ProFile_EN_ESProFile = _ProFile_EN;
+            PR_W_ungated_ESProFile = PR_W_ungated;
+            _CRES_in = _CRES_in_ESProFile;
+            _CRES_out_ESProFile = _CRES_out;
+            _CMD_ESPROFILE = _CMD;
+            _BSY = _BSY_ESPROFILE;
+            R_W_ESPROFILE = DR_W;
+            _STRB_ESPROFILE = _PSTRB;
+            _PARITY = _PARITY_ESPROFILE;
+            OCD = OCD_ESPROFILE;
+            // But make sure that the external ProFile is left in a safe state (all outputs deasserted)
+            PD_out_ExtProFile = 8'b00000000;
+            _ProFile_EN_ExtProFile = 1'b1;
+            PR_W_ungated_ExtProFile = 1'b1;
+            _CRES_out_ExtProFile = 1'b1;
+            _CMD_EXTPROFILE = 1'b1;
+            R_W_EXTPROFILE = 1'b1;
+            _STRB_EXTPROFILE = 1'b1;
+        // Otherwise, use the external "real" ProFile
+        end else begin
+            PD_in = PD_in_ExtProFile;
+            PD_out_ExtProFile = PD_out;
+            _ProFile_EN_ExtProFile = _ProFile_EN;
+            PR_W_ungated_ExtProFile = PR_W_ungated;
+            _CRES_in = _CRES_in_ExtProFile;
+            _CRES_out_ExtProFile = _CRES_out;
+            _CMD_EXTPROFILE = _CMD;
+            _BSY = _BSY_EXTPROFILE;
+            R_W_EXTPROFILE = DR_W;
+            _STRB_EXTPROFILE = _PSTRB;
+            _PARITY = _PARITY_EXTPROFILE;
+            OCD = OCD_EXTPROFILE;
+            // And make sure that ESProFile is left in a safe state
+            PD_out_ESProFile = 8'b00000000;
+            _ProFile_EN_ESProFile = 1'b1;
+            PR_W_ungated_ESProFile = 1'b1;
+            _CRES_out_ESProFile = 1'b1;
+            _CMD_ESPROFILE = 1'b1;
+            R_W_ESPROFILE = 1'b1;
+            _STRB_ESPROFILE = 1'b1;
+        end
+    end
 
     logic [7:0] SCC_DOUT;
     logic [7:0] SCC_DIN;
@@ -965,7 +961,7 @@ module top(
         // The external SCC uses a bidrectional data bus, so we need IOBUFs for it
         generate
             for (i = 0; i < 8; i++) begin
-                IOBUF (
+                IOBUF SCC_DBuf (
                     // Incoming data from the SCC goes into SCC_DIN[i]
                     .O(SCC_DIN[i]),
                     // The bidirectional SCC bus is SCC_D[7:0]
@@ -986,7 +982,7 @@ module top(
         // The external SRAM chip has a bidirectional data bus, so we need IOBUFs for it
         generate
             for (i = 0; i < 16; i++) begin
-                IOBUF (
+                IOBUF SRAM_DBuf (
                     // Incoming data from the SRAM goes into DIN_SRAM[i]
                     .O(DIN_SRAM[i]),
                     // The bidirectional SRAM data bus is D_SRAM[15:0]

@@ -3,6 +3,7 @@
 
 set_property ALLOW_COMBINATORIAL_LOOPS true [get_nets {cpu_board/BD_out[*]}]
 set_property ALLOW_COMBINATORIAL_LOOPS true [get_nets cpu_board/_BUST_latched]
+set_property ALLOW_COMBINATORIAL_LOOPS true [get_nets cpu_board/_BUST_latched__0]
 set_property ALLOW_COMBINATORIAL_LOOPS true [get_nets cpu_board/BD_inferred_i_21_n_0]
 set_property ALLOW_COMBINATORIAL_LOOPS true [get_nets cpu_board/BD_inferred_i_22_n_0]
 set_property ALLOW_COMBINATORIAL_LOOPS true [get_nets cpu_board/BD_inferred_i_23_n_0]
@@ -19,7 +20,16 @@ set_property ALLOW_COMBINATORIAL_LOOPS true [get_nets {cpu_board/latched_MMU_add
 set_property ALLOW_COMBINATORIAL_LOOPS true [get_nets {cpu_board/latched_MMU_address[19]}]
 set_property ALLOW_COMBINATORIAL_LOOPS true [get_nets {cpu_board/latched_MMU_address[20]}]
 
+## Make sure that any nets marked as debug are also marked as DONT_TOUCH so that they don't get optimized away
+set_property DONT_TOUCH true [get_nets -hier -filter {MARK_DEBUG == 1}]
+
+## Tell Vivado that our SPI configuration flash bus is 4 bits wide to maximize bitstream loading speed at boot
+## It should be about 4x faster than the default 1x configuration; almost instantaneous
+set_property CONFIG_MODE SPIx4 [current_design]
+set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]
+
 ## The 125MHz sysclk signal
+## ADD CREATE_CLOCKS FOR ALL THE OTHER CLOCK SIGNALS TOO!!!!
 create_clock -period 8.000 -name sys_clk_pin -waveform {0.000 4.000} -add [get_ports sysclk]
 set_property -dict {PACKAGE_PIN B8 IOSTANDARD LVCMOS33} [get_ports sysclk]
 
@@ -244,3 +254,60 @@ set_property -dict {PACKAGE_PIN B7 IOSTANDARD LVCMOS33} [get_ports {SPEED_SEL[0]
 set_property -dict {PACKAGE_PIN C5 IOSTANDARD LVCMOS33} [get_ports {SPEED_SEL[1]}]
 set_property -dict {PACKAGE_PIN C6 IOSTANDARD LVCMOS33} [get_ports CPU_ROM_SEL]
 set_property -dict {PACKAGE_PIN F5 IOSTANDARD LVCMOS33} [get_ports IO_ROM_SEL]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create_debug_core u_ila_0 ila
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
+set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
+set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
+set_property C_DATA_DEPTH 8192 [get_debug_cores u_ila_0]
+set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_0]
+set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
+set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
+set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
+set_property port_width 1 [get_debug_ports u_ila_0/clk]
+connect_debug_port u_ila_0/clk [get_nets [list clkdiv_125mhz_to_20mhz/inst/lisa_dotck]]
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
+set_property port_width 16 [get_debug_ports u_ila_0/probe0]
+connect_debug_port u_ila_0/probe0 [get_nets [list {cpu_board/UD_CPU_in[0]} {cpu_board/UD_CPU_in[1]} {cpu_board/UD_CPU_in[2]} {cpu_board/UD_CPU_in[3]} {cpu_board/UD_CPU_in[4]} {cpu_board/UD_CPU_in[5]} {cpu_board/UD_CPU_in[6]} {cpu_board/UD_CPU_in[7]} {cpu_board/UD_CPU_in[8]} {cpu_board/UD_CPU_in[9]} {cpu_board/UD_CPU_in[10]} {cpu_board/UD_CPU_in[11]} {cpu_board/UD_CPU_in[12]} {cpu_board/UD_CPU_in[13]} {cpu_board/UD_CPU_in[14]} {cpu_board/UD_CPU_in[15]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
+set_property port_width 23 [get_debug_ports u_ila_0/probe1]
+connect_debug_port u_ila_0/probe1 [get_nets [list {cpu_board/UA_CPU[1]} {cpu_board/UA_CPU[2]} {cpu_board/UA_CPU[3]} {cpu_board/UA_CPU[4]} {cpu_board/UA_CPU[5]} {cpu_board/UA_CPU[6]} {cpu_board/UA_CPU[7]} {cpu_board/UA_CPU[8]} {cpu_board/UA_CPU[9]} {cpu_board/UA_CPU[10]} {cpu_board/UA_CPU[11]} {cpu_board/UA_CPU[12]} {cpu_board/UA_CPU[13]} {cpu_board/UA_CPU[14]} {cpu_board/UA_CPU[15]} {cpu_board/UA_CPU[16]} {cpu_board/UA_CPU[17]} {cpu_board/UA_CPU[18]} {cpu_board/UA_CPU[19]} {cpu_board/UA_CPU[20]} {cpu_board/UA_CPU[21]} {cpu_board/UA_CPU[22]} {cpu_board/UA_CPU[23]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
+set_property port_width 16 [get_debug_ports u_ila_0/probe2]
+connect_debug_port u_ila_0/probe2 [get_nets [list {cpu_board/UD_CPU_out[0]} {cpu_board/UD_CPU_out[1]} {cpu_board/UD_CPU_out[2]} {cpu_board/UD_CPU_out[3]} {cpu_board/UD_CPU_out[4]} {cpu_board/UD_CPU_out[5]} {cpu_board/UD_CPU_out[6]} {cpu_board/UD_CPU_out[7]} {cpu_board/UD_CPU_out[8]} {cpu_board/UD_CPU_out[9]} {cpu_board/UD_CPU_out[10]} {cpu_board/UD_CPU_out[11]} {cpu_board/UD_CPU_out[12]} {cpu_board/UD_CPU_out[13]} {cpu_board/UD_CPU_out[14]} {cpu_board/UD_CPU_out[15]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe3]
+set_property port_width 1 [get_debug_ports u_ila_0/probe3]
+connect_debug_port u_ila_0/probe3 [get_nets [list cpu_board/_RSTHLT_555]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe4]
+set_property port_width 1 [get_debug_ports u_ila_0/probe4]
+connect_debug_port u_ila_0/probe4 [get_nets [list io_board/TONE]]
+set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
+set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
+set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
+connect_debug_port dbg_hub/clk [get_nets lisa_dotck_ungated]

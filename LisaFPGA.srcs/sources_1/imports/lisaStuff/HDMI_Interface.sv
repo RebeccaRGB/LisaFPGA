@@ -218,18 +218,28 @@ module HDMI_Interface(
     input logic sysclk,
     input logic _reset,
     input logic DOTCK,
-    input logic _VSYNC,
-    input logic _HSYNC,
+    input logic VA_overflow, // Replaces VSYNC; active high during vertical blanking
+    input logic _clr_vid_clk, // Replaces _HSYNC; active low during horizontal blanking
     input logic VID,
+    input logic [5:0] CONT,
+    input logic INVID,
+    input logic TONE,
+    input logic [2:0] VC,
     output logic tmds_clock,
     output logic [2:0] tmds
     );
-
+ 
     logic clk_pixel;
     logic clk_pixel_x5;
     logic clk_audio;
 
     hdmi_pll_xilinx pll(.clk_in1(sysclk), .clk_out1(clk_pixel), .clk_out2(clk_pixel_x5));
+
+    /*HDMI_MMCM_Mode16_60Hz hdmi_clockgen (
+        .sysclk(sysclk),
+        .clk_pixel(clk_pixel),
+        .clk_pixel_x5(clk_pixel_x5)
+    );*/
 
     logic [10:0] counter = 1'd0;
     always_ff @(posedge clk_pixel)
@@ -238,11 +248,29 @@ module HDMI_Interface(
     end
     assign clk_audio = clk_pixel && counter == 11'd1546;
 
-    logic [15:0] audio_sample_word [1:0];
-    assign audio_sample_word = {16'd0, 16'd0}; // Silence
-    /*logic [15:0] audio_sample_word [1:0] = '{16'd0, 16'd0};
-    always @(posedge clk_audio)
-      audio_sample_word <= '{audio_sample_word[1] + 16'd1, audio_sample_word[0] - 16'd1};*/
+    (* MARK_DEBUG = "TRUE" *) logic [15:0] audio_sample_word;
+
+    // Now let's do the audio sample generation
+    // We take our input audio square wave on TONE and volume on VC (3 bits)
+    // And then we convert it to two 16-bit audio samples (stereo)
+    // Both channels will be the same since the Lisa is mono
+    // We need to convert the square wave to a PCM value, and scale it linearly based on VC
+    // VC = 000 = mute, VC = 111 = max volume
+    // So when TONE is high, output max_volume, when TONE is low, output 0
+    // max_volume = (VC / 7) * 65535
+    // So final output = TONE ? max_volume : 0
+    logic [15:0] max_volume;
+    assign max_volume = (VC == 3'd0) ? 16'd0 :
+                        (VC == 3'd1) ? 16'd9362 :
+                        (VC == 3'd2) ? 16'd18724 :
+                        (VC == 3'd3) ? 16'd28086 :
+                        (VC == 3'd4) ? 16'd37448 :
+                        (VC == 3'd5) ? 16'd46810 :
+                        (VC == 3'd6) ? 16'd56172 :
+                                       16'd65535;
+    always_ff @(posedge clk_audio) begin
+        audio_sample_word <= TONE ? max_volume : 0; //-max_volume;
+    end
 
     logic [23:0] rgb = 24'd0;
     (* MARK_DEBUG = "TRUE" *) logic [11:0] cx;
@@ -259,33 +287,56 @@ module HDMI_Interface(
     (* MARK_DEBUG = "TRUE" *) logic [14:0] word_index;
     (* MARK_DEBUG = "TRUE" *) logic [2:0] bit_index;
     (* MARK_DEBUG = "TRUE" *) logic pixel;
-
+    // Missing one single column of pixels on tghe right of the frame
+    // Left side of the frame has 3? (maybe 2 maybe 4) extra columns of black pixels
     (* MARK_DEBUG = "TRUE" *) logic [14:0] byte_counter;
     (* MARK_DEBUG = "TRUE" *) logic [2:0] bit_counter;
     (* MARK_DEBUG = "TRUE" *) logic [7:0] current_byte;
+    (* MARK_DEBUG = "TRUE" *) logic [2:0] end_line_overlap_counter;
+    (* MARK_DEBUG = "TRUE" *) logic [2:0] start_line_overlap_counter;
+    (* MARK_DEBUG = "TRUE" *) logic [1:0] hsync_delay_counter;
+    (* MARK_DEBUG = "TRUE" *) logic prev_clr_vid_clk;
     always_ff @(negedge DOTCK) begin
+        prev_clr_vid_clk <= _clr_vid_clk;
         if (!_reset) begin
             bit_counter <= 0;
             byte_counter <= 0;
             current_byte <= 8'd0;
+            start_line_overlap_counter <= 0;
+            end_line_overlap_counter <= 0;
+            hsync_delay_counter <= 0;
         end else begin
-            if (_VSYNC == 1'b0) begin
+            if (VA_overflow == 1'b1) begin
                 bit_counter <= 0;
                 byte_counter <= 0;
                 current_byte <= 8'd0;
-            end else if (_HSYNC == 1'b0) begin // actually, HSYNC is low during the active part of the frame and high during the hblank
-                if (bit_counter == 3'd7) begin
-                    lisa_framebuffer[byte_counter] <= {current_byte[6:0], VID};
-                    byte_counter <= byte_counter + 1;
-                    bit_counter <= 0;
-                    current_byte <= 8'd0;
+                hsync_delay_counter <= 0;
+            end else if ((_clr_vid_clk == 1'b1 || end_line_overlap_counter != 3'd7) && hsync_delay_counter == 2'd2) begin
+                if (_clr_vid_clk == 1'b0 && end_line_overlap_counter != 3'd7) begin
+                    end_line_overlap_counter <= end_line_overlap_counter + 1;
+                end else if (_clr_vid_clk == 1'b1) begin
+                    end_line_overlap_counter <= 3'd0;
+                end
+                if (start_line_overlap_counter != 3'd7) begin
+                    start_line_overlap_counter <= start_line_overlap_counter + 1;
                 end else begin
-                    current_byte <= {current_byte[6:0], VID};
-                    bit_counter <= bit_counter + 1;
+                    if (bit_counter == 3'd7) begin
+                        lisa_framebuffer[byte_counter] <= {VID, current_byte[7:1]};
+                        byte_counter <= byte_counter + 1;
+                        bit_counter <= 0;
+                        current_byte <= 8'd0;
+                    end else begin
+                        current_byte <= {VID, current_byte[7:1]};
+                        bit_counter <= bit_counter + 1;
+                    end
                 end
             end else begin
+                start_line_overlap_counter <= 3'd0;
+                if (hsync_delay_counter != 2'd2 && prev_clr_vid_clk && !_clr_vid_clk) begin
+                    hsync_delay_counter <= hsync_delay_counter + 1;
+                end
                 if (bit_counter == 3'd7) begin
-                    lisa_framebuffer[byte_counter] <= {current_byte[6:0], VID};
+                    lisa_framebuffer[byte_counter] <= {VID, current_byte[7:1]};
                     byte_counter <= byte_counter + 1;
                     bit_counter <= 0;
                     current_byte <= 8'd0;
@@ -307,7 +358,8 @@ module HDMI_Interface(
     always @(posedge clk_pixel) begin
         if (cx >= 240 && cx < 1680 && cy < 1092) begin
             // Inside the active area
-            rgb <= pixel ? 24'h000000 : 24'hFFFFFF; // White or black pixel
+            // Figure out if the pixel is black or white, taking INVID and CONT into account
+            rgb <= (pixel ^ INVID) ? 24'h000000 : {(6'h3f - CONT), 2'b00, (6'h3f - CONT), 2'b00, (6'h3f - CONT), 2'b00};
         end else begin
             rgb <= 24'h202020;
         end
@@ -320,7 +372,7 @@ module HDMI_Interface(
         .clk_audio(clk_audio),
         .reset(~_reset), // Reset switch, active high
         .rgb(rgb), // RGB pixel value
-        .audio_sample_word(audio_sample_word), // Audio sample, ignore for now
+        .audio_sample_word({audio_sample_word, audio_sample_word}), // Audio sample, ignore for now
         .tmds(tmds), // outputs to HDMI port
         .tmds_clock(tmds_clock),
         .cx(cx), // x and y coordinates of current pixel

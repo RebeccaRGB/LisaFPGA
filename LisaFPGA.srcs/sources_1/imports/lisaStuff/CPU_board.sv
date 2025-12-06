@@ -96,7 +96,9 @@ module CPU_board(
     output logic E_pos_phase, // A pulse that goes high for two cycle just after the rising edge of E
     output logic E_neg_phase,  // A pulse that goes high for two cycles just after the falling edge of E
     output logic E_either_edge, // A pulse that goes high for one cycle just after either edge of E
-    input logic CPU_ROM_SEL // Selects whether the CPU board uses revision H or 3A boot ROMs (and VSROMs)
+    input logic CPU_ROM_SEL, // Selects whether the CPU board uses revision H or 3A boot ROMs (and VSROMs)
+    output logic VA_overflow, // Goes high during vertical blanking interval (for longer than _VSYNC)
+    output logic _clr_vid_clk // Goes low during horizontal active video (for shorter than _HSYNC)
     );
 
     // The internal CPU board version of the address bus is narrower than the version that's exposed to other cards
@@ -1024,10 +1026,8 @@ module CPU_board(
         end
     end
 
-    logic _clr_vid_clk;
     logic vid_addr_clr;
     logic VSIR_int;
-    logic VA_overflow;
     logic [7:0] VSROM_data;
 
     // Now we can instantiate an actual VSROM to generate all the video timing signals
@@ -1108,6 +1108,8 @@ module CPU_board(
     (*MARK_DEBUG = "TRUE" *) logic [15:0] vid_shift_reg;
     (*MARK_DEBUG = "TRUE" *) logic vid_shift_out;
     always_ff @(posedge DOTCK) begin
+        // No matter what, the output bit is always the MSB of the shift register
+        vid_shift_out <= vid_shift_reg[15];
         // If we want to load the shift register, then stick MD into it
         if (!vid_addr_clk) begin
             vid_shift_reg <= MD_IN;
@@ -1115,8 +1117,6 @@ module CPU_board(
         end else begin
             // First, make sure we're not being inhbited by bit 14 of the vid addr counter
             if (!vid_addr_counter[14]) begin
-                // And if not, then put the next bit out on vid_shift_out and shift the register
-                vid_shift_out <= vid_shift_reg[15];
                 // We shift INVID into the low bit each time; the Lisa Hardware Manual says this was done for debugging or something
                 // But it's completely useless in practice; might as well just shift in 0s or 1s
                 vid_shift_reg <= {vid_shift_reg[14:0], INVID};
