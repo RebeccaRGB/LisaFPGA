@@ -34,17 +34,17 @@ input RDY;              // Ready signal. Pauses CPU when RDY=0
  * internal signals
  */
 
-(* MARK_DEBUG = "TRUE" *) reg  [15:0] PC;         // Program Counter 
-(* MARK_DEBUG = "TRUE" *) reg  [7:0] ABL;         // Address Bus Register LSB
-(* MARK_DEBUG = "TRUE" *) reg  [7:0] ABH;         // Address Bus Register MSB
-(* MARK_DEBUG = "TRUE" *) wire [7:0] ADD;         // Adder Hold Register (registered in ALU)
+reg  [15:0] PC;         // Program Counter 
+reg  [7:0] ABL;         // Address Bus Register LSB
+reg  [7:0] ABH;         // Address Bus Register MSB
+wire [7:0] ADD;         // Adder Hold Register (registered in ALU)
 
-(* MARK_DEBUG = "TRUE" *) reg  [7:0] DIHOLD;      // Hold for Data In
-(* MARK_DEBUG = "TRUE" *) reg  DIHOLD_valid;      //
-(* MARK_DEBUG = "TRUE" *) wire [7:0] DIMUX;       //
+reg  [7:0] DIHOLD;      // Hold for Data In
+reg  DIHOLD_valid;      //
+wire [7:0] DIMUX;       //
 
-(* MARK_DEBUG = "TRUE" *) reg  [7:0] IRHOLD;      // Hold for Instruction register 
-(* MARK_DEBUG = "TRUE" *) reg  IRHOLD_valid;      // Valid instruction in IRHOLD
+reg  [7:0] IRHOLD;      // Hold for Instruction register 
+reg  IRHOLD_valid;      // Valid instruction in IRHOLD
 
 reg  [7:0] AXYS[3:0];   // A, X, Y and S register file
 
@@ -62,7 +62,7 @@ wire HC;                // ALU half carry
 reg  [7:0] AI;          // ALU Input A
 reg  [7:0] BI;          // ALU Input B
 wire [7:0] DI;          // Data In
-(* MARK_DEBUG = "TRUE" *) wire [7:0] IR;          // Instruction register
+wire [7:0] IR;          // Instruction register
 reg  [7:0] DO;          // Data Out 
 reg  WE;                // Write Enable
 reg  CI;                // Carry In
@@ -75,10 +75,10 @@ reg NMI_edge;           // captured NMI edge
 reg [1:0] regsel;                       // Select A, X, Y or S register
 wire [7:0] regfile = AXYS[regsel];      // Selected register output
 
-(* MARK_DEBUG = "TRUE" *) wire [7:0] A_REG = AXYS[SEL_A];
-(* MARK_DEBUG = "TRUE" *) wire [7:0] X_REG = AXYS[SEL_X];
-(* MARK_DEBUG = "TRUE" *) wire [7:0] Y_REG = AXYS[SEL_Y];
-(* MARK_DEBUG = "TRUE" *) wire [7:0] S_REG = AXYS[SEL_S];
+wire [7:0] A_REG = AXYS[SEL_A];
+wire [7:0] X_REG = AXYS[SEL_X];
+wire [7:0] Y_REG = AXYS[SEL_Y];
+wire [7:0] S_REG = AXYS[SEL_S];
 
 parameter 
         SEL_A    = 2'd0,

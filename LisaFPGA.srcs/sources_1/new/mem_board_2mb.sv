@@ -33,7 +33,7 @@ module mem_board_2mb(
     input wire A20,
 
     // The RAM size select lines from the jumpers on the PCB
-    (* MARK_DEBUG = "TRUE" *) input logic [1:0] RAM_SEL,
+    input logic [1:0] RAM_SEL,
 
     // The 20-ish MHz dot clock
     input logic DOTCK,
@@ -84,12 +84,12 @@ module mem_board_2mb(
     assign _SFER_out = 1'b1; // SFER isn't implemented on Apple's RAM boards or ours, so just keep it deasserted
     assign SFER_OE = 1'b0;
 
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] buffered_RA;
+    logic [7:0] buffered_RA;
 
     logic CAS, RAS;
 
     logic BDSL;
-    (* MARK_DEBUG = "TRUE" *) logic LBDSL;
+    logic LBDSL;
 
     // Get the active-high versions of CAS and RAS
     assign CAS = ~_CAS;
@@ -186,8 +186,8 @@ module mem_board_2mb(
         // 01 = 1MB
         // 10 = 1.5MB
         // 11 = 2MB (all RAM enabled)
-    (* MARK_DEBUG = "TRUE" *) logic _CAS_sdram;
-    (* MARK_DEBUG = "TRUE" *)logic _RAS_sdram;
+    logic _CAS_sdram;
+    logic _RAS_sdram;
     always_comb begin
         case (RAM_SEL)
             2'b00: begin // 512KB

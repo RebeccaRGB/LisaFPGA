@@ -55,7 +55,7 @@ module top(
         output logic HDS_ESFLOPPY,
         output logic [3:0] PH_ESFLOPPY,
         output logic MT1_ESFLOPPY,
-        output logic MT0_ESFLOPPY,
+        input logic MT0_ESFLOPPY, // CHANGE BACK TO OUTPUT ONCE PROBLEM IS FIXED
         output logic _DR1_ESFLOPPY,
         output logic _DR0_ESFLOPPY,
         output logic PWM_ESFLOPPY,
@@ -113,7 +113,7 @@ module top(
 
         input logic MOUSE_SEL,
 
-        output logic [1:0] GPIO,
+        output logic [5:0] GPIO,
 
         output logic SCC_C4M,
         output logic SCC_WR,
@@ -148,9 +148,9 @@ module top(
         output logic _RESET,
         input logic _NMISW,
 
-        (* MARK_DEBUG = "TRUE" *) input logic [1:0] SPEED_SEL,
-        (* MARK_DEBUG = "TRUE" *) input logic CPU_ROM_SEL,
-        (* MARK_DEBUG = "TRUE" *) input logic IO_ROM_SEL
+        input logic [1:0] SPEED_SEL,
+        input logic CPU_ROM_SEL,
+        input logic IO_ROM_SEL
     );
 
     // The internal Verilog SCC isn't working yet, so disable the transceivers that hook it to the serial bus
@@ -218,12 +218,12 @@ module top(
     logic _CAS;
     logic _RAS;
     tri A20;
-    (* MARK_DEBUG = "TRUE" *) logic _HDER; // Original is open-collector, we're making it a regular logic signal instead that gets muxed here in the top module
-    (* MARK_DEBUG = "TRUE" *) logic _HDER_CPU; // It gets muxed from these
-    (* MARK_DEBUG = "TRUE" *) logic HDER_OE_CPU;
-    (* MARK_DEBUG = "TRUE" *) logic _HDER_MEM;
-    (* MARK_DEBUG = "TRUE" *) logic HDER_OE_MEM;
-    (* MARK_DEBUG = "TRUE" *) logic _SFER; // Original is open-collector, we're making it a regular logic signal instead that gets muxed here in the top module
+    logic _HDER; // Original is open-collector, we're making it a regular logic signal instead that gets muxed here in the top module
+    logic _HDER_CPU; // It gets muxed from these
+    logic HDER_OE_CPU;
+    logic _HDER_MEM;
+    logic HDER_OE_MEM;
+    logic _SFER; // Original is open-collector, we're making it a regular logic signal instead that gets muxed here in the top module
     logic _SFER_CPU; // It gets muxed from these
     logic SFER_OE_CPU;
     logic _SFER_MEM;
@@ -244,7 +244,6 @@ module top(
     assign _INT1 = 1'b1;
     assign _INT2 = 1'b1;
 
-    logic lisa_dotck_ungated;
     logic lisa_dotck;
     logic sysclk_ibuf;
 
@@ -268,88 +267,116 @@ module top(
     // As well as a 12MHz clock for USB
     logic usbclk;
 
-    // We can switch between 4 different speed settings for the Lisa dot clock using the speed select inputs
-    logic dotck_20M;
-    logic dotck_40M;
-    logic dotck_60M;
-    logic dotck_80M;
-
     // We use an MMCM for this, but there's a catch
     // It can't generate either COPCK or SCCCK directly because the frequencies are too low
     // So instead, we generate 2x the frequency of each and divide it by 2 with flip-flops
-    clock_divider clkdiv_125mhz_to_20mhz (
-        .lisa_dotck(lisa_dotck_ungated), // dotck_20M
+    // We'll use this MMCM to generate everything but the DOTCK
+    clock_divider primary_clock_divider (
         .sysclk(sysclk_ibuf),
+        //.lisa_dotck(lisa_dotck_ungated), // dotck_20M
         .C16M(C16M_ungated),
         .COPCK_2x(COPCK_2x),
         .SCCCK_2x(SCCCK_2x),
         .C5M(C5M_ungated),
         .usbclk(usbclk)
     );
-/*
-    // This second MMCM generates the alternate non-standard dotck frequencies we can select from
-    alt_dotck_generator clkdiv_alt_dotck (
+
+    // The DOTCK is a little bit different because we need to be able to select between multiple frequencies for it
+    // So we generate all of the possible DOTCK frequencies with a separate MMCM, and then use clock muxing to pick which one we want
+    logic dotck_20M;
+    logic dotck_40M;
+    logic dotck_60M;
+    logic dotck_80M;
+
+    // This second MMCM generates all of the dotck frequencies we can select from
+    dotck_mmcm dotck_generator (
         .sysclk(sysclk_ibuf),
+        .dotck_20M(dotck_20M),
         .dotck_40M(dotck_40M),
         .dotck_60M(dotck_60M),
         .dotck_80M(dotck_80M)
     );
 
     // Now we need to read the speed select inputs and pick which dot clock to use
-    // We must use special BUFGCTRL primitives here that are designed for clock muxing; clocks can't be routed through regular muxes
-    (*MARK_DEBUG = "TRUE"*) logic sel_20_or_40;
-    (*MARK_DEBUG = "TRUE"*) logic sel_20_or_40_n;
-    (*MARK_DEBUG = "TRUE"*) logic sel_60_or_80;
-    (*MARK_DEBUG = "TRUE"*) logic sel_60_or_80_n;
-    (*MARK_DEBUG = "TRUE"*) logic sel_A_or_B;
-    (*MARK_DEBUG = "TRUE"*) logic sel_A_or_B_n;
-    // First stage selection (20M vs 40M)
-    assign sel_20_or_40    = (SPEED_SEL == 2'b00);
-    assign sel_20_or_40_n  = (SPEED_SEL == 2'b01);
+    // We have to use special BUFGMUX primitives that are designed for clock muxing; clocks can't be safely routed through regular muxes
+    // Each BUFGMUX can only select between two clocks, so we have to do it in multiple stages
+    // One for 20 or 40M, one for 60 or 80M, and one for selecting between the two groups
 
-    // Second stage selection (60M vs 80M)
-    assign sel_60_or_80    = (SPEED_SEL == 2'b10);
-    assign sel_60_or_80_n  = (SPEED_SEL == 2'b11);
+    logic dotck_A, dotck_B;
 
-    // Final stage selection (A={20M,40M} vs B={60M,80M})
-    assign sel_A_or_B      = (SPEED_SEL[1] == 1'b0); // A = slow group
-    assign sel_A_or_B_n    = (SPEED_SEL[1] == 1'b1); // B = fast group
-
-    //------------------------------------------------------------
-    // First stage: select between 20M and 40M
-    //------------------------------------------------------------
-    wire dotck_A;
-
-    BUFGCTRL #(
-        .INIT_OUT(0),        // Start low
-        .PRESELECT_I0("FALSE"),
-        .PRESELECT_I1("FALSE")
-    ) bufgctrl_A (
-        .I0(dotck_20M),      // Clock 0
-        .I1(dotck_40M),      // Clock 1
-        .S0(sel_20_or_40),   // 1 = I0 enabled
-        .S1(sel_20_or_40_n), // 1 = I1 enabled
-        .CE0(1'b1),
-        .CE1(1'b1),
-        .IGNORE0(1'b0),
-        .IGNORE1(1'b0),
-        .O(dotck_A)
+    // Use the first BUFGMUX to select between 20M and 40M
+    BUFGMUX #(
+        .CLK_SEL_TYPE("SYNC") // Synchronous clock switching vs async, doesn't really matter here
+    ) dotck_mux_20M40M (
+        .I0(dotck_20M), // The two clock inputs
+        .I1(dotck_40M),
+        .S(~SPEED_SEL[0]), // Our select line; inverted to match the way the switch is labeled on my PCB
+        .O(dotck_A) // The output clock
     );
 
-    //------------------------------------------------------------
-    // Second stage: select between 60M and 80M
-    //------------------------------------------------------------
-    wire dotck_B;
+    // Now do it again for 60M and 80M
+    BUFGMUX #(
+        .CLK_SEL_TYPE("SYNC")
+    ) dotck_mux_60M80M (
+        .I0(dotck_60M),
+        .I1(dotck_80M),
+        .S(~SPEED_SEL[0]),
+        .O(dotck_B)
+    );
+
+    // And finally, select between the two groups to get the final DOTCK
+    BUFGMUX #(
+        .CLK_SEL_TYPE("SYNC")
+    ) dotck_final_mux (
+        .I0(dotck_A), // 20M/40M group
+        .I1(dotck_B), // 60M/80M group
+        .S(~SPEED_SEL[1]), // Select between the two groups, once again inverted to match the PCB switch labeling
+        .O(lisa_dotck_ungated) // Final DOTCK output
+    );
+
+    /*logic sel_10_or_20;
+    logic _sel_10_or_20;
+    logic sel_40_or_60;
+    logic _sel_40_or_60;
+    logic sel_A_or_B;
+    logic _sel_A_or_B;
+    // First stage selection (10M vs 20M)
+    assign sel_10_or_20    = (SPEED_SEL == 2'b00);
+    assign _sel_10_or_20  = (SPEED_SEL == 2'b01);
+
+    // Second stage selection (40M vs 60M)
+    assign sel_40_or_60    = (SPEED_SEL == 2'b10);
+    assign _sel_40_or_60  = (SPEED_SEL == 2'b11);
+
+    // Final stage selection (A = 10/20 vs B = 40/60)
+    assign sel_A_or_B      = (SPEED_SEL[1] == 1'b0); // A = slow group
+    assign _sel_A_or_B    = (SPEED_SEL[1] == 1'b1); // B = fast group
+
+    BUFGCTRL #(
+        .INIT_OUT(0), // Initial output value; doesn't really matter
+        .PRESELECT_I0("FALSE"), // Which input to preselect; doesn't matter either
+        .PRESELECT_I1("FALSE")
+    ) bufgctrl_A (
+        .I0(dotck_10M), // 10M input clock
+        .I1(dotck_20M), // 20M input clock
+        .S0(sel_10_or_20), // 10M selected when this is 1
+        .S1(_sel_10_or_20), // 20M selected when this is 1
+        .CE0(1'b1), // Both clock enables always enabled
+        .CE1(1'b1),
+        .IGNORE0(1'b0), // Ignore inputs always low
+        .IGNORE1(1'b0),
+        .O(dotck_A) // Output clock
+    );
 
     BUFGCTRL #(
         .INIT_OUT(0),
         .PRESELECT_I0("FALSE"),
         .PRESELECT_I1("FALSE")
     ) bufgctrl_B (
-        .I0(dotck_60M),
-        .I1(dotck_80M),
-        .S0(sel_60_or_80),     // 1 = I0 enabled
-        .S1(sel_60_or_80_n),   // 1 = I1 enabled
+        .I0(dotck_40M),
+        .I1(dotck_60M),
+        .S0(sel_40_or_60),
+        .S1(_sel_40_or_60),
         .CE0(1'b1),
         .CE1(1'b1),
         .IGNORE0(1'b0),
@@ -357,9 +384,7 @@ module top(
         .O(dotck_B)
     );
 
-    //------------------------------------------------------------
-    // Final stage: select between {20/40} and {60/80}
-    //------------------------------------------------------------
+    // Now we select between the two groups (10/20 and 40/60) to get the final lisa_dotck_ungated DOTCK signal
     BUFGCTRL #(
         .INIT_OUT(0),
         .PRESELECT_I0("FALSE"),
@@ -367,8 +392,8 @@ module top(
     ) bufgctrl_final (
         .I0(dotck_A),
         .I1(dotck_B),
-        .S0(sel_A_or_B),       // 1 = I0 enabled
-        .S1(sel_A_or_B_n),     // 1 = I1 enabled
+        .S0(sel_A_or_B),
+        .S1(_sel_A_or_B),
         .CE0(1'b1),
         .CE1(1'b1),
         .IGNORE0(1'b0),
@@ -475,7 +500,7 @@ module top(
     logic VA_overflow;
     logic _clr_vid_clk;
 
-    //`ifndef SIMULATION
+    `ifndef SIMULATION
         HDMI_Interface lisa_hdmi_output(
             .sysclk(sysclk_ibuf),
             ._reset(_RESET),
@@ -491,7 +516,7 @@ module top(
             .tmds_clock(tmds_clock),
             .tmds(tmds)
         );
-    //`endif
+    `endif
 
     genvar i;
     generate
@@ -592,20 +617,20 @@ module top(
     (* MARK_DEBUG = "TRUE" *) logic MT0;
     logic _IRQ;
     logic _BG0; // i think this needs to be open-collector
-    (* MARK_DEBUG = "TRUE" *) logic OCD;
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] PD_in;
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] PD_out;
-    (* MARK_DEBUG = "TRUE" *) logic _ProFile_EN;
-    (* MARK_DEBUG = "TRUE" *) logic PR_W_ungated;
-    (* MARK_DEBUG = "TRUE" *) logic _PARITY;
-    (* MARK_DEBUG = "TRUE" *) logic _PSTRB;
-    (* MARK_DEBUG = "TRUE" *) logic DR_W;
-    (* MARK_DEBUG = "TRUE" *) logic _BSY;
-    (* MARK_DEBUG = "TRUE" *) logic _CMD;
+    logic OCD;
+    logic [7:0] PD_in;
+    logic [7:0] PD_out;
+    logic _ProFile_EN;
+    logic PR_W_ungated;
+    logic _PARITY;
+    logic _PSTRB;
+    logic DR_W;
+    logic _BSY;
+    logic _CMD;
     //logic SPKRIN;
-    (* MARK_DEBUG = "TRUE" *) logic KBD_in;
-    (* MARK_DEBUG = "TRUE" *) logic KBD_out;
-    (* MARK_DEBUG = "TRUE" *) logic [6:0] M;
+    logic KBD_in;
+    logic KBD_out;
+    logic [6:0] M;
     logic _NMI_IO;
     logic NMI_OE_IO;
     logic _CRES_in;
@@ -699,7 +724,7 @@ module top(
     // First generate the Sony drive's PWM motor control signal
     // It's derived from MT0, but processed through the Lite Adapter
     // So let's make a Lite adapter to generate it
-    (* MARK_DEBUG = "TRUE" *) logic PWM;
+    logic PWM;
 
     Lite_Adapter lisa_lite (
         .clk(C5M),
@@ -729,22 +754,35 @@ module top(
             HDS_ESFLOPPY = 1'b0;
             PH_ESFLOPPY = 4'b0000;
             MT1_ESFLOPPY = 1'b0;
-            MT0_ESFLOPPY = 1'b0;
+            //MT0_ESFLOPPY = 1'b0; // COMMENT BACK IN ONCE THE RDA PROBLEM IS FIXED
             _DR1_ESFLOPPY = 1'b1;
             _DR0_ESFLOPPY = 1'b1;
             PWM_ESFLOPPY = 1'b0;
+            //GPIO[0] = 1'b0; // TEMPORARY: ROUTE LOW TO A GPIO PIN FOR DEBUGGING PURPOSES
+            //GPIO[1] = 1'b0; // TEMPORARY: ROUTE LOW TO A GPIO PIN FOR DEBUGGING PURPOSES
+            //GPIO[2] = 1'b0; // TEMPORARY: ROUTE LOW TO A GPIO PIN FOR DEBUGGING PURPOSES
+            //GPIO[3] = 1'b0; // TEMPORARY: ROUTE LOW TO A GPIO PIN FOR DEBUGGING PURPOSES
+            //GPIO[4] = 1'b0; // TEMPORARY: ROUTE LOW TO A GPIO PIN FOR DEBUGGING PURPOSES
+            //GPIO[5] = 1'b0; // TEMPORARY: ROUTE LOW TO A GPIO PIN FOR DEBUGGING PURPOSES
         // Otherwise, use the onboard ESFloppy signals
         end else begin
-            RDA = RDA_ESFLOPPY;
-            WRD_ESFLOPPY = WRD;
+            RDA = MT0_ESFLOPPY; // REPLACE RDA WITH RDA_ESFLOPPY ONCE THE RDA PROBLEM IS FIXED
+            _DR0_ESFLOPPY = WRD; // REPLACE DR0 WITH _WRD_ESFLOPPY ONCE THE WRD PROBLEM IS FIXED
+            //WRD_ESFLOPPY = WRD;
+            //GPIO[0] = WRD; // TEMPORARY: ROUTE WRD TO A GPIO PIN FOR DEBUGGING PURPOSES
+            //GPIO[1] = WRD; // TEMPORARY: ROUTE WRD TO A GPIO PIN FOR DEBUGGING PURPOSES
+            //GPIO[2] = WRD; // TEMPORARY: ROUTE WRD TO A GPIO PIN FOR DEBUGGING PURPOSES
+            //GPIO[3] = WRD; // TEMPORARY: ROUTE WRD TO A GPIO PIN FOR DEBUGGING PURPOSES
+            //GPIO[4] = WRD; // TEMPORARY: ROUTE WRD TO A GPIO PIN FOR DEBUGGING PURPOSES
+            //GPIO[5] = WRD; // TEMPORARY: ROUTE WRD TO A GPIO PIN FOR DEBUGGING PURPOSES
             SNS = SNS_ESFLOPPY;
             _WRQ_ESFLOPPY = _WRQ;
             HDS_ESFLOPPY = HDS;
             PH_ESFLOPPY = PH;
             MT1_ESFLOPPY = PWM; // SHOULD BE MT1, CHANGED TO ACCOUNT FOR BODGE WIRES ON BOARD
-            MT0_ESFLOPPY = MT0;
+            //MT0_ESFLOPPY = MT0; COMMENT BACK IN ONCE THE RDA PROBLEM IS FIXED
             _DR1_ESFLOPPY = _DR1;
-            _DR0_ESFLOPPY = _DR0;
+            //_DR0_ESFLOPPY = _DR0; COMMENT BACK IN ONCE THE WRD PROBLEM IS FIXED
             PWM_ESFLOPPY = PWM;
             // And make sure that the external floppy drive signals are inactive
             WRD_EXTFLOPPY = 1'b0;
@@ -813,22 +851,24 @@ module top(
     logic [7:0] usb_key_modifiers_port0;
     logic [7:0] usb_key1_port0;
     // Instantiate the USB HID host module for the first USB port (port 0, previously hard-coded to be for the mouse)
-    usb_hid_host usb_port0 (
-        .usbclk(usbclk), // 12MHz clock
-        .usbrst_n(usbrst), // Active-low reset
-        .usb_dm(usb_dm_out_port0), // USB I/O
-        .usb_dp(usb_dp_out_port0),
-        .usb_dp_in(usb_dp_in_port0),
-        .usb_dm_in(usb_dm_in_port0),
-        .usb_oe(usb_oe_port0),
-        .typ(usb_typ_port0), // Type 2 = mouse, type 1 = keyboard
-        .report(usb_report_port0), // Pulses when we get a report from the device
-        .mouse_btn(usb_mouse_btn_port0), // Mouse button states
-        .mouse_dx(usb_mouse_dx_port0), // Mouse x and y movement
-        .mouse_dy(usb_mouse_dy_port0),
-        .key_modifiers(usb_key_modifiers_port0), // Keyboard key modifier bits
-        .key1(usb_key1_port0) // Up to 4 simultaneous keycodes
-    );
+    `ifndef simulation
+        usb_hid_host usb_port0 (
+            .usbclk(usbclk), // 12MHz clock
+            .usbrst_n(usbrst), // Active-low reset
+            .usb_dm(usb_dm_out_port0), // USB I/O
+            .usb_dp(usb_dp_out_port0),
+            .usb_dp_in(usb_dp_in_port0),
+            .usb_dm_in(usb_dm_in_port0),
+            .usb_oe(usb_oe_port0),
+            .typ(usb_typ_port0), // Type 2 = mouse, type 1 = keyboard
+            .report(usb_report_port0), // Pulses when we get a report from the device
+            .mouse_btn(usb_mouse_btn_port0), // Mouse button states
+            .mouse_dx(usb_mouse_dx_port0), // Mouse x and y movement
+            .mouse_dy(usb_mouse_dy_port0),
+            .key_modifiers(usb_key_modifiers_port0), // Keyboard key modifier bits
+            .key1(usb_key1_port0) // Up to 4 simultaneous keycodes
+        );
+    `endif
 
     // Now repeat all that for the second USB port (port 1), previously hard-coded to be for the keyboard but now can be for anything
     // We also need IOBUFs for the USB data lines since they're bidirectional
@@ -865,22 +905,24 @@ module top(
     logic [7:0] usb_key_modifiers_port1;
     logic [7:0] usb_key1_port1;
     // Instantiate the USB HID host module for the second USB port (port 1, previously hard-coded to be for the keyboard)
-    usb_hid_host usb_port1 (
-        .usbclk(usbclk), // 12MHz clock
-        .usbrst_n(usbrst), // Active-low reset
-        .usb_dm(usb_dm_out_port1), // USB I/O
-        .usb_dp(usb_dp_out_port1),
-        .usb_dp_in(usb_dp_in_port1),
-        .usb_dm_in(usb_dm_in_port1),
-        .usb_oe(usb_oe_port1),
-        .typ(usb_typ_port1), // Type 2 = mouse, type 1 = keyboard
-        .report(usb_report_port1), // Pulses when we get a report from the device
-        .mouse_btn(usb_mouse_btn_port1), // Mouse button states
-        .mouse_dx(usb_mouse_dx_port1), // Mouse x and y movement
-        .mouse_dy(usb_mouse_dy_port1),
-        .key_modifiers(usb_key_modifiers_port1), // Keyboard key modifier bits
-        .key1(usb_key1_port1) // Up to 4 simultaneous keycodes
-    );
+    `ifndef simulation
+        usb_hid_host usb_port1 (
+            .usbclk(usbclk), // 12MHz clock
+            .usbrst_n(usbrst), // Active-low reset
+            .usb_dm(usb_dm_out_port1), // USB I/O
+            .usb_dp(usb_dp_out_port1),
+            .usb_dp_in(usb_dp_in_port1),
+            .usb_dm_in(usb_dm_in_port1),
+            .usb_oe(usb_oe_port1),
+            .typ(usb_typ_port1), // Type 2 = mouse, type 1 = keyboard
+            .report(usb_report_port1), // Pulses when we get a report from the device
+            .mouse_btn(usb_mouse_btn_port1), // Mouse button states
+            .mouse_dx(usb_mouse_dx_port1), // Mouse x and y movement
+            .mouse_dy(usb_mouse_dy_port1),
+            .key_modifiers(usb_key_modifiers_port1), // Keyboard key modifier bits
+            .key1(usb_key1_port1) // Up to 4 simultaneous keycodes
+        );
+    `endif
 
     // Now we just need to look at the type codes from each port and route the data accordingly
     logic signed [7:0] mouse_dx_selected;
@@ -943,6 +985,8 @@ module top(
     );
 
     // And now the USB keyboard one
+    logic KBD_in_USB;
+    logic KBD_out_USB;
     usb_keyboard_interface usb_kbd_interface (
         .usbclk(usbclk),
         .usbrst(usbrst),
@@ -954,8 +998,6 @@ module top(
     );
 
     // There's a little more we need to do for the keyboard though; it's bidirectional, so we need to make an IOBUF for the Lisa keyboard interface
-    logic KBD_in_USB;
-    logic KBD_out_USB;
     logic KBD_in_LISA;
     logic KBD_out_LISA;
     IOBUF KBDBuf (

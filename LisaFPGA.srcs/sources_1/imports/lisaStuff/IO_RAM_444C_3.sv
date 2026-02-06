@@ -35,7 +35,7 @@ module IO_RAM_444C_3(
         logic [3:0] RAM_array [0:1023];
     `endif
 
-    (* MARK_DEBUG = "TRUE" *) logic [3:0] D_out_int;
+    logic [3:0] D_out_int;
     assign D_out = (!_CS) ? D_out_int : 4'bz;
 
     always_ff @(negedge _CS) begin

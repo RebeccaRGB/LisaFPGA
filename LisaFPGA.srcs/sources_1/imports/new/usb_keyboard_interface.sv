@@ -84,8 +84,8 @@ module usb_keyboard_interface(
     (*MARK_DEBUG = "true"*) kbd_state_t kbd_state;
 
     logic prev_kbd_in;
-    (*MARK_DEBUG = "true"*) logic [25:0] kbd_in_pulse_counter; // Counts how long KBD_in has been low
-    (*MARK_DEBUG = "true"*) logic [9:0] kbd_bit_timer; // Timer for sending bits (16us or 30us)
+    logic [25:0] kbd_in_pulse_counter; // Counts how long KBD_in has been low
+    logic [9:0] kbd_bit_timer; // Timer for sending bits (16us or 30us)
 
     // The keycode in Lisa format to send
     (*MARK_DEBUG = "true"*) logic [7:0] lisa_keycode;
@@ -229,10 +229,10 @@ module usb_keyboard_interface(
     (*MARK_DEBUG = "true"*) logic first_run;
 
     // Bit masks for the modifier keys
-    (*MARK_DEBUG = "true"*) logic SHIFT_MASK = 8'h22; // Left and right shift
-    (*MARK_DEBUG = "true"*) logic LEFT_OPTION_MASK = 8'h01; // Left option (mapped to the left control key)
-    (*MARK_DEBUG = "true"*) logic RIGHT_OPTION_MASK = 8'h10; // Right option (mapped to the right control key)
-    (*MARK_DEBUG = "true"*) logic APPLE_MASK = 8'h44; // Left Apple (mapped to left and right alt keys)
+    logic SHIFT_MASK = 8'h22; // Left and right shift
+    logic LEFT_OPTION_MASK = 8'h01; // Left option (mapped to the left control key)
+    logic RIGHT_OPTION_MASK = 8'h10; // Right option (mapped to the right control key)
+    logic APPLE_MASK = 8'h44; // Left Apple (mapped to left and right alt keys)
 
     typedef enum logic [6:0] {
         WAIT,

@@ -34,7 +34,7 @@ module Lite_Adapter(
     // The counter runs at 5MHz, and the PWM output is high when the shift register value is greater than or equal to the counter value
 
     // First do the shift register; reset it on system reset and shift in PH0 on the rising edge of MT
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] shiftreg;
+    logic [7:0] shiftreg;
     always_ff @(posedge MT, posedge rst) begin
         if (rst) begin
             shiftreg <= 8'b0;
@@ -44,7 +44,7 @@ module Lite_Adapter(
     end
 
     // And now do the 8-bit counter running at 5MHz; reset it on system reset and increment it on the rising edge of clk
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] counter;
+    logic [7:0] counter;
     always_ff @(posedge clk, posedge rst) begin
         if (rst) begin
             counter <= 8'b0;

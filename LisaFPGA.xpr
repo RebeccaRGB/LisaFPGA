@@ -59,19 +59,19 @@
     <Option Name="IPUserFilesDir" Val="$PIPUSERFILESDIR"/>
     <Option Name="IPStaticSourceDir" Val="$PIPUSERFILESDIR/ipstatic"/>
     <Option Name="EnableBDX" Val="FALSE"/>
-    <Option Name="WTXSimLaunchSim" Val="76"/>
+    <Option Name="WTXSimLaunchSim" Val="190"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="13"/>
-    <Option Name="WTModelSimExportSim" Val="13"/>
-    <Option Name="WTQuestaExportSim" Val="13"/>
+    <Option Name="WTXSimExportSim" Val="28"/>
+    <Option Name="WTModelSimExportSim" Val="28"/>
+    <Option Name="WTQuestaExportSim" Val="28"/>
     <Option Name="WTIesExportSim" Val="0"/>
-    <Option Name="WTVcsExportSim" Val="13"/>
-    <Option Name="WTRivieraExportSim" Val="13"/>
+    <Option Name="WTVcsExportSim" Val="28"/>
+    <Option Name="WTRivieraExportSim" Val="28"/>
     <Option Name="WTActivehdlExportSim" Val="0"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
@@ -263,8 +263,49 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/ip/clock_divider/clock_divider.xci">
+      <File Path="$PSRCDIR/sources_1/imports/Downloads/MUX.v">
         <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Downloads/MUX.v"/>
+          <Attr Name="ImportTime" Val="1768971196"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/Downloads/logic.inc">
+        <FileInfo SFType="VHeader">
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Downloads/logic.inc"/>
+          <Attr Name="ImportTime" Val="1768971151"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+          <Attr Name="IsVisible" Val="1"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/Downloads/chip_6502_nodes.inc">
+        <FileInfo SFType="VHeader">
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Downloads/chip_6502_nodes.inc"/>
+          <Attr Name="ImportTime" Val="1768971160"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+          <Attr Name="IsVisible" Val="1"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/Downloads/chip_6502.v">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Downloads/chip_6502.v"/>
+          <Attr Name="ImportTime" Val="1768971168"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/HDMI_Interface_MeetsTiming.sv">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -897,20 +938,6 @@
         <Option Name="TopAutoSet" Val="TRUE"/>
       </Config>
     </FileSet>
-    <FileSet Name="alt_dotck_generator" Type="BlockSrcs" RelSrcDir="$PSRCDIR/alt_dotck_generator" RelGenDir="$PGENDIR/alt_dotck_generator">
-      <File Path="$PSRCDIR/sources_1/ip/alt_dotck_generator/alt_dotck_generator.xci">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <Config>
-        <Option Name="TopModule" Val="alt_dotck_generator"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
     <FileSet Name="hdmi_clk_1080p60" Type="BlockSrcs" RelSrcDir="$PSRCDIR/hdmi_clk_1080p60" RelGenDir="$PGENDIR/hdmi_clk_1080p60">
       <File Path="$PSRCDIR/sources_1/ip/hdmi_clk_1080p60/hdmi_clk_1080p60.xci">
         <FileInfo>
@@ -922,6 +949,32 @@
       </File>
       <Config>
         <Option Name="TopModule" Val="hdmi_clk_1080p60"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="clock_divider" Type="BlockSrcs" RelSrcDir="$PSRCDIR/clock_divider" RelGenDir="$PGENDIR/clock_divider">
+      <File Path="$PSRCDIR/sources_1/ip/clock_divider/clock_divider.xci">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="clock_divider"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="dotck_mmcm" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dotck_mmcm" RelGenDir="$PGENDIR/dotck_mmcm">
+      <File Path="$PSRCDIR/sources_1/ip/dotck_mmcm/dotck_mmcm.xci">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="dotck_mmcm"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -958,16 +1011,27 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="alt_dotck_generator_synth_1" Type="Ft3:Synth" SrcSet="alt_dotck_generator" Part="xc7a100tcsg324-2" ConstrsSet="alt_dotck_generator" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/alt_dotck_generator_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/alt_dotck_generator_synth_1" ParallelReportGen="true">
+    <Run Id="hdmi_clk_1080p60_synth_1" Type="Ft3:Synth" SrcSet="hdmi_clk_1080p60" Part="xc7a100tcsg324-2" ConstrsSet="hdmi_clk_1080p60" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/hdmi_clk_1080p60_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/hdmi_clk_1080p60_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/hdmi_clk_1080p60_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
         <Step Id="synth_design"/>
       </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="hdmi_clk_1080p60_synth_1" Type="Ft3:Synth" SrcSet="hdmi_clk_1080p60" Part="xc7a100tcsg324-2" ConstrsSet="hdmi_clk_1080p60" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/hdmi_clk_1080p60_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/hdmi_clk_1080p60_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/hdmi_clk_1080p60_synth_1" ParallelReportGen="true">
+    <Run Id="clock_divider_synth_1" Type="Ft3:Synth" SrcSet="clock_divider" Part="xc7a100tcsg324-2" ConstrsSet="clock_divider" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/clock_divider_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/clock_divider_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/clock_divider_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dotck_mmcm_synth_1" Type="Ft3:Synth" SrcSet="dotck_mmcm" Part="xc7a100tcsg324-2" ConstrsSet="dotck_mmcm" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/dotck_mmcm_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dotck_mmcm_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dotck_mmcm_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
         <Step Id="synth_design"/>
@@ -995,7 +1059,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="alt_dotck_generator_impl_1" Type="Ft2:EntireDesign" Part="xc7a100tcsg324-2" ConstrsSet="alt_dotck_generator" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="alt_dotck_generator_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/alt_dotck_generator_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/alt_dotck_generator_impl_1" ParallelReportGen="true">
+    <Run Id="hdmi_clk_1080p60_impl_1" Type="Ft2:EntireDesign" Part="xc7a100tcsg324-2" ConstrsSet="hdmi_clk_1080p60" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="hdmi_clk_1080p60_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/hdmi_clk_1080p60_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/hdmi_clk_1080p60_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
         <Step Id="init_design"/>
@@ -1012,7 +1076,24 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="hdmi_clk_1080p60_impl_1" Type="Ft2:EntireDesign" Part="xc7a100tcsg324-2" ConstrsSet="hdmi_clk_1080p60" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="hdmi_clk_1080p60_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/hdmi_clk_1080p60_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/hdmi_clk_1080p60_impl_1" ParallelReportGen="true">
+    <Run Id="clock_divider_impl_1" Type="Ft2:EntireDesign" Part="xc7a100tcsg324-2" ConstrsSet="clock_divider" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="clock_divider_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/clock_divider_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/clock_divider_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="dotck_mmcm_impl_1" Type="Ft2:EntireDesign" Part="xc7a100tcsg324-2" ConstrsSet="dotck_mmcm" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="dotck_mmcm_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/dotck_mmcm_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/dotck_mmcm_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
         <Step Id="init_design"/>

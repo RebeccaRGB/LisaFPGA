@@ -33,8 +33,8 @@ module RAM_matrix(
     output logic PO
     );
 
-    (*MARK_DEBUG = "TRUE" *) logic [7:0] row_addr; // Latched row address (from A0-A7)
-    (*MARK_DEBUG = "TRUE" *) logic [7:0] col_addr; // Latched column address (from A0-A7)
+    logic [7:0] row_addr; // Latched row address (from A0-A7)
+    logic [7:0] col_addr; // Latched column address (from A0-A7)
 
     always_ff @(negedge (&_RAS)) begin
         row_addr <= A;
@@ -46,12 +46,12 @@ module RAM_matrix(
             col_addr <= A;
     end
 
-    (*MARK_DEBUG = "TRUE" *) logic [3:0] _CS;
+    logic [3:0] _CS;
     always_ff @(posedge clk) begin
         _CS <= _RAS | _CAS; // Chip is selected when both RAS and CAS are low
     end
 
-    (*MARK_DEBUG = "TRUE" *) logic [7:0] Q0, Q1, Q2, Q3; // Outputs from each bank
+    logic [7:0] Q0, Q1, Q2, Q3; // Outputs from each bank
     logic PQ0, PQ1, PQ2, PQ3; // Parity outputs from each bank
 
     initial begin
@@ -65,7 +65,7 @@ module RAM_matrix(
         `endif
     end
 
-    //(* MARK_DEBUG = "TRUE" *) logic _total_CS;
+    //logic _total_CS;
     //assign _total_CS = _CS[0] & _CS[1] & _CS[2] & _CS[3];
 
     always_ff @(negedge clk) begin

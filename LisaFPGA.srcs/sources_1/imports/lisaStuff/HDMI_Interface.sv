@@ -36,6 +36,26 @@ module HDMI_Interface(
     output logic [2:0] tmds
     );
 
+    logic clk_pixel;
+    logic clk_pixel_x5, clk_pixel_x5_unbuffered;
+    logic clk_audio;
+
+    hdmi_pll_xilinx pll(.clk_in1(sysclk), .clk_out1(clk_pixel), .clk_out2(clk_pixel_x5));
+    /*hdmi_clk_1080p60 hdmi_clockgen (
+        .sysclk(sysclk),
+        .clk_pixel(clk_pixel),
+        .clk_pixel_x5(clk_pixel_x5_unbuffered)
+    );*/
+
+    // clk_pixel is already buffered with a BUFG inside the MMCM, but we need to buffer clk_pixel_x5 with a BUFIO
+    // BUFGs, BUFHs, and BUFRs are too slow for high speed clocking like this; they cap out at about 600-something MHz, and we need 742.5MHz
+    // So we use a BUFIO which is designed for high speed clocking of I/O stuff, like the OSERDES primitives used for HDMI TMDS encoding
+    // Even a BUFIO still isn't quite fast enough for 742.5MHz, but it's close enough that it seems to work okay
+    /*BUFIO bufio_clk_pixel_x5 (
+        .I(clk_pixel_x5_unbuffered),
+        .O(clk_pixel_x5)
+    );*/
+
     // Synchronise the reset signal (from the DOTCK domain) to the HDMI pixel clock domain
     // Otherwise we have tons of metastability issues`
     logic _reset_hdmi_int, _reset_hdmi;
@@ -44,17 +64,6 @@ module HDMI_Interface(
         _reset_hdmi_int <= _reset;
         _reset_hdmi <= _reset_hdmi_int;
     end
-    
-    logic clk_pixel;
-    logic clk_pixel_x5;
-    logic clk_audio;
-
-    hdmi_pll_xilinx pll(.clk_in1(sysclk), .clk_out1(clk_pixel), .clk_out2(clk_pixel_x5));
-    /*hdmi_clk_1080p60 hdmi_clockgen (
-        .sysclk(sysclk),
-        .clk_pixel(clk_pixel),
-        .clk_pixel_x5(clk_pixel_x5)
-    );*/
 
     logic [11:0] counter = 1'd0;
     always_ff @(posedge clk_pixel)
@@ -63,7 +72,7 @@ module HDMI_Interface(
     end
     assign clk_audio = clk_pixel && counter == 12'd1546; // Same here; 1546 for 48KHz at 74.25MHz pixel clock, 3094 for 48KHz at 148.5MHz
 
-    (* MARK_DEBUG = "TRUE" *) logic [15:0] audio_sample_word;
+    logic [15:0] audio_sample_word;
 
     // Now let's do the audio sample generation
     // We take our input audio square wave on TONE and volume on VC (3 bits)
@@ -93,8 +102,8 @@ module HDMI_Interface(
     end
 
     logic [23:0] rgb = 24'd0;
-    (* MARK_DEBUG = "TRUE" *) logic [11:0] cx;
-    (* MARK_DEBUG = "TRUE" *) logic [10:0] cy;
+    logic [11:0] cx;
+    logic [10:0] cy;
 
     // We'll use the full vertical resolution (actually a little more), and less of the horizontal resolution
     // The Lisa is 720x364, so we'll center that in 1920x1080, but each Lisa pixel is 3 pixels high and 2 pixels wide
@@ -106,21 +115,20 @@ module HDMI_Interface(
     // And it needs to be 32832 bytes (608*432/8) for the 3A ROMs
     // But we'll make it even bigger (33000 bytes) to account for the fact that the 3A ROMs capture an extra few bytes at the end of the frame
     logic [7:0] lisa_framebuffer [0:32999];
-    (* MARK_DEBUG = "TRUE" *) logic [9:0] lisa_x;
-    (* MARK_DEBUG = "TRUE" *) logic [9:0] lisa_y;
-    (* MARK_DEBUG = "TRUE" *) logic [15:0] word_index;
-    (* MARK_DEBUG = "TRUE" *) logic [2:0] bit_index;
-    (* MARK_DEBUG = "TRUE" *) logic pixel;
+    logic [9:0] lisa_x;
+    logic [9:0] lisa_y;
+    logic [15:0] word_index;
+    logic [2:0] bit_index;
+    logic pixel;
     // Missing one single column of pixels on tghe right of the frame
     // Left side of the frame has 3? (maybe 2 maybe 4) extra columns of black pixels
-    (* MARK_DEBUG = "TRUE" *) logic [15:0] byte_counter;
-    (* MARK_DEBUG = "TRUE" *) logic [2:0] bit_counter;
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] current_byte;
-    (* MARK_DEBUG = "TRUE" *) logic [3:0] end_line_overlap_counter;
-    (* MARK_DEBUG = "TRUE" *) logic [3:0] start_line_overlap_counter;
-    (* MARK_DEBUG = "TRUE" *) logic [1:0] hsync_delay_counter;
-    (* MARK_DEBUG = "TRUE" *) logic prev_clr_vid_clk;
-
+    logic [15:0] byte_counter;
+    logic [2:0] bit_counter;
+    logic [7:0] current_byte;
+    logic [3:0] end_line_overlap_counter;
+    logic [3:0] start_line_overlap_counter;
+    logic [1:0] hsync_delay_counter;
+    logic prev_clr_vid_clk;
     logic [3:0] hsync_delay_counter_threshold;
     logic [3:0] start_line_overlap_counter_threshold;
     logic [3:0] end_line_overlap_counter_threshold;
@@ -222,8 +230,8 @@ module HDMI_Interface(
 
     // First up, we compute the Lisa pixel coordinates from the HDMI pixel coordinates
     // Each Lisa pixel is 2x3 HDMI pixels
-    //(* MARK_DEBUG = "TRUE" *) logic [9:0] lisa_x_int;
-    //(* MARK_DEBUG = "TRUE" *) logic [9:0] lisa_y_int;
+    //logic [9:0] lisa_x_int;
+    //logic [9:0] lisa_y_int;
     always_ff @(posedge clk_pixel) begin
         if (CPU_ROM_SEL == 1'b0) begin
             // If we have H ROMs, then each Lisa pixel is 2x3 HDMI pixels
@@ -258,7 +266,7 @@ module HDMI_Interface(
         end
     end
 
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] pixel_word;
+    logic [7:0] pixel_word;
 
     // Pipeline the read address for better timing
     logic [15:0] word_index_stage3, word_index_stage4;
@@ -287,8 +295,8 @@ module HDMI_Interface(
 
     // Now we can finally generate the RGB output based on the pixel value
     // But we need to delay cx and cy by 5 clock cycles to match the pixel signal
-    (* MARK_DEBUG = "TRUE" *) logic [11:0] cx1, cx2, cx3, cx4, cx5;//, cx6;
-    (* MARK_DEBUG = "TRUE" *) logic [10:0] cy1, cy2, cy3, cy4, cy5;//, cy6;
+    logic [11:0] cx1, cx2, cx3, cx4, cx5;//, cx6;
+    logic [10:0] cy1, cy2, cy3, cy4, cy5;//, cy6;
     always_ff @(posedge clk_pixel) begin
         cx1 <= cx;
         cx2 <= cx1;

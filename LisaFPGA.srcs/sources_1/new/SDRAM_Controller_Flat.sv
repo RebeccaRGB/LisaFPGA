@@ -35,19 +35,19 @@ module SDRAM_Controller_Flat(
     input logic _LDS,
     output logic [15:0] DO,
     output logic [1:0] PO,
-    (*MARK_DEBUG = "TRUE" *) output logic _CE_SRAM,
-    (*MARK_DEBUG = "TRUE" *) output logic _OE_SRAM,
-    (*MARK_DEBUG = "TRUE" *) output logic _WE_SRAM,
-    (*MARK_DEBUG = "TRUE" *) output logic _UDS_SRAM,
-    (*MARK_DEBUG = "TRUE" *) output logic _LDS_SRAM,
-    (*MARK_DEBUG = "TRUE" *) output logic [20:1] A_SRAM,
-    (*MARK_DEBUG = "TRUE" *) input logic [15:0] DIN_SRAM,
-    (*MARK_DEBUG = "TRUE" *) output logic [15:0] DOUT_SRAM,
-    (*MARK_DEBUG = "TRUE" *) output logic SRAM_BUS_DIR
+    output logic _CE_SRAM,
+    output logic _OE_SRAM,
+    (* MARK_DEBUG = "TRUE" *) output logic _WE_SRAM,
+    (* MARK_DEBUG = "TRUE" *) output logic _UDS_SRAM,
+    (* MARK_DEBUG = "TRUE" *) output logic _LDS_SRAM,
+    (* MARK_DEBUG = "TRUE" *) output logic [20:1] A_SRAM,
+    input logic [15:0] DIN_SRAM,
+    output logic [15:0] DOUT_SRAM,
+    output logic SRAM_BUS_DIR
     );
 
-    (*MARK_DEBUG = "TRUE" *) logic [7:0] row_addr; // Latched row address (from A0-A7)
-    (*MARK_DEBUG = "TRUE" *) logic [7:0] col_addr; // Latched column address (from A0-A7)
+    logic [7:0] row_addr; // Latched row address (from A0-A7)
+    logic [7:0] col_addr; // Latched column address (from A0-A7)
 
     // Latch the row address on the falling edge of _RAS
     always_ff @(negedge _RAS) begin
@@ -61,13 +61,18 @@ module SDRAM_Controller_Flat(
     end
 
     // Select the SDRAM when both RAS and CAS are low
-    (*MARK_DEBUG = "TRUE" *) logic _CS;
+    (* MARK_DEBUG = "TRUE" *) logic _CS;
+    //(* MARK_DEBUG = "TRUE" *) logic _delayed_RAS;
+    //logic _even_more_delayed_RAS;
     always_ff @(posedge clk) begin
         if (!_RAS && !_CAS) begin
+        //if (!_RAS && ! _delayed_RAS) begin // _even_more_delayed_RAS
             _CS <= 1'b0; // SDRAM selected
         end else begin
             _CS <= 1'b1; // Not selected
         end
+        //_delayed_RAS <= _RAS;
+        //_even_more_delayed_RAS <= _delayed_RAS;
     end
 
     // Now let's hook all these signals up to the SDRAM chip

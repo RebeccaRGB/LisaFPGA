@@ -95,19 +95,18 @@ module mem_board_512k(
     assign _SFER_out = 1'b1; // SFER isn't implemented on Apple's RAM boards, so just keep it deasserted
     assign SFER_OE = 1'b0;
 
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] buffered_RA;
+    logic [7:0] buffered_RA;
     logic [7:0] _decoded_bank_address;
     logic [3:0] _decoded_RAS_address;
 
     logic CAS, RAS;
     logic CAS0_sel, CAS1_sel, CAS2_sel, CAS3_sel;
     logic RAS0_sel, RAS1_sel, RAS2_sel, RAS3_sel;
-    (* MARK_DEBUG = "TRUE" *) logic _CAS0, _CAS1, _CAS2, _CAS3;
-    (* MARK_DEBUG = "TRUE" *) logic _RAS0, _RAS1, _RAS2, _RAS3;
+    logic _CAS0, _CAS1, _CAS2, _CAS3;
+    logic _RAS0, _RAS1, _RAS2, _RAS3;
 
     logic BDSL;
-    (* MARK_DEBUG = "TRUE" *) logic LBDSL;
-
+    logic LBDSL;
     logic [3:0] _A19_A20_decoded;
 
     assign T3 = 1'b1;
@@ -185,12 +184,11 @@ module mem_board_512k(
         end
     end
 
-    (* MARK_DEBUG = "TRUE" *) logic latched_parity_lower, latched_parity_upper;
-    (* MARK_DEBUG = "TRUE" *) logic write_bad_parity_lower, write_bad_parity_upper;
-    (* MARK_DEBUG = "TRUE" *) logic PIL, POL, PIU, POU;
-    (* MARK_DEBUG = "TRUE" *) logic low_odd, high_odd;
-    (* MARK_DEBUG = "TRUE" *) logic invalid_parity, invalid_parity_latched;
-
+    logic latched_parity_lower, latched_parity_upper;
+    logic write_bad_parity_lower, write_bad_parity_upper;
+    logic PIL, POL, PIU, POU;
+    logic low_odd, high_odd;
+    logic invalid_parity, invalid_parity_latched;
     // Whenever RAS is asserted, latch the lower and upper parity coming out of the parity RAM chips
     always @(RAS, POL, POU) begin
         if (RAS) begin
@@ -246,7 +244,7 @@ module mem_board_512k(
     //assign _HDER_DAT = ~(~(LBDSL_readop & invalid_parity_latched));
     //assign HDER_OE = ~(LBDSL_readop & invalid_parity_latched);
 
-    (* MARK_DEBUG = "TRUE" *) logic LR_W, UR_W;
+    logic LR_W, UR_W;
 
     // The R/W signals for the lower and upper banks of RAM
     assign LR_W = _LDS | MREAD;

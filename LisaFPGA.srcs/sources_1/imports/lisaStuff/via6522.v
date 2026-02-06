@@ -18,11 +18,11 @@ module via6522 (
     input falling,
     input reset,
     
-    (* MARK_DEBUG = "TRUE" *) input [3:0] addr,
-    (* MARK_DEBUG = "TRUE" *) input wen,
-    (* MARK_DEBUG = "TRUE" *) input ren,
-    (* MARK_DEBUG = "TRUE" *) input [7:0] data_in,
-    (* MARK_DEBUG = "TRUE" *) output reg [7:0] data_out,
+    input [3:0] addr,
+    input wen,
+    input ren,
+    input [7:0] data_in,
+    output reg [7:0] data_out,
 
     output reg phi2_ref,
 

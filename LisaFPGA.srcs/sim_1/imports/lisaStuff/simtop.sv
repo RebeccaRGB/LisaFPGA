@@ -244,7 +244,8 @@ module simtop(
     initial begin
         _NMISW = 1'b1;
         _PWRSW = 1'b1;
-        #5000;
+        _RSTSW = 1'b1;
+        #50000;
         _RSTSW = 1'b0; // Press reset
         #500000;
         _RSTSW = 1'b1; // Release reset

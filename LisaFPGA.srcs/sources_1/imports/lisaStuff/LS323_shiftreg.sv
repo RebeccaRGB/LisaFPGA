@@ -21,18 +21,19 @@
 
 
 module LS323_shiftreg(
-    (* MARK_DEBUG = "TRUE" *) input logic clk,
-    (* MARK_DEBUG = "TRUE" *) input logic _CLR,
-    (* MARK_DEBUG = "TRUE" *) input logic _OE1,
-    (* MARK_DEBUG = "TRUE" *) input logic _OE2,
-    (* MARK_DEBUG = "TRUE" *) input logic S0,
-    (* MARK_DEBUG = "TRUE" *) input logic S1,
-    (* MARK_DEBUG = "TRUE" *) input logic SR,
-    (* MARK_DEBUG = "TRUE" *) input logic SL, 
-    (* MARK_DEBUG = "TRUE" *) input logic [7:0] D,
-    (* MARK_DEBUG = "TRUE" *) output wire [7:0] Q,
-    (* MARK_DEBUG = "TRUE" *) output logic QA,
-    (* MARK_DEBUG = "TRUE" *) output logic QH
+    input logic clk,
+    input logic clk_en,
+    input logic _CLR,
+    input logic _OE1,
+    input logic _OE2,
+    input logic S0,
+    input logic S1,
+    input logic SR,
+    input logic SL, 
+    input logic [7:0] D,
+    output wire [7:0] Q,
+    output logic QA,
+    output logic QH
     );
 
     // The LS323 is an 8-bit shift register that can be parallel loaded, shifted left, or shifted right
@@ -43,7 +44,7 @@ module LS323_shiftreg(
     // SR is the serial input for shifting right, SL is the serial input for shifting left
 
     // Internal version of Q that's not gated by OE
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] Q_int;
+    logic [7:0] Q_int;
 
     // Make sure that Q_int starts at 0 on power-up
     // This is really only necessary for simulation, just so that it doesn't start at X and propagate X's everywhere
@@ -53,17 +54,20 @@ module LS323_shiftreg(
 
     // On the rising edge of the clock, do whatever operation is selected by S0 and S1
     always_ff @(posedge clk) begin
-        // If _CLR is low, clear the register synchronously instead of doing anything else
-        if (!_CLR) begin
-            Q_int <= 8'b0;
-        end else begin
-            // Otherwise do one of the four following operatios:
-            case ({S1, S0})
-                2'b00: Q_int <= Q_int; // Hold state
-                2'b01: Q_int <= {SR, Q_int[7:1]}; // Shift right, put SR into MSB
-                2'b10: Q_int <= {Q_int[6:0], SL}; // Shift left, put SL into LSB
-                2'b11: Q_int <= D; // Parallel load from D
-            endcase
+        // But only do anything if clk_en (our clock gate) is high
+        if (clk_en) begin
+            // If _CLR is low, clear the register synchronously instead of doing anything else
+            if (!_CLR) begin
+                Q_int <= 8'b0;
+            end else begin
+                // Otherwise do one of the four following operatios:
+                case ({S1, S0})
+                    2'b00: Q_int <= Q_int; // Hold state
+                    2'b01: Q_int <= {SR, Q_int[7:1]}; // Shift right, put SR into MSB
+                    2'b10: Q_int <= {Q_int[6:0], SL}; // Shift left, put SL into LSB
+                    2'b11: Q_int <= D; // Parallel load from D
+                endcase
+            end
         end
     end
 

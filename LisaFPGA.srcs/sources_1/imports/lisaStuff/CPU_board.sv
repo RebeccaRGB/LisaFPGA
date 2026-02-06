@@ -67,12 +67,12 @@ module CPU_board(
     (* MARK_DEBUG = "TRUE" *) input logic [15:0] MD_IN,
     (* MARK_DEBUG = "TRUE" *) output logic [15:0] MD_OUT,
     (* MARK_DEBUG = "TRUE" *) output logic [8:1] RA,
-    (* MARK_DEBUG = "TRUE" *) input logic _RSTSW,
+    input logic _RSTSW,
     (* MARK_DEBUG = "TRUE" *) output wire A16, // all 4 of these are tri-state b/c of BGACK
     (* MARK_DEBUG = "TRUE" *) output wire A17,
     (* MARK_DEBUG = "TRUE" *) output wire A18,
     (* MARK_DEBUG = "TRUE" *) output wire A19,
-    (* MARK_DEBUG = "TRUE" *) input logic DOTCK,
+    input logic DOTCK,
     (* MARK_DEBUG = "TRUE" *) output logic MREAD,
     (* MARK_DEBUG = "TRUE" *) output logic _CAS,
     (* MARK_DEBUG = "TRUE" *) output logic _RAS,
@@ -175,6 +175,7 @@ module CPU_board(
     // The reset line coming out of our "555"; gets fed to the CPU
     (* MARK_DEBUG = "TRUE" *) logic _RSTHLT_555;
     logic fast_reset;
+    logic _HALTOUT_CPU;
     always_ff @(posedge DOTCK, negedge _RSTSW, negedge _HALTOUT_CPU) begin
         // If the reset switch is being pressed, then clear the reset counter, and set _RSTHLT_555 low since we're now in reset
         // Same goes for if the CPU itself is requesting a halt; on the Lisa, this just leads to an immediate reset
@@ -202,7 +203,6 @@ module CPU_board(
     // This is done with wire-AND logic on the original board, but since our CPU core has separate ports for HALT in and HALT out,
     // We do it with a plain old assign statement instead
     logic _HALT;
-    logic _HALTOUT_CPU;
     assign _HALT = _RSTHLT_555 & _HALTOUT_CPU;
 
     // Reset is a similar deal; it's just the 555 reset/halt signal wire-ANDed (or just ANDed in our case) with the CPU RESET output
@@ -234,7 +234,7 @@ module CPU_board(
     end
 
     // Unbuffered versions of _UDS, _LDS, _AS, and READ, right off the CPU
-    (* MARK_DEBUG = "TRUE" *) logic _UUDS, _ULDS, _UAS, UREAD;
+    logic _UUDS, _ULDS, _UAS, UREAD;
     // If BGACK says the CPU doesn't control the bus, disconnect the CPU from the buffered versions of these signals
     // Otherwise, we are in control, so pass the unbuffered versions through to the buffered ones
     assign _UDS = _BGACK ? _UUDS : 1'bz;
@@ -420,8 +420,8 @@ module CPU_board(
     // Starting with the write enable signal for the MMU registers
     (* MARK_DEBUG = "TRUE" *) logic _MMU_reg_WE;
     (* MARK_DEBUG = "TRUE" *) logic _MMUIO;
-    (* MARK_DEBUG = "TRUE" *) logic PCK;
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] _T;
+    logic PCK;
+    logic [7:0] _T;
     // This takes the form of a JK flip-flop
     always_ff @(posedge DOTCK, posedge _MMUIO, negedge _RESET) begin
         // If we're in reset, deassert _MMU_reg_WE
@@ -645,7 +645,7 @@ module CPU_board(
     // Now that we're done with memory stuff, let's move onto the system timing circuits
     // First, we need to divide the master clock (DOTCK) down with a counter
     // DOTCK is 20.37504MHz in the stock Lisa
-    (* MARK_DEBUG = "TRUE" *) logic [3:0] Q_counter;
+    logic [3:0] Q_counter;
     (* MARK_DEBUG = "TRUE" *) logic _VT7;
     // Clock the counter on DOTCK
     always_ff @(posedge DOTCK, posedge fast_reset) begin
@@ -1176,7 +1176,7 @@ module CPU_board(
     // It has to have two phases of the clock fed to it separately: enPhi1 and enPhi2
     // enPhi1 should fall on the rising edge of PCK, and enPhi2 should fall on the falling edge of PCK
     // Both should rise one cycle before they fall
-    (* MARK_DEBUG = "TRUE" *) logic enPhi1, enPhi2;
+    logic enPhi1, enPhi2;
     assign enPhi1 = Q_counter[0] & ~PCK;
     assign enPhi2 = Q_counter[0] & PCK;
 
