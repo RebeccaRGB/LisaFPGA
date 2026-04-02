@@ -31,8 +31,8 @@ module usb_keyboard_interface(
     );
 
     // The latched versions of the key modifiers and key1
-    (*MARK_DEBUG = "true"*) logic [7:0] key_modifiers;
-    (*MARK_DEBUG = "true"*) logic [7:0] key1;
+    logic [7:0] key_modifiers;
+    logic [7:0] key1;
 
     // Latch the key modifiers and keycodes on the rising edge of report
     always_ff @(posedge usbclk, negedge usbrst) begin
@@ -81,14 +81,14 @@ module usb_keyboard_interface(
         KBD_RESET
     } kbd_state_t;
 
-    (*MARK_DEBUG = "true"*) kbd_state_t kbd_state;
+    kbd_state_t kbd_state;
 
     logic prev_kbd_in;
     logic [25:0] kbd_in_pulse_counter; // Counts how long KBD_in has been low
     logic [9:0] kbd_bit_timer; // Timer for sending bits (16us or 30us)
 
     // The keycode in Lisa format to send
-    (*MARK_DEBUG = "true"*) logic [7:0] lisa_keycode;
+    logic [7:0] lisa_keycode;
 
     // And a lookup table to convert USB HID keycodes to Lisa keycodes
     // I'm not going to pretend that I wrote this myself; it sounded like a lot of work so I asked ChatGPT to generate it for me
@@ -205,14 +205,15 @@ module usb_keyboard_interface(
 
     // A state counter that's set when we start a reset sequence
     // In which case we send 0x80 first, then 0xBF
-    (*MARK_DEBUG = "true"*) logic [1:0] kbd_reset_sequence;
+    logic [1:0] kbd_reset_sequence;
 
     // Another difference we need to account for:
     // The USB keyboard sends a keycode as long as the key is held down and then sends 0 when it's released
     // The Lisa keyboard protocol expects key press and key release to be separate events
     // So we need to essentially detect edges on the key1 signal and only send the keycode when it rises (press) or falls (release)
     // We'll do this by keeping track of the previous key1 value and comparing it to the current one
-    (*MARK_DEBUG = "true"*) logic [7:0] prev_key1;
+    logic [7:0] prev_key1;
+    logic [7:0] prev_key_modifiers;
 
     // An enum for the states of each modifier key
     typedef enum logic [1:0] {
@@ -221,12 +222,12 @@ module usb_keyboard_interface(
     } modifier_state_t;
 
     // Now create some signals for storing the previous states of said keys: shift (left/right are same), left/right option, and apple key
-    (*MARK_DEBUG = "true"*) modifier_state_t prev_shift_state, prev_left_option_state, prev_right_option_state, prev_apple_state;
+    modifier_state_t prev_shift_state, prev_left_option_state, prev_right_option_state, prev_apple_state;
     // This signal keeps track of the caps lock state
-    (*MARK_DEBUG = "true"*) logic caps_lock_state;
+    logic caps_lock_state;
 
     // A flag to indicate the first run of any of the modifier key handlers
-    (*MARK_DEBUG = "true"*) logic first_run;
+    logic first_run;
 
     // Bit masks for the modifier keys
     logic SHIFT_MASK = 8'h22; // Left and right shift
@@ -244,14 +245,15 @@ module usb_keyboard_interface(
         HANDLE_REGULAR_UP
     } decoder_state_t;
 
-    (*MARK_DEBUG = "true"*) decoder_state_t decoder_state;
+    decoder_state_t decoder_state;
 
     // Boolean flag to say whether or not keycode was actually sent
-    (*MARK_DEBUG = "true"*) logic sent_keycode;
+    logic sent_keycode;
 
     always_ff @(posedge usbclk, negedge usbrst) begin
         if (!usbrst) begin
             prev_key1 <= 8'd0;
+            prev_key_modifiers <= 8'd0;
             caps_lock_state <= 1'b0;
             lisa_keycode <= 8'd0;
             kbd_reset_sequence <= 2'd0;
@@ -279,17 +281,19 @@ module usb_keyboard_interface(
                     // And clear the reset sequence counter
                     kbd_reset_sequence <= 2'd0;
                 end
-                // Also, clear prev_key1 to avoid spurious key events after reset
+                // Also, clear prev_key1 and prev_key_modifiers to avoid spurious key events after reset
                 prev_key1 <= 8'd0;
+                prev_key_modifiers <= 8'd0;
             end else begin
                 // Otherwise, handle key events as normal, which we do with a state machine
                 case (decoder_state)
                     WAIT: begin
-                        // In the idle state, we just wait until we see a change in key1
-                        if (key1 != prev_key1) begin
+                        // In the idle state, we just wait until we see a change in key1 or the modifiers
+                        if (key1 != prev_key1 || key_modifiers != prev_key_modifiers) begin
                             // And then we move to HANDLE_SHIFT to start processing modifier keys
                             first_run <= 1'b1; // Set the first run flag
                             sent_keycode <= 1'b1; // Set the flag so we don't automatically fall through the shift handler
+                            prev_key_modifiers <= key_modifiers; // Update prev_key_modifiers to the new modifier value
                             decoder_state <= HANDLE_SHIFT;
                         end
                     end
@@ -314,6 +318,7 @@ module usb_keyboard_interface(
                             // Or just go straight to the next state if we didn't send anything
                             first_run <= 1'b1; // Set the first run flag again
                             sent_keycode <= 1'b1; // Set the flag so we don't automatically fall through next time
+                            lisa_keycode <= 8'd0; // Clear lisa_keycode to indicate no key to send
                             decoder_state <= HANDLE_LEFT_OPTION;
                         end
                     end
@@ -336,6 +341,7 @@ module usb_keyboard_interface(
                         if (kbd_state == FINISHED || !sent_keycode) begin
                             sent_keycode <= 1'b1; // Set the flag so we don't automatically fall through next time
                             first_run <= 1'b1; // Set the first run flag again
+                            lisa_keycode <= 8'd0; // Clear lisa_keycode to indicate no key to send
                             decoder_state <= HANDLE_RIGHT_OPTION;
                         end
                     end
@@ -358,6 +364,7 @@ module usb_keyboard_interface(
                         if (kbd_state == FINISHED || !sent_keycode) begin
                             sent_keycode <= 1'b1; // Set the flag so we don't automatically fall through next time
                             first_run <= 1'b1; // Set the first run flag again
+                            lisa_keycode <= 8'd0; // Clear lisa_keycode to indicate no key to send
                             decoder_state <= HANDLE_APPLE;
                         end
                     end
@@ -380,14 +387,19 @@ module usb_keyboard_interface(
                         if (kbd_state == FINISHED || !sent_keycode) begin
                             first_run <= 1'b1; // Set the first run flag again
                             sent_keycode <= 1'b1; // Set the flag so we don't automatically fall through next time
+                            lisa_keycode <= 8'd0; // Clear lisa_keycode to indicate no key to send
                             // We're finally done with modifier keys, so move to handling regular keys
                             // Decide whether it's a key down or key up event and go to the appropriate state
-                            if (key1 != 8'd0) begin
+                            if (key1 != 8'd0 && key1 != prev_key1) begin
                                 // Key down event
                                 decoder_state <= HANDLE_REGULAR_DOWN;
-                            end else begin
+                            end else if (key1 != prev_key1) begin
                                 // Key up event
                                 decoder_state <= HANDLE_REGULAR_UP;
+                                // No change in key1, just the modifiers, so nothing to do and go back and wait for the next event
+                            end else begin
+                                decoder_state <= WAIT;
+                                prev_key1 <= key1; // Don't forget to update prev_key1 here even if we don't actually do anything
                             end
                         end
                     end

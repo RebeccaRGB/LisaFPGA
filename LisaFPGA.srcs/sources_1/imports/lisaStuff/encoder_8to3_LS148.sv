@@ -23,77 +23,43 @@
 module encoder_8to3_LS148(
     input logic [7:0] _D,
     input logic _EI,
-    //output logic _EO,
-    //output logic _GS,
     output logic [2:0] _Q
     );
 
-    // Internal signals to hold the output signals before we take OE into account
-    logic [2:0] _Q_int;
-    logic _EO_int;
-    logic _GS_int;
+    // Internal signal to hold the output before we take OE into account
+    logic [2:0] Q_int;
+
+    // For ease-of-understanding, convert the active-low inputs to active-high inputs
+    logic [7:0] D;
+    assign D = ~_D;
 
     // Forward the internal output signals through to the real outputs if _EI (the OE) is low, else set the outputs to all 1's
-    assign _Q = _EI ? 3'b111 : _Q_int;
-    //assign _EO = _EI ? 1'b1 : _EO_int;
-    //assign _GS = _EI ? 1'b1 : _GS_int;
+    // Don't forget to invert our internal active-high outputs to active-low outputs for the real outputs
+    assign _Q = _EI ? 3'b111 : ~Q_int;
 
-    // Go through all valid input cases
     always_comb begin
-        casez (_D)
-            8'b0???????: begin
-                // And set the outputs accordingly
-                _Q_int <= 3'b000;
-                _EO_int <= 1'b1;
-                _GS_int <= 1'b0;
-            end
-            8'b10?????: begin
-                _Q_int <= 3'b001;
-                _EO_int <= 1'b1;
-                _GS_int <= 1'b0;
-            end
-            8'b110????: begin
-                _Q_int <= 3'b010;
-                _EO_int <= 1'b1;
-                _GS_int <= 1'b0;
-            end
-            8'b1110????: begin
-                _Q_int <= 3'b011;
-                _EO_int <= 1'b1;
-                _GS_int <= 1'b0;
-            end
-            8'b11110???: begin
-                _Q_int <= 3'b100;
-                _EO_int <= 1'b1;
-                _GS_int <= 1'b0;
-            end
-            8'b111110??: begin
-                _Q_int <= 3'b101;
-                _EO_int <= 1'b1;
-                _GS_int <= 1'b0;
-            end
-            8'b1111110?: begin
-                _Q_int <= 3'b110;
-                _EO_int <= 1'b1;
-                _GS_int <= 1'b0;
-            end
-            8'b11111110: begin
-                _Q_int <= 3'b111;
-                _EO_int <= 1'b1;
-                _GS_int <= 1'b0;
-            end
-            8'b11111111: begin
-                _Q_int <= 3'b111;
-                _EO_int <= 1'b0;
-                _GS_int <= 1'b1;
-            end
-            // Default for invalid input combo; all outputs deasserted
-            default: begin
-                _Q_int <= 3'b111;
-                _EO_int <= 1'b1;
-                _GS_int <= 1'b1;
-            end
-        endcase
+        // Now implement the priority encoder; it's just a bunch of if's
+        // Apparently SystemVerilog has this cool "priority if" construct to make sure the synthesizer infers the right thing
+        // It would very likely work fine without it though
+        priority if (D[7]) begin
+            Q_int = 3'd7;
+        end else if (D[6]) begin
+            Q_int = 3'd6;
+        end else if (D[5]) begin
+            Q_int = 3'd5;
+        end else if (D[4]) begin
+            Q_int = 3'd4;
+        end else if (D[3]) begin
+            Q_int = 3'd3;
+        end else if (D[2]) begin
+            Q_int = 3'd2;
+        end else if (D[1]) begin
+            Q_int = 3'd1;
+        end else if (D[0]) begin
+            Q_int = 3'd0;
+        end else begin
+            Q_int = 3'd0;
+        end
     end
 
 endmodule

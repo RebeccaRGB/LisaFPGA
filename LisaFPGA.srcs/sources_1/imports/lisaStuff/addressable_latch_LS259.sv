@@ -21,6 +21,7 @@
 
 
 module addressable_latch_LS259(
+    input logic clk,
     input logic [2:0] A,
     input logic D,
     input logic _G,
@@ -28,12 +29,12 @@ module addressable_latch_LS259(
     output logic [7:0] Q
     );
 
-    always_ff @(negedge _G, negedge _CLR) begin
+    always_ff @(posedge clk, negedge _CLR) begin
         // Async clear if _CLR is low
         if (!_CLR) begin
             Q <= 8'b00000000;
-        // Otherwise latch the input D into the addressed output
-        end else begin
+        // Otherwise latch the input D into the addressed output if _G is low
+        end else if (!_G) begin
             Q[A] <= D;
         end
     end

@@ -37,10 +37,10 @@ module SDRAM_Controller_Flat(
     output logic [1:0] PO,
     output logic _CE_SRAM,
     output logic _OE_SRAM,
-    (* MARK_DEBUG = "TRUE" *) output logic _WE_SRAM,
-    (* MARK_DEBUG = "TRUE" *) output logic _UDS_SRAM,
-    (* MARK_DEBUG = "TRUE" *) output logic _LDS_SRAM,
-    (* MARK_DEBUG = "TRUE" *) output logic [20:1] A_SRAM,
+    output logic _WE_SRAM,
+    output logic _UDS_SRAM,
+    output logic _LDS_SRAM,
+    output logic [20:1] A_SRAM,
     input logic [15:0] DIN_SRAM,
     output logic [15:0] DOUT_SRAM,
     output logic SRAM_BUS_DIR
@@ -49,20 +49,34 @@ module SDRAM_Controller_Flat(
     logic [7:0] row_addr; // Latched row address (from A0-A7)
     logic [7:0] col_addr; // Latched column address (from A0-A7)
 
+    logic _RAS_prev, _CAS_prev; // Previous states of RAS and CAS for edge detection
+
     // Latch the row address on the falling edge of _RAS
-    always_ff @(negedge _RAS) begin
+    /*always_ff @(negedge _RAS) begin
         row_addr <= A;
+    end*/
+    always_ff @(posedge clk) begin
+        if (!_RAS && _RAS_prev) begin // Latch the row address on the falling edge of _RAS
+            row_addr <= A;
+        end
+        _RAS_prev <= _RAS; // Update the previous state of _RAS for edge detection
+        _CAS_prev <= _CAS; // And do _CAS too
     end
 
     // Latch the column address on the falling edge of _CAS (if _RAS is already active)
-    always_ff @(negedge _CAS) begin
+    /*always_ff @(negedge _CAS) begin
         if (!_RAS) // Only latch if _RAS is already low
             col_addr <= A;
+    end*/
+    always_ff @(posedge clk) begin
+        if (!_CAS && _CAS_prev && !_RAS) begin // Only latch the column address if _CAS is falling and _RAS is already low
+            col_addr <= A;
+        end
     end
 
     // Select the SDRAM when both RAS and CAS are low
-    (* MARK_DEBUG = "TRUE" *) logic _CS;
-    //(* MARK_DEBUG = "TRUE" *) logic _delayed_RAS;
+    logic _CS;
+    //logic _delayed_RAS;
     //logic _even_more_delayed_RAS;
     always_ff @(posedge clk) begin
         if (!_RAS && !_CAS) begin

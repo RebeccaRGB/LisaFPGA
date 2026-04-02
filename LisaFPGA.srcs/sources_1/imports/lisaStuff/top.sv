@@ -28,6 +28,7 @@ module top(
         output logic VID,
         output logic [5:0] CONT,
         input logic INVID,
+        input logic SCANLINES,
 
         output logic TONE,
         output logic [2:0] VC,
@@ -47,7 +48,7 @@ module top(
 
         input logic [1:0] RAM_SEL,
 
-        inout logic [7:0] ESFLOPPY_COMM_BUS,
+        inout logic [5:0] ESFLOPPY_COMM_BUS,
         input logic RDA_ESFLOPPY,
         output logic WRD_ESFLOPPY,
         input logic SNS_ESFLOPPY,
@@ -55,7 +56,7 @@ module top(
         output logic HDS_ESFLOPPY,
         output logic [3:0] PH_ESFLOPPY,
         output logic MT1_ESFLOPPY,
-        input logic MT0_ESFLOPPY, // CHANGE BACK TO OUTPUT ONCE PROBLEM IS FIXED
+        output logic MT0_ESFLOPPY,
         output logic _DR1_ESFLOPPY,
         output logic _DR0_ESFLOPPY,
         output logic PWM_ESFLOPPY,
@@ -113,7 +114,7 @@ module top(
 
         input logic MOUSE_SEL,
 
-        output logic [5:0] GPIO,
+        input logic [5:0] GPIO,
 
         output logic SCC_C4M,
         output logic SCC_WR,
@@ -154,7 +155,7 @@ module top(
     );
 
     // The internal Verilog SCC isn't working yet, so disable the transceivers that hook it to the serial bus
-    assign INTERNAL_SCC_EN = 1'b0;
+    assign INTERNAL_SCC_EN = 1'b1;
     // Stick something random on the GPIO pins for now
     //assign GPIO = {_VSYNC, _HSYNC, VID, TONE, LEFT_ESFLOPPY, OK_ESFLOPPY};
 
@@ -184,7 +185,7 @@ module top(
     logic BD_OE_CPU;
     logic [15:0] BD_IO;
     logic BD_OE_IO;
-    tri [12:1] A;
+    logic [12:1] A;
     logic _VMA;
     logic _VPA; // Original is open-collector, we're making it a regular logic signal instead that gets muxed here in the top module
     logic _VPA_CPU; // It gets muxed from these
@@ -210,14 +211,14 @@ module top(
     logic [15:0] MD_IN;
     logic [15:0] MD_OUT;
     logic [8:1] RA;
-    tri A16;
-    tri A17;
-    tri A18;
-    tri A19;
+    logic A16;
+    logic A17;
+    logic A18;
+    logic A19;
     logic MREAD;
     logic _CAS;
     logic _RAS;
-    tri A20;
+    logic A20;
     logic _HDER; // Original is open-collector, we're making it a regular logic signal instead that gets muxed here in the top module
     logic _HDER_CPU; // It gets muxed from these
     logic HDER_OE_CPU;
@@ -304,13 +305,20 @@ module top(
 
     logic dotck_A, dotck_B;
 
+    // SPEED_SEL is in an unknown clock domain, so let's bring it into the dotck_20M domain before feeding it into the muxes
+    // This should help to get rid of any noise from flipping the switches too
+    logic [1:0] SPEED_SEL_dotck;
+    always_ff @(posedge dotck_20M) begin
+        SPEED_SEL_dotck <= SPEED_SEL;
+    end
+
     // Use the first BUFGMUX to select between 20M and 40M
     BUFGMUX #(
         .CLK_SEL_TYPE("SYNC") // Synchronous clock switching vs async, doesn't really matter here
     ) dotck_mux_20M40M (
         .I0(dotck_20M), // The two clock inputs
         .I1(dotck_40M),
-        .S(~SPEED_SEL[0]), // Our select line; inverted to match the way the switch is labeled on my PCB
+        .S(~SPEED_SEL_dotck[0]), // Our select line; inverted to match the way the switch is labeled on my PCB
         .O(dotck_A) // The output clock
     );
 
@@ -320,7 +328,7 @@ module top(
     ) dotck_mux_60M80M (
         .I0(dotck_60M),
         .I1(dotck_80M),
-        .S(~SPEED_SEL[0]),
+        .S(~SPEED_SEL_dotck[0]),
         .O(dotck_B)
     );
 
@@ -330,78 +338,9 @@ module top(
     ) dotck_final_mux (
         .I0(dotck_A), // 20M/40M group
         .I1(dotck_B), // 60M/80M group
-        .S(~SPEED_SEL[1]), // Select between the two groups, once again inverted to match the PCB switch labeling
+        .S(~SPEED_SEL_dotck[1]), // Select between the two groups, once again inverted to match the PCB switch labeling
         .O(lisa_dotck_ungated) // Final DOTCK output
     );
-
-    /*logic sel_10_or_20;
-    logic _sel_10_or_20;
-    logic sel_40_or_60;
-    logic _sel_40_or_60;
-    logic sel_A_or_B;
-    logic _sel_A_or_B;
-    // First stage selection (10M vs 20M)
-    assign sel_10_or_20    = (SPEED_SEL == 2'b00);
-    assign _sel_10_or_20  = (SPEED_SEL == 2'b01);
-
-    // Second stage selection (40M vs 60M)
-    assign sel_40_or_60    = (SPEED_SEL == 2'b10);
-    assign _sel_40_or_60  = (SPEED_SEL == 2'b11);
-
-    // Final stage selection (A = 10/20 vs B = 40/60)
-    assign sel_A_or_B      = (SPEED_SEL[1] == 1'b0); // A = slow group
-    assign _sel_A_or_B    = (SPEED_SEL[1] == 1'b1); // B = fast group
-
-    BUFGCTRL #(
-        .INIT_OUT(0), // Initial output value; doesn't really matter
-        .PRESELECT_I0("FALSE"), // Which input to preselect; doesn't matter either
-        .PRESELECT_I1("FALSE")
-    ) bufgctrl_A (
-        .I0(dotck_10M), // 10M input clock
-        .I1(dotck_20M), // 20M input clock
-        .S0(sel_10_or_20), // 10M selected when this is 1
-        .S1(_sel_10_or_20), // 20M selected when this is 1
-        .CE0(1'b1), // Both clock enables always enabled
-        .CE1(1'b1),
-        .IGNORE0(1'b0), // Ignore inputs always low
-        .IGNORE1(1'b0),
-        .O(dotck_A) // Output clock
-    );
-
-    BUFGCTRL #(
-        .INIT_OUT(0),
-        .PRESELECT_I0("FALSE"),
-        .PRESELECT_I1("FALSE")
-    ) bufgctrl_B (
-        .I0(dotck_40M),
-        .I1(dotck_60M),
-        .S0(sel_40_or_60),
-        .S1(_sel_40_or_60),
-        .CE0(1'b1),
-        .CE1(1'b1),
-        .IGNORE0(1'b0),
-        .IGNORE1(1'b0),
-        .O(dotck_B)
-    );
-
-    // Now we select between the two groups (10/20 and 40/60) to get the final lisa_dotck_ungated DOTCK signal
-    BUFGCTRL #(
-        .INIT_OUT(0),
-        .PRESELECT_I0("FALSE"),
-        .PRESELECT_I1("FALSE")
-    ) bufgctrl_final (
-        .I0(dotck_A),
-        .I1(dotck_B),
-        .S0(sel_A_or_B),
-        .S1(_sel_A_or_B),
-        .CE0(1'b1),
-        .CE1(1'b1),
-        .IGNORE0(1'b0),
-        .IGNORE1(1'b0),
-        .O(lisa_dotck_ungated)
-    );*/
-
-
 
     //assign COPCK = rpio_24_r;
     // Here's that division by 2
@@ -474,13 +413,15 @@ module top(
 
     always_ff @(posedge COPCK) begin
         ON_prev <= ON;
+        _RSTSW_int <= _RSTSW & ~(ON & ~ON_prev); // Detect the rising edge of ON and use that plus the reset switch to reset the system
     end
 
-    // So we detect the rising edge of ON
-    assign ON_rising = ON & ~ON_prev;
-
-    // And use that to reset the system along with the reset button
-    assign _RSTSW_int = _RSTSW & ~ON_rising;
+    // We need a version of _RSTSW_int synchronized into the DOTCK domain for the CPU board, so do that now
+    logic _RSTSW_dotck_int, _RSTSW_dotck;
+    always_ff @(posedge lisa_dotck_ungated) begin
+        _RSTSW_dotck_int <= _RSTSW_int;
+        _RSTSW_dotck <= _RSTSW_dotck_int;
+    end
 
     // Note the inversion of _VSYNC and VID here; the LS132 on the motherboard does this
     assign _VSYNC = ~_VSYNC_int;
@@ -505,6 +446,7 @@ module top(
             .sysclk(sysclk_ibuf),
             ._reset(_RESET),
             .DOTCK(lisa_dotck),
+            .framerate_sel(GPIO[0]), // 0 for 1080p30, 1 for 1080p60
             .VA_overflow(VA_overflow), // Replaces VSYNC; better reflects the VSYNC time which is actually longer than _VSYNC
             ._clr_vid_clk(_clr_vid_clk), // Replaces _HSYNC; better reflects the HSYNC time which is actually shorter than _HSYNC
             .VID(VID_int),
@@ -513,6 +455,7 @@ module top(
             .VC(VC),
             .CPU_ROM_SEL(CPU_ROM_SEL),
             .blank_video(~ON), // When the Lisa is off, we want to blank the video output
+            .scanlines(SCANLINES), // When high, put scanlines on the video output to make it look cool
             .tmds_clock(tmds_clock),
             .tmds(tmds)
         );
@@ -574,7 +517,7 @@ module top(
         .MD_IN(MD_IN),
         .MD_OUT(MD_OUT),
         .RA(RA),
-        ._RSTSW(_RSTSW_int),
+        ._RSTSW(_RSTSW_dotck),
         .A16(A16),
         .A17(A17),
         .A18(A18),
@@ -596,7 +539,7 @@ module top(
         ._NMI(_NMI),
 
         .VAL_LED(VAL_LED),
-        .INVID(INVID),
+        .INVID(~INVID),
         .E_pos_phase(E_pos_phase),
         .E_neg_phase(E_neg_phase),
         .E_either_edge(E_either_edge),
@@ -605,18 +548,18 @@ module top(
         ._clr_vid_clk(_clr_vid_clk)
     );
 
-    (* MARK_DEBUG = "TRUE" *) logic [3:0] PH;
-    (* MARK_DEBUG = "TRUE" *) logic WRD;
-    (* MARK_DEBUG = "TRUE" *) logic _WRQ;
-    (* MARK_DEBUG = "TRUE" *) logic RDA;
-    (* MARK_DEBUG = "TRUE" *) logic _DR1;
-    (* MARK_DEBUG = "TRUE" *) logic _DR0;
-    (* MARK_DEBUG = "TRUE" *) logic HDS;
-    (* MARK_DEBUG = "TRUE" *) logic SNS;
-    (* MARK_DEBUG = "TRUE" *) logic MT1;
-    (* MARK_DEBUG = "TRUE" *) logic MT0;
+    logic [3:0] PH;
+    logic WRD;
+    logic _WRQ;
+    logic RDA;
+    logic _DR1;
+    logic _DR0;
+    logic HDS;
+    logic SNS;
+    logic MT1;
+    logic MT0;
     logic _IRQ;
-    logic _BG0; // i think this needs to be open-collector
+    logic _BG0;
     logic OCD;
     logic [7:0] PD_in;
     logic [7:0] PD_out;
@@ -719,7 +662,7 @@ module top(
     // This depends on the FLOPPY_SRC signal, so we need to mux between them
 
     // Set the ESFloppy comms bus to a random value for now
-    assign ESFLOPPY_COMM_BUS = 8'h55;
+    assign ESFLOPPY_COMM_BUS = 6'h55;
 
     // First generate the Sony drive's PWM motor control signal
     // It's derived from MT0, but processed through the Lite Adapter
@@ -737,9 +680,16 @@ module top(
     always_comb begin
         // If FLOPPY_SRC is high, use the external floppy drive signals
         if (FLOPPY_SRC) begin
-            RDA = RDA_EXTFLOPPY;
+            if (IO_ROM_SEL) begin
+                // If we're in Twiggy mode, hook RDA and SNS up to their own individual pins
+                RDA = RDA_EXTFLOPPY;
+                SNS = SNS_EXTFLOPPY;
+            end else begin
+                // If we're in Sony mode, hook both RDA and SNS to RDA
+                RDA = RDA_EXTFLOPPY;
+                SNS = RDA_EXTFLOPPY;
+            end
             WRD_EXTFLOPPY = WRD;
-            SNS = SNS_EXTFLOPPY;
             _WRQ_EXTFLOPPY = _WRQ;
             HDS_EXTFLOPPY = HDS;
             PH_EXTFLOPPY = PH;
@@ -754,35 +704,29 @@ module top(
             HDS_ESFLOPPY = 1'b0;
             PH_ESFLOPPY = 4'b0000;
             MT1_ESFLOPPY = 1'b0;
-            //MT0_ESFLOPPY = 1'b0; // COMMENT BACK IN ONCE THE RDA PROBLEM IS FIXED
+            MT0_ESFLOPPY = 1'b0;
             _DR1_ESFLOPPY = 1'b1;
             _DR0_ESFLOPPY = 1'b1;
             PWM_ESFLOPPY = 1'b0;
-            //GPIO[0] = 1'b0; // TEMPORARY: ROUTE LOW TO A GPIO PIN FOR DEBUGGING PURPOSES
-            //GPIO[1] = 1'b0; // TEMPORARY: ROUTE LOW TO A GPIO PIN FOR DEBUGGING PURPOSES
-            //GPIO[2] = 1'b0; // TEMPORARY: ROUTE LOW TO A GPIO PIN FOR DEBUGGING PURPOSES
-            //GPIO[3] = 1'b0; // TEMPORARY: ROUTE LOW TO A GPIO PIN FOR DEBUGGING PURPOSES
-            //GPIO[4] = 1'b0; // TEMPORARY: ROUTE LOW TO A GPIO PIN FOR DEBUGGING PURPOSES
-            //GPIO[5] = 1'b0; // TEMPORARY: ROUTE LOW TO A GPIO PIN FOR DEBUGGING PURPOSES
         // Otherwise, use the onboard ESFloppy signals
         end else begin
-            RDA = MT0_ESFLOPPY; // REPLACE RDA WITH RDA_ESFLOPPY ONCE THE RDA PROBLEM IS FIXED
-            _DR0_ESFLOPPY = WRD; // REPLACE DR0 WITH _WRD_ESFLOPPY ONCE THE WRD PROBLEM IS FIXED
-            //WRD_ESFLOPPY = WRD;
-            //GPIO[0] = WRD; // TEMPORARY: ROUTE WRD TO A GPIO PIN FOR DEBUGGING PURPOSES
-            //GPIO[1] = WRD; // TEMPORARY: ROUTE WRD TO A GPIO PIN FOR DEBUGGING PURPOSES
-            //GPIO[2] = WRD; // TEMPORARY: ROUTE WRD TO A GPIO PIN FOR DEBUGGING PURPOSES
-            //GPIO[3] = WRD; // TEMPORARY: ROUTE WRD TO A GPIO PIN FOR DEBUGGING PURPOSES
-            //GPIO[4] = WRD; // TEMPORARY: ROUTE WRD TO A GPIO PIN FOR DEBUGGING PURPOSES
-            //GPIO[5] = WRD; // TEMPORARY: ROUTE WRD TO A GPIO PIN FOR DEBUGGING PURPOSES
-            SNS = SNS_ESFLOPPY;
+            if (IO_ROM_SEL) begin
+                // If we're in Twiggy mode, hook RDA and SNS up to their own individual pins
+                RDA = RDA_ESFLOPPY;
+                SNS = SNS_ESFLOPPY;
+            end else begin
+                // If we're in Sony mode, hook both RDA and SNS to RDA
+                RDA = RDA_ESFLOPPY;
+                SNS = RDA_ESFLOPPY;
+            end
+            WRD_ESFLOPPY = WRD;
             _WRQ_ESFLOPPY = _WRQ;
             HDS_ESFLOPPY = HDS;
             PH_ESFLOPPY = PH;
-            MT1_ESFLOPPY = PWM; // SHOULD BE MT1, CHANGED TO ACCOUNT FOR BODGE WIRES ON BOARD
-            //MT0_ESFLOPPY = MT0; COMMENT BACK IN ONCE THE RDA PROBLEM IS FIXED
+            MT1_ESFLOPPY = MT1;
+            MT0_ESFLOPPY = MT0;
             _DR1_ESFLOPPY = _DR1;
-            //_DR0_ESFLOPPY = _DR0; COMMENT BACK IN ONCE THE WRD PROBLEM IS FIXED
+            _DR0_ESFLOPPY = _DR0;
             PWM_ESFLOPPY = PWM;
             // And make sure that the external floppy drive signals are inactive
             WRD_EXTFLOPPY = 1'b0;
@@ -973,29 +917,30 @@ module top(
         end
     end
 
-    // Finally, instantiate the USB mouse interface module, routing in the appropriate signals
-    usb_mouse_interface usb_mouse_interface (
-        .usbclk(usbclk),
-        .usbrst(usbrst),
-        .mouse_dx_in(mouse_dx_selected),
-        .mouse_dy_in(mouse_dy_selected),
-        .mouse_btn_in(mouse_btn_selected),
-        .report(mouse_report_selected),
-        .M(M_USB)
-    );
-
-    // And now the USB keyboard one
     logic KBD_in_USB;
     logic KBD_out_USB;
-    usb_keyboard_interface usb_kbd_interface (
-        .usbclk(usbclk),
-        .usbrst(usbrst),
-        .key_modifiers_in(key_modifiers_selected),
-        .key1_in(key1_selected),
-        .report(key_report_selected),
-        .KBD_in(KBD_out_USB),
-        .KBD_out(KBD_in_USB)
-    );
+    // Finally, instantiate the USB mouse interface module, routing in the appropriate signals
+    `ifndef SIMULATION
+        usb_mouse_interface usb_mouse_interface (
+            .usbclk(usbclk),
+            .usbrst(usbrst),
+            .mouse_dx_in(mouse_dx_selected),
+            .mouse_dy_in(mouse_dy_selected),
+            .mouse_btn_in(mouse_btn_selected),
+            .report(mouse_report_selected),
+            .M(M_USB)
+        );
+        // And now the USB keyboard one
+        usb_keyboard_interface usb_kbd_interface (
+            .usbclk(usbclk),
+            .usbrst(usbrst),
+            .key_modifiers_in(key_modifiers_selected),
+            .key1_in(key1_selected),
+            .report(key_report_selected),
+            .KBD_in(KBD_out_USB),
+            .KBD_out(KBD_in_USB)
+        );
+    `endif
 
     // There's a little more we need to do for the keyboard though; it's bidirectional, so we need to make an IOBUF for the Lisa keyboard interface
     logic KBD_in_LISA;
@@ -1239,10 +1184,12 @@ module top(
 
         .sysclk(sysclk_ibuf),
         .C16M(C16M),
+        .COPCK_2x(COPCK_2x),
         .COPCK(COPCK),
         .SCCCK(SCCCK),
         .E_pos_phase(E_pos_phase),
         .E_neg_phase(E_neg_phase),
+        .DOTCK(lisa_dotck),
         .E_either_edge(E_either_edge),
         .VC(VC),
         .SCC_C4M(SCC_C4M),

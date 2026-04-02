@@ -20,10 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module HDMI_Interface(
+module HDMI_Interface (
     input logic sysclk,
     input logic _reset,
     input logic DOTCK,
+    input logic framerate_sel, // 0 for 1080p30, 1 for 1080p60
     input logic VA_overflow, // Replaces VSYNC; active high during vertical blanking
     input logic _clr_vid_clk, // Replaces _HSYNC; active low during horizontal blanking
     input logic VID,
@@ -32,29 +33,66 @@ module HDMI_Interface(
     input logic [2:0] VC,
     input logic CPU_ROM_SEL,
     input logic blank_video, // When high, force the video output to black
+    input logic scanlines, // When high, put scanlines on the video output to make it look cool
     output logic tmds_clock,
     output logic [2:0] tmds
     );
 
-    logic clk_pixel;
-    logic clk_pixel_x5, clk_pixel_x5_unbuffered;
-    logic clk_audio;
+    logic clk_pixel, clk_pixel_1080p30, clk_pixel_1080p60;
+    logic clk_pixel_x5, clk_pixel_x5_1080p30, clk_pixel_x5_1080p60;
+    logic clk_feedback_in, clk_feedback_out;
+    logic clk_audio_unbuffered, clk_audio;
 
-    hdmi_pll_xilinx pll(.clk_in1(sysclk), .clk_out1(clk_pixel), .clk_out2(clk_pixel_x5));
-    /*hdmi_clk_1080p60 hdmi_clockgen (
+    // Instantiate the MMCM for our 1080p30 and 1080p60 pixel clock and 5x pixel clock
+    hdmi_clock_divider hdmi_clock_generator (
         .sysclk(sysclk),
-        .clk_pixel(clk_pixel),
-        .clk_pixel_x5(clk_pixel_x5_unbuffered)
-    );*/
-
-    // clk_pixel is already buffered with a BUFG inside the MMCM, but we need to buffer clk_pixel_x5 with a BUFIO
-    // BUFGs, BUFHs, and BUFRs are too slow for high speed clocking like this; they cap out at about 600-something MHz, and we need 742.5MHz
-    // So we use a BUFIO which is designed for high speed clocking of I/O stuff, like the OSERDES primitives used for HDMI TMDS encoding
-    // Even a BUFIO still isn't quite fast enough for 742.5MHz, but it's close enough that it seems to work okay
-    /*BUFIO bufio_clk_pixel_x5 (
-        .I(clk_pixel_x5_unbuffered),
+        .clk_pixel_x5_1080p60(clk_pixel_x5_1080p60),
+        .clk_pixel_x5_1080p30(clk_pixel_x5_1080p30),
+        .clk_pixel_1080p60(clk_pixel_1080p60),
+        .clk_pixel_1080p30(clk_pixel_1080p30),
+        .clkfb_in(clk_feedback_in),
+        .clkfb_out(clk_feedback_out)
+    );
+    // Give it a feedback path through a BUFG
+    BUFG hdmi_clk_feedback (
+        .I(clk_feedback_out),
+        .O(clk_feedback_in)
+    );
+    // Now instantiate two BUFGMUXes to mux the pixel clocks and the x5 pixel clocks
+    BUFGMUX bufgmux_clk_pixel (
+        .I0(clk_pixel_1080p30),
+        .I1(clk_pixel_1080p60),
+        .S(framerate_sel),
+        .O(clk_pixel)
+    );
+    BUFGMUX bufgmux_clk_pixel_x5 (
+        .I0(clk_pixel_x5_1080p30),
+        .I1(clk_pixel_x5_1080p60),
+        .S(framerate_sel),
         .O(clk_pixel_x5)
-    );*/
+    );
+    // Finally, we need to determine the audio clock threshold depending on which video mode is selected
+    // This ensures that we're always generating a 48KHz audio clock regardless of the pixel clock
+    /*logic [11:0] audio_clk_threshold;
+    always_ff @(posedge DOTCK) begin
+        if (framerate_sel_sync == 1'b0) begin
+            // 1080p30 requires a 74.25MHz pixel clock, so the toggle threshold for 48KHz audio is 74250000 / (2 * 48000) = 772-ish
+            audio_clk_threshold <= 772;
+        end else begin
+            // 1080p60 requires a 148.5MHz pixel clock, so the toggle threshold for 48KHz audio is 148500000 / (2 * 48000) = 1546-ish
+            audio_clk_threshold <= 1546;
+        end
+    end*/
+
+    // Finally, pick the video ID code sent to the HDMI interface based on our framerate
+    logic [6:0] video_id_code;
+    always_ff @(posedge clk_pixel) begin
+        if (framerate_sel == 1'b0) begin
+            video_id_code <= 7'd34; // Code 34 for 1080p30
+        end else begin
+            video_id_code <= 7'd16; // Code 16 for 1080p60
+        end
+    end
 
     // Synchronise the reset signal (from the DOTCK domain) to the HDMI pixel clock domain
     // Otherwise we have tons of metastability issues`
@@ -65,12 +103,38 @@ module HDMI_Interface(
         _reset_hdmi <= _reset_hdmi_int;
     end
 
-    logic [11:0] counter = 1'd0;
-    always_ff @(posedge clk_pixel)
-    begin
-        counter <= counter == 12'd1546 ? 1'd0 : counter + 1'd1; // 1546 for 48KHz at 74.25MHz pixel clock, 3094 for 48KHz at 148.5MHz
+    // We need to synchronize blank_video too; it's the ON signal, which is in the COPCK_2x domain
+    logic blank_video_int, blank_video_sync;
+    always_ff @(posedge clk_pixel) begin
+        blank_video_int <= blank_video;
+        blank_video_sync <= blank_video_int;
     end
-    assign clk_audio = clk_pixel && counter == 12'd1546; // Same here; 1546 for 48KHz at 74.25MHz pixel clock, 3094 for 48KHz at 148.5MHz
+
+    // Now generate the audio clock by dividing the pixel clock down to 48KHz using a counter
+    // We can't use an MMCM because they can only go down to 6MHz or so
+    logic [11:0] counter;
+    // Clock this off the 1080p30 clock; this way we don't have to worry about the threshold changing when we shift between 1080p30 and 1080p60
+    always_ff @(posedge clk_pixel_1080p30, negedge _reset_hdmi) begin
+        if (!_reset_hdmi) begin
+            counter <= 12'd0;
+            clk_audio_unbuffered <= 1'b0;
+        end else begin
+            if (counter == 12'd772) begin // Toggle threshold for 48KHz audio is 74250000 / (2 * 48000) = 772-ish
+                counter <= 12'd0;
+                clk_audio_unbuffered <= ~clk_audio_unbuffered;
+            end else begin
+                counter <= counter + 1'd1;
+            end
+        end
+    end
+
+    // But clk_audio_unbuffered is a clock, and it's not on a clock net right now, which causes clock skew if we use it as-is
+    // This isn't a theoretical problem; the audio actually gets garbled sometimes between synthesis runs if we don't fix the skew
+    // So we need to get it on a real clock net there, which we can do with a BUFG
+    BUFG buf_audio (
+        .I(clk_audio_unbuffered),
+        .O(clk_audio)
+    );
 
     logic [15:0] audio_sample_word;
 
@@ -120,8 +184,6 @@ module HDMI_Interface(
     logic [15:0] word_index;
     logic [2:0] bit_index;
     logic pixel;
-    // Missing one single column of pixels on tghe right of the frame
-    // Left side of the frame has 3? (maybe 2 maybe 4) extra columns of black pixels
     logic [15:0] byte_counter;
     logic [2:0] bit_counter;
     logic [7:0] current_byte;
@@ -141,14 +203,14 @@ module HDMI_Interface(
             // This means 4 lines will get cut off the bottom of the frame, so to better center it, we wait 2 lines before starting to capture
             // This way, we lose 2 lines at the top and 2 lines at the bottom instead of all 4 at the bottom
             hsync_delay_counter_threshold <= 2'd2;
-            start_line_overlap_counter_threshold <= 4'd11; // Wait 11 DOTCKs after HSYNC is over before starting to capture pixels
-            end_line_overlap_counter_threshold <= 4'd11; // Keep capturing pixels for 11 DOTCKs after HSYNC starts
+            start_line_overlap_counter_threshold <= 4'd9; // Wait 9 DOTCKs after HSYNC is over before starting to capture pixels
+            end_line_overlap_counter_threshold <= 4'd9; // Keep capturing pixels for 9 DOTCKs after HSYNC starts
         end else begin
             // 3A ROMs; set the start and end line overlap counters for 3A ROM timing, and the the hsync delay counter is zero
             // No delay after VSYNC is over before starting to capture lines; 432*2=864 which fits within 1080 just fine
             hsync_delay_counter_threshold <= 2'd0;
-            start_line_overlap_counter_threshold <= 4'd11; // Wait 11 DOTCKs after HSYNC is over before starting to capture pixels
-            end_line_overlap_counter_threshold <= 4'd11; // Keep capturing pixels for 11 DOTCKs after HSYNC starts
+            start_line_overlap_counter_threshold <= 4'd9; // Wait 9 DOTCKs after HSYNC is over before starting to capture pixels
+            end_line_overlap_counter_threshold <= 4'd9; // Keep capturing pixels for 9 DOTCKs after HSYNC starts
         end
         prev_clr_vid_clk <= _clr_vid_clk;
         if (!_reset) begin
@@ -218,26 +280,33 @@ module HDMI_Interface(
 
     // Before we do any of that though, we need to make a LUT for division by 3
     // Hardware dividers take tons of hardware resources and are too slow to meet timing at 148.5MHz, so a LUT is the solution
-    /*logic [9:0] div3_lut [0:1079];
+    (* rom_style = "distributed" *) logic [9:0] div3_lut [0:1079];
 
-    // Initialize the lookup table
-    initial begin: init_div3_lut
+    initial begin
         integer i;
         for (i = 0; i <= 1079; i = i + 1) begin
             div3_lut[i] = i / 3;
         end
-    end*/
+    end
+
+    // We also need LUTs for mod 2 and mod 3 operations so that we can insert scanlines (blank lines) every 2 or 3 lines, depending on ROM type
+     (* rom_style = "distributed" *) logic [1:0] mod2_lut [0:1079];
+     (* rom_style = "distributed" *) logic [1:0] mod3_lut [0:1079];
+     initial begin
+         integer j;
+         for (j = 0; j <= 1079; j = j + 1) begin
+             mod2_lut[j] = j % 2;
+             mod3_lut[j] = j % 3;
+         end
+     end
 
     // First up, we compute the Lisa pixel coordinates from the HDMI pixel coordinates
     // Each Lisa pixel is 2x3 HDMI pixels
-    //logic [9:0] lisa_x_int;
-    //logic [9:0] lisa_y_int;
     always_ff @(posedge clk_pixel) begin
         if (CPU_ROM_SEL == 1'b0) begin
             // If we have H ROMs, then each Lisa pixel is 2x3 HDMI pixels
             lisa_x <= (cx - 240) >> 1; // Remove the start offset of 240 HDMI pixels and divide by 2, gives us Lisa pixel x coordinate 0-719
-            //lisa_y <= div3_lut[cy]; // Divide by 3 using our LUT, gives us Lisa pixel y coordinate 0-363
-            lisa_y <= cy / 3;
+            lisa_y <= div3_lut[cy]; // Divide by 3 using our LUT, gives us Lisa pixel y coordinate 0-363
         end else begin
             // If we have 3A ROMs, then each Lisa pixel is 2x2 HDMI pixels
             lisa_x <= (cx - 352) >> 1; // Remove the start offset of 352 HDMI pixels and divide by 2, gives us Lisa pixel x coordinate 0-607
@@ -245,25 +314,39 @@ module HDMI_Interface(
         end
     end
 
-    // In this pipeline stage, we just register the Lisa pixel coordinates
-    // This gives the division by 3 for the H ROMs time to complete in the previous stage
-    /*always_ff @(posedge clk_pixel) begin
-        lisa_x <= lisa_x_int;
-        lisa_y <= lisa_y_int;
-    end*/
 
     // Next, we use the Lisa pixel coordinates to compute our bit index into the framebuffer
     // Which we then use to determine which word and bit within that word we need to read from the framebuffer
+    // Make sure to use a DSP for the multiplications here to help with timing
+    (* use_dsp = "yes" *) logic [15:0] word_index_int;
+    logic [15:0] lisa_x_shifted;
+    logic [2:0] bit_index_int;
     always_ff @(posedge clk_pixel) begin
         if (CPU_ROM_SEL == 1'b0) begin
             // H ROMs
-            word_index <= (lisa_y * 720 + lisa_x) >> 3; // Combine the x and y and divide by 8 to get word (byte) index
-            bit_index  <= (lisa_y * 720 + lisa_x) & 7; // Modulo 8 to get bit index within the byte
+            // The easy-to-understand way to do this is:
+            // word_index <= (lisa_y * 720 + lisa_x) >> 3; // Combine the x and y and divide by 8 to get word (byte) index
+            // bit_index  <= (lisa_y * 720 + lisa_x) & 7; // Modulo 8 to get bit index within the byte
+            // But this is pretty expensive (huge multiplier for lisa_y * 720) and fails timing at 1080p60, so we'll simplify it a bit
+            // 720 / 8 = 90, so we can do:
+            word_index_int <= lisa_y * 90; // Go ahead and do the >> 3 for 720 to get 90, combine with lisa_y to get word (byte) index of the column
+            lisa_x_shifted <= lisa_x >> 3; // Also do the division by 8 for lisa_x here too
+            // We'll add in the row's lisa_x >> 3 in the next stage of the pipeline
+            bit_index_int <= lisa_x[2:0]; // The lower 3 bits of lisa_x give us the bit index within the byte, no multiplication needed
         end else begin
             // 3A ROMs
-            word_index <= (lisa_y * 608 + lisa_x) >> 3; // Combine the x and y and divide by 8 to get word (byte) index
-            bit_index  <= (lisa_y * 608 + lisa_x) & 7; // Modulo 8 to get bit index within the byte
+            // Same deal for the 3A ROM version; this is the easy-to-understand way:
+            // word_index <= (lisa_y * 608 + lisa_x) >> 3; // Combine the x and y and divide by 8 to get word (byte) index
+            // bit_index  <= (lisa_y * 608 + lisa_x) & 7; // Modulo 8 to get bit index within the byte
+            // But 608 / 8 = 76, so we can do:
+            word_index_int <= lisa_y * 76; // Combine the y * 76 and x / 8 to get word (byte) index of the column
+            lisa_x_shifted <= lisa_x >> 3; // Divide lisa_x by 8 here too
+            bit_index_int <= lisa_x[2:0]; // The lower 3 bits of lisa_x give us the bit index within the byte without any multiplication
         end
+        // Now in the next pipeline stage, add lisa_x_shifted to the intermediate word index to account for how far we are into the line
+        word_index <= word_index_int + lisa_x_shifted;
+        // The bit index was already done in the previous stage, so just pass it along
+        bit_index <= bit_index_int;
     end
 
     logic [7:0] pixel_word;
@@ -271,6 +354,7 @@ module HDMI_Interface(
     // Pipeline the read address for better timing
     logic [15:0] word_index_stage3, word_index_stage4;
     logic [2:0] bit_index_stage3, bit_index_stage4;
+    logic in_scanline_stage4, in_scanline_stage5;
 
     always_ff @(posedge clk_pixel) begin
         // In the third stage, we just pass the values along
@@ -281,35 +365,41 @@ module HDMI_Interface(
         word_index_stage4 <= word_index_stage3;
         bit_index_stage4 <= bit_index_stage3;
         pixel_word <= lisa_framebuffer[word_index_stage3];
+        // Also, if scanlines are on, figure out if we're in a scanline or not in this stage and set a flag accordingly
+        if (scanlines) begin
+            if (CPU_ROM_SEL == 1'b0) begin
+                // For the H ROMs, we want a scanline every 3 lines, so check if mod3_lut[cy] == 2 (the last line in each 3 line group)
+                in_scanline_stage4 <= (mod3_lut[cy] == 2);
+            end else begin
+                // For the 3A ROMs, we want a scanline every 2 lines, so check if mod2_lut[cy] == 1 (the last line in each 2 line group)
+                in_scanline_stage4 <= (mod2_lut[cy] == 1);
+            end
+        end else begin
+            in_scanline_stage4 <= 1'b0;
+        end
+        in_scanline_stage5 <= in_scanline_stage4;
         
-        // And finally, in the fifth stage, we extract the pixel bit
-        pixel <= pixel_word[bit_index_stage4];
+        // And finally, in the fifth stage, we extract the pixel bit, but override it to 0 if we're in a scanline
+        pixel <= in_scanline_stage5 ? 1'b0 : pixel_word[bit_index_stage4];
     end
-
-    // Finally, we read the proper byte from the framebuffer and extract the pixel bit
-    // This is identical for both H and 3A ROMs
-    //always_ff @(posedge clk_pixel) begin
-    //    pixel_word <= lisa_framebuffer[word_index];
-    //    pixel <= pixel_word[bit_index];
-    //end
 
     // Now we can finally generate the RGB output based on the pixel value
     // But we need to delay cx and cy by 5 clock cycles to match the pixel signal
-    logic [11:0] cx1, cx2, cx3, cx4, cx5;//, cx6;
-    logic [10:0] cy1, cy2, cy3, cy4, cy5;//, cy6;
+    logic [11:0] cx1, cx2, cx3, cx4, cx5, cx6;
+    logic [10:0] cy1, cy2, cy3, cy4, cy5, cy6;
     always_ff @(posedge clk_pixel) begin
         cx1 <= cx;
         cx2 <= cx1;
         cx3 <= cx2;
         cx4 <= cx3;
         cx5 <= cx4;
-        //cx6 <= cx5;
+        cx6 <= cx5;
         cy1 <= cy;
         cy2 <= cy1;
         cy3 <= cy2;
         cy4 <= cy3;
         cy5 <= cy4;
-        //cy6 <= cy5;
+        cy6 <= cy5;
     end
 
     // Note: The "brightest" I've seen anything be able to go on the Lisa is an 0x11 on the CONT value (MacWorks Plus)
@@ -321,22 +411,22 @@ module HDMI_Interface(
         // Check the ROM revision; the active area of the frame depends on this
         if (CPU_ROM_SEL == 1'b0) begin
             // H ROM active area: (240,0) to (1680,1092)
-            if (cx5 >= 240 && cx5 < 1680 && cy5 < 1092) begin
+            if (cx6 >= 240 && cx6 < 1680 && cy6 < 1092) begin
                 // Figure out if the pixel is black or white, taking CONT into account
                 // No need to worry about INVID since it's already handled on the CPU board
                 // If the Lisa is off (blank_video), force black output
-                rgb <= blank_video ? 24'h000000 : (pixel ? {(6'h3f - CONT), 2'b00, (6'h3f - CONT), 2'b00, (6'h3f - CONT), 2'b00} : 24'h000000);
+                rgb <= blank_video_sync ? 24'h000000 : (pixel ? {(6'h3f - CONT), 2'b00, (6'h3f - CONT), 2'b00, (6'h3f - CONT), 2'b00} : 24'h000000);
             end else begin
                 // If we're outside the active area, output a dark gray border
                 rgb <= 24'h202020;
             end
         end else begin
             // 3A ROM active area: (352,108) to (1568,972) or really (1568,970) because of the missing last line
-            if (cx5 >= 352 && cx5 < 1568 && cy5 >= 108 && cy5 < 970) begin
+            if (cx6 >= 352 && cx6 < 1568 && cy6 >= 108 && cy6 < 970) begin
                 // Figure out if the pixel is black or white, taking CONT into account
                 // No need to worry about INVID since it's already handled on the CPU board
                 // If the Lisa is off (blank_video), force black output
-                rgb <= blank_video ? 24'h000000 : (pixel ? {(6'h3f - CONT), 2'b00, (6'h3f - CONT), 2'b00, (6'h3f - CONT), 2'b00} : 24'h000000);
+                rgb <= blank_video_sync ? 24'h000000 : (pixel ? {(6'h3f - CONT), 2'b00, (6'h3f - CONT), 2'b00, (6'h3f - CONT), 2'b00} : 24'h000000);
             end else begin
                 // If we're outside the active area, output a dark gray border
                 rgb <= 24'h202020;
@@ -344,8 +434,9 @@ module HDMI_Interface(
         end
     end
 
-    // 1920x1080 @ 60Hz
-    hdmi #(.VIDEO_ID_CODE(16), .VIDEO_REFRESH_RATE(60.0), .AUDIO_RATE(48000), .AUDIO_BIT_WIDTH(16)) hdmi(
+    // Either 1080p30 or 1080p60 depending on how we instantiated the HDMI interface
+    hdmi #(.VIDEO_REFRESH_RATE(60.0), .AUDIO_RATE(48000), .AUDIO_BIT_WIDTH(16)) hdmi(
+        .video_id_code(video_id_code),
         .clk_pixel_x5(clk_pixel_x5), // Input clocks
         .clk_pixel(clk_pixel),
         .clk_audio(clk_audio),

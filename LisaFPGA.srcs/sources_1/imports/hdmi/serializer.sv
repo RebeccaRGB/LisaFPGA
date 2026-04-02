@@ -1,9 +1,8 @@
 module serializer
 #(
-    parameter int NUM_CHANNELS = 3,
-    parameter real VIDEO_RATE
-)
-(
+    parameter int NUM_CHANNELS = 3
+    // Removed VIDEO_RATE from the serializer entirely; it's only needed for serialization on Altera FPGAs
+ )(
     input logic clk_pixel,
     input logic clk_pixel_x5,
     input logic reset,
@@ -212,7 +211,7 @@ module serializer
                     ALTLVDS_TX_component.implement_in_les = "OFF",
                     ALTLVDS_TX_component.inclock_boost = 0,
                     ALTLVDS_TX_component.inclock_data_alignment = "EDGE_ALIGNED",
-                    ALTLVDS_TX_component.inclock_period = int'(10000000.0 / (VIDEO_RATE * 10.0)),
+                    ALTLVDS_TX_component.inclock_period = int'(10000000.0 / (1 * 10.0)), // Replaced VIDEO_RATE with 1 since we're not using an Altera FPGA
                     ALTLVDS_TX_component.inclock_phase_shift = 0,
                     // ALTLVDS_TX_component.intended_device_family = "Cyclone V",
                     ALTLVDS_TX_component.lpm_hint = "CBX_MODULE_PREFIX=altlvds_tx_inst",
@@ -225,7 +224,7 @@ module serializer
                     // ALTLVDS_TX_component.outclock_multiply_by = 1,
                     // ALTLVDS_TX_component.outclock_phase_shift = 0,
                     // ALTLVDS_TX_component.outclock_resource = "Dual-Regional clock",
-                    ALTLVDS_TX_component.output_data_rate = int'(VIDEO_RATE * 10.0),
+                    ALTLVDS_TX_component.output_data_rate = int'(1 * 10.0), // Replaced VIDEO_RATE with 1 since we're not using an Altera FPGA
                     ALTLVDS_TX_component.pll_compensation_mode = "AUTO",
                     ALTLVDS_TX_component.pll_self_reset_on_loss_lock = "OFF",
                     ALTLVDS_TX_component.preemphasis_setting = 0,

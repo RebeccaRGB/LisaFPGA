@@ -51,8 +51,8 @@ module IO_board(
     output logic _VPA_out,
     output logic VPA_OE,
     input logic _DTACK_in,
-    (* MARK_DEBUG = "TRUE" *) output logic _DTACK_out,
-    (* MARK_DEBUG = "TRUE" *) output logic DTACK_OE,
+    output logic _DTACK_out,
+    output logic DTACK_OE,
     input logic _AS,
     input logic READ,
     input logic _LDS,
@@ -102,11 +102,13 @@ module IO_board(
     // These clocks are normally generated on the I/O board in a real Lisa, but we gen them in the top-level module with an MMCM
     input logic sysclk, // 125MHz FPGA system clock
     input logic C16M, // 16MHz clock
-    input logic COPCK, // 3.9MHz clock for the COP421
+    input logic COPCK_2x, // 7.8MHz clock (the COP clock x 2); this is an actual clock net
+    input logic COPCK, // 3.9MHz clock (the COP clock); this is NOT a clock net, so we'll use it as a clock enable
     input logic SCCCK, // 3.68MHz clock for the 8530 SCC
     input logic E_pos_phase, // A pulse that goes high for two cycles just after the rising edge of E, used by the 6522 VIA core
     input logic E_neg_phase, // Same but for the falling edge of E, used by the 6522 VIA core
-    input logic E_either_edge, // A pulse that goes high for one cycle just after either edge of E, used by the 6522 VIA core
+    input logic DOTCK, // The dot clock
+    input logic E_either_edge, // The E clock, which is CPUCK/10
     output logic [2:0] VC, // 3-bit volume control for the external speaker amp
     
     // All the signals that go to the external SCC
@@ -142,22 +144,23 @@ module IO_board(
     // First, instantiate a 6504 microprocessor, but there aren't actually any IP cores available for that
     // So we'll use a 6502 core (apparently this one's transistor-accurate) and adapt it a bit since they're basically the same chip
     // This 4-bit signal is the counter that synchronizes all the operations in the floppy controller
-    (* MARK_DEBUG = "TRUE" *) logic [3:0] FDC_counter;
+    logic [3:0] FDC_counter;
     // The R/W line from the 6504
-    (* MARK_DEBUG = "TRUE" *) logic RW_FDC;
+    logic RW_FDC;
     // The 6504's address and data buses
-    (* MARK_DEBUG = "TRUE" *) logic [15:0] MA;
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] FD_in;
+    logic [15:0] MA;
+    logic [7:0] FD_in;
 
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] FD_out;
+    logic [7:0] FD_out;
 
-    (* MARK_DEBUG = "TRUE" *) logic [15:0] MA_unlatched;
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] FD_out_unlatched;
-    (* MARK_DEBUG = "TRUE" *) logic RW_FDC_latched;
-    (* MARK_DEBUG = "TRUE" *) logic _RW_FDC_unlatched;
+    logic [15:0] MA_unlatched;
+    logic [7:0] FD_out_unlatched;
+    logic RW_FDC_latched;
+    logic _RW_FDC_unlatched;
 
     cpu FDC_6504(
-        .clk(FDC_counter[2]), // PHI0 clock input is FDC_counter[2]
+        .clk(C16M), // Clock is C16M
+        .phi(FDC_counter_clock_enables_rising[2]), // And we use FDC_counter[2] as the clock enable
         .reset(~_RESET), // Reset comes from systemwide _RESET
         .AB(MA_unlatched), // This core expects synchronous RAM, so we'll latch the RAM address
         .DI(FD_in), // Data input/output buses
@@ -170,7 +173,7 @@ module IO_board(
 
     // Forward the unlatched address, data, and R/W signals to the latched versions on the rising edge of the PHI2 clock (FDC_counter[2])
     // Use C16M to clock the FF, but FDC_counter[2] as a clock enable
-    (* MARK_DEBUG = "TRUE" *) logic [3:0] FDC_counter_clock_enables_rising;
+    logic [3:0] FDC_counter_clock_enables_rising;
     always_ff @(posedge C16M) begin
         if (FDC_counter_clock_enables_rising[2]) begin
             MA <= MA_unlatched;
@@ -195,13 +198,13 @@ module IO_board(
     );*/
 
     // The FD_in bus going into the 6504 can be fed by a few different sources
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] PSM_out;
+    logic [7:0] PSM_out;
     // One of the two OE signals for the state machine LS323; the other comes from MA[0]
-    (* MARK_DEBUG = "TRUE" *) logic _state_machine_OE1;
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] RD_out;
-    (* MARK_DEBUG = "TRUE" *) logic _FDC_RAM_CS_processed;
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] ROM_out;
-    (* MARK_DEBUG = "TRUE" *) logic _IOROM_CE;
+    logic _state_machine_OE1;
+    logic [7:0] RD_out;
+    logic _FDC_RAM_CS_processed;
+    logic [7:0] ROM_out;
+    logic _IOROM_CE;
 
     always_comb begin
         if (!_IOROM_CE) begin
@@ -254,11 +257,11 @@ module IO_board(
 
     // Let's do the same for the two 444C-3 RAM chips that provide 1K of RAM to the FDC, shared by the 6504 for FDC and the 68K for PRAM
     // Chip select for both chips
-    (* MARK_DEBUG = "TRUE" *) logic _FDC_RAM_CS;
+    logic _FDC_RAM_CS;
     // Address lines for the chips, will be multiplexed between the 6504 and 68K
-    (* MARK_DEBUG = "TRUE" *) logic [9:0] RA;
+    logic [9:0] RA;
     // R/W line multiplexed between the 6504 and 68K too
-    (* MARK_DEBUG = "TRUE" *) logic RW_FDC_RAM;
+    logic RW_FDC_RAM;
 
     // We've got to do some special processing on the chip select signal to get things to work on the actual FPGA
     // IF we just forwarded the select signal from the 6504 or 68K directly to the RAM, we would run into timing issues
@@ -270,11 +273,11 @@ module IO_board(
     // But since the 68K access changed the RAM address, the RAM will still be outputting the 68K's data when the 6504 cycle resumes
     // And so the 6504 will read the wrong data, causing crazy stuff to happen
     // So we need to make sure that when the 68K stops accessing the RAM, the RAM gets unselected and reselected again so it latches the 6504 address again
-    (* MARK_DEBUG = "TRUE" *) logic _FDC_RAM_CS_muxed;
-    (* MARK_DEBUG = "TRUE" *) logic FDC_counter_inhibit_flag;
-    (* MARK_DEBUG = "TRUE" *) logic FDC_counter_inhibit;
-    (* MARK_DEBUG = "TRUE" *) logic FDC_RAM_addr_select_prev;
-    (* MARK_DEBUG = "TRUE" *) logic FDC_RAM_addr_select;
+    logic _FDC_RAM_CS_muxed;
+    logic FDC_counter_inhibit_flag;
+    logic FDC_counter_inhibit;
+    logic FDC_RAM_addr_select_prev;
+    logic FDC_RAM_addr_select;
 
     // First, we use this flip-flop to determine what should be feeding the RAM's chip select; no delay logic yet
     always_ff @(posedge C16M) begin
@@ -294,7 +297,7 @@ module IO_board(
 
     // This handles the setting and clearing of the counter inhibit flag that we use to pause the 6504 clock
     // The flag only lasts for one sysclk cycle here, but we'll stretch it out in the next always_ff block
-    (* MARK_DEBUG = "TRUE" *) logic _DTACK_ungated;
+    logic _DTACK_ungated;
     always_ff @(posedge C16M) begin
         // If we're at the end of a 68K access to the RAM (rising edge of FDC_RAM_addr_select), then set the flag
         // Also set it during end of the access (when DTACK is asserted), so that there's not a quick toggle of this signal
@@ -380,7 +383,7 @@ module IO_board(
     assign BD_OE_int = (~FDC_RAM_addr_select && READ) ? 1'b1 : 1'bz;
 
     // Thanks to a lack of tri-state logic, we have to do some multiplexing on the RAM, which is what RD_in is for
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] RD_in;
+    logic [7:0] RD_in;
     // When low, the RAM is being accessed by the 68K and its contents should be put on the BD bus
     // When we're accessing the RAM from the 68K, put the 68K's data on the RAM's input lines, else put the 6504's data on it
     assign RD_in = (~FDC_RAM_addr_select) ? BD_in[7:0] : FD_out;
@@ -395,19 +398,19 @@ module IO_board(
     // It's pure magic and basically works the same way as the floppy controller state machine on the Apple ][
 
     // The state machine's clock
-    (* MARK_DEBUG = "TRUE" *) logic state_machine_clk;
+    logic state_machine_clk;
     // This one comes from the output of a 2-to-4 decoder that decodes MA[5:4]
-    (* MARK_DEBUG = "TRUE" *) logic [3:0] FDC_address_decoder_1;
+    logic [3:0] FDC_address_decoder_1;
     assign _state_machine_OE1 = FDC_address_decoder_1[0];
     // We don't actually use QH for anything, so just tie it to a dummy wire
     logic QH_dummy; 
     
     // Address and data lines for the PROM
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] PROM_address;
-    (* MARK_DEBUG = "TRUE" *) logic [7:0] PROM_data;
+    logic [7:0] PROM_address;
+    logic [7:0] PROM_data;
 
     // Clock the shiftreg on C16M, but use state_machine_clk as a clock enable
-    (* MARK_DEBUG = "TRUE" *) logic state_machine_clk_enable;
+    logic state_machine_clk_enable;
     LS323_shiftreg FDC_state_shiftreg(
         .clk(C16M),
         .clk_en(state_machine_clk_enable),
@@ -483,10 +486,11 @@ module IO_board(
     // Now for the two LS259 addressable latches that hold the floppy drive control signals
     // This is pretty simple; they're addressed by MA[3:1] with the data on MA[0] and clocked by lines from a decoder we'll make later
     // One of the latch outputs is an intermediate signal used to form the state machine clock
-    (* MARK_DEBUG = "TRUE" *) logic state_machine_clk_int;
+    logic state_machine_clk_int;
     // The latch also outputs HDS, but it's the inverted HDS
     logic _HDS;
     addressable_latch_LS259 upper_FDC_latch(
+        .clk(C16M),
         .A(MA[3:1]),
         .D(MA[0]),
         ._G(FDC_address_decoder_1[0]),
@@ -501,16 +505,17 @@ module IO_board(
     assign HDS = ~_HDS;
 
     // We have to do the same inversion thing for DR0 and DR1, so make intermediate signals for them too
-    (* MARK_DEBUG = "TRUE" *) logic DR0;
-    (* MARK_DEBUG = "TRUE" *) logic DR1;
+    logic DR0;
+    logic DR1;
     // FDIR (floppy disk interrupt) and DISK_DIAG (set when the FDC is doing diagnostics) are also outputs from the lower latch
-    (* MARK_DEBUG = "TRUE" *) logic FDIR;
-    (* MARK_DEBUG = "TRUE" *) logic DISK_DIAG;
+    logic FDIR;
+    logic DISK_DIAG;
     // A latch output that's used to lock out CPU board accesses to the FDC RAM when the 6504 is using it
     logic DIS;
     // And a dummy bit we won't use
     logic dummy_bit;
     addressable_latch_LS259 lower_FDC_latch(
+        .clk(C16M),
         .A(MA[3:1]),
         .D(MA[0]),
         ._G(FDC_address_decoder_1[1]),
@@ -528,10 +533,10 @@ module IO_board(
     // The reset is done synchronously with the 16MHz clock
     // To avoid metastability, we'll implement clock enable strobes here too
     // That way, we can clock all the other parts of the FDC off C16M directly, and just gate their enables with these strobes
-    (* MARK_DEBUG = "TRUE" *) logic [3:0] FDC_counter_clock_enables_falling;
-    (* MARK_DEBUG = "TRUE" *) logic [3:0] FDC_counter_next;
-    (* MARK_DEBUG = "TRUE" *) logic FDC_counter_enable;
-    (* MARK_DEBUG = "TRUE" *) logic _DTACK_FF_1_output;
+    logic [3:0] FDC_counter_clock_enables_falling;
+    logic [3:0] FDC_counter_next;
+    logic FDC_counter_enable;
+    logic _DTACK_FF_1_output;
     logic already_reset;
 
     initial begin
@@ -598,14 +603,22 @@ module IO_board(
         _AS_int <= _AS_sync;
     end
 
-    always_ff @(posedge C16M, posedge _AS_int) begin
+    // We need to synchronize _INTIO too since it's also used in the same always_ff block
+    logic _INTIO_int;
+    logic _INTIO_sync;
+    always_ff @(posedge C16M) begin
+        _INTIO_sync <= _INTIO;
+        _INTIO_int <= _INTIO_sync;
+    end
+
+    always_ff @(posedge C16M) begin
         if (_AS_int) begin
-            // Async preset on deasserted AS
+            // Original design was async preset on deasserted AS, but we do sync preset to avoid metastability
             _DTACK_FF_1_output <= 1'b1;
         // Otherwise, set or clear based on INTIO, A12, and DIS
         // But only if the clock enable for rising edge of FDC_counter[0] is set
         end else if (FDC_counter_clock_enables_rising[0]) begin
-            if (!_INTIO && !A[12] && !DIS) begin
+            if (!_INTIO_int && !A[12] && !DIS) begin
                 _DTACK_FF_1_output <= 1'b0;
             end else begin
                 _DTACK_FF_1_output <= 1'b1;
@@ -622,9 +635,9 @@ module IO_board(
     // _PHI2 is the inverted version of the 6504's PHI2 clock, which is just FDC_counter[2] in our case
     assign _PHI2 = ~FDC_counter[2];
     // Clock the FF on C16M to avoid metastability; we'll use clock enables to simulate the rising edge of _PHI2
-    always_ff @(posedge C16M, posedge _AS_int) begin
+    always_ff @(posedge C16M) begin
         if (_AS_int) begin
-            // Async preset on deasserted AS, just like before
+            // Original design was async preset on deasserted AS, but we do sync preset to avoid metastability
             FDC_RAM_addr_select <= 1'b1;
         // D input is output of the first flop
         // Clocked on falling edge of FDC_counter[2] (AKA _PHI2)
@@ -680,7 +693,7 @@ module IO_board(
     // Now onto chip select for the FDC RAM, _FDC_RAM_CS
     // This goes low (enabled) when either the 68K is accessing the RAM (FDC_RAM_addr_select is low)
     // Or when the 6504 has the bus and the output of a yet-to-be-made decoder is asserted by both MA10 and MA12 from the 6504 being low
-    (* MARK_DEBUG = "TRUE" *) logic [3:0] FDC_address_decoder_0;
+    logic [3:0] FDC_address_decoder_0;
     assign _FDC_RAM_CS = (FDC_RAM_addr_select) ? (FDC_address_decoder_0[0] | FDC_counter[2]) : 1'b0;
 
     // The I/O board ROM chip select, _IOROM_CE, is asserted (low) whenever the 6504 has the bus (FDC_RAM_addr_select high) and MA12 is high
@@ -774,7 +787,7 @@ module IO_board(
     logic C2M;
 
     // I/O board-wide 8-bit data bus
-    (* MARK_DEBUG = "TRUE" *) tri [7:0] IO_D;
+    tri [7:0] IO_D;
     logic [7:0] D_out_9512;
 
     // Now instantiate our dummy 9512 itself
@@ -808,8 +821,8 @@ module IO_board(
     // First, the output data bus from the SCC
     logic [7:0] D_out_SCC;
     // Chip select and write enable for the SCC
-    (* MARK_DEBUG = "TRUE" *) logic CS_SCC;
-    (* MARK_DEBUG = "TRUE" *) logic WE_SCC;
+    logic CS_SCC;
+    logic WE_SCC;
     // We don't use the SCC's WREQ output, so just tie it to a dummy wire
     logic dummy_wreq;
 
@@ -817,17 +830,16 @@ module IO_board(
     assign CS_SCC = ~_VMA & ~_AS;
 
     // A write enable signal for the SCC that we'll generate later
-    (* MARK_DEBUG = "TRUE" *) logic _WSIO;
+    logic _WSIO;
     // We write to the SCC whenever _WSIO is asserted and we're not in reset, or when _WSIO is deasserted and we're in reset
     assign WE_SCC = (~_RESET ^ _WSIO) ? 1'b0 : 1'b1;
 
     // Only put the SCC's output on the I/O board data bus when it's being selected and read from
     // We use another yet-to-be-made signal, _RSIO, for this, and do the same XOR with reset as before to see if we should be reading
     // In addition to the CS check, of course
-    (* MARK_DEBUG = "TRUE" *) logic _RSIO;
+    logic _RSIO;
     assign IO_D = (~(~_RESET ^ _RSIO) & CS_SCC) ? D_out_SCC : 8'bz;
 
-    logic IOCLK;
     logic _PSI;
     `ifdef SIMULATION
         // In simulation, use the dumb broken NanoMac SCC core
@@ -917,19 +929,17 @@ module IO_board(
     logic [7:0] port_b_out_PP_VIA;
 
     // And last but not least, a VIA chip select signal, which will active whenever both _DSKPT and VMA are asserted
-    (* MARK_DEBUG = "TRUE" *) logic CS_PP_VIA;
+    logic CS_PP_VIA;
     assign CS_PP_VIA = ~_DSKPT & ~_VMA;
 
     // Oh yeah, one more thing: we need a clock signal that goes high whenever either phase of E goes high
     // This is the .clock() input to the VIA core; it's what all the VIA's internal operations are synchronized to
     // The VIA logic simply checks the pos/neg phase signals to know when to do things; it's not actually clocked off them
-
-    // So make our "IOCLK" high whenever either phase of E goes high, and low otherwise
-    assign IOCLK = E_pos_phase | E_neg_phase;
+    logic [7:0] port_b_ddrb_pp_via;
 
     // And now we can instantiate the VIA with all this information
     via6522 pp_via(
-        .clock(E_either_edge), // Clock it with the IOCLK "fast" clock
+        .clock(E_either_edge), // Clock it with the E clock
         .rising(E_pos_phase), // But use the E phase signals for timing
         .falling(E_neg_phase),
         .reset(~_RESET), // Systemwide reset
@@ -942,6 +952,7 @@ module IO_board(
         .port_a_i(SD_in),
         .port_b_o(port_b_out_PP_VIA), // These two composite signals for Port B are about to be broken out into their individual bits
         .port_b_i(port_b_in_PP_VIA),
+        .port_b_t(port_b_ddrb_pp_via), // We need this DDRB signal to know which bits of Port B are inputs vs outputs
         .ca1_i(_BSY), // CA1 comes from _BSY, not gated by _ProFile_EN
         .ca2_o(_PSTRB_ungated), // CA2 goes to the ungated version of _PSTRB
         .ca2_i(1'b0), // Make sure the unused CA2 input is tied to a known state
@@ -967,7 +978,7 @@ module IO_board(
     assign _CMD_ungated = port_b_out_PP_VIA[4]; // PB4 is _CMD
     assign port_b_in_PP_VIA[5] = parity_out; // PB5 is the output parity
     assign port_b_in_PP_VIA[6] = DISK_DIAG; // PB6 is DISK_DIAG from the FDC
-    assign WCNT = port_b_out_PP_VIA[7]; // PB7 is WCNT
+    assign WCNT = port_b_ddrb_pp_via[7] ? port_b_out_PP_VIA[7] : 1'b0; // PB7 is WCNT, but only when it's an output
     // Put the unused input bits of Port B into known states
     assign port_b_in_PP_VIA[4:2] = 3'b111;
     assign port_b_in_PP_VIA[7] = 1'b1;
@@ -995,9 +1006,9 @@ module IO_board(
 
     // Its output goes into a flip-flop that latches the parity so we can still read it after the ProFile changes the data lines
     // The FF is clocked by _PSTRB_ungated, and it gets set whenever the EVEN output from the parity checker is high
-    // The only thing that can reset it is an asynchronous reset from _PRES
+    // The only thing that can reset it is an asynchronous reset from _PRES, which we've made synchronous here
     // So this FF basically stays idle while parities are good (not even), and then locks itself on whenever a parity error occurs
-    logic _PRES;
+    /*logic _PRES;
     always_ff @(posedge _PSTRB_ungated, negedge _PRES) begin
         if (!_PRES) begin
             latched_parity_in <= 1'b0;
@@ -1006,6 +1017,18 @@ module IO_board(
                 latched_parity_in <= 1'b1;
             end
         end
+    end*/
+    logic _PRES;
+    logic _PSTRB_ungated_prev;
+    always_ff @(posedge DOTCK) begin
+        if (!_PRES) begin
+            latched_parity_in <= 1'b0;
+        end else if (_PSTRB_ungated && !_PSTRB_ungated_prev) begin
+            if (parity_ff_input) begin
+                latched_parity_in <= 1'b1;
+            end
+        end
+        _PSTRB_ungated_prev <= _PSTRB_ungated;
     end
 
     // And another to the PD_out bus, which generates the parity of the outgoing data to the ProFile
@@ -1046,7 +1069,7 @@ module IO_board(
     // And when A10 and A11 are both high, we assert _CS_KBD_VIA to select the keyboard VIA
     // Selecting the SCC or either of the VIAs also asserts _VPA to tell the 68K that it's a valid peripheral address
     // We'll accomplish all this with two 2-to-4 decoders
-    (* MARK_DEBUG = "TRUE" *) logic _CS_KBD_VIA;
+    logic _CS_KBD_VIA;
     logic _CS_SCC_decoder;
     logic dummy_output1, dummy_output2;
     decoder_2to4 IO_board_address_decoder(
@@ -1064,8 +1087,8 @@ module IO_board(
     // Which we assert whenever either the keyboard VIA, parallel port VIA, or SCC is selected
     // But as with _VPA on the CPU board, we have to do the VPA muxing in the top-level module to avoid multiple drivers on one signal
     // So we do a VPA and a VPA_OE so the mux knows when to drive the signal
-    (* MARK_DEBUG = "TRUE" *) assign _VPA_out = (~_CS_KBD_VIA | ~_DSKPT | ~_CS_SCC_decoder) ? 1'b0 : 1'bz;
-    (* MARK_DEBUG = "TRUE" *) assign VPA_OE = (~_CS_KBD_VIA | ~_DSKPT | ~_CS_SCC_decoder);
+    assign _VPA_out = (~_CS_KBD_VIA | ~_DSKPT | ~_CS_SCC_decoder) ? 1'b0 : 1'bz;
+    assign VPA_OE = (~_CS_KBD_VIA | ~_DSKPT | ~_CS_SCC_decoder);
 
     // Now we'll do the mux that gets keyboard and mouse data from the peripherals to the COP
     // It's a dual 4-to-1 mux, with the select lines coming from the COP, and the data lines coming from the keyboard and mouse
@@ -1126,6 +1149,13 @@ module IO_board(
 
     logic dummy_COP0, dummy_COP1, dummy_COP2; // Dummy wires for unused COP outputs
 
+    // One other thing we need to do: turn COPCK into a clock enable that goes high the cycle before the rising edge of COPCK_2x
+    logic COPCK_clk_enable;
+    always_ff @(posedge COPCK_2x) begin
+        // Luckily we can make this simply by just inverting COPCK
+        COPCK_clk_enable <= ~COPCK;
+    end
+
     // Instantiate the VHDL model of the COP421
     t420_notri #(
         // 0 = divide by 4
@@ -1135,8 +1165,8 @@ module IO_board(
         .opt_ck_div_g(2), // Make sure it divides the clock by 16 (parameter=2) like the original, previously had it set to 1 (divide by 8)
         .opt_type_g(1)
     ) cop421 (
-        .ck_i(COPCK), // Clock it from the 3.9MHz COPCK for perfect RTC timing
-        .ck_en_i(1'b1), // The clock is always enabled
+        .ck_i(COPCK_2x), // Clock it from the 7.8MHz COPCK_2x clock net
+        .ck_en_i(COPCK_clk_enable), // Use our 3.9MHz-derived clock enable as the clock enable input to the COP
         .reset_n_i(1'b1), // Other than power-on reset, which is handled internally, we never reset the COP because that would wipe the RTC
         // .cko_i(), // We don't use the clock out pin for anything
         .io_l_i(L_COP_out), // Hook up the bidirectional L bus
@@ -1162,7 +1192,7 @@ module IO_board(
 
     // We also need a chip select for the VIA
     // We already made the _CS_KBD_VIA signal earlier, but that's only half the picture; VMA also must be asserted
-    (* MARK_DEBUG = "TRUE" *) logic CS_KBD_VIA;
+    logic CS_KBD_VIA;
     assign CS_KBD_VIA = ~_CS_KBD_VIA & ~_VMA;
 
     logic KBIR;
@@ -1174,7 +1204,7 @@ module IO_board(
 
     // And now we instantiate the chip
     via6522 kbd_via(
-        .clock(E_either_edge), // Clock it with the IOCLK "fast" clock
+        .clock(E_either_edge), // Clock it with the E clock
         .rising(E_pos_phase), // But use the E phase signals for timing
         .falling(E_neg_phase),
         .reset(~_RESET), // Systemwide reset
@@ -1224,7 +1254,7 @@ module IO_board(
                 DDRA_extension_counter <= 11'b0;
                 // Otherwise, DDRA is low
             end else begin
-                if (DDRA_extension_counter < 11'd512) begin
+                if (DDRA_extension_counter < 11'd768) begin
                     // If DDRA is low but the counter hasn't reached its max value yet, increment it
                     DDRA_extension_counter <= DDRA_extension_counter + 1'b1;
                     KBD_via_DDRA_extended <= 1'b1; // And keep the extended signal high
@@ -1235,9 +1265,17 @@ module IO_board(
             end
         end
     end
-    // And now gate L_COP_out with this extended DDRA signal
-    assign L_COP_out = (KBD_via_DDRA_extended) ? L_COP_out_int : 8'b10000000;
 
+    // Next, synchronize this signal into the COPCK_2x domain
+    logic KBD_via_DDRA_extended_int, KBD_via_DDRA_extended_sync;
+    always_ff @(posedge COPCK_2x) begin
+        KBD_via_DDRA_extended_int <= KBD_via_DDRA_extended;
+        KBD_via_DDRA_extended_sync <= KBD_via_DDRA_extended_int;
+    end
+
+    // And now gate L_COP_out with this synced extended DDRA signal
+    assign L_COP_out = (KBD_via_DDRA_extended_sync) ? L_COP_out_int : 8'b10000000;
+    
     // Only put the VIA's output data on the global I/O board data bus when it's being selected and read from
     assign IO_D = (CS_KBD_VIA & READ) ? D_out_KBD_VIA : 8'bz;
 
@@ -1269,7 +1307,7 @@ module IO_board(
     assign port_b_in_KBD_VIA[6] = _READY_COP; // PB6 is _READY from the COP
     // PB7 is one of the things that can drive _CRES, which is asserted when either PB7 is low or _RESET is low
     // The ProFile can also drive _CRES, so we have separate CRES_out and CRES_in lines
-    assign _CRES_out = (port_b_out_KBD_VIA[7] & _RESET) ? 1'b1 : 1'b0;
+    assign _CRES_out = (port_b_out_KBD_VIA[7] & _RESET_SYSTEM) ? 1'b1 : 1'b0;
     // Put the other unused bits of Port B into known states
     assign port_b_in_KBD_VIA[0] = 1'b0;
     assign port_b_in_KBD_VIA[1] = 1'b0;
@@ -1283,13 +1321,16 @@ module IO_board(
     assign _PRES = _CRES_out & _CRES_in;
 
     // Last but not least, Page 5, from which we literally only need to implement one thing: the contrast latch
-    // It's just an LS174 hex D flip-flop clocked by WCNT from the parallel port VIA and reset by _RESET
     // The original I/O board also had a DAC to convert the contrast to an analog voltage, but we have to do that externally (or over HDMI)
-    always_ff @(posedge WCNT, negedge _RESET) begin
-        if (!_RESET) begin
+    logic WCNT_prev;
+    always_ff @(posedge DOTCK, negedge _RESET_SYSTEM) begin
+        if (!_RESET_SYSTEM) begin
             CONT <= 6'b0; // On reset, set contrast to 0
         end else begin
-            CONT <= SD_out[7:2]; // Otherwise, latch bits 2-7 of the SD output from the parallel port VIA into CONT
+            if (WCNT && !WCNT_prev) begin
+                CONT <= SD_out[7:2]; // Otherwise, latch bits [7:2] of the SD bus from the PP VIA into CONT on the rising edge of WCNT
+            end
+            WCNT_prev <= WCNT; // And keep track of the previous state of WCNT so we can detect rising edges
         end
     end
 

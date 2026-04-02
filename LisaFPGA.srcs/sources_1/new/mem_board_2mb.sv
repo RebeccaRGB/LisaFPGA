@@ -109,7 +109,12 @@ module mem_board_2mb(
 
     // We latch the board select signal when RAS is low, for use in the parity-checking circuitry
     // It's always high here, but I kept the original logic anyway in case we want to re-enable multiple memory boards in the future
-    always @(_RAS, BDSL) begin
+    /*always @(_RAS, BDSL) begin
+        if (!_RAS) begin
+            LBDSL <= BDSL;
+        end
+    end*/
+    always_ff @(posedge DOTCK) begin
         if (!_RAS) begin
             LBDSL <= BDSL;
         end
@@ -118,14 +123,20 @@ module mem_board_2mb(
     // Now time for the (currently disabled) parity checking logic
     logic disable_parity;
     assign disable_parity = 1'b1; // Go ahead and disable parity checking before we forget
-    (* MARK_DEBUG = "TRUE" *) logic latched_parity_lower, latched_parity_upper;
-    (* MARK_DEBUG = "TRUE" *) logic write_bad_parity_lower, write_bad_parity_upper;
-    (* MARK_DEBUG = "TRUE" *) logic PIL, POL, PIU, POU;
-    (* MARK_DEBUG = "TRUE" *) logic low_odd, high_odd;
-    (* MARK_DEBUG = "TRUE" *) logic invalid_parity, invalid_parity_latched;
+    logic latched_parity_lower, latched_parity_upper;
+    logic write_bad_parity_lower, write_bad_parity_upper;
+    logic PIL, POL, PIU, POU;
+    logic low_odd, high_odd;
+    logic invalid_parity, invalid_parity_latched;
 
     // Whenever RAS is asserted, latch the lower and upper parity coming out of the parity RAM chips (that we don't have)
-    always @(RAS, POL, POU) begin
+    /*always @(RAS, POL, POU) begin
+        if (RAS) begin
+            latched_parity_lower <= POL;
+            latched_parity_upper <= POU;
+        end
+    end*/
+    always_ff @(posedge DOTCK) begin
         if (RAS) begin
             latched_parity_lower <= POL;
             latched_parity_upper <= POU;
@@ -164,20 +175,69 @@ module mem_board_2mb(
     assign LBDSL_readop = LBDSL & MREAD;
 
     // The parity error flip-flop, which is clocked by _CAS and asynchronously cleared by our readop-only board select from above
-    always_ff @(posedge _CAS, negedge LBDSL_readop) begin
+    /*always_ff @(posedge _CAS, negedge LBDSL_readop) begin
         if (!LBDSL_readop) begin
             invalid_parity_latched <= 1'b0;
         end else begin
             // This flip-flop just lets us hold onto the bad parity until the next memory cycle, so we can tell the CPU board about it
             invalid_parity_latched <= invalid_parity;
         end
+    end*/
+    logic LBDSL_readop_prev;
+    logic _CAS_prev;
+    always_ff @(posedge DOTCK) begin
+        if (!LBDSL_readop && LBDSL_readop_prev) begin
+            invalid_parity_latched <= 1'b0;
+        end else if (_CAS && !_CAS_prev) begin
+            // This flip-flop just lets us hold onto the bad parity until the next memory cycle, so we can tell the CPU board about it
+            invalid_parity_latched <= invalid_parity;
+        end
+        // Latch the previous values of LBDSL and _CAS for the edge detections above
+        LBDSL_readop_prev <= LBDSL_readop;
+        _CAS_prev <= _CAS;
+    end
+
+    // All of that parity logic is for a board that has real parity RAM, which we don't have
+    // But we still need to be able to generate bad parity for testing purposes thanks to the CPU board's "write wrong parity" feature
+    // So basically, if HDER_in is asserted, then we wait for a write, latch that address, and set a flag that says it should have bad parity
+    // Then, when we see the next read to that address, we send bad parity back to the CPU board by forcing HDER_out low
+    // If the CPU board writes to that same address with HDER_in deasserted, then we clear the flag and send good parity again
+    // Note that this strategy only allows us to force bad parity on one address at a time, but this is good enough to pass the ROM's tests
+    logic [20:1] latched_bad_parity_address;
+    logic force_bad_parity;
+    logic HDER_force_bad_parity;
+    always_ff @(posedge DOTCK) begin
+        if (!_CAS_sdram && !_RAS_sdram && !MREAD) begin
+            // We'll end up here whenever a write happens; now check if HDER_in is asserted
+            if (!_HDER_in) begin
+                // If it is, then latch the address and set the flag to force bad parity on the next read to that address
+                latched_bad_parity_address <= {A20, A19, A18, A17, A16, buffered_RA};
+                force_bad_parity <= 1'b1;
+            end else begin
+                // If not, then check if we're writing to the same address that we had previously latched for bad parity
+                // If we are, then clear the flag so we send good parity again
+                if ({A20, A19, A18, A17, A16, buffered_RA} == latched_bad_parity_address) begin
+                    force_bad_parity <= 1'b0;
+                end
+            end
+        // Now check if we're doing a read operation
+        end else if (!_CAS_sdram && !_RAS_sdram && MREAD) begin
+            // If so, then see if the address matches the one we latched for bad parity
+            if ({A20, A19, A18, A17, A16, buffered_RA} == latched_bad_parity_address) begin
+                // If it does, then set the HDER_force_bad_parity signal to whatever our force_bad_parity flag is
+                HDER_force_bad_parity <= force_bad_parity;
+            end else begin
+                // And if there's no match, then send good parity
+                HDER_force_bad_parity <= 1'b0;
+            end
+        end
     end
 
     // We've encountered a hard memory error if we're in the middle of a read op (with this board selected) and the parity is invalid
     // We have to make an OE for HDER here since the CPU board can drive it too; it gets muxed with the CPU board in top.sv
-    // Prevemt HDER from ever being asserted if parity checking is disabled (which it is currently thanks to our SDRAM)
-    assign _HDER_out = disable_parity ? 1'b1 : (LBDSL_readop & invalid_parity_latched ? 1'b0 : 1'b1);
-    assign HDER_OE = disable_parity ? 1'b0 : (LBDSL_readop & invalid_parity_latched);
+    // Prevemt HDER from ever being asserted except for "write wrong parity" if parity checking is disabled
+    assign _HDER_out = disable_parity ? ~HDER_force_bad_parity : (LBDSL_readop & invalid_parity_latched ? 1'b0 : 1'b1);
+    assign HDER_OE = disable_parity ? HDER_force_bad_parity : (LBDSL_readop & invalid_parity_latched);
 
     // The last thing to do before we instantiate the SDRAM controller is to implement the RAM size select jumpers
     // All we do is check the jumpers and inhibit RAS/CAS if the CPU tries to access memory beyond the selected size

@@ -33,29 +33,29 @@ module CPU_board(
     output wire _IAK1, // open-collector, i guess supposed to be pulled up on card
     input wire _INT2, // open-collector, pulled up on CPU board
     output wire _IAK2, // open-collector, i guess supposed to be pulled up on card
-    (* MARK_DEBUG = "TRUE" *) input wire _RSIR, // open-collector, pulled up on CPU board
-    (* MARK_DEBUG = "TRUE" *) input wire _KBIR, // open-collector, pulled up on CPU board
-    (* MARK_DEBUG = "TRUE" *) input logic _IOIR, // open-collector, pulled up on i/o and CPU board
+    input wire _RSIR, // open-collector, pulled up on CPU board
+    input wire _KBIR, // open-collector, pulled up on CPU board
+    input logic _IOIR, // open-collector, pulled up on i/o and CPU board
     output logic E,
-    (* MARK_DEBUG = "TRUE" *) output logic _RESET, // may need to be open-collector, wait for IOB to find out
+    output logic _RESET, // may need to be open-collector, wait for IOB to find out
     output logic CPUCK,
     input wire _LDMA, // open-collector i think
     input wire _BGACK, // also open-collector i think
     input wire _BR, // also open-collector i think
     output logic _BG, // check if open-collector, not sure
-    (* MARK_DEBUG = "TRUE" *) input logic [15:0] BD_in, // bidirectional tri-state bus
-    (* MARK_DEBUG = "TRUE" *) output logic [15:0] BD_out,
-    (* MARK_DEBUG = "TRUE" *) output logic BD_OE,
+    input logic [15:0] BD_in, // bidirectional tri-state bus
+    output logic [15:0] BD_out,
+    output logic BD_OE,
     output wire [12:1] A_OUT, // tri-state address bus (tri-stated by BGACK)
     output logic _VMA,
-    (* MARK_DEBUG = "TRUE" *) input logic _VPA_in, // open-collector i think, input to CPU, driven by stuff on CPU board and presumably I/O board too
-    (* MARK_DEBUG = "TRUE" *) output logic _VPA_out,
-    (* MARK_DEBUG = "TRUE" *) output logic VPA_OE,
-    (* MARK_DEBUG = "TRUE" *) input logic _DTACK_in,
-    (* MARK_DEBUG = "TRUE" *) output logic _DTACK_out,
-    (* MARK_DEBUG = "TRUE" *) output logic DTACK_OE,
+    input logic _VPA_in, // open-collector i think, input to CPU, driven by stuff on CPU board and presumably I/O board too
+    output logic _VPA_out,
+    output logic VPA_OE,
+    input logic _DTACK_in,
+    output logic _DTACK_out,
+    output logic DTACK_OE,
     output wire _AS, // tri-state b/c of BGACK, pulled up to 5V when not in use
-    output wire READ, // tri-state b/c of BGACK, pulled up to 5V
+    (* MARK_DEBUG = "TRUE" *) output wire READ, // tri-state b/c of BGACK, pulled up to 5V
     output wire _LDS, // tri-state b/c of BGACK, pulled up to 5V
     output wire _UDS, // tri-state b/c of BGACK, pulled up to 5V
     output logic _CSYNC,
@@ -64,29 +64,29 @@ module CPU_board(
     output logic VA9B,
     output logic _R1,
     output logic _R2,
-    (* MARK_DEBUG = "TRUE" *) input logic [15:0] MD_IN,
-    (* MARK_DEBUG = "TRUE" *) output logic [15:0] MD_OUT,
-    (* MARK_DEBUG = "TRUE" *) output logic [8:1] RA,
+    input logic [15:0] MD_IN,
+    output logic [15:0] MD_OUT,
+    output logic [8:1] RA,
     input logic _RSTSW,
-    (* MARK_DEBUG = "TRUE" *) output wire A16, // all 4 of these are tri-state b/c of BGACK
-    (* MARK_DEBUG = "TRUE" *) output wire A17,
-    (* MARK_DEBUG = "TRUE" *) output wire A18,
-    (* MARK_DEBUG = "TRUE" *) output wire A19,
+    output logic A16, // all 4 of these are tri-state b/c of BGACK
+    (* MARK_DEBUG = "TRUE" *) output logic A17,
+    (* MARK_DEBUG = "TRUE" *) output logic A18,
+    (* MARK_DEBUG = "TRUE" *) output logic A19,
     input logic DOTCK,
-    (* MARK_DEBUG = "TRUE" *) output logic MREAD,
-    (* MARK_DEBUG = "TRUE" *) output logic _CAS,
-    (* MARK_DEBUG = "TRUE" *) output logic _RAS,
-    (* MARK_DEBUG = "TRUE" *) output wire A20, // tri-state b/c of BGACK
-    (* MARK_DEBUG = "TRUE" *) output logic _HSYNC,
+    output logic MREAD,
+    output logic _CAS,
+    output logic _RAS,
+    (* MARK_DEBUG = "TRUE" *) output logic A20, // tri-state b/c of BGACK
+    output logic _HSYNC,
     input logic _HDER_in,
     output logic _HDER_out,
     output logic HDER_OE,
-    (* MARK_DEBUG = "TRUE" *) output logic _VSYNC,
+    output logic _VSYNC,
     input logic _SFER_in,
     output logic _SFER_out,
     output logic SFER_OE,
-    (* MARK_DEBUG = "TRUE" *) output logic VID,
-    (* MARK_DEBUG = "TRUE" *) input logic _NMI, // open-collector
+    output logic VID,
+    input logic _NMI, // open-collector
 
     // Everything below here are signals added by me that weren't on the edge connector of the original CPU board
     // The LED hooked to the video address latch
@@ -95,15 +95,24 @@ module CPU_board(
     input logic INVID,
     output logic E_pos_phase, // A pulse that goes high for two cycle just after the rising edge of E
     output logic E_neg_phase,  // A pulse that goes high for two cycles just after the falling edge of E
-    output logic E_either_edge, // A pulse that goes high for one cycle just after either edge of E
+    output logic E_either_edge, // A clock that goes high for one cycle just after either edge of E
     input logic CPU_ROM_SEL, // Selects whether the CPU board uses revision H or 3A boot ROMs (and VSROMs)
     output logic VA_overflow, // Goes high during vertical blanking interval (for longer than _VSYNC)
     output logic _clr_vid_clk // Goes low during horizontal active video (for shorter than _HSYNC)
     );
 
+    // The E_either_edge clock coming out of the CPU is just a standard logic fabric signal, but we need it to be on an actual clock net
+    // So do that with a BUFG
+    logic E_either_edge_logic;
+    BUFG E_bufg (
+        .I(E_either_edge_logic),
+        .O(E_either_edge)
+    );
+
+
     // The internal CPU board version of the address bus is narrower than the version that's exposed to other cards
     // So map the low 12 bits of the wide internal version to the narrow external one
-    (* MARK_DEBUG = "TRUE" *) tri [20:1] A;
+    tri [20:1] A;
     assign A_OUT = A[12:1];
 
     // The CPU core we're using separates the data bus into two unidirectional buses: one for input and one for output
@@ -116,10 +125,10 @@ module CPU_board(
     // Emulate the LS245s that make connections between the memory, buffered, and unbuffered data buses
     // First, we need to define _MDEN for enabling the MD-to-BD transceiver
     // _MDEN is asserted if the current cycle is not an I/O cycle, not a special I/O (MMU/ROM) cycle, and is a CPU (not video) cycle
-    (* MARK_DEBUG = "TRUE" *) logic _MDEN;
-    (* MARK_DEBUG = "TRUE" *) logic CPUC1;
-    (* MARK_DEBUG = "TRUE" *) logic _IOCY;
-    (* MARK_DEBUG = "TRUE" *) logic _SPIO;
+    logic _MDEN;
+    logic CPUC1;
+    logic _IOCY;
+    logic _SPIO;
     assign _MDEN = ~(CPUC1 & _IOCY & _SPIO);
 
     /*always @(CPUC1, _IOCY, _SPIO, _CDACK) begin
@@ -130,13 +139,13 @@ module CPU_board(
         end
     end*/
 
-    (* MARK_DEBUG = "TRUE" *) tri [15:0] BD;
+    tri [15:0] BD;
     // For our data bus mux in top.sv, we pass BD through to the output all the time
     assign BD_out = BD;
     // And only feed the muxed BD value through to our internal BD_in when the CPU board isn't driving BD
     assign BD = (BD_OE) ? 16'bz : BD_in;
 
-    (* MARK_DEBUG = "TRUE" *) logic _DBON;
+    logic _DBON;
     // And now we can do the transceiver logic
     // First, we pass BD through to MD if we're doing a write and _MDEN is asserted, else high-z
     assign MD_OUT = (~READ & ~_MDEN) ? BD : 16'b0;
@@ -156,13 +165,13 @@ module CPU_board(
     assign UD_CPU_in = (READ & ~_DBON) ? BD : 16'bz;
 
     // The interrupt priority level that gets fed to the CPU
-    (* MARK_DEBUG = "TRUE" *) logic [2:0] _IPL;
+    logic [2:0] _IPL;
     // Encodes one of the 7 interrupt types into an IPL priority level for the CPU
     // The IPL output hooks straight into the CPU
-    (* MARK_DEBUG = "TRUE" *) logic _HPIR;
+    logic _HPIR;
     // We're going to need an internal version of the I/O interrupt signal that incorporates the CPU board's _IOIR input
     // We'll generate it later though
-    (* MARK_DEBUG = "TRUE" *) logic _IOIR_int;
+    logic _IOIR_int;
     encoder_8to3_LS148 IRQ_encoder(
         ._D({_HPIR, _RSIR, _INT0, _INT1, _INT2, _KBIR, _IOIR_int, _IOIR_int}),
         ._EI(1'b0),
@@ -173,7 +182,7 @@ module CPU_board(
     // Counter for reset state
     logic [23:0] rst_counter;
     // The reset line coming out of our "555"; gets fed to the CPU
-    (* MARK_DEBUG = "TRUE" *) logic _RSTHLT_555;
+    logic _RSTHLT_555;
     logic fast_reset;
     logic _HALTOUT_CPU;
     always_ff @(posedge DOTCK, negedge _RSTSW, negedge _HALTOUT_CPU) begin
@@ -184,10 +193,10 @@ module CPU_board(
             _RSTHLT_555 <= 1'b0;
         end else begin
             // If rst_counter is greater than 20 million, then we've been in reset for about a second, so get out of reset now
-            if (rst_counter > 24'd20) begin
+            if (rst_counter > 24'd15000000) begin
                 _RSTHLT_555 <= 1'b1;
             end else begin
-                // Otherwise, we still need to be in reset, so increment the counter (one increment per CPUCK) and ensure _RSTHLT is low
+                // Otherwise, we still need to be in reset, so increment the counter (one increment per DOTCK) and ensure _RSTHLT is low
                 rst_counter <= rst_counter + 1'b1;
                 if (rst_counter < 24'd5) begin
                     fast_reset <= 1'b1;
@@ -206,7 +215,7 @@ module CPU_board(
     assign _HALT = _RSTHLT_555 & _HALTOUT_CPU;
 
     // Reset is a similar deal; it's just the 555 reset/halt signal wire-ANDed (or just ANDed in our case) with the CPU RESET output
-    (* MARK_DEBUG = "TRUE" *) logic _RSTOUT_CPU;
+    logic _RSTOUT_CPU;
     assign _RESET = _RSTHLT_555 & _RSTOUT_CPU;
 
 
@@ -215,7 +224,7 @@ module CPU_board(
     // And if the counter isn't reset in time and gets too big, it puts out a pulse on _BUST to signify a bus error
     logic [15:0] bust_counter;
     logic _BUST;
-    always_ff @(posedge CPUCK, negedge _RESET, posedge _AS) begin
+    /*always_ff @(posedge CPUCK, negedge _RESET, posedge _AS) begin
         // If the Lisa is in reset or we want to reset the timer with AS, then reset the counter and make sure _BUST is deasserted
         if (!_RESET || _AS) begin
             bust_counter <= 16'b0;
@@ -229,6 +238,29 @@ module CPU_board(
                 // Otherwise, just increment the counter and make sure _BUST is deasserted
                 bust_counter <= bust_counter + 1'b1;
                 _BUST <= 1'b1;
+            end
+        end
+    end*/
+    always_ff @(posedge DOTCK, negedge _RESET) begin
+        // If the Lisa is in reset, then reset the counter and make sure _BUST is deasserted
+        if (!_RESET) begin
+            bust_counter <= 16'b0;
+            _BUST <= 1'b1;
+        // Otherwise, we need to see if we have a bus error or not
+        end else begin
+            // Reset the counter and deassert _BUST whenever _AS is high
+            if (_AS) begin
+                bust_counter <= 16'b0;
+                _BUST <= 1'b1;
+            end else begin
+                // Otherwise, if the counter is greater than 16000 (16000/80000000 = 200us-ish delay), then assert_BUST to indicate a bus error
+                if (bust_counter > 16'd16000) begin
+                    _BUST <= 1'b0;
+                end else begin
+                    // Otherwise, just increment the counter and make sure _BUST is deasserted
+                    bust_counter <= bust_counter + 1'b1;
+                    _BUST <= 1'b1;
+                end
             end
         end
     end
@@ -251,7 +283,7 @@ module CPU_board(
 
 
     // Time to do the boot ROMs; this is the OE signal for them
-    (* MARK_DEBUG = "TRUE" *) logic _ROM;
+    logic _ROM;
 
     // And now we instantiate them; note that we can load ROM files that will be "burnt" into the ROMs during synthesis
     // One ROM connects to the low byte of the UD bus and the other connects to the high byte
@@ -292,7 +324,7 @@ module CPU_board(
     // Pretty nifty for 1983, right?
     logic [15:0] mea_latch;
     // VIDEO is high if we're in a video cycle, low if not
-    (* MARK_DEBUG = "TRUE" *) logic VIDEO;
+    logic VIDEO;
     // Reads from the mem error address latch if asserted
     logic _RMEA;
     // Latch the proper bits of the address and the VIDEO bit
@@ -310,7 +342,7 @@ module CPU_board(
     // It's basically exactly the same as the MEA latch above, just with different signal names and widths
     // We only OE the DMA latch if the CPU isn't the bus master and the CPU/master (as opposed to video) is in control of memory addressing
     logic dma_latch_oe;
-    (* MARK_DEBUG = "TRUE" *) logic _CMUX;
+    logic _CMUX;
     assign dma_latch_oe = ~_BGACK & ~_CMUX;
     logic [7:0] dma_latch;
     always_ff @(posedge _LDMA) begin
@@ -353,7 +385,8 @@ module CPU_board(
     // _BUST gets set in the latch on a bus error, and gets cleared when we read from the memory error address latch
     logic _SFMSK, _HDMSK, _VTMSK;
 
-    (* MARK_DEBUG = "TRUE" *) logic _SFER_latched, _HDER_latched, _VTIR, _BUST_latched;
+    logic _SFER_latched, _HDER_latched, _VTIR;
+    logic _BUST_latched;
     // Latch _SFER
     always @(_SFMSK, _SFER_in) begin
         // If there's a soft error and it's not masked, then latch the error
@@ -390,7 +423,8 @@ module CPU_board(
     // Same idea for _BUST too
     // Unlike the others, there should never be a situation here where both signals are asserted at once, but account for it anyway
     // Here we also need to account for the reset condition, in which case we want _BUST_latched to be deasserted
-    always @(_RMEA, _BUST, _RESET) begin
+    //always @(_RMEA, _BUST, _RESET) begin
+    always_ff @(posedge DOTCK, negedge _RESET) begin
         if (!_RESET) begin
             _BUST_latched <= 1'b1;
         end else begin
@@ -418,8 +452,8 @@ module CPU_board(
     // Now it's time to do the MMU
     // Before we do the core of the MMU, let's do some of the surrounding logic that helps it work
     // Starting with the write enable signal for the MMU registers
-    (* MARK_DEBUG = "TRUE" *) logic _MMU_reg_WE;
-    (* MARK_DEBUG = "TRUE" *) logic _MMUIO;
+    logic _MMU_reg_WE;
+    logic _MMUIO;
     logic PCK;
     logic [7:0] _T;
     // This takes the form of a JK flip-flop
@@ -450,7 +484,7 @@ module CPU_board(
     // It controls the OE of LS245s that hook the reg outputs to the bus
     // The logic for this one is pretty simple b/c the J input to the flop is tied to ground
     // Once again, our logic is slightly different than that of the original schematic
-    (* MARK_DEBUG = "TRUE" *) logic _MMU_reg_dat_OE;
+    logic _MMU_reg_dat_OE;
     always_ff @(posedge DOTCK, posedge _MMUIO) begin
         // If the MMUIO cycle is over (or we're not doing one at all), then we shouldn't be hooking the MMU regs to the UD bus
         if (_MMUIO) begin
@@ -466,16 +500,16 @@ module CPU_board(
 
     // Now for some of the combinational logic that controls the MMU
     // Selects either a base or limit register
-    (* MARK_DEBUG = "TRUE" *) logic B_L;
+    logic B_L;
     // The two signals used to select one of 3 MMU contexts
     // Different from the user-configurable SEG1 and SEG2 b/c these are overridden to force the Lisa into context 0 when in supervisor mode
-    (* MARK_DEBUG = "TRUE" *) logic MS1, MS2;
-    (* MARK_DEBUG = "TRUE" *) logic SEG1, SEG2;
+    logic MS1, MS2;
+    logic SEG1, SEG2;
     // Chip select for the MMU RAM chip that produces the upper 4 bits of the address (in SOR mode) and the 4 control bits (in SLR mode)
-    (* MARK_DEBUG = "TRUE" *) logic _MMU_highreg_CS;
+    logic _MMU_highreg_CS;
     // Choose the SOR (Seg Origin/Base Register) as long as either _MALE is asserted or _MMUIO is asserted while UA3 is high
     // And choose the SLR (Seg Limit Register) otherwise (so if _MALE is deasserted and _MMUIO is not asserted while UA3 is high)
-    (* MARK_DEBUG = "TRUE" *) logic _MALE;
+    logic _MALE;
     assign B_L = ~_MALE | (~_MMUIO & UA[3]);
     // Pass ~SEG1 through to MS1, but override it to 1 (context 0) if the CPU is in supervisor mode as shown by FC2 being high
     // If it's an MMUIO cycle, then ignore supervisor mode b/c we want to write to the MMU registers in whatever context the user wants
@@ -486,7 +520,7 @@ module CPU_board(
     // Select the high MMU reg chip if UA14 is high, or we're in an MMUIO cycle (reading/writing MMU regs), or start is deasserted
     // By the way, _START is a signal that lets you access the MMU when your program is executing out of ROM
     // Once you have the MMU set up, you deassert (pull high) _START and then your program can start executing from RAM
-    (* MARK_DEBUG = "TRUE" *) logic _START;
+    logic _START;
     assign _MMU_highreg_CS = !_RESET ? 1'b1 : ~(UA[14] | ~_MMUIO | _START);
 
     // Next, implement the logic for the LS245 that hooks the UD bus to the MMU reg bus
@@ -501,7 +535,7 @@ module CPU_board(
     assign TD = (!_MMU_reg_dat_OE & !READ) ? UD_CPU_out[11:0] : MMU_RAM_out;
 
     // Aliases of the top 4 bits of the MMU reg output for easier use elsewhere in the system
-    (* MARK_DEBUG = "TRUE" *) tri1 _MEM, _IO, _RO, _STK;
+    tri1 _MEM, _IO, _RO, _STK;
     assign _MEM = TD[11];
     assign _IO = TD[10];
     assign _RO = TD[9];
@@ -553,7 +587,7 @@ module CPU_board(
     // We'll store the 12-bit adder output here
     logic [11:0] MMU_adder_out;
     // This is the "access check" signal that's hooked to carry and fires if we're outside the page limits
-    (* MARK_DEBUG = "TRUE" *) logic ACCK;
+    logic ACCK;
     // This is a flag that gets set if the current seg is a stack seg
     // It causes the carry in of the low adder to be set, causing the seg to grow down not up if it's a stack seg
     logic stk_flag;
@@ -602,7 +636,7 @@ module CPU_board(
     // Changing the addr in this latch lets you move the 32K screen page anywhere in memory
     // It also has an LED hooked to it that blinks during ROM diagnostics
     // _VAL is the latch signal for the vid addr latch
-    (* MARK_DEBUG = "TRUE" *) logic _VAL;
+    logic _VAL;
     logic [7:0] VAL_output;
     always_ff @(negedge _VAL, negedge _RESET) begin
         if (!_RESET) begin
@@ -624,7 +658,7 @@ module CPU_board(
     // And not only that, but we have 8 RAM address (RA) lines but 16 addr lines to fit on them
     // So we have to mux that too, meaning we need a 4-to-1 mux for each RA line
     // This is the video address; we already have the regular address in plain old A
-    (* MARK_DEBUG = "TRUE" *) logic [14:1] VA;
+    logic [14:1] VA;
     // The mux is flipped through its 4 possible states based on RAS and _CMUX
     // RAS determines whether we put the low or high part of the addr on our 8 addr lines
     // And _CMUX determines whether we put on a vid addr or a regular addr
@@ -646,7 +680,7 @@ module CPU_board(
     // First, we need to divide the master clock (DOTCK) down with a counter
     // DOTCK is 20.37504MHz in the stock Lisa
     logic [3:0] Q_counter;
-    (* MARK_DEBUG = "TRUE" *) logic _VT7;
+    logic _VT7;
     // Clock the counter on DOTCK
     always_ff @(posedge DOTCK, posedge fast_reset) begin
         // If the system gets reset, put the counter in a known state (outputs 0, carry out deasserted)
@@ -702,7 +736,7 @@ module CPU_board(
     assign BERR_unlatched = ~(~_IOCY | ~_CAS | _T[3] | ~CPUC1 | ~_SPIO);
     // And now we need to actually implement the _BERR flip-flop
     // The K input is permanently deasserted, so we just have J (_BERR_unlatched), preset (_BUST), and clear (AS)
-    (* MARK_DEBUG = "TRUE" *) logic _BERR;
+    logic _BERR;
     always_ff @(posedge DOTCK, negedge _BUST, posedge _AS) begin
         // If we get a bus error indicated by _BUST, then preset the flop
         if (!_BUST) begin
@@ -744,7 +778,7 @@ module CPU_board(
     logic SPIO_unlatched;
     // We're going to need a signal called MCY for this one
     // It's asserted when the page we're accessing is memory according to the MMU, and we're in the CPU part of the cycle, not video
-    (* MARK_DEBUG = "TRUE" *) logic MCY;
+    logic MCY;
     assign MCY = ~_MEM & CPUC1;
     // We set the SPIO latch if BGACK says we're the bus master, this isn't a memory cycle, the stuff we're trying to access isn't read-only, we're in a CPU cycle not a video cycle, and we're in timing state T2
     assign SPIO_unlatched = ~(~_BGACK | MCY | ~_RO | ~CPUC1 | _T[2]);
@@ -883,7 +917,7 @@ module CPU_board(
         end
     end
     // Now we can make the actual decoder
-    (* MARK_DEBUG = "TRUE" *) logic _CPU_board_decoder_CS;
+    logic _CPU_board_decoder_CS;
     decoder_3to8 IO_select_decoder(
         // Take IOA13-15 as inputs
         .ABC(IOA[15:13]),
@@ -897,7 +931,7 @@ module CPU_board(
     );
 
     // Now for that next decoder, which generates select signals for some chips on the CPU board
-    (* MARK_DEBUG = "TRUE" *) logic sys_ctrl_latch_WE;
+    logic sys_ctrl_latch_WE;
     decoder_2to4 CPU_board_decoder_1(
         // It takes A11 and A12 as inputs
         .AB(A[12:11]),
@@ -933,7 +967,7 @@ module CPU_board(
     // _DTACK is wire-ANDed with the _Q output of the flop and _CPU_board_decoder_CS; the only things on the CPU board that drive it
     // Why? B/c that way, we also fire _CDACK for non-memory ops that access the latches on the CPU board
     // What about special I/O ops though? Well, the flop output gets ORed with SPIO, so that if we're doing a special I/O op, we also ack it
-    (* MARK_DEBUG = "TRUE" *) logic _CDACK;
+    logic _CDACK;
     logic CDACK_flop;
     /*always_ff @(negedge _CAS, posedge _AS, negedge _DTACK) begin
         // If AS is deasserted, clear the flop (async clear)
@@ -994,9 +1028,11 @@ module CPU_board(
 
     // Time for the system control register
     // It's an 8-bit addressable latch that you can write to in order to control various system functions
-    (* MARK_DEBUG = "TRUE" *) logic HDER_int;
-    (* MARK_DEBUG = "TRUE" *) logic SFER_int;
+    logic HDER_int;
+    logic SFER_int;
     addressable_latch_LS259 sys_ctrl_latch(
+        // Use the DOTCK as the master clock; the _G input is used as a clock enable within the LS259 module
+        .clk(DOTCK),
         // It's addressed by A4-A2
         .A(A[4:2]),
         // And really by A1 too; it's used as the data input
@@ -1034,13 +1070,31 @@ module CPU_board(
     // First, we need to make a counter that counts through all the addresses of the video state machine ROM
     logic [7:0] VSROM_address;
     logic VSROM_address_clr;
-    always_ff @(negedge VIDEO, posedge VSROM_address_clr, negedge _RESET) begin
+    /*always_ff @(negedge VIDEO, posedge VSROM_address_clr, negedge _RESET) begin
         // Clear the counter if VSROM_address_clr is asserted
         if (VSROM_address_clr | !_RESET) begin
             VSROM_address <= 8'b0;
         end else begin
             // Else increment it on the falling edge of VIDEO (the start of a video cycle)
             VSROM_address <= VSROM_address + 8'b1;
+        end
+    end*/
+    // The new synchronous version of that:
+    logic VIDEO_prev;
+    always_ff @(posedge DOTCK, negedge _RESET) begin
+        // Clear the counter if we're in reset
+        if (!_RESET) begin
+            VSROM_address <= 8'b0;
+            VIDEO_prev <= 1'b0; // Clear out VIDEO_prev too
+        end else begin
+            // If the VSROM_address_clr signal is asserted, clear the counter
+            if (VSROM_address_clr) begin
+                VSROM_address <= 8'b0;
+            end else if (!VIDEO && VIDEO_prev) begin
+                // Else increment it on the falling edge of VIDEO (the start of a video cycle)
+                VSROM_address <= VSROM_address + 8'b1;
+            end
+            VIDEO_prev <= VIDEO; // Update VIDEO_prev for the next cycle
         end
     end
 
@@ -1070,7 +1124,7 @@ module CPU_board(
     
     // Next, we need to latch the VSROM outputs; there are some errors on the original schematics about which VSROM outputs go where
     // But they're obviously hooked up correctly here
-    always_ff @(posedge VIDEO) begin
+    /*always_ff @(posedge VIDEO) begin
         // This is the clear signal for the VSROM address counter
         VSROM_address_clr <= VSROM_data[0];
         _VSYNC <= VSROM_data[1];
@@ -1082,6 +1136,24 @@ module CPU_board(
         // Intermediate version of the vertical sync interrupt
         VSIR_int <= VSROM_data[5];
         _HSYNC <= VSROM_data[6];
+    end*/
+    // New synchronous version of that:
+    always_ff @(posedge DOTCK) begin
+        // If we're on the rising edge of VIDEO, latch the VSROM outputs into the appropriate signals
+        if (VIDEO && !VIDEO_prev) begin
+            // This is the clear signal for the VSROM address counter
+            VSROM_address_clr <= VSROM_data[0];
+            _VSYNC <= VSROM_data[1];
+            // Clear signal for the clock for the video address counter; we'll get to it later
+            _clr_vid_clk <= VSROM_data[2];
+            // Clear signal for the video address counter
+            vid_addr_clr <= VA[8] & VSROM_data[3];
+            _CSYNC <= VSROM_data[4];
+            // Intermediate version of the vertical sync interrupt
+            VSIR_int <= VSROM_data[5];
+            _HSYNC <= VSROM_data[6];
+        end
+        // No need to update VIDEO_prev since that's already done above
     end
 
     // Now make the actual _VSIR signal; it gets asserted when VSIR_int is asserted and VA_overflow (which we haven't made yet) is asserted
@@ -1093,8 +1165,8 @@ module CPU_board(
     // First, let's make a flip-flop that clocks the video address counter
     // This flop is clocked by DOTCK and gets async cleared when we're not in a video cycle or when _clr_vid_clk is asserted
     // When the clear conditions aren't met, it's just a D flip flop with _T6 as its input
-    (*MARK_DEBUG = "TRUE" *) logic vid_addr_clk;
-    always_ff @(posedge DOTCK, negedge VIDEO, negedge _clr_vid_clk) begin
+    logic vid_addr_clk;
+    /*always_ff @(posedge DOTCK, negedge VIDEO, negedge _clr_vid_clk) begin
         // If we're not in a video cycle or _clr_vid_clk is asserted, clear the flop (async clear)
         if (!VIDEO | !_clr_vid_clk) begin
             vid_addr_clk <= 1'b1;
@@ -1102,22 +1174,54 @@ module CPU_board(
             // Otherwise, just make it a D flip flop with _T6 as its input
             vid_addr_clk <= _T[6];
         end
+    end*/
+    // New synchronous version of that:
+    logic _clr_vid_clk_prev;
+    always_ff @(posedge DOTCK) begin
+        // If VIDEO is low (we're not in a video cycle) or _clr_vid_clk is asserted, inhibit the clock by holding it high
+        if (!VIDEO || !_clr_vid_clk) begin
+            vid_addr_clk <= 1'b1;
+        // Otherwise, just make it a D flip flop with _T6 as its input
+        end else begin
+            vid_addr_clk <= _T[6];
+        end
+        // Update our previous _clr_vid_clk signal for edge detection in the next cycle
+        // No need to do VIDEO_prev since we did that in an earlier always_ff also clocked by DOTCK
+        _clr_vid_clk_prev <= _clr_vid_clk;
     end
 
     // Now we can make the actual video address counter
     // It's a 16-bit counter, of which 14 bits are actually used for the video address, and 1 for overflow
     // The counter is clocked by the vid_addr_clk we just made
     // And it gets async cleared when vid_addr_clr and _CMUX are both asserted (meaning the CPU is in control of the bus), not video
-    (*MARK_DEBUG = "TRUE" *) logic [15:0] vid_addr_counter;
+    logic [15:0] vid_addr_counter;
     logic full_vid_addr_counter_clr;
     assign full_vid_addr_counter_clr = vid_addr_clr & ~_CMUX;
-    always_ff @(negedge vid_addr_clk, posedge full_vid_addr_counter_clr, negedge _RESET) begin
+    /*always_ff @(negedge vid_addr_clk, posedge full_vid_addr_counter_clr, negedge _RESET) begin
         // If the clear conditions are met, clear the counter (async clear)
         if (full_vid_addr_counter_clr | !_RESET) begin
             vid_addr_counter <= 16'b0;
         end else begin
             // Otherwise, increment the counter on each clock
             vid_addr_counter <= vid_addr_counter + 16'b1;
+        end
+    end*/
+    // New synchronous version of that:
+    logic vid_addr_clk_prev;
+    always_ff @(posedge DOTCK, negedge _RESET) begin
+        // If _RESET is asserted, then clear the counter and also vid_addr_clk_prev
+        if (!_RESET) begin
+            vid_addr_counter <= 16'b0;
+            vid_addr_clk_prev <= 1'b0;
+        end else begin
+            if (full_vid_addr_counter_clr) begin
+                // If the clear conditions are met, clear the counter
+                vid_addr_counter <= 16'b0;
+            end else if (!vid_addr_clk && vid_addr_clk_prev) begin
+                // Otherwise, if we're on the falling edge of a vid_addr_clk, increment the counter
+                vid_addr_counter <= vid_addr_counter + 16'b1;
+            end
+            vid_addr_clk_prev <= vid_addr_clk; // Update the previous clock signal for edge detection
         end
     end
 
@@ -1131,8 +1235,8 @@ module CPU_board(
     // The shift register gets loaded by the same vid_addr_clk that clocks the video address counter
     // And it's clocked by DOTCK as you'd expect; this is where the name Dot Clock actually comes from
     // Shifting is inhibited whenever bit 14 of the video address counter goes high, so that we don't shift out garbage when we're outside the visible area
-    (*MARK_DEBUG = "TRUE" *) logic [15:0] vid_shift_reg;
-    (*MARK_DEBUG = "TRUE" *) logic vid_shift_out;
+    logic [15:0] vid_shift_reg;
+    logic vid_shift_out;
     always_ff @(posedge DOTCK) begin
         // No matter what, the output bit is always the MSB of the shift register
         vid_shift_out <= vid_shift_reg[15];
@@ -1197,7 +1301,7 @@ module CPU_board(
         .VMAn(_VMA),
         .E_PosClkEn(E_pos_phase), // Neither of these are used on the CPU board, but our 6522 core on the I/O board needs both these phases
         .E_NegClkEn(E_neg_phase),
-        .Center_Edge_Pulse(E_either_edge),
+        .Center_Edge_Pulse(E_either_edge_logic),
         .FC0(FC[0]),
         .FC1(FC[1]),
         .FC2(FC[2]),

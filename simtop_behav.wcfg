@@ -5,7 +5,7 @@
    <db_ref_list>
       <db_ref path="simtop_behav.wdb" id="1">
          <top_modules>
-            <top_module name="\$unit_AM9512_FPU_sv_341148841 " />
+            <top_module name="\$unit_AM9512_FPU_sv_3840823014 " />
             <top_module name="glbl" />
             <top_module name="simtop" />
             <top_module name="t400_io_pack" />
@@ -17,18 +17,90 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="18.338859 us"></ZoomEndTime>
-      <Cursor1Time time="1.000000 us"></Cursor1Time>
+      <ZoomStartTime time="37,268.088 ns"></ZoomStartTime>
+      <ZoomEndTime time="37,954.542 ns"></ZoomEndTime>
+      <Cursor1Time time="2,659,151.996 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="341"></NameColumnWidth>
-      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+      <NameColumnWidth column_width="440"></NameColumnWidth>
+      <ValueColumnWidth column_width="168"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="60" />
+   <WVObjectSize size="93" />
    <wvobject type="logic" fp_name="/simtop/dut/lisa_dotck">
       <obj_property name="ElementShortName">lisa_dotck</obj_property>
       <obj_property name="ObjectShortName">lisa_dotck</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/rgb">
+      <obj_property name="ElementShortName">rgb[23:0]</obj_property>
+      <obj_property name="ObjectShortName">rgb[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/cx">
+      <obj_property name="ElementShortName">cx[11:0]</obj_property>
+      <obj_property name="ObjectShortName">cx[11:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/cy">
+      <obj_property name="ElementShortName">cy[10:0]</obj_property>
+      <obj_property name="ObjectShortName">cy[10:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/cx5">
+      <obj_property name="ElementShortName">cx5[11:0]</obj_property>
+      <obj_property name="ObjectShortName">cx5[11:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/cy5">
+      <obj_property name="ElementShortName">cy5[10:0]</obj_property>
+      <obj_property name="ObjectShortName">cy5[10:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/lisa_x">
+      <obj_property name="ElementShortName">lisa_x[9:0]</obj_property>
+      <obj_property name="ObjectShortName">lisa_x[9:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/lisa_y">
+      <obj_property name="ElementShortName">lisa_y[9:0]</obj_property>
+      <obj_property name="ObjectShortName">lisa_y[9:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/word_index">
+      <obj_property name="ElementShortName">word_index[15:0]</obj_property>
+      <obj_property name="ObjectShortName">word_index[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/bit_index">
+      <obj_property name="ElementShortName">bit_index[2:0]</obj_property>
+      <obj_property name="ObjectShortName">bit_index[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/word_index_int">
+      <obj_property name="ElementShortName">word_index_int[15:0]</obj_property>
+      <obj_property name="ObjectShortName">word_index_int[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/lisa_x_shifted">
+      <obj_property name="ElementShortName">lisa_x_shifted[15:0]</obj_property>
+      <obj_property name="ObjectShortName">lisa_x_shifted[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/bit_index_int">
+      <obj_property name="ElementShortName">bit_index_int[2:0]</obj_property>
+      <obj_property name="ObjectShortName">bit_index_int[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/word_index_stage3">
+      <obj_property name="ElementShortName">word_index_stage3[15:0]</obj_property>
+      <obj_property name="ObjectShortName">word_index_stage3[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/word_index_stage4">
+      <obj_property name="ElementShortName">word_index_stage4[15:0]</obj_property>
+      <obj_property name="ObjectShortName">word_index_stage4[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/bit_index_stage3">
+      <obj_property name="ElementShortName">bit_index_stage3[2:0]</obj_property>
+      <obj_property name="ObjectShortName">bit_index_stage3[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/bit_index_stage4">
+      <obj_property name="ElementShortName">bit_index_stage4[2:0]</obj_property>
+      <obj_property name="ObjectShortName">bit_index_stage4[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/lisa_hdmi_output/pixel_word">
+      <obj_property name="ElementShortName">pixel_word[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_word[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/lisa_hdmi_output/pixel">
+      <obj_property name="ElementShortName">pixel</obj_property>
+      <obj_property name="ObjectShortName">pixel</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/simtop/dut/io_board/ON">
       <obj_property name="ElementShortName">ON</obj_property>
@@ -37,18 +109,6 @@
    <wvobject type="logic" fp_name="/simtop/dut/_PWRSW">
       <obj_property name="ElementShortName">_PWRSW</obj_property>
       <obj_property name="ObjectShortName">_PWRSW</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/simtop/dut/_RSTSW">
-      <obj_property name="ElementShortName">_RSTSW</obj_property>
-      <obj_property name="ObjectShortName">_RSTSW</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/simtop/dut/_NMISW">
-      <obj_property name="ElementShortName">_NMISW</obj_property>
-      <obj_property name="ObjectShortName">_NMISW</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/simtop/dut/_RSTSW_int">
-      <obj_property name="ElementShortName">_RSTSW_int</obj_property>
-      <obj_property name="ObjectShortName">_RSTSW_int</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/simtop/dut/cpu_board/Q_counter">
       <obj_property name="ElementShortName">Q_counter[3:0]</obj_property>
@@ -62,9 +122,61 @@
       <obj_property name="ElementShortName">_RAS</obj_property>
       <obj_property name="ObjectShortName">_RAS</obj_property>
    </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/_UDS">
+      <obj_property name="ElementShortName">_UDS</obj_property>
+      <obj_property name="ObjectShortName">_UDS</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/_LDS">
+      <obj_property name="ElementShortName">_LDS</obj_property>
+      <obj_property name="ObjectShortName">_LDS</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/MREAD">
+      <obj_property name="ElementShortName">MREAD</obj_property>
+      <obj_property name="ObjectShortName">MREAD</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/slot1/RA">
+      <obj_property name="ElementShortName">RA[8:1]</obj_property>
+      <obj_property name="ObjectShortName">RA[8:1]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/A16">
+      <obj_property name="ElementShortName">A16</obj_property>
+      <obj_property name="ObjectShortName">A16</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/A17">
+      <obj_property name="ElementShortName">A17</obj_property>
+      <obj_property name="ObjectShortName">A17</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/A18">
+      <obj_property name="ElementShortName">A18</obj_property>
+      <obj_property name="ObjectShortName">A18</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/A19">
+      <obj_property name="ElementShortName">A19</obj_property>
+      <obj_property name="ObjectShortName">A19</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/A20">
+      <obj_property name="ElementShortName">A20</obj_property>
+      <obj_property name="ObjectShortName">A20</obj_property>
+   </wvobject>
    <wvobject type="array" fp_name="/simtop/dut/cpu_board/BD_in">
       <obj_property name="ElementShortName">BD_in[15:0]</obj_property>
       <obj_property name="ObjectShortName">BD_in[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/slot1/LBDSL_readop">
+      <obj_property name="ElementShortName">LBDSL_readop</obj_property>
+      <obj_property name="ObjectShortName">LBDSL_readop</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/slot1/buffered_RA">
+      <obj_property name="ElementShortName">buffered_RA[7:0]</obj_property>
+      <obj_property name="ObjectShortName">buffered_RA[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/slot1/_decoded_bank_address">
+      <obj_property name="ElementShortName">_decoded_bank_address[7:0]</obj_property>
+      <obj_property name="ObjectShortName">_decoded_bank_address[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simtop/dut/slot1/_decoded_RAS_address">
+      <obj_property name="ElementShortName">_decoded_RAS_address[3:0]</obj_property>
+      <obj_property name="ObjectShortName">_decoded_RAS_address[3:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/simtop/dut/cpu_board/BD_out">
       <obj_property name="ElementShortName">BD_out[15:0]</obj_property>
@@ -78,14 +190,6 @@
       <obj_property name="ElementShortName">BD[15:0]</obj_property>
       <obj_property name="ObjectShortName">BD[15:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_DTACK_in">
-      <obj_property name="ElementShortName">_DTACK_in</obj_property>
-      <obj_property name="ObjectShortName">_DTACK_in</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_DTACK_out">
-      <obj_property name="ElementShortName">_DTACK_out</obj_property>
-      <obj_property name="ObjectShortName">_DTACK_out</obj_property>
-   </wvobject>
    <wvobject type="array" fp_name="/simtop/dut/cpu_board/MD_IN">
       <obj_property name="ElementShortName">MD_IN[15:0]</obj_property>
       <obj_property name="ObjectShortName">MD_IN[15:0]</obj_property>
@@ -93,6 +197,26 @@
    <wvobject type="array" fp_name="/simtop/dut/cpu_board/MD_OUT">
       <obj_property name="ElementShortName">MD_OUT[15:0]</obj_property>
       <obj_property name="ObjectShortName">MD_OUT[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_DTACK_in">
+      <obj_property name="ElementShortName">_DTACK_in</obj_property>
+      <obj_property name="ObjectShortName">_DTACK_in</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/DTACK_latch">
+      <obj_property name="ElementShortName">DTACK_latch</obj_property>
+      <obj_property name="ObjectShortName">DTACK_latch</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_CDACK">
+      <obj_property name="ElementShortName">_CDACK</obj_property>
+      <obj_property name="ObjectShortName">_CDACK</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/CDACK_flop">
+      <obj_property name="ElementShortName">CDACK_flop</obj_property>
+      <obj_property name="ObjectShortName">CDACK_flop</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/cpu_board/CDACK_core">
+      <obj_property name="ElementShortName">CDACK_core</obj_property>
+      <obj_property name="ObjectShortName">CDACK_core</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/simtop/dut/cpu_board/UA_CPU">
       <obj_property name="ElementShortName">UA_CPU[23:1]</obj_property>
@@ -110,14 +234,6 @@
       <obj_property name="ElementShortName">_RSTSW</obj_property>
       <obj_property name="ObjectShortName">_RSTSW</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/simtop/dut/io_board/_FDC_RAM_CS_processed">
-      <obj_property name="ElementShortName">_FDC_RAM_CS_processed</obj_property>
-      <obj_property name="ObjectShortName">_FDC_RAM_CS_processed</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/simtop/dut/io_board/_FDC_RAM_CS_muxed">
-      <obj_property name="ElementShortName">_FDC_RAM_CS_muxed</obj_property>
-      <obj_property name="ObjectShortName">_FDC_RAM_CS_muxed</obj_property>
-   </wvobject>
    <wvobject type="logic" fp_name="/simtop/dut/cpu_board/_RSTHLT_555">
       <obj_property name="ElementShortName">_RSTHLT_555</obj_property>
       <obj_property name="ObjectShortName">_RSTHLT_555</obj_property>
@@ -130,13 +246,13 @@
       <obj_property name="ElementShortName">sysclk</obj_property>
       <obj_property name="ObjectShortName">sysclk</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/simtop/dut/io_board/_RESET">
-      <obj_property name="ElementShortName">_RESET</obj_property>
-      <obj_property name="ObjectShortName">_RESET</obj_property>
+   <wvobject type="array" fp_name="/simtop/dut/io_board/A">
+      <obj_property name="ElementShortName">A[12:1]</obj_property>
+      <obj_property name="ObjectShortName">A[12:1]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/simtop/dut/io_board/FDC_counter[2]">
-      <obj_property name="ElementShortName">[2]</obj_property>
-      <obj_property name="ObjectShortName">[2]</obj_property>
+   <wvobject type="logic" fp_name="/simtop/dut/io_board/_AS_sync">
+      <obj_property name="ElementShortName">_AS_sync</obj_property>
+      <obj_property name="ObjectShortName">_AS_sync</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/simtop/dut/io_board/MA">
       <obj_property name="ElementShortName">MA[15:0]</obj_property>
@@ -166,9 +282,25 @@
       <obj_property name="ElementShortName">_FDC_RAM_CS</obj_property>
       <obj_property name="ObjectShortName">_FDC_RAM_CS</obj_property>
    </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/io_board/_FDC_RAM_CS_muxed">
+      <obj_property name="ElementShortName">_FDC_RAM_CS_muxed</obj_property>
+      <obj_property name="ObjectShortName">_FDC_RAM_CS_muxed</obj_property>
+   </wvobject>
    <wvobject type="logic" fp_name="/simtop/dut/io_board/_DTACK_FF_1_output">
       <obj_property name="ElementShortName">_DTACK_FF_1_output</obj_property>
       <obj_property name="ObjectShortName">_DTACK_FF_1_output</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/io_board/DTACK_OE">
+      <obj_property name="ElementShortName">DTACK_OE</obj_property>
+      <obj_property name="ObjectShortName">DTACK_OE</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/io_board/_DTACK_ungated">
+      <obj_property name="ElementShortName">_DTACK_ungated</obj_property>
+      <obj_property name="ObjectShortName">_DTACK_ungated</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simtop/dut/io_board/_DTACK_out">
+      <obj_property name="ElementShortName">_DTACK_out</obj_property>
+      <obj_property name="ObjectShortName">_DTACK_out</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/simtop/dut/io_board/already_reset">
       <obj_property name="ElementShortName">already_reset</obj_property>

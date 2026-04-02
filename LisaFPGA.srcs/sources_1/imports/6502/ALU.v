@@ -17,8 +17,9 @@
  *
  */
 
-module ALU( clk, op, right, AI, BI, CI, CO, BCD, OUT, V, Z, N, HC, RDY );
+module ALU( clk, phi, op, right, AI, BI, CI, CO, BCD, OUT, V, Z, N, HC, RDY );
 	input clk;
+	input phi; // Phi added by AlexTheCat123 to convert this core to a clock-enable design
 	input right;
 	input [3:0] op;		// operation
 	input [7:0] AI;
@@ -93,7 +94,7 @@ end
 
 // calculate the flags 
 always @(posedge clk)
-    if( RDY ) begin
+    if( phi && RDY ) begin
 	AI7 <= AI[7];
 	BI7 <= temp_BI[7];
 	OUT <= temp[7:0];
