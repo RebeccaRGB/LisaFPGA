@@ -1305,9 +1305,16 @@ module IO_board(
     assign port_b_in_KBD_VIA[4] = FDIR; // PB4 is FDIR from the FDC
     assign port_b_in_KBD_VIA[5] = _PRES; // PB5 is _PRES from the ProFile
     assign port_b_in_KBD_VIA[6] = _READY_COP; // PB6 is _READY from the COP
-    // PB7 is one of the things that can drive _CRES, which is asserted when either PB7 is low or _RESET is low
-    // The ProFile can also drive _CRES, so we have separate CRES_out and CRES_in lines
-    assign _CRES_out = (port_b_out_KBD_VIA[7] & _RESET_SYSTEM) ? 1'b1 : 1'b0;
+    // PB7 is one of the things that can drive _CRES, but the ProFile can also drive _CRES, so we have separate CRES_out and CRES_in lines
+    always_comb begin
+        if (KBD_via_DDRB[7]) begin
+            // Assert _CRES_out when PB7 is an output and it's low, or when the system is in reset
+            _CRES_out = port_b_out_KBD_VIA[7] & _RESET_SYSTEM;
+            // Otherwise, if PB7 is an input, then just have _CRES_out follow the state of RESET
+        end else begin
+            _CRES_out = _RESET_SYSTEM;
+        end
+    end
     // Put the other unused bits of Port B into known states
     assign port_b_in_KBD_VIA[0] = 1'b0;
     assign port_b_in_KBD_VIA[1] = 1'b0;
