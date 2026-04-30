@@ -1274,8 +1274,19 @@ module IO_board(
     end
 
     // And now gate L_COP_out with this synced extended DDRA signal
-    assign L_COP_out = (KBD_via_DDRA_extended_sync) ? L_COP_out_int : 8'b10000000;
-    
+    // Make sure we latch the value of L_cop_out_int when DDRA goes low though, so that it stays the same through the end of the extended pulse
+    logic KBD_VIA_DDRA_extended_sync_prev;
+    always_ff @(posedge COPCK_2x) begin
+        // So latch L_COP_out_int on the rising edge of the DDRA extended signal
+        if (KBD_via_DDRA_extended_sync && !KBD_VIA_DDRA_extended_sync_prev) begin
+            L_COP_out <= L_COP_out_int;
+        end else if (!KBD_via_DDRA_extended_sync) begin
+            // And then when the extended signal goes low, hold L_COP_out at its default of 0x80
+            L_COP_out <= 8'b10000000;
+        end
+        KBD_VIA_DDRA_extended_sync_prev <= KBD_via_DDRA_extended_sync;
+    end
+
     // Only put the VIA's output data on the global I/O board data bus when it's being selected and read from
     assign IO_D = (CS_KBD_VIA & READ) ? D_out_KBD_VIA : 8'bz;
 
