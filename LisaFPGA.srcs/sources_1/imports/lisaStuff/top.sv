@@ -154,6 +154,13 @@ module top(
         input logic IO_ROM_SEL
     );
 
+    // This is the board ID for the LisaFPGA identity register; software can read it to see if it's on a real Lisa or an FPGA
+    // The identity register is just a byte-extended version of the system status register
+    localparam logic [2:0] LisaFPGA_ID = 3'b110;
+    // This flag says whether this is a LisaFPGA Desktop board (as opposed to a Motherboard Replacement)
+    // It's also exposed as a field in the identity register
+    localparam logic LisaFPGA_Desktop = 1'b1;
+
     // The internal Verilog SCC isn't working yet, so disable the transceivers that hook it to the serial bus
     assign INTERNAL_SCC_EN = 1'b1;
     // Stick something random on the GPIO pins for now
@@ -568,7 +575,10 @@ module top(
         .E_either_edge(E_either_edge),
         .CPU_ROM_SEL(CPU_ROM_SEL),
         .VA_overflow(VA_overflow),
-        ._clr_vid_clk(_clr_vid_clk)
+        ._clr_vid_clk(_clr_vid_clk),
+        .SPEED_SEL(SPEED_SEL),
+        .LisaFPGA_ID(LisaFPGA_ID),
+        .LisaFPGA_Desktop(LisaFPGA_Desktop)
     );
 
     logic [3:0] PH;

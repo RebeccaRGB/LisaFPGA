@@ -98,7 +98,10 @@ module CPU_board(
     output logic E_either_edge, // A clock that goes high for one cycle just after either edge of E
     input logic CPU_ROM_SEL, // Selects whether the CPU board uses revision H or 3A boot ROMs (and VSROMs)
     output logic VA_overflow, // Goes high during vertical blanking interval (for longer than _VSYNC)
-    output logic _clr_vid_clk // Goes low during horizontal active video (for shorter than _HSYNC)
+    output logic _clr_vid_clk, // Goes low during horizontal active video (for shorter than _HSYNC)
+    input logic [1:0] SPEED_SEL, // The speed selection switches
+    input logic [2:0] LisaFPGA_ID, // The 3-bit ID number for a LisaFPGA board, exposed in the LisaFPGA identity register
+    input logic LisaFPGA_Desktop // Whether this is a LisaFPGA Desktop board (as opposed to a Motherboard Replacement), also in the identity register
     );
 
     // The E_either_edge clock coming out of the CPU is just a standard logic fabric signal, but we need it to be on an actual clock net
@@ -473,8 +476,14 @@ module CPU_board(
     end
     // Now put all the values onto the data bus if requested
     // They should be output if selected by _RBES (read bus error status) and be high-z otherwise
+    // A small tweak here from the original Lisa: the high byte of the register on the original board wasn't connected to anything
+    // But here, I've made it a "LisaFPGA identity register" so software that's curious about whether it's running on a real Lisa or an FPGA can check
+    // The high 3 bits of the high byte are 110 to identify it as an FPGA
+    // The next 2 bits are reserved for future use and are always 0 for now
+    // The next bit is 1 if the board is a LisaFPGA Desktop board, and 0 if it's a LisaFPGA Motherboard Replacement
+    // The low 2 bits are the current state of the speed selection switches, so software can know how fast it's running
     logic _RBES;
-    assign BD = _RBES ? 16'bz : {8'b0, 1'b0, INVID, _CSYNC, VID, _BUST_latched, _VTIR, _HDER_latched, _SFER_latched};
+    assign BD = _RBES ? 16'bz : {LisaFPGA_ID, 1'b0, 1'b0, LisaFPGA_Desktop, SPEED_SEL, 1'b0, INVID, _CSYNC, VID, _BUST_latched, _VTIR, _HDER_latched, _SFER_latched};
     assign BD_OE_int = _RBES ? 1'bz : 1'b1;
     // There are two more signals that are generated as by-products of the latch
     // One is _HPIR (high-priority interrupt), which fires if we get an NMI or either a hard or soft memory error
