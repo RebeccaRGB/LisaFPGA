@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-| Date         : Mon May 18 15:25:37 2026
+| Date         : Sat Jun  6 16:22:19 2026
 | Host         : alex-cattop running 64-bit Linux Mint 22.1
 | Command      : report_drc -file top_drc_routed.rpt -pb top_drc_routed.pb -rpx top_drc_routed.rpx
 | Design       : top
@@ -20,7 +20,7 @@ Table of Contents
 1. REPORT SUMMARY
 -----------------
             Netlist: netlist
-          Floorplan: design_1
+          Floorplan: checkpoint_top
       Design limits: <entire design considered>
            Ruledeck: default
              Max checks: <unlimited>
@@ -113,16 +113,16 @@ Related violations: <none>
 
 LUTLP-2#9 Warning
 Combinatorial Loop Allowed  
-5 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. This loop has been identified in the constraints as being known and understood by use of the ALLOW_COMBINATORIAL_LOOPS property on a net in the loop. The cells in the loop are: cpu_board/BD_out[5]_INST_0, io_board/FDC_state_shiftreg/cpu_board_i_13,
-io_board/FDC_state_shiftreg/cpu_board_i_33,
+5 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. This loop has been identified in the constraints as being known and understood by use of the ALLOW_COMBINATORIAL_LOOPS property on a net in the loop. The cells in the loop are: cpu_board/BD_out[5]_INST_0, io_board/high_FDC_RAM/cpu_board_i_13,
+io_board/high_FDC_RAM/cpu_board_i_33,
 io_board/kbd_via/genblk4[5].SCC_DBuf_i_1
 io_board/kbd_via/genblk4[5].SCC_DBuf_i_2.
 Related violations: <none>
 
 LUTLP-2#10 Warning
 Combinatorial Loop Allowed  
-5 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. This loop has been identified in the constraints as being known and understood by use of the ALLOW_COMBINATORIAL_LOOPS property on a net in the loop. The cells in the loop are: cpu_board/BD_out[6]_INST_0, io_board/FDC_state_shiftreg/cpu_board_i_12,
-io_board/FDC_state_shiftreg/cpu_board_i_32,
+5 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. This loop has been identified in the constraints as being known and understood by use of the ALLOW_COMBINATORIAL_LOOPS property on a net in the loop. The cells in the loop are: cpu_board/BD_out[6]_INST_0, io_board/high_FDC_RAM/cpu_board_i_12,
+io_board/high_FDC_RAM/cpu_board_i_32,
 io_board/kbd_via/genblk4[6].SCC_DBuf_i_1
 io_board/kbd_via/genblk4[6].SCC_DBuf_i_2.
 Related violations: <none>
@@ -130,8 +130,7 @@ Related violations: <none>
 LUTLP-2#11 Warning
 Combinatorial Loop Allowed  
 6 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. This loop has been identified in the constraints as being known and understood by use of the ALLOW_COMBINATORIAL_LOOPS property on a net in the loop. The cells in the loop are: cpu_board/BD_out[4]_INST_0, cpu_board/BD_out[4]_INST_0_i_1,
-io_board/FDC_state_shiftreg/cpu_board_i_14,
-io_board/FDC_state_shiftreg/cpu_board_i_34,
+io_board/high_FDC_RAM/cpu_board_i_14, io_board/high_FDC_RAM/cpu_board_i_34,
 io_board/kbd_via/genblk4[4].SCC_DBuf_i_1
 io_board/kbd_via/genblk4[4].SCC_DBuf_i_2.
 Related violations: <none>
@@ -139,44 +138,40 @@ Related violations: <none>
 LUTLP-2#12 Warning
 Combinatorial Loop Allowed  
 7 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. This loop has been identified in the constraints as being known and understood by use of the ALLOW_COMBINATORIAL_LOOPS property on a net in the loop. The cells in the loop are: cpu_board/BD_out[0]_INST_0, cpu_board/BD_out[0]_INST_0_i_1,
-cpu_board/BD_out[0]_INST_0_i_3, io_board/FDC_state_shiftreg/cpu_board_i_18,
-io_board/FDC_state_shiftreg/cpu_board_i_38,
-io_board/kbd_via/genblk4[0].SCC_DBuf_i_1
-io_board/kbd_via/genblk4[0].SCC_DBuf_i_7.
+cpu_board/BD_out[0]_INST_0_i_3, io_board/kbd_via/genblk4[0].SCC_DBuf_i_1,
+io_board/kbd_via/genblk4[0].SCC_DBuf_i_7,
+io_board/low_FDC_RAM/cpu_board_i_18, io_board/low_FDC_RAM/cpu_board_i_38.
 Related violations: <none>
 
 LUTLP-2#13 Warning
 Combinatorial Loop Allowed  
 7 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. This loop has been identified in the constraints as being known and understood by use of the ALLOW_COMBINATORIAL_LOOPS property on a net in the loop. The cells in the loop are: cpu_board/BD_out[1]_INST_0, cpu_board/BD_out[1]_INST_0_i_1,
-cpu_board/BD_out[1]_INST_0_i_3, io_board/FDC_state_shiftreg/cpu_board_i_17,
-io_board/FDC_state_shiftreg/cpu_board_i_37,
-io_board/kbd_via/genblk4[1].SCC_DBuf_i_1
-io_board/kbd_via/genblk4[1].SCC_DBuf_i_2.
+cpu_board/BD_out[1]_INST_0_i_3, io_board/kbd_via/genblk4[1].SCC_DBuf_i_1,
+io_board/kbd_via/genblk4[1].SCC_DBuf_i_2,
+io_board/low_FDC_RAM/cpu_board_i_17, io_board/low_FDC_RAM/cpu_board_i_37.
 Related violations: <none>
 
 LUTLP-2#14 Warning
 Combinatorial Loop Allowed  
 7 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. This loop has been identified in the constraints as being known and understood by use of the ALLOW_COMBINATORIAL_LOOPS property on a net in the loop. The cells in the loop are: cpu_board/BD_out[2]_INST_0, cpu_board/BD_out[2]_INST_0_i_1,
-cpu_board/BD_out[2]_INST_0_i_3, io_board/FDC_state_shiftreg/cpu_board_i_16,
-io_board/FDC_state_shiftreg/cpu_board_i_36,
-io_board/kbd_via/genblk4[2].SCC_DBuf_i_1
-io_board/kbd_via/genblk4[2].SCC_DBuf_i_2.
+cpu_board/BD_out[2]_INST_0_i_3, io_board/kbd_via/genblk4[2].SCC_DBuf_i_1,
+io_board/kbd_via/genblk4[2].SCC_DBuf_i_2,
+io_board/low_FDC_RAM/cpu_board_i_16, io_board/low_FDC_RAM/cpu_board_i_36.
 Related violations: <none>
 
 LUTLP-2#15 Warning
 Combinatorial Loop Allowed  
 7 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. This loop has been identified in the constraints as being known and understood by use of the ALLOW_COMBINATORIAL_LOOPS property on a net in the loop. The cells in the loop are: cpu_board/BD_out[3]_INST_0, cpu_board/BD_out[3]_INST_0_i_1,
-cpu_board/BD_out[3]_INST_0_i_3, io_board/FDC_state_shiftreg/cpu_board_i_15,
-io_board/FDC_state_shiftreg/cpu_board_i_35,
-io_board/kbd_via/genblk4[3].SCC_DBuf_i_1
-io_board/kbd_via/genblk4[3].SCC_DBuf_i_2.
+cpu_board/BD_out[3]_INST_0_i_3, io_board/kbd_via/genblk4[3].SCC_DBuf_i_1,
+io_board/kbd_via/genblk4[3].SCC_DBuf_i_2,
+io_board/low_FDC_RAM/cpu_board_i_15, io_board/low_FDC_RAM/cpu_board_i_35.
 Related violations: <none>
 
 LUTLP-2#16 Warning
 Combinatorial Loop Allowed  
 7 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. This loop has been identified in the constraints as being known and understood by use of the ALLOW_COMBINATORIAL_LOOPS property on a net in the loop. The cells in the loop are: cpu_board/BD_out[7]_INST_0, cpu_board/BD_out[7]_INST_0_i_1,
-cpu_board/BD_out[7]_INST_0_i_3, io_board/FDC_state_shiftreg/cpu_board_i_11,
-io_board/FDC_state_shiftreg/cpu_board_i_31,
+cpu_board/BD_out[7]_INST_0_i_3, io_board/high_FDC_RAM/cpu_board_i_11,
+io_board/high_FDC_RAM/cpu_board_i_31,
 io_board/kbd_via/genblk4[7].SCC_DBuf_i_1
 io_board/kbd_via/genblk4[7].SCC_DBuf_i_2.
 Related violations: <none>
@@ -15571,102 +15566,102 @@ Related violations: <none>
 
 REQP-1839#1 Warning
 RAMB36 async control check  
-The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[13] (net: io_board/MA_unlatched[10]) which is driven by a register (io_board/FDC_6504/state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[11] (net: io_board/MA_unlatched[8]) which is driven by a register (io_board/FDC_6504/state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#2 Warning
 RAMB36 async control check  
-The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[14] (net: io_board/MA_unlatched[11]) which is driven by a register (io_board/FDC_6504/state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[11] (net: io_board/MA_unlatched[8]) which is driven by a register (io_board/FDC_6504/state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#3 Warning
 RAMB36 async control check  
-The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[14] (net: io_board/MA_unlatched[11]) which is driven by a register (io_board/FDC_6504/state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[12] (net: io_board/MA_unlatched[9]) which is driven by a register (io_board/FDC_6504/state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#4 Warning
 RAMB36 async control check  
-The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[14] (net: io_board/MA_unlatched[11]) which is driven by a register (io_board/FDC_6504/state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[12] (net: io_board/MA_unlatched[9]) which is driven by a register (io_board/FDC_6504/state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#5 Warning
 RAMB36 async control check  
-The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[14] (net: io_board/MA_unlatched[11]) which is driven by a register (io_board/FDC_6504/state_reg[3]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[12] (net: io_board/MA_unlatched[9]) which is driven by a register (io_board/FDC_6504/state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#6 Warning
 RAMB36 async control check  
-The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[14] (net: io_board/MA_unlatched[11]) which is driven by a register (io_board/FDC_6504/state_reg[4]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[12] (net: io_board/MA_unlatched[9]) which is driven by a register (io_board/FDC_6504/state_reg[3]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#7 Warning
 RAMB36 async control check  
-The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[14] (net: io_board/MA_unlatched[11]) which is driven by a register (io_board/FDC_6504/state_reg[5]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[12] (net: io_board/MA_unlatched[9]) which is driven by a register (io_board/FDC_6504/state_reg[4]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#8 Warning
 RAMB36 async control check  
-The RAMB36E1 lisa_hdmi_output/lisa_framebuffer_reg_0_0 has an input control pin lisa_hdmi_output/lisa_framebuffer_reg_0_0/WEA[0] (net: lisa_hdmi_output/lisa_framebuffer[0]) which is driven by a register (cpu_board/vid_addr_counter_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[12] (net: io_board/MA_unlatched[9]) which is driven by a register (io_board/FDC_6504/state_reg[5]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#9 Warning
 RAMB36 async control check  
-The RAMB36E1 lisa_hdmi_output/lisa_framebuffer_reg_0_1 has an input control pin lisa_hdmi_output/lisa_framebuffer_reg_0_1/WEA[0] (net: lisa_hdmi_output/lisa_framebuffer[0]) which is driven by a register (cpu_board/vid_addr_counter_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[13] (net: io_board/MA_unlatched[10]) which is driven by a register (io_board/FDC_6504/state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#10 Warning
 RAMB36 async control check  
-The RAMB36E1 lisa_hdmi_output/lisa_framebuffer_reg_0_2 has an input control pin lisa_hdmi_output/lisa_framebuffer_reg_0_2/WEA[0] (net: lisa_hdmi_output/lisa_framebuffer[0]) which is driven by a register (cpu_board/vid_addr_counter_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[13] (net: io_board/MA_unlatched[10]) which is driven by a register (io_board/FDC_6504/state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#11 Warning
 RAMB36 async control check  
-The RAMB36E1 lisa_hdmi_output/lisa_framebuffer_reg_0_3 has an input control pin lisa_hdmi_output/lisa_framebuffer_reg_0_3/WEA[0] (net: lisa_hdmi_output/lisa_framebuffer[0]) which is driven by a register (cpu_board/vid_addr_counter_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[13] (net: io_board/MA_unlatched[10]) which is driven by a register (io_board/FDC_6504/state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#12 Warning
 RAMB36 async control check  
-The RAMB36E1 lisa_hdmi_output/lisa_framebuffer_reg_0_4 has an input control pin lisa_hdmi_output/lisa_framebuffer_reg_0_4/WEA[0] (net: lisa_hdmi_output/lisa_framebuffer_reg_0_4_i_1_n_0) which is driven by a register (cpu_board/vid_addr_counter_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[13] (net: io_board/MA_unlatched[10]) which is driven by a register (io_board/FDC_6504/state_reg[3]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#13 Warning
 RAMB36 async control check  
-The RAMB36E1 lisa_hdmi_output/lisa_framebuffer_reg_0_5 has an input control pin lisa_hdmi_output/lisa_framebuffer_reg_0_5/WEA[0] (net: lisa_hdmi_output/lisa_framebuffer_reg_0_4_i_1_n_0) which is driven by a register (cpu_board/vid_addr_counter_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[13] (net: io_board/MA_unlatched[10]) which is driven by a register (io_board/FDC_6504/state_reg[4]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#14 Warning
 RAMB36 async control check  
-The RAMB36E1 lisa_hdmi_output/lisa_framebuffer_reg_0_6 has an input control pin lisa_hdmi_output/lisa_framebuffer_reg_0_6/WEA[0] (net: lisa_hdmi_output/lisa_framebuffer_reg_0_4_i_1_n_0) which is driven by a register (cpu_board/vid_addr_counter_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[13] (net: io_board/MA_unlatched[10]) which is driven by a register (io_board/FDC_6504/state_reg[5]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#15 Warning
 RAMB36 async control check  
-The RAMB36E1 lisa_hdmi_output/lisa_framebuffer_reg_0_7 has an input control pin lisa_hdmi_output/lisa_framebuffer_reg_0_7/WEA[0] (net: lisa_hdmi_output/lisa_framebuffer_reg_0_4_i_1_n_0) which is driven by a register (cpu_board/vid_addr_counter_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[14] (net: io_board/MA_unlatched[11]) which is driven by a register (io_board/FDC_6504/state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#16 Warning
 RAMB36 async control check  
-The RAMB36E1 lisa_hdmi_output/lisa_framebuffer_reg_1_0 has an input control pin lisa_hdmi_output/lisa_framebuffer_reg_1_0/WEA[0] (net: lisa_hdmi_output/lisa_framebuffer[0]) which is driven by a register (cpu_board/vid_addr_counter_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[14] (net: io_board/MA_unlatched[11]) which is driven by a register (io_board/FDC_6504/state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#17 Warning
 RAMB36 async control check  
-The RAMB36E1 lisa_hdmi_output/lisa_framebuffer_reg_1_1 has an input control pin lisa_hdmi_output/lisa_framebuffer_reg_1_1/WEA[0] (net: lisa_hdmi_output/lisa_framebuffer[0]) which is driven by a register (cpu_board/vid_addr_counter_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[14] (net: io_board/MA_unlatched[11]) which is driven by a register (io_board/FDC_6504/state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#18 Warning
 RAMB36 async control check  
-The RAMB36E1 lisa_hdmi_output/lisa_framebuffer_reg_1_2 has an input control pin lisa_hdmi_output/lisa_framebuffer_reg_1_2/WEA[0] (net: lisa_hdmi_output/lisa_framebuffer[0]) which is driven by a register (cpu_board/vid_addr_counter_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[14] (net: io_board/MA_unlatched[11]) which is driven by a register (io_board/FDC_6504/state_reg[3]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#19 Warning
 RAMB36 async control check  
-The RAMB36E1 lisa_hdmi_output/lisa_framebuffer_reg_1_3 has an input control pin lisa_hdmi_output/lisa_framebuffer_reg_1_3/WEA[0] (net: lisa_hdmi_output/lisa_framebuffer[0]) which is driven by a register (cpu_board/vid_addr_counter_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[14] (net: io_board/MA_unlatched[11]) which is driven by a register (io_board/FDC_6504/state_reg[4]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#20 Warning
 RAMB36 async control check  
-The RAMB36E1 lisa_hdmi_output/lisa_framebuffer_reg_1_4 has an input control pin lisa_hdmi_output/lisa_framebuffer_reg_1_4/WEA[0] (net: lisa_hdmi_output/lisa_framebuffer_reg_0_4_i_1_n_0) which is driven by a register (cpu_board/vid_addr_counter_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 io_board/MA_reg_rep has an input control pin io_board/MA_reg_rep/ADDRARDADDR[14] (net: io_board/MA_unlatched[11]) which is driven by a register (io_board/FDC_6504/state_reg[5]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1840#1 Warning

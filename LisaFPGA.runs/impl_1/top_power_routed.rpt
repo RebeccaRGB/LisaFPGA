@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-| Date             : Mon May 18 15:25:50 2026
+| Date             : Sat Jun  6 16:22:31 2026
 | Host             : alex-cattop running 64-bit Linux Mint 22.1
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 1.214        |
+| Total On-Chip Power (W)  | 1.278        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 1.112        |
+| Dynamic (W)              | 1.176        |
 | Device Static (W)        | 0.102        |
 | Effective TJA (C/W)      | 4.6          |
-| Max Ambient (C)          | 79.5         |
-| Junction Temperature (C) | 30.5         |
+| Max Ambient (C)          | 79.2         |
+| Junction Temperature (C) | 30.8         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,23 +52,23 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.020 |       22 |       --- |             --- |
-| Slice Logic              |     0.136 |    40650 |       --- |             --- |
-|   LUT as Logic           |     0.134 |    17144 |     63400 |           27.04 |
-|   F7/F8 Muxes            |     0.001 |     5107 |     63400 |            8.06 |
-|   CARRY4                 |    <0.001 |      164 |     15850 |            1.03 |
-|   Register               |    <0.001 |    16287 |    126800 |           12.84 |
+| Clocks                   |     0.019 |       22 |       --- |             --- |
+| Slice Logic              |     0.134 |    40681 |       --- |             --- |
+|   LUT as Logic           |     0.132 |    17132 |     63400 |           27.02 |
+|   F7/F8 Muxes            |     0.001 |     5108 |     63400 |            8.06 |
+|   CARRY4                 |    <0.001 |      168 |     15850 |            1.06 |
+|   Register               |    <0.001 |    16305 |    126800 |           12.86 |
 |   LUT as Shift Register  |    <0.001 |       13 |     19000 |            0.07 |
 |   LUT as Distributed RAM |    <0.001 |      132 |     19000 |            0.69 |
 |   BUFG                   |    <0.001 |        2 |        32 |            6.25 |
 |   Others                 |     0.000 |      114 |       --- |             --- |
-| Signals                  |     0.436 |    28240 |       --- |             --- |
+| Signals                  |     0.488 |    28273 |       --- |             --- |
 | Block RAM                |     0.038 |     19.5 |       135 |           14.44 |
 | MMCM                     |     0.324 |        3 |         6 |           50.00 |
 | DSPs                     |     0.001 |        1 |       240 |            0.42 |
-| I/O                      |     0.157 |      185 |       210 |           88.10 |
+| I/O                      |     0.172 |      188 |       210 |           89.52 |
 | Static Power             |     0.102 |          |           |                 |
-| Total                    |     1.214 |          |           |                 |
+| Total                    |     1.278 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -78,9 +78,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.653 |       0.634 |      0.019 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.198 |       0.180 |      0.018 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     0.050 |       0.046 |      0.004 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.703 |       0.684 |      0.019 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.199 |       0.180 |      0.018 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.054 |       0.050 |      0.004 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -164,17 +164,17 @@ Table of Contents
 +--------------------------------------+-----------+
 | Name                                 | Power (W) |
 +--------------------------------------+-----------+
-| top                                  |     1.112 |
-|   cpu_board                          |     0.567 |
+| top                                  |     1.176 |
+|   cpu_board                          |     0.618 |
 |     M68K                             |     0.012 |
 |       excUnit                        |     0.008 |
-|     low_MMU_RAM                      |     0.260 |
-|     mid_MMU_RAM                      |     0.273 |
+|     low_MMU_RAM                      |     0.323 |
+|     mid_MMU_RAM                      |     0.261 |
 |   dotck_generator                    |     0.121 |
 |     inst                             |     0.121 |
 |   io_board                           |     0.003 |
-|   lisa_hdmi_output                   |     0.165 |
-|     hdmi                             |     0.014 |
+|   lisa_hdmi_output                   |     0.164 |
+|     hdmi                             |     0.013 |
 |       serializer                     |     0.004 |
 |       true_hdmi_output.packet_picker |     0.007 |
 |     hdmi_clock_generator             |     0.109 |

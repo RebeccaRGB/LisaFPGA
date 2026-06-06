@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-| Date         : Mon May 18 15:25:51 2026
+| Date         : Sat Jun  6 16:22:32 2026
 | Host         : alex-cattop running 64-bit Linux Mint 22.1
 | Command      : report_clock_utilization -file top_clock_utilization_routed.rpt
 | Design       : top
@@ -71,34 +71,34 @@ Table of Contents
 +-----------+-----------+-----------------+------------+----------------+--------------+-------------------+-------------+-----------------+--------------+------------------------+------------------------------------------+-------------------------------------------------------+
 | Global Id | Source Id | Driver Type/Pin | Constraint | Site           | Clock Region | Load Clock Region | Clock Loads | Non-Clock Loads | Clock Period | Clock                  | Driver Pin                               | Net                                                   |
 +-----------+-----------+-----------------+------------+----------------+--------------+-------------------+-------------+-----------------+--------------+------------------------+------------------------------------------+-------------------------------------------------------+
-| g0        | src0      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y19 | n/a          |                 4 |        1762 |               0 |       13.291 | dotck_80M_dotck_mmcm   | DOTCK_bufg/O                             | DOTCK                                                 |
-| g0        | src1      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y19 | n/a          |                 4 |        1762 |               0 |       13.291 |                        | DOTCK_bufg/O                             | DOTCK                                                 |
+| g0        | src0      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y19 | n/a          |                 4 |        1762 |               0 |       49.073 | dotck_20M_dotck_mmcm   | DOTCK_bufg/O                             | DOTCK                                                 |
+| g0        | src1      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y19 | n/a          |                 4 |        1762 |               0 |       49.073 |                        | DOTCK_bufg/O                             | DOTCK                                                 |
 | g1        | src2      | BUFG/O          | None       | BUFGCTRL_X0Y6  | n/a          |                 2 |         745 |               0 |       82.993 | usbclk_clock_divider   | primary_clock_divider/inst/clkout6_buf/O | primary_clock_divider/inst/usbclk                     |
-| g2        | src3      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y22 | n/a          |                 4 |         707 |               0 |       13.474 | clk_pixel_1080p30      | lisa_hdmi_output/bufgmux_clk_pixel/O     | lisa_hdmi_output/clk_pixel                            |
-| g2        | src4      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y22 | n/a          |                 4 |         707 |               0 |       13.474 | clk_pixel_1080p60      | lisa_hdmi_output/bufgmux_clk_pixel/O     | lisa_hdmi_output/clk_pixel                            |
+| g2        | src3      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y22 | n/a          |                 3 |         705 |               0 |       13.474 | clk_pixel_1080p30      | lisa_hdmi_output/bufgmux_clk_pixel/O     | lisa_hdmi_output/clk_pixel                            |
+| g2        | src4      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y22 | n/a          |                 3 |         705 |               0 |       13.474 | clk_pixel_1080p60      | lisa_hdmi_output/bufgmux_clk_pixel/O     | lisa_hdmi_output/clk_pixel                            |
 | g3        | src5      | BUFG/O          | None       | BUFGCTRL_X0Y12 | n/a          |                 2 |         380 |               0 |              |                        | cpu_board/E_bufg/O                       | cpu_board/E_either_edge                               |
-| g4        | src6      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y1  | n/a          |                 3 |         221 |               0 |       62.244 | C16M_clock_divider     | C16M_bufg/O                              | C16M                                                  |
-| g4        | src7      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y1  | n/a          |                 3 |         221 |               0 |       62.244 | C16M_clock_divider     | C16M_bufg/O                              | C16M                                                  |
-| g5        | src8      | BUFG/O          | None       | BUFGCTRL_X0Y5  | n/a          |                 2 |         153 |               0 |      127.681 | COPCK_2x_clock_divider | primary_clock_divider/inst/clkout3_buf/O | primary_clock_divider/inst/COPCK_2x                   |
-| g6        | src9      | BUFG/O          | None       | BUFGCTRL_X0Y14 | n/a          |                 2 |          41 |               8 |              |                        | D_out_int_tristate_oe_reg[3]_i_3/O       | _FDC_RAM_CS_processed                                 |
+| g4        | src6      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y1  | n/a          |                 2 |         221 |               0 |       62.244 | C16M_clock_divider     | C16M_bufg/O                              | C16M                                                  |
+| g4        | src7      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y1  | n/a          |                 2 |         221 |               0 |       62.244 | C16M_clock_divider     | C16M_bufg/O                              | C16M                                                  |
+| g5        | src8      | BUFG/O          | None       | BUFGCTRL_X0Y5  | n/a          |                 2 |         173 |               0 |      127.681 | COPCK_2x_clock_divider | primary_clock_divider/inst/clkout3_buf/O | primary_clock_divider/inst/COPCK_2x                   |
+| g6        | src9      | BUFG/O          | None       | BUFGCTRL_X0Y14 | n/a          |                 1 |          41 |               8 |              |                        | D_out_int_tristate_oe_reg[3]_i_3/O       | _FDC_RAM_CS_processed                                 |
 | g7        | src10     | BUFG/O          | None       | BUFGCTRL_X0Y21 | n/a          |                 1 |          24 |               0 |    20830.314 | clk_audio              | lisa_hdmi_output/buf_audio/O             | lisa_hdmi_output/clk_audio                            |
 | g8        | src11     | BUFGCTRL/O      | None       | BUFGCTRL_X0Y3  | n/a          |                 1 |          22 |               0 |      199.501 | C5M_clock_divider      | C5M_bufg/O                               | C5M                                                   |
 | g8        | src12     | BUFGCTRL/O      | None       | BUFGCTRL_X0Y3  | n/a          |                 1 |          22 |               0 |      199.501 | C5M_clock_divider      | C5M_bufg/O                               | C5M                                                   |
 | g9        | src13     | BUFGCTRL/O      | None       | BUFGCTRL_X0Y23 | n/a          |                 1 |           8 |               0 |        2.695 | clk_pixel_x5_1080p30   | lisa_hdmi_output/bufgmux_clk_pixel_x5/O  | lisa_hdmi_output/clk_pixel_x5                         |
 | g9        | src14     | BUFGCTRL/O      | None       | BUFGCTRL_X0Y23 | n/a          |                 1 |           8 |               0 |        2.695 | clk_pixel_x5_1080p60   | lisa_hdmi_output/bufgmux_clk_pixel_x5/O  | lisa_hdmi_output/clk_pixel_x5                         |
-| g10       | src15     | BUFGCTRL/O      | None       | BUFGCTRL_X0Y20 | n/a          |                 3 |           5 |               0 |       13.291 | dotck_40M_dotck_mmcm   | dotck_final_mux/O                        | DOTCK_ungated                                         |
-| g10       | src0      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y20 | n/a          |                 3 |           5 |               0 |       13.291 | dotck_80M_dotck_mmcm   | dotck_final_mux/O                        | DOTCK_ungated                                         |
-| g11       | src16     | BUFG/O          | None       | BUFGCTRL_X0Y31 | n/a          |                 3 |           3 |               0 |       49.073 | dotck_20M_dotck_mmcm   | dotck_generator/inst/clkout1_buf/O       | dotck_generator/inst/dotck_20M                        |
+| g10       | src0      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y20 | n/a          |                 2 |           5 |               0 |       49.073 | dotck_20M_dotck_mmcm   | dotck_final_mux/O                        | DOTCK_ungated                                         |
+| g10       | src15     | BUFGCTRL/O      | None       | BUFGCTRL_X0Y20 | n/a          |                 2 |           5 |               0 |       49.073 | dotck_80M_dotck_mmcm   | dotck_final_mux/O                        | DOTCK_ungated                                         |
+| g11       | src0      | BUFG/O          | None       | BUFGCTRL_X0Y31 | n/a          |                 2 |           3 |               0 |       49.073 | dotck_20M_dotck_mmcm   | dotck_generator/inst/clkout1_buf/O       | dotck_generator/inst/dotck_20M                        |
 | g12       | src6      | BUFG/O          | None       | BUFGCTRL_X0Y0  | n/a          |                 2 |           3 |               0 |       62.244 | C16M_clock_divider     | primary_clock_divider/inst/clkout2_buf/O | primary_clock_divider/inst/C16M                       |
 | g13       | src11     | BUFG/O          | None       | BUFGCTRL_X0Y2  | n/a          |                 2 |           3 |               0 |      199.501 | C5M_clock_divider      | primary_clock_divider/inst/clkout5_buf/O | primary_clock_divider/inst/C5M                        |
-| g14       | src16     | BUFGCTRL/O      | None       | BUFGCTRL_X0Y30 | n/a          |                 1 |           1 |               0 |       24.537 | dotck_20M_dotck_mmcm   | dotck_mux_20M40M/O                       | dotck_A                                               |
-| g14       | src15     | BUFGCTRL/O      | None       | BUFGCTRL_X0Y30 | n/a          |                 1 |           1 |               0 |       24.537 | dotck_40M_dotck_mmcm   | dotck_mux_20M40M/O                       | dotck_A                                               |
+| g14       | src0      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y30 | n/a          |                 1 |           1 |               0 |       49.073 | dotck_20M_dotck_mmcm   | dotck_mux_20M40M/O                       | dotck_A                                               |
+| g14       | src16     | BUFGCTRL/O      | None       | BUFGCTRL_X0Y30 | n/a          |                 1 |           1 |               0 |       49.073 | dotck_40M_dotck_mmcm   | dotck_mux_20M40M/O                       | dotck_A                                               |
 | g15       | src17     | BUFGCTRL/O      | None       | BUFGCTRL_X0Y27 | n/a          |                 1 |           1 |               0 |       13.291 | dotck_60M_dotck_mmcm   | dotck_mux_60M80M/O                       | dotck_B                                               |
-| g15       | src0      | BUFGCTRL/O      | None       | BUFGCTRL_X0Y27 | n/a          |                 1 |           1 |               0 |       13.291 | dotck_80M_dotck_mmcm   | dotck_mux_60M80M/O                       | dotck_B                                               |
+| g15       | src15     | BUFGCTRL/O      | None       | BUFGCTRL_X0Y27 | n/a          |                 1 |           1 |               0 |       13.291 | dotck_80M_dotck_mmcm   | dotck_mux_60M80M/O                       | dotck_B                                               |
 | g16       | src18     | BUFG/O          | None       | BUFGCTRL_X0Y25 | n/a          |                 1 |           1 |               0 |       40.000 | clkfbout_dotck_mmcm    | dotck_generator/inst/clkf_buf/O          | dotck_generator/inst/clkfbout_buf_dotck_mmcm          |
-| g17       | src15     | BUFG/O          | None       | BUFGCTRL_X0Y29 | n/a          |                 1 |           1 |               0 |       24.537 | dotck_40M_dotck_mmcm   | dotck_generator/inst/clkout2_buf/O       | dotck_generator/inst/dotck_40M                        |
+| g17       | src16     | BUFG/O          | None       | BUFGCTRL_X0Y29 | n/a          |                 1 |           1 |               0 |       24.537 | dotck_40M_dotck_mmcm   | dotck_generator/inst/clkout2_buf/O       | dotck_generator/inst/dotck_40M                        |
 | g18       | src17     | BUFG/O          | None       | BUFGCTRL_X0Y28 | n/a          |                 1 |           1 |               0 |       16.358 | dotck_60M_dotck_mmcm   | dotck_generator/inst/clkout3_buf/O       | dotck_generator/inst/dotck_60M                        |
-| g19       | src0      | BUFG/O          | None       | BUFGCTRL_X0Y26 | n/a          |                 1 |           1 |               0 |       13.291 | dotck_80M_dotck_mmcm   | dotck_generator/inst/clkout4_buf/O       | dotck_generator/inst/dotck_80M                        |
+| g19       | src15     | BUFG/O          | None       | BUFGCTRL_X0Y26 | n/a          |                 1 |           1 |               0 |       13.291 | dotck_80M_dotck_mmcm   | dotck_generator/inst/clkout4_buf/O       | dotck_generator/inst/dotck_80M                        |
 | g20       | src19     | BUFG/O          | None       | BUFGCTRL_X0Y24 | n/a          |                 1 |           1 |               0 |       16.000 | clk_feedback_out       | lisa_hdmi_output/hdmi_clk_feedback/O     | lisa_hdmi_output/clk_feedback_in                      |
 | g21       | src20     | BUFG/O          | None       | BUFGCTRL_X0Y4  | n/a          |                 1 |           1 |               0 |       80.000 | clkfbout_clock_divider | primary_clock_divider/inst/clkf_buf/O    | primary_clock_divider/inst/clkfbout_buf_clock_divider |
 +-----------+-----------+-----------------+------------+----------------+--------------+-------------------+-------------+-----------------+--------------+------------------------+------------------------------------------+-------------------------------------------------------+
@@ -112,31 +112,31 @@ Table of Contents
 +-----------+-----------+---------------------+-----------------+-----------------+--------------+-------------+-----------------+---------------------+------------------------+-------------------------------------------------------------------+-----------------------------------------------------------------+
 | Source Id | Global Id | Driver Type/Pin     | Constraint      | Site            | Clock Region | Clock Loads | Non-Clock Loads | Source Clock Period | Source Clock           | Driver Pin                                                        | Net                                                             |
 +-----------+-----------+---------------------+-----------------+-----------------+--------------+-------------+-----------------+---------------------+------------------------+-------------------------------------------------------------------+-----------------------------------------------------------------+
-| src0      | g0        | BUFGCTRL/O          | None            | BUFGCTRL_X0Y20  | n/a          |           5 |               0 |              13.291 | dotck_80M_dotck_mmcm   | dotck_final_mux/O                                                 | DOTCK_ungated                                                   |
-| src0      | g10       | BUFGCTRL/O          | None            | BUFGCTRL_X0Y27  | n/a          |           0 |               0 |              13.291 | dotck_80M_dotck_mmcm   | dotck_mux_60M80M/O                                                | dotck_B                                                         |
-| src0      | g15       | BUFG/O              | None            | BUFGCTRL_X0Y26  | n/a          |           0 |               0 |              13.291 | dotck_80M_dotck_mmcm   | dotck_generator/inst/clkout4_buf/O                                | dotck_generator/inst/dotck_80M                                  |
-| src0      | g19       | MMCME2_ADV/CLKOUT3  | None            | MMCME2_ADV_X0Y3 | X0Y3         |           1 |               0 |              13.291 | dotck_80M_dotck_mmcm   | dotck_generator/inst/mmcm_adv_inst/CLKOUT3                        | dotck_generator/inst/dotck_80M_dotck_mmcm                       |
+| src0      | g0        | BUFGCTRL/O          | None            | BUFGCTRL_X0Y20  | n/a          |           5 |               0 |              49.073 | dotck_20M_dotck_mmcm   | dotck_final_mux/O                                                 | DOTCK_ungated                                                   |
+| src0      | g10       | BUFGCTRL/O          | None            | BUFGCTRL_X0Y30  | n/a          |           1 |               0 |              49.073 | dotck_20M_dotck_mmcm   | dotck_mux_20M40M/O                                                | dotck_A                                                         |
+| src0      | g11       | MMCME2_ADV/CLKOUT0  | None            | MMCME2_ADV_X0Y3 | X0Y3         |           1 |               0 |              49.073 | dotck_20M_dotck_mmcm   | dotck_generator/inst/mmcm_adv_inst/CLKOUT0                        | dotck_generator/inst/dotck_20M_dotck_mmcm                       |
+| src0      | g14       | BUFG/O              | None            | BUFGCTRL_X0Y31  | n/a          |           3 |               0 |              49.073 | dotck_20M_dotck_mmcm   | dotck_generator/inst/clkout1_buf/O                                | dotck_generator/inst/dotck_20M                                  |
 | src1      | g0        | VCC/P               | None            |                 | n/a          |           0 |               0 |                     |                        | VCC_1/P                                                           | VCC_2                                                           |
 | src2      | g1        | MMCME2_ADV/CLKOUT5  | MMCME2_ADV_X0Y0 | MMCME2_ADV_X0Y0 | X0Y0         |           1 |               0 |              82.993 | usbclk_clock_divider   | primary_clock_divider/inst/mmcm_adv_inst/CLKOUT5                  | primary_clock_divider/inst/usbclk_clock_divider                 |
 | src3      | g2        | MMCME2_ADV/CLKOUT3  | MMCME2_ADV_X0Y2 | MMCME2_ADV_X0Y2 | X0Y2         |          14 |               0 |              13.474 | clk_pixel_1080p30      | lisa_hdmi_output/hdmi_clock_generator/inst/mmcm_adv_inst/CLKOUT3  | lisa_hdmi_output/hdmi_clock_generator/inst/clk_pixel_1080p30    |
 | src4      | g2        | MMCME2_ADV/CLKOUT2  | MMCME2_ADV_X0Y2 | MMCME2_ADV_X0Y2 | X0Y2         |           0 |               0 |               6.737 | clk_pixel_1080p60      | lisa_hdmi_output/hdmi_clock_generator/inst/mmcm_adv_inst/CLKOUT2  | lisa_hdmi_output/hdmi_clock_generator/inst/clk_pixel_1080p60    |
-| src5      | g3        | FDRE/Q              | None            | SLICE_X15Y90    | X0Y1         |           1 |               0 |                     |                        | cpu_board/M68K/Center_Edge_Pulse_reg/Q                            | cpu_board/M68K/Center_Edge_Pulse                                |
+| src5      | g3        | FDRE/Q              | None            | SLICE_X51Y96    | X0Y1         |           1 |               0 |                     |                        | cpu_board/M68K/Center_Edge_Pulse_reg/Q                            | cpu_board/M68K/Center_Edge_Pulse                                |
 | src6      | g4        | BUFG/O              | None            | BUFGCTRL_X0Y0   | n/a          |           3 |               0 |              62.244 | C16M_clock_divider     | primary_clock_divider/inst/clkout2_buf/O                          | primary_clock_divider/inst/C16M                                 |
 | src6      | g12       | MMCME2_ADV/CLKOUT1  | MMCME2_ADV_X0Y0 | MMCME2_ADV_X0Y0 | X0Y0         |           1 |               0 |              62.244 | C16M_clock_divider     | primary_clock_divider/inst/mmcm_adv_inst/CLKOUT1                  | primary_clock_divider/inst/C16M_clock_divider                   |
 | src7      | g4        | VCC/P               | None            |                 | n/a          |           0 |               0 |                     |                        | VCC_1/P                                                           | VCC_2                                                           |
 | src8      | g5        | MMCME2_ADV/CLKOUT2  | MMCME2_ADV_X0Y0 | MMCME2_ADV_X0Y0 | X0Y0         |           1 |               0 |             127.681 | COPCK_2x_clock_divider | primary_clock_divider/inst/mmcm_adv_inst/CLKOUT2                  | primary_clock_divider/inst/COPCK_2x_clock_divider               |
-| src9      | g6        | FDRE/Q              | None            | SLICE_X13Y101   | X0Y2         |           1 |              27 |                     |                        | io_board/_FDC_RAM_CS_processed_reg/Q                              | io_board/_FDC_RAM_CS_processed_reg_0                            |
-| src10     | g7        | FDCE/Q              | None            | SLICE_X50Y103   | X0Y2         |           1 |               1 |                     |                        | lisa_hdmi_output/clk_audio_unbuffered_reg/Q                       | lisa_hdmi_output/clk_audio_unbuffered                           |
+| src9      | g6        | FDRE/Q              | None            | SLICE_X28Y102   | X0Y2         |           1 |              27 |                     |                        | io_board/_FDC_RAM_CS_processed_reg/Q                              | io_board/_FDC_RAM_CS_processed_reg_0                            |
+| src10     | g7        | FDCE/Q              | None            | SLICE_X51Y100   | X0Y2         |           1 |               1 |                     |                        | lisa_hdmi_output/clk_audio_unbuffered_reg/Q                       | lisa_hdmi_output/clk_audio_unbuffered                           |
 | src11     | g8        | BUFG/O              | None            | BUFGCTRL_X0Y2   | n/a          |           3 |               0 |             199.501 | C5M_clock_divider      | primary_clock_divider/inst/clkout5_buf/O                          | primary_clock_divider/inst/C5M                                  |
 | src11     | g13       | MMCME2_ADV/CLKOUT4  | MMCME2_ADV_X0Y0 | MMCME2_ADV_X0Y0 | X0Y0         |           1 |               0 |             199.501 | C5M_clock_divider      | primary_clock_divider/inst/mmcm_adv_inst/CLKOUT4                  | primary_clock_divider/inst/C5M_clock_divider                    |
 | src12     | g8        | VCC/P               | None            |                 | n/a          |           0 |               0 |                     |                        | VCC_1/P                                                           | VCC_2                                                           |
 | src13     | g9        | MMCME2_ADV/CLKOUT1  | MMCME2_ADV_X0Y2 | MMCME2_ADV_X0Y2 | X0Y2         |           1 |               0 |               2.695 | clk_pixel_x5_1080p30   | lisa_hdmi_output/hdmi_clock_generator/inst/mmcm_adv_inst/CLKOUT1  | lisa_hdmi_output/hdmi_clock_generator/inst/clk_pixel_x5_1080p30 |
 | src14     | g9        | MMCME2_ADV/CLKOUT0  | MMCME2_ADV_X0Y2 | MMCME2_ADV_X0Y2 | X0Y2         |           0 |               0 |               1.347 | clk_pixel_x5_1080p60   | lisa_hdmi_output/hdmi_clock_generator/inst/mmcm_adv_inst/CLKOUT0  | lisa_hdmi_output/hdmi_clock_generator/inst/clk_pixel_x5_1080p60 |
-| src15     | g10       | BUFGCTRL/O          | None            | BUFGCTRL_X0Y30  | n/a          |           1 |               0 |              24.537 | dotck_40M_dotck_mmcm   | dotck_mux_20M40M/O                                                | dotck_A                                                         |
-| src15     | g14       | BUFG/O              | None            | BUFGCTRL_X0Y29  | n/a          |           0 |               0 |              24.537 | dotck_40M_dotck_mmcm   | dotck_generator/inst/clkout2_buf/O                                | dotck_generator/inst/dotck_40M                                  |
-| src15     | g17       | MMCME2_ADV/CLKOUT1  | None            | MMCME2_ADV_X0Y3 | X0Y3         |           1 |               0 |              24.537 | dotck_40M_dotck_mmcm   | dotck_generator/inst/mmcm_adv_inst/CLKOUT1                        | dotck_generator/inst/dotck_40M_dotck_mmcm                       |
-| src16     | g11       | MMCME2_ADV/CLKOUT0  | None            | MMCME2_ADV_X0Y3 | X0Y3         |           1 |               0 |              49.073 | dotck_20M_dotck_mmcm   | dotck_generator/inst/mmcm_adv_inst/CLKOUT0                        | dotck_generator/inst/dotck_20M_dotck_mmcm                       |
-| src16     | g14       | BUFG/O              | None            | BUFGCTRL_X0Y31  | n/a          |           3 |               0 |              49.073 | dotck_20M_dotck_mmcm   | dotck_generator/inst/clkout1_buf/O                                | dotck_generator/inst/dotck_20M                                  |
+| src15     | g10       | BUFGCTRL/O          | None            | BUFGCTRL_X0Y27  | n/a          |           0 |               0 |              13.291 | dotck_80M_dotck_mmcm   | dotck_mux_60M80M/O                                                | dotck_B                                                         |
+| src15     | g15       | BUFG/O              | None            | BUFGCTRL_X0Y26  | n/a          |           0 |               0 |              13.291 | dotck_80M_dotck_mmcm   | dotck_generator/inst/clkout4_buf/O                                | dotck_generator/inst/dotck_80M                                  |
+| src15     | g19       | MMCME2_ADV/CLKOUT3  | None            | MMCME2_ADV_X0Y3 | X0Y3         |           1 |               0 |              13.291 | dotck_80M_dotck_mmcm   | dotck_generator/inst/mmcm_adv_inst/CLKOUT3                        | dotck_generator/inst/dotck_80M_dotck_mmcm                       |
+| src16     | g14       | BUFG/O              | None            | BUFGCTRL_X0Y29  | n/a          |           0 |               0 |              24.537 | dotck_40M_dotck_mmcm   | dotck_generator/inst/clkout2_buf/O                                | dotck_generator/inst/dotck_40M                                  |
+| src16     | g17       | MMCME2_ADV/CLKOUT1  | None            | MMCME2_ADV_X0Y3 | X0Y3         |           1 |               0 |              24.537 | dotck_40M_dotck_mmcm   | dotck_generator/inst/mmcm_adv_inst/CLKOUT1                        | dotck_generator/inst/dotck_40M_dotck_mmcm                       |
 | src17     | g15       | BUFG/O              | None            | BUFGCTRL_X0Y28  | n/a          |           1 |               0 |              16.358 | dotck_60M_dotck_mmcm   | dotck_generator/inst/clkout3_buf/O                                | dotck_generator/inst/dotck_60M                                  |
 | src17     | g18       | MMCME2_ADV/CLKOUT2  | None            | MMCME2_ADV_X0Y3 | X0Y3         |           1 |               0 |              16.358 | dotck_60M_dotck_mmcm   | dotck_generator/inst/mmcm_adv_inst/CLKOUT2                        | dotck_generator/inst/dotck_60M_dotck_mmcm                       |
 | src18     | g16       | MMCME2_ADV/CLKFBOUT | None            | MMCME2_ADV_X0Y3 | X0Y3         |           1 |               0 |              40.000 | clkfbout_dotck_mmcm    | dotck_generator/inst/mmcm_adv_inst/CLKFBOUT                       | dotck_generator/inst/clkfbout_dotck_mmcm                        |
@@ -153,12 +153,12 @@ Table of Contents
 +----------+--------------------+-----------------+----------------------------+--------------+-------------+-----------------+--------------+-------------------+------------------------------------------------------------------+--------------------------------------------------------------+
 | Local Id | Driver Type/Pin    | Constraint      | Site/BEL                   | Clock Region | Clock Loads | Non-Clock Loads | Clock Period | Clock             | Driver Pin                                                       | Net                                                          |
 +----------+--------------------+-----------------+----------------------------+--------------+-------------+-----------------+--------------+-------------------+------------------------------------------------------------------+--------------------------------------------------------------+
-| 0        | FDCE/Q             | None            | SLICE_X41Y117/AFF          | X0Y2         |          16 |               3 |              |                   | cpu_board/_MALE_reg/Q                                            | cpu_board/_MALE                                              |
+| 0        | FDCE/Q             | None            | SLICE_X49Y62/AFF           | X0Y1         |          16 |               3 |              |                   | cpu_board/_MALE_reg/Q                                            | cpu_board/_MALE                                              |
 | 1        | MMCME2_ADV/CLKOUT3 | MMCME2_ADV_X0Y2 | MMCME2_ADV_X0Y2/MMCME2_ADV | X0Y2         |          14 |               0 |       13.474 | clk_pixel_1080p30 | lisa_hdmi_output/hdmi_clock_generator/inst/mmcm_adv_inst/CLKOUT3 | lisa_hdmi_output/hdmi_clock_generator/inst/clk_pixel_1080p30 |
-| 2        | FDRE/Q             | None            | SLICE_X44Y139/DFF          | X0Y2         |           1 |              15 |              |                   | cpu_board/_CAS_reg/Q                                             | cpu_board/_CAS                                               |
-| 3        | FDCE/Q             | None            | SLICE_X36Y103/AFF          | X0Y2         |           1 |               2 |              |                   | cpu_board/sys_ctrl_latch/Q_reg[7]/Q                              | cpu_board/sys_ctrl_latch/_HDMSK                              |
-| 4        | FDCE/Q             | None            | SLICE_X39Y105/AFF          | X0Y2         |           1 |               2 |              |                   | cpu_board/sys_ctrl_latch/Q_reg[5]/Q                              | cpu_board/sys_ctrl_latch/_SFMSK                              |
-| 5        | FDCE/Q             | None            | SLICE_X38Y104/AFF          | X0Y2         |           1 |               2 |              |                   | cpu_board/sys_ctrl_latch/Q_reg[6]/Q                              | cpu_board/sys_ctrl_latch/_VTMSK                              |
+| 2        | FDRE/Q             | None            | SLICE_X52Y56/AFF           | X1Y1         |           1 |              15 |              |                   | cpu_board/_CAS_reg/Q                                             | cpu_board/_CAS                                               |
+| 3        | FDCE/Q             | None            | SLICE_X67Y91/AFF           | X1Y1         |           1 |               2 |              |                   | cpu_board/sys_ctrl_latch/Q_reg[7]/Q                              | cpu_board/sys_ctrl_latch/_HDMSK                              |
+| 4        | FDCE/Q             | None            | SLICE_X62Y90/BFF           | X1Y1         |           1 |               2 |              |                   | cpu_board/sys_ctrl_latch/Q_reg[5]/Q                              | cpu_board/sys_ctrl_latch/_SFMSK                              |
+| 5        | FDCE/Q             | None            | SLICE_X57Y93/AFF           | X1Y1         |           1 |               2 |              |                   | cpu_board/sys_ctrl_latch/Q_reg[6]/Q                              | cpu_board/sys_ctrl_latch/_VTMSK                              |
 +----------+--------------------+-----------------+----------------------------+--------------+-------------+-----------------+--------------+-------------------+------------------------------------------------------------------+--------------------------------------------------------------+
 * Local Clocks in this context represents only clocks driven by non-global buffers
 ** Clock Loads column represents cell count of net connects that connect to a clock pin. Internal cell leaf pins are not considered
@@ -173,13 +173,13 @@ Table of Contents
 +-------------------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+
 | Clock Region Name | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail |
 +-------------------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+
-| X0Y0              |    3 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    1 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 |   13 |  2600 |    0 |   600 |    0 |    20 |    6 |    10 |    0 |    20 |
+| X0Y0              |    1 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    1 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 |    0 |  2600 |    0 |   600 |    0 |    20 |    0 |    10 |    0 |    20 |
 | X1Y0              |    0 |    12 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     4 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |  1500 |    0 |   550 |    0 |    40 |    0 |    20 |    0 |    40 |
-| X0Y1              |    8 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    0 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 | 1785 |  2000 |  577 |   600 |    0 |    20 |    9 |    10 |    1 |    20 |
-| X1Y1              |    3 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    0 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 |   21 |  1900 |    1 |   650 |    0 |    60 |    0 |    30 |    0 |    40 |
-| X0Y2              |   11 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    1 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    8 |    50 | 1419 |  2000 |  485 |   600 |    0 |    20 |    3 |    10 |    0 |    20 |
-| X1Y2              |    4 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    0 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 |    8 |  1900 |    5 |   650 |    0 |    60 |    0 |    30 |    0 |    40 |
-| X0Y3              |    2 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    1 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 |  738 |  2600 |  187 |   600 |    0 |    20 |    0 |    10 |    0 |    20 |
+| X0Y1              |    5 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    0 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 |  101 |  2000 |   31 |   600 |    0 |    20 |    6 |    10 |    0 |    20 |
+| X1Y1              |    2 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    0 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 |  432 |  1900 |  131 |   650 |    0 |    60 |    0 |    30 |    0 |    40 |
+| X0Y2              |   10 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    1 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    8 |    50 | 2307 |  2000 |  771 |   600 |    0 |    20 |   10 |    10 |    1 |    20 |
+| X1Y2              |    6 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    0 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 | 1160 |  1900 |  404 |   650 |    0 |    60 |    2 |    30 |    0 |    40 |
+| X0Y3              |    2 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    1 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 |    2 |  2600 |    0 |   600 |    0 |    20 |    0 |    10 |    0 |    20 |
 | X1Y3              |    0 |    12 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     4 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |  1350 |    0 |   500 |    0 |    30 |    0 |    15 |    0 |    40 |
 +-------------------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+
 * Global Clock column represents track count; while other columns represents cell counts
@@ -202,25 +202,25 @@ All Modules
 7. Device Cell Placement Summary for Global Clock g0
 ----------------------------------------------------
 
-+-----------+-----------------+-------------------+----------+-------------+---------------+-------------+----------+----------------+----------+-------+
-| Global Id | Driver Type/Pin | Driver Region (D) | Clock    | Period (ns) | Waveform (ns) | Slice Loads | IO Loads | Clocking Loads | GT Loads | Net   |
-+-----------+-----------------+-------------------+----------+-------------+---------------+-------------+----------+----------------+----------+-------+
-| g0        | BUFGCTRL/O      | n/a               | Multiple |      13.291 | {0.000 6.645} |        1762 |        0 |              0 |        0 | DOTCK |
-+-----------+-----------------+-------------------+----------+-------------+---------------+-------------+----------+----------------+----------+-------+
++-----------+-----------------+-------------------+----------+-------------+----------------+-------------+----------+----------------+----------+-------+
+| Global Id | Driver Type/Pin | Driver Region (D) | Clock    | Period (ns) | Waveform (ns)  | Slice Loads | IO Loads | Clocking Loads | GT Loads | Net   |
++-----------+-----------------+-------------------+----------+-------------+----------------+-------------+----------+----------------+----------+-------+
+| g0        | BUFGCTRL/O      | n/a               | Multiple |      49.073 | {0.000 24.537} |        1762 |        0 |              0 |        0 | DOTCK |
++-----------+-----------------+-------------------+----------+-------------+----------------+-------------+----------+----------------+----------+-------+
 * Slice Loads column represents load cell count of all cell types other than IO, GT and clock resources
 ** IO Loads column represents load cell count of IO types
 *** Clocking Loads column represents load cell count that are clock resources (global clock buffer, MMCM, PLL, etc)
 **** GT Loads column represents load cell count of GT types
 
 
-+----+-------+-----+-----------------------+
-|    | X0    | X1  | HORIZONTAL PROG DELAY |
-+----+-------+-----+-----------------------+
-| Y3 |     0 |   0 |                     - |
-| Y2 |   210 |   0 |                     0 |
-| Y1 |  1529 |  17 |                     0 |
-| Y0 |     6 |   0 |                     0 |
-+----+-------+-----+-----------------------+
++----+------+------+-----------------------+
+|    | X0   | X1   | HORIZONTAL PROG DELAY |
++----+------+------+-----------------------+
+| Y3 |    0 |    0 |                     - |
+| Y2 |  462 |  782 |                     0 |
+| Y1 |   89 |  429 |                     0 |
+| Y0 |    0 |    0 |                     - |
++----+------+------+-----------------------+
 
 
 8. Device Cell Placement Summary for Global Clock g1
@@ -237,14 +237,14 @@ All Modules
 **** GT Loads column represents load cell count of GT types
 
 
-+----+------+----+-----------------------+
-|    | X0   | X1 | HORIZONTAL PROG DELAY |
-+----+------+----+-----------------------+
-| Y3 |  739 |  0 |                     0 |
-| Y2 |    6 |  0 |                     0 |
-| Y1 |    0 |  0 |                     - |
-| Y0 |    0 |  0 |                     - |
-+----+------+----+-----------------------+
++----+------+------+-----------------------+
+|    | X0   | X1   | HORIZONTAL PROG DELAY |
++----+------+------+-----------------------+
+| Y3 |    0 |    0 |                     - |
+| Y2 |  627 |  118 |                     0 |
+| Y1 |    0 |    0 |                     - |
+| Y0 |    0 |    0 |                     - |
++----+------+------+-----------------------+
 
 
 9. Device Cell Placement Summary for Global Clock g2
@@ -253,7 +253,7 @@ All Modules
 +-----------+-----------------+-------------------+----------+-------------+---------------+-------------+----------+----------------+----------+----------------------------+
 | Global Id | Driver Type/Pin | Driver Region (D) | Clock    | Period (ns) | Waveform (ns) | Slice Loads | IO Loads | Clocking Loads | GT Loads | Net                        |
 +-----------+-----------------+-------------------+----------+-------------+---------------+-------------+----------+----------------+----------+----------------------------+
-| g2        | BUFGCTRL/O      | n/a               | Multiple |      13.474 | {0.000 6.737} |         699 |        8 |              0 |        0 | lisa_hdmi_output/clk_pixel |
+| g2        | BUFGCTRL/O      | n/a               | Multiple |      13.474 | {0.000 6.737} |         697 |        8 |              0 |        0 | lisa_hdmi_output/clk_pixel |
 +-----------+-----------------+-------------------+----------+-------------+---------------+-------------+----------+----------------+----------+----------------------------+
 * Slice Loads column represents load cell count of all cell types other than IO, GT and clock resources
 ** IO Loads column represents load cell count of IO types
@@ -265,9 +265,9 @@ All Modules
 |    | X0   | X1 | HORIZONTAL PROG DELAY |
 +----+------+----+-----------------------+
 | Y3 |    0 |  0 |                     - |
-| Y2 |  590 |  2 |                     0 |
-| Y1 |   96 |  0 |                     0 |
-| Y0 |   19 |  0 |                     0 |
+| Y2 |  695 |  2 |                     0 |
+| Y1 |    8 |  0 |                     0 |
+| Y0 |    0 |  0 |                     - |
 +----+------+----+-----------------------+
 
 
@@ -285,14 +285,14 @@ All Modules
 **** GT Loads column represents load cell count of GT types
 
 
-+----+------+----+-----------------------+
-|    | X0   | X1 | HORIZONTAL PROG DELAY |
-+----+------+----+-----------------------+
-| Y3 |    0 |  0 |                     - |
-| Y2 |  377 |  3 |                     0 |
-| Y1 |    0 |  0 |                     - |
-| Y0 |    0 |  0 |                     - |
-+----+------+----+-----------------------+
++----+------+-----+-----------------------+
+|    | X0   | X1  | HORIZONTAL PROG DELAY |
++----+------+-----+-----------------------+
+| Y3 |    0 |   0 |                     - |
+| Y2 |  295 |  85 |                     0 |
+| Y1 |    0 |   0 |                     - |
+| Y0 |    0 |   0 |                     - |
++----+------+-----+-----------------------+
 
 
 11. Device Cell Placement Summary for Global Clock g4
@@ -309,14 +309,14 @@ All Modules
 **** GT Loads column represents load cell count of GT types
 
 
-+----+------+----+-----------------------+
-|    | X0   | X1 | HORIZONTAL PROG DELAY |
-+----+------+----+-----------------------+
-| Y3 |    0 |  0 |                     - |
-| Y2 |   55 |  2 |                     0 |
-| Y1 |  164 |  0 |                     0 |
-| Y0 |    0 |  0 |                     - |
-+----+------+----+-----------------------+
++----+------+-----+-----------------------+
+|    | X0   | X1  | HORIZONTAL PROG DELAY |
++----+------+-----+-----------------------+
+| Y3 |    0 |   0 |                     - |
+| Y2 |  208 |  13 |                     0 |
+| Y1 |    0 |   0 |                     - |
+| Y0 |    0 |   0 |                     - |
++----+------+-----+-----------------------+
 
 
 12. Device Cell Placement Summary for Global Clock g5
@@ -325,7 +325,7 @@ All Modules
 +-----------+-----------------+-------------------+------------------------+-------------+----------------+-------------+----------+----------------+----------+-------------------------------------+
 | Global Id | Driver Type/Pin | Driver Region (D) | Clock                  | Period (ns) | Waveform (ns)  | Slice Loads | IO Loads | Clocking Loads | GT Loads | Net                                 |
 +-----------+-----------------+-------------------+------------------------+-------------+----------------+-------------+----------+----------------+----------+-------------------------------------+
-| g5        | BUFG/O          | n/a               | COPCK_2x_clock_divider |     127.681 | {0.000 63.840} |         149 |        0 |              0 |        0 | primary_clock_divider/inst/COPCK_2x |
+| g5        | BUFG/O          | n/a               | COPCK_2x_clock_divider |     127.681 | {0.000 63.840} |         169 |        0 |              0 |        0 | primary_clock_divider/inst/COPCK_2x |
 +-----------+-----------------+-------------------+------------------------+-------------+----------------+-------------+----------+----------------+----------+-------------------------------------+
 * Slice Loads column represents load cell count of all cell types other than IO, GT and clock resources
 ** IO Loads column represents load cell count of IO types
@@ -333,14 +333,14 @@ All Modules
 **** GT Loads column represents load cell count of GT types
 
 
-+----+------+----+-----------------------+
-|    | X0   | X1 | HORIZONTAL PROG DELAY |
-+----+------+----+-----------------------+
-| Y3 |    0 |  0 |                     - |
-| Y2 |  147 |  0 |                     0 |
-| Y1 |    2 |  0 |                     0 |
-| Y0 |    0 |  0 |                     - |
-+----+------+----+-----------------------+
++----+----+------+-----------------------+
+|    | X0 | X1   | HORIZONTAL PROG DELAY |
++----+----+------+-----------------------+
+| Y3 |  0 |    0 |                     - |
+| Y2 |  0 |  167 |                     0 |
+| Y1 |  2 |    0 |                     0 |
+| Y0 |  0 |    0 |                     - |
++----+----+------+-----------------------+
 
 
 13. Device Cell Placement Summary for Global Clock g6
@@ -361,8 +361,8 @@ All Modules
 |    | X0  | X1 | HORIZONTAL PROG DELAY |
 +----+-----+----+-----------------------+
 | Y3 |   0 |  0 |                     - |
-| Y2 |   1 |  0 |                     0 |
-| Y1 |  16 |  0 |                     0 |
+| Y2 |  17 |  0 |                     0 |
+| Y1 |   0 |  0 |                     - |
 | Y0 |   0 |  0 |                     - |
 +----+-----+----+-----------------------+
 
@@ -409,8 +409,8 @@ All Modules
 |    | X0  | X1 | HORIZONTAL PROG DELAY |
 +----+-----+----+-----------------------+
 | Y3 |   0 |  0 |                     - |
-| Y2 |   0 |  0 |                     - |
-| Y1 |  22 |  0 |                     0 |
+| Y2 |  22 |  0 |                     0 |
+| Y1 |   0 |  0 |                     - |
 | Y0 |   0 |  0 |                     - |
 +----+-----+----+-----------------------+
 
@@ -442,11 +442,11 @@ All Modules
 17. Device Cell Placement Summary for Global Clock g10
 ------------------------------------------------------
 
-+-----------+-----------------+-------------------+----------+-------------+---------------+-------------+----------+----------------+----------+---------------+
-| Global Id | Driver Type/Pin | Driver Region (D) | Clock    | Period (ns) | Waveform (ns) | Slice Loads | IO Loads | Clocking Loads | GT Loads | Net           |
-+-----------+-----------------+-------------------+----------+-------------+---------------+-------------+----------+----------------+----------+---------------+
-| g10       | BUFGCTRL/O      | n/a               | Multiple |      13.291 | {0.000 6.645} |           4 |        0 |              1 |        0 | DOTCK_ungated |
-+-----------+-----------------+-------------------+----------+-------------+---------------+-------------+----------+----------------+----------+---------------+
++-----------+-----------------+-------------------+----------+-------------+----------------+-------------+----------+----------------+----------+---------------+
+| Global Id | Driver Type/Pin | Driver Region (D) | Clock    | Period (ns) | Waveform (ns)  | Slice Loads | IO Loads | Clocking Loads | GT Loads | Net           |
++-----------+-----------------+-------------------+----------+-------------+----------------+-------------+----------+----------------+----------+---------------+
+| g10       | BUFGCTRL/O      | n/a               | Multiple |      49.073 | {0.000 24.537} |           4 |        0 |              1 |        0 | DOTCK_ungated |
++-----------+-----------------+-------------------+----------+-------------+----------------+-------------+----------+----------------+----------+---------------+
 * Slice Loads column represents load cell count of all cell types other than IO, GT and clock resources
 ** IO Loads column represents load cell count of IO types
 *** Clocking Loads column represents load cell count that are clock resources (global clock buffer, MMCM, PLL, etc)
@@ -458,7 +458,7 @@ All Modules
 +----+----+----+-----------------------+
 | Y3 |  0 |  0 |                     - |
 | Y2 |  0 |  0 |                     - |
-| Y1 |  2 |  2 |                     0 |
+| Y1 |  4 |  0 |                     0 |
 | Y0 |  0 |  0 |                     - |
 +----+----+----+-----------------------+
 
@@ -480,8 +480,8 @@ All Modules
 +----+----+----+-----------------------+
 |    | X0 | X1 | HORIZONTAL PROG DELAY |
 +----+----+----+-----------------------+
-| Y3 |  0 |  0 |                     - |
-| Y2 |  1 |  1 |                     0 |
+| Y3 |  2 |  0 |                     0 |
+| Y2 |  0 |  0 |                     - |
 | Y1 |  0 |  0 |                     - |
 | Y0 |  0 |  0 |                     - |
 +----+----+----+-----------------------+
@@ -541,7 +541,7 @@ All Modules
 +-----------+-----------------+-------------------+----------+-------------+----------------+-------------+----------+----------------+----------+---------+
 | Global Id | Driver Type/Pin | Driver Region (D) | Clock    | Period (ns) | Waveform (ns)  | Slice Loads | IO Loads | Clocking Loads | GT Loads | Net     |
 +-----------+-----------------+-------------------+----------+-------------+----------------+-------------+----------+----------------+----------+---------+
-| g14       | BUFGCTRL/O      | n/a               | Multiple |      24.537 | {0.000 12.268} |           0 |        0 |              1 |        0 | dotck_A |
+| g14       | BUFGCTRL/O      | n/a               | Multiple |      49.073 | {0.000 24.537} |           0 |        0 |              1 |        0 | dotck_A |
 +-----------+-----------------+-------------------+----------+-------------+----------------+-------------+----------+----------------+----------+---------+
 * Slice Loads column represents load cell count of all cell types other than IO, GT and clock resources
 ** IO Loads column represents load cell count of IO types
@@ -733,8 +733,6 @@ All Modules
 +-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+-------------------------------------------------------+
 | Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF | Memory LUTs | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                                                   |
 +-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+-------------------------------------------------------+
-| g0        | n/a   | BUFGCTRL/O      | None       |           6 |               0 |  0 |           0 |    6 |   0 |  0 |    0 |   0 |       0 | DOTCK                                                 |
-| g2        | n/a   | BUFGCTRL/O      | None       |          19 |               0 | 13 |           0 |    6 |   0 |  0 |    0 |   0 |       0 | lisa_hdmi_output/clk_pixel                            |
 | g21       | n/a   | BUFG/O          | None       |           1 |               0 |  0 |           0 |    0 |   0 |  0 |    1 |   0 |       0 | primary_clock_divider/inst/clkfbout_buf_clock_divider |
 +-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+-------------------------------------------------------+
 * Clock Loads column represents cell count of net connects that connect to a clock pin. Internal cell leaf pins are not considered
@@ -745,18 +743,15 @@ All Modules
 30. Clock Region Cell Placement per Global Clock: Region X0Y1
 -------------------------------------------------------------
 
-+-----------+-------+-----------------+------------+-------------+-----------------+------+-------------+------+-----+----+------+-----+---------+-------------------------------------+
-| Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF   | Memory LUTs | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                                 |
-+-----------+-------+-----------------+------------+-------------+-----------------+------+-------------+------+-----+----+------+-----+---------+-------------------------------------+
-| g0        | n/a   | BUFGCTRL/O      | None       |        1529 |               0 | 1520 |           0 |    8 |   0 |  0 |    0 |   0 |       0 | DOTCK                               |
-| g2        | n/a   | BUFGCTRL/O      | None       |          96 |               0 |   66 |          21 |    8 |   1 |  0 |    0 |   0 |       0 | lisa_hdmi_output/clk_pixel          |
-| g4        | n/a   | BUFGCTRL/O      | None       |         164 |               0 |  163 |           0 |    1 |   0 |  0 |    0 |   0 |       0 | C16M                                |
-| g5        | n/a   | BUFG/O          | None       |           2 |               0 |    2 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | primary_clock_divider/inst/COPCK_2x |
-| g6        | n/a   | BUFG/O          | None       |           8 |               8 |    8 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | _FDC_RAM_CS_processed               |
-| g8        | n/a   | BUFGCTRL/O      | None       |          22 |               0 |   22 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | C5M                                 |
-| g10       | n/a   | BUFGCTRL/O      | None       |           2 |               0 |    2 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | DOTCK_ungated                       |
-| g13       | n/a   | BUFG/O          | None       |           2 |               0 |    2 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | primary_clock_divider/inst/C5M      |
-+-----------+-------+-----------------+------------+-------------+-----------------+------+-------------+------+-----+----+------+-----+---------+-------------------------------------+
++-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+-------------------------------------+
+| Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF | Memory LUTs | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                                 |
++-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+-------------------------------------+
+| g0        | n/a   | BUFGCTRL/O      | None       |          89 |               0 | 83 |           0 |    6 |   0 |  0 |    0 |   0 |       0 | DOTCK                               |
+| g2        | n/a   | BUFGCTRL/O      | None       |           8 |               0 |  2 |           0 |    6 |   0 |  0 |    0 |   0 |       0 | lisa_hdmi_output/clk_pixel          |
+| g5        | n/a   | BUFG/O          | None       |           2 |               0 |  2 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | primary_clock_divider/inst/COPCK_2x |
+| g10       | n/a   | BUFGCTRL/O      | None       |           4 |               0 |  4 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | DOTCK_ungated                       |
+| g13       | n/a   | BUFG/O          | None       |           2 |               0 |  2 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | primary_clock_divider/inst/C5M      |
++-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+-------------------------------------+
 * Clock Loads column represents cell count of net connects that connect to a clock pin. Internal cell leaf pins are not considered
 ** Non-Clock Loads column represents cell count of non-clock pin loads
 *** Columns FF, LUTRAM, RAMB through 'Hard IP' represents load cell counts
@@ -765,13 +760,12 @@ All Modules
 31. Clock Region Cell Placement per Global Clock: Region X1Y1
 -------------------------------------------------------------
 
-+-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+---------------------------------+
-| Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF | Memory LUTs | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                             |
-+-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+---------------------------------+
-| g0        | n/a   | BUFGCTRL/O      | None       |          17 |               0 | 17 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | DOTCK                           |
-| g10       | n/a   | BUFGCTRL/O      | None       |           2 |               0 |  2 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | DOTCK_ungated                   |
-| g12       | n/a   | BUFG/O          | None       |           2 |               0 |  2 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | primary_clock_divider/inst/C16M |
-+-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+---------------------------------+
++-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+---------------------------------+
+| Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF  | Memory LUTs | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                             |
++-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+---------------------------------+
+| g0        | n/a   | BUFGCTRL/O      | None       |         429 |               0 | 429 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | DOTCK                           |
+| g12       | n/a   | BUFG/O          | None       |           2 |               0 |   2 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | primary_clock_divider/inst/C16M |
++-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+---------------------------------+
 * Clock Loads column represents cell count of net connects that connect to a clock pin. Internal cell leaf pins are not considered
 ** Non-Clock Loads column represents cell count of non-clock pin loads
 *** Columns FF, LUTRAM, RAMB through 'Hard IP' represents load cell counts
@@ -780,21 +774,20 @@ All Modules
 32. Clock Region Cell Placement per Global Clock: Region X0Y2
 -------------------------------------------------------------
 
-+-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+-------------------------------------+
-| Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF  | Memory LUTs | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                                 |
-+-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+-------------------------------------+
-| g0        | n/a   | BUFGCTRL/O      | None       |         210 |               0 | 208 |           0 |    2 |   0 |  0 |    0 |   0 |       0 | DOTCK                               |
-| g1        | n/a   | BUFG/O          | None       |           6 |               0 |   6 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | primary_clock_divider/inst/usbclk   |
-| g2        | n/a   | BUFGCTRL/O      | None       |         590 |               0 | 580 |           0 |    2 |   0 |  0 |    0 |   0 |       0 | lisa_hdmi_output/clk_pixel          |
-| g3        | n/a   | BUFG/O          | None       |         377 |               0 | 377 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | cpu_board/E_either_edge             |
-| g4        | n/a   | BUFGCTRL/O      | None       |          55 |               0 |  54 |           0 |    1 |   0 |  0 |    0 |   0 |       0 | C16M                                |
-| g5        | n/a   | BUFG/O          | None       |         147 |               0 | 146 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | primary_clock_divider/inst/COPCK_2x |
-| g6        | n/a   | BUFG/O          | None       |           1 |               0 |   1 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | _FDC_RAM_CS_processed               |
-| g7        | n/a   | BUFG/O          | None       |          24 |               0 |  24 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | lisa_hdmi_output/clk_audio          |
-| g9        | n/a   | BUFGCTRL/O      | None       |           8 |               0 |   0 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | lisa_hdmi_output/clk_pixel_x5       |
-| g11       | n/a   | BUFG/O          | None       |           1 |               0 |   1 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | dotck_generator/inst/dotck_20M      |
-| g20       | n/a   | BUFG/O          | None       |           1 |               0 |   0 |           0 |    0 |   0 |  0 |    1 |   0 |       0 | lisa_hdmi_output/clk_feedback_in    |
-+-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+-------------------------------------+
++-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+-----------------------------------+
+| Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF  | Memory LUTs | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                               |
++-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+-----------------------------------+
+| g0        | n/a   | BUFGCTRL/O      | None       |         462 |               0 | 454 |           0 |    8 |   0 |  0 |    0 |   0 |       0 | DOTCK                             |
+| g1        | n/a   | BUFG/O          | None       |         627 |               0 | 627 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | primary_clock_divider/inst/usbclk |
+| g2        | n/a   | BUFGCTRL/O      | None       |         695 |               0 | 657 |          21 |    8 |   1 |  0 |    0 |   0 |       0 | lisa_hdmi_output/clk_pixel        |
+| g3        | n/a   | BUFG/O          | None       |         295 |               0 | 295 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | cpu_board/E_either_edge           |
+| g4        | n/a   | BUFGCTRL/O      | None       |         208 |               0 | 206 |           0 |    2 |   0 |  0 |    0 |   0 |       0 | C16M                              |
+| g6        | n/a   | BUFG/O          | None       |           9 |               8 |   9 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | _FDC_RAM_CS_processed             |
+| g7        | n/a   | BUFG/O          | None       |          24 |               0 |  24 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | lisa_hdmi_output/clk_audio        |
+| g8        | n/a   | BUFGCTRL/O      | None       |          22 |               0 |  22 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | C5M                               |
+| g9        | n/a   | BUFGCTRL/O      | None       |           8 |               0 |   0 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | lisa_hdmi_output/clk_pixel_x5     |
+| g20       | n/a   | BUFG/O          | None       |           1 |               0 |   0 |           0 |    0 |   0 |  0 |    1 |   0 |       0 | lisa_hdmi_output/clk_feedback_in  |
++-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+-----------------------------------+
 * Clock Loads column represents cell count of net connects that connect to a clock pin. Internal cell leaf pins are not considered
 ** Non-Clock Loads column represents cell count of non-clock pin loads
 *** Columns FF, LUTRAM, RAMB through 'Hard IP' represents load cell counts
@@ -803,14 +796,16 @@ All Modules
 33. Clock Region Cell Placement per Global Clock: Region X1Y2
 -------------------------------------------------------------
 
-+-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+--------------------------------+
-| Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF | Memory LUTs | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                            |
-+-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+--------------------------------+
-| g2        | n/a   | BUFGCTRL/O      | None       |           2 |               0 |  2 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | lisa_hdmi_output/clk_pixel     |
-| g3        | n/a   | BUFG/O          | None       |           3 |               0 |  3 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | cpu_board/E_either_edge        |
-| g4        | n/a   | BUFGCTRL/O      | None       |           2 |               0 |  2 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | C16M                           |
-| g11       | n/a   | BUFG/O          | None       |           1 |               0 |  1 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | dotck_generator/inst/dotck_20M |
-+-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+--------------------------------+
++-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+-------------------------------------+
+| Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF  | Memory LUTs | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                                 |
++-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+-------------------------------------+
+| g0        | n/a   | BUFGCTRL/O      | None       |         782 |               0 | 779 |           0 |    2 |   0 |  0 |    0 |   0 |       0 | DOTCK                               |
+| g1        | n/a   | BUFG/O          | None       |         118 |               0 | 117 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | primary_clock_divider/inst/usbclk   |
+| g2        | n/a   | BUFGCTRL/O      | None       |           2 |               0 |   0 |           0 |    2 |   0 |  0 |    0 |   0 |       0 | lisa_hdmi_output/clk_pixel          |
+| g3        | n/a   | BUFG/O          | None       |          85 |               0 |  85 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | cpu_board/E_either_edge             |
+| g4        | n/a   | BUFGCTRL/O      | None       |          13 |               0 |  13 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | C16M                                |
+| g5        | n/a   | BUFG/O          | None       |         167 |               0 | 166 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | primary_clock_divider/inst/COPCK_2x |
++-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+-------------------------------------+
 * Clock Loads column represents cell count of net connects that connect to a clock pin. Internal cell leaf pins are not considered
 ** Non-Clock Loads column represents cell count of non-clock pin loads
 *** Columns FF, LUTRAM, RAMB through 'Hard IP' represents load cell counts
@@ -819,12 +814,12 @@ All Modules
 34. Clock Region Cell Placement per Global Clock: Region X0Y3
 -------------------------------------------------------------
 
-+-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+----------------------------------------------+
-| Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF  | Memory LUTs | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                                          |
-+-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+----------------------------------------------+
-| g1        | n/a   | BUFG/O          | None       |         739 |               0 | 738 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | primary_clock_divider/inst/usbclk            |
-| g16       | n/a   | BUFG/O          | None       |           1 |               0 |   0 |           0 |    0 |   0 |  0 |    1 |   0 |       0 | dotck_generator/inst/clkfbout_buf_dotck_mmcm |
-+-----------+-------+-----------------+------------+-------------+-----------------+-----+-------------+------+-----+----+------+-----+---------+----------------------------------------------+
++-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+----------------------------------------------+
+| Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF | Memory LUTs | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                                          |
++-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+----------------------------------------------+
+| g11       | n/a   | BUFG/O          | None       |           2 |               0 |  2 |           0 |    0 |   0 |  0 |    0 |   0 |       0 | dotck_generator/inst/dotck_20M               |
+| g16       | n/a   | BUFG/O          | None       |           1 |               0 |  0 |           0 |    0 |   0 |  0 |    1 |   0 |       0 | dotck_generator/inst/clkfbout_buf_dotck_mmcm |
++-----------+-------+-----------------+------------+-------------+-----------------+----+-------------+------+-----+----+------+-----+---------+----------------------------------------------+
 * Clock Loads column represents cell count of net connects that connect to a clock pin. Internal cell leaf pins are not considered
 ** Non-Clock Loads column represents cell count of non-clock pin loads
 *** Columns FF, LUTRAM, RAMB through 'Hard IP' represents load cell counts
@@ -864,14 +859,14 @@ set_property LOC IOB_X0Y176 [get_ports sysclk]
 #startgroup
 create_pblock {CLKAG_primary_clock_divider/inst/usbclk}
 add_cells_to_pblock [get_pblocks  {CLKAG_primary_clock_divider/inst/usbclk}] [get_cells -filter { PRIMITIVE_GROUP != I/O && IS_PRIMITIVE==1 && PRIMITIVE_LEVEL !=INTERNAL } -of_object [get_pins -filter {DIRECTION==IN} -of_objects [get_nets -hierarchical -filter {PARENT=="primary_clock_divider/inst/usbclk"}]]]
-resize_pblock [get_pblocks {CLKAG_primary_clock_divider/inst/usbclk}] -add {CLOCKREGION_X0Y2:CLOCKREGION_X0Y2 CLOCKREGION_X0Y3:CLOCKREGION_X0Y3}
+resize_pblock [get_pblocks {CLKAG_primary_clock_divider/inst/usbclk}] -add {CLOCKREGION_X0Y2:CLOCKREGION_X0Y2 CLOCKREGION_X1Y2:CLOCKREGION_X1Y2}
 #endgroup
 
 # Clock net "primary_clock_divider/inst/COPCK_2x" driven by instance "primary_clock_divider/inst/clkout3_buf" located at site "BUFGCTRL_X0Y5"
 #startgroup
 create_pblock {CLKAG_primary_clock_divider/inst/COPCK_2x}
 add_cells_to_pblock [get_pblocks  {CLKAG_primary_clock_divider/inst/COPCK_2x}] [get_cells -filter { PRIMITIVE_GROUP != I/O && IS_PRIMITIVE==1 && PRIMITIVE_LEVEL !=INTERNAL } -of_object [get_pins -filter {DIRECTION==IN} -of_objects [get_nets -hierarchical -filter {PARENT=="primary_clock_divider/inst/COPCK_2x"}]]]
-resize_pblock [get_pblocks {CLKAG_primary_clock_divider/inst/COPCK_2x}] -add {CLOCKREGION_X0Y1:CLOCKREGION_X0Y1 CLOCKREGION_X0Y2:CLOCKREGION_X0Y2}
+resize_pblock [get_pblocks {CLKAG_primary_clock_divider/inst/COPCK_2x}] -add {CLOCKREGION_X0Y1:CLOCKREGION_X0Y1 CLOCKREGION_X1Y2:CLOCKREGION_X1Y2}
 #endgroup
 
 # Clock net "primary_clock_divider/inst/C5M" driven by instance "primary_clock_divider/inst/clkout5_buf" located at site "BUFGCTRL_X0Y2"
@@ -899,7 +894,7 @@ resize_pblock [get_pblocks {CLKAG_lisa_hdmi_output/clk_pixel_x5}] -add {CLOCKREG
 #startgroup
 create_pblock {CLKAG_lisa_hdmi_output/clk_pixel}
 add_cells_to_pblock [get_pblocks  {CLKAG_lisa_hdmi_output/clk_pixel}] [get_cells -filter { PRIMITIVE_GROUP != I/O && IS_PRIMITIVE==1 && PRIMITIVE_LEVEL !=INTERNAL } -of_object [get_pins -filter {DIRECTION==IN} -of_objects [get_nets -hierarchical -filter {PARENT=="lisa_hdmi_output/clk_pixel"}]]]
-resize_pblock [get_pblocks {CLKAG_lisa_hdmi_output/clk_pixel}] -add {CLOCKREGION_X0Y0:CLOCKREGION_X0Y0 CLOCKREGION_X0Y1:CLOCKREGION_X0Y1 CLOCKREGION_X0Y2:CLOCKREGION_X0Y2 CLOCKREGION_X1Y2:CLOCKREGION_X1Y2}
+resize_pblock [get_pblocks {CLKAG_lisa_hdmi_output/clk_pixel}] -add {CLOCKREGION_X0Y1:CLOCKREGION_X0Y1 CLOCKREGION_X0Y2:CLOCKREGION_X0Y2 CLOCKREGION_X1Y2:CLOCKREGION_X1Y2}
 #endgroup
 
 # Clock net "lisa_hdmi_output/clk_audio" driven by instance "lisa_hdmi_output/buf_audio" located at site "BUFGCTRL_X0Y21"
@@ -913,7 +908,7 @@ resize_pblock [get_pblocks {CLKAG_lisa_hdmi_output/clk_audio}] -add {CLOCKREGION
 #startgroup
 create_pblock {CLKAG_dotck_generator/inst/dotck_20M}
 add_cells_to_pblock [get_pblocks  {CLKAG_dotck_generator/inst/dotck_20M}] [get_cells -filter { PRIMITIVE_GROUP != I/O && IS_PRIMITIVE==1 && PRIMITIVE_LEVEL !=INTERNAL && NAME!=dotck_mux_20M40M} -of_object [get_pins -filter {DIRECTION==IN} -of_objects [get_nets -hierarchical -filter {PARENT=="dotck_generator/inst/dotck_20M"}]]]
-resize_pblock [get_pblocks {CLKAG_dotck_generator/inst/dotck_20M}] -add {CLOCKREGION_X0Y2:CLOCKREGION_X0Y2 CLOCKREGION_X1Y2:CLOCKREGION_X1Y2}
+resize_pblock [get_pblocks {CLKAG_dotck_generator/inst/dotck_20M}] -add {CLOCKREGION_X0Y3:CLOCKREGION_X0Y3}
 #endgroup
 
 # Clock net "cpu_board/E_either_edge" driven by instance "cpu_board/E_bufg" located at site "BUFGCTRL_X0Y12"
@@ -927,33 +922,33 @@ resize_pblock [get_pblocks {CLKAG_cpu_board/E_either_edge}] -add {CLOCKREGION_X0
 #startgroup
 create_pblock {CLKAG__FDC_RAM_CS_processed}
 add_cells_to_pblock [get_pblocks  {CLKAG__FDC_RAM_CS_processed}] [get_cells -filter { PRIMITIVE_GROUP != I/O && IS_PRIMITIVE==1 && PRIMITIVE_LEVEL !=INTERNAL } -of_object [get_pins -filter {DIRECTION==IN} -of_objects [get_nets -hierarchical -filter {PARENT=="_FDC_RAM_CS_processed"}]]]
-resize_pblock [get_pblocks {CLKAG__FDC_RAM_CS_processed}] -add {CLOCKREGION_X0Y1:CLOCKREGION_X0Y1 CLOCKREGION_X0Y2:CLOCKREGION_X0Y2}
+resize_pblock [get_pblocks {CLKAG__FDC_RAM_CS_processed}] -add {CLOCKREGION_X0Y2:CLOCKREGION_X0Y2}
 #endgroup
 
 # Clock net "DOTCK_ungated" driven by instance "dotck_final_mux" located at site "BUFGCTRL_X0Y20"
 #startgroup
 create_pblock {CLKAG_DOTCK_ungated}
 add_cells_to_pblock [get_pblocks  {CLKAG_DOTCK_ungated}] [get_cells -filter { PRIMITIVE_GROUP != I/O && IS_PRIMITIVE==1 && PRIMITIVE_LEVEL !=INTERNAL && NAME!=DOTCK_bufg} -of_object [get_pins -filter {DIRECTION==IN} -of_objects [get_nets -hierarchical -filter {PARENT=="DOTCK_ungated"}]]]
-resize_pblock [get_pblocks {CLKAG_DOTCK_ungated}] -add {CLOCKREGION_X0Y1:CLOCKREGION_X0Y1 CLOCKREGION_X1Y1:CLOCKREGION_X1Y1}
+resize_pblock [get_pblocks {CLKAG_DOTCK_ungated}] -add {CLOCKREGION_X0Y1:CLOCKREGION_X0Y1}
 #endgroup
 
 # Clock net "DOTCK" driven by instance "DOTCK_bufg" located at site "BUFGCTRL_X0Y19"
 #startgroup
 create_pblock {CLKAG_DOTCK}
 add_cells_to_pblock [get_pblocks  {CLKAG_DOTCK}] [get_cells -filter { PRIMITIVE_GROUP != I/O && IS_PRIMITIVE==1 && PRIMITIVE_LEVEL !=INTERNAL } -of_object [get_pins -filter {DIRECTION==IN} -of_objects [get_nets -hierarchical -filter {PARENT=="DOTCK"}]]]
-resize_pblock [get_pblocks {CLKAG_DOTCK}] -add {CLOCKREGION_X0Y0:CLOCKREGION_X0Y0 CLOCKREGION_X0Y1:CLOCKREGION_X0Y1 CLOCKREGION_X0Y2:CLOCKREGION_X0Y2 CLOCKREGION_X1Y1:CLOCKREGION_X1Y1}
+resize_pblock [get_pblocks {CLKAG_DOTCK}] -add {CLOCKREGION_X0Y1:CLOCKREGION_X0Y1 CLOCKREGION_X0Y2:CLOCKREGION_X0Y2 CLOCKREGION_X1Y1:CLOCKREGION_X1Y1 CLOCKREGION_X1Y2:CLOCKREGION_X1Y2}
 #endgroup
 
 # Clock net "C5M" driven by instance "C5M_bufg" located at site "BUFGCTRL_X0Y3"
 #startgroup
 create_pblock {CLKAG_C5M}
 add_cells_to_pblock [get_pblocks  {CLKAG_C5M}] [get_cells -filter { PRIMITIVE_GROUP != I/O && IS_PRIMITIVE==1 && PRIMITIVE_LEVEL !=INTERNAL } -of_object [get_pins -filter {DIRECTION==IN} -of_objects [get_nets -hierarchical -filter {PARENT=="C5M"}]]]
-resize_pblock [get_pblocks {CLKAG_C5M}] -add {CLOCKREGION_X0Y1:CLOCKREGION_X0Y1}
+resize_pblock [get_pblocks {CLKAG_C5M}] -add {CLOCKREGION_X0Y2:CLOCKREGION_X0Y2}
 #endgroup
 
 # Clock net "C16M" driven by instance "C16M_bufg" located at site "BUFGCTRL_X0Y1"
 #startgroup
 create_pblock {CLKAG_C16M}
 add_cells_to_pblock [get_pblocks  {CLKAG_C16M}] [get_cells -filter { PRIMITIVE_GROUP != I/O && IS_PRIMITIVE==1 && PRIMITIVE_LEVEL !=INTERNAL } -of_object [get_pins -filter {DIRECTION==IN} -of_objects [get_nets -hierarchical -filter {PARENT=="C16M"}]]]
-resize_pblock [get_pblocks {CLKAG_C16M}] -add {CLOCKREGION_X0Y1:CLOCKREGION_X0Y1 CLOCKREGION_X0Y2:CLOCKREGION_X0Y2 CLOCKREGION_X1Y2:CLOCKREGION_X1Y2}
+resize_pblock [get_pblocks {CLKAG_C16M}] -add {CLOCKREGION_X0Y2:CLOCKREGION_X0Y2 CLOCKREGION_X1Y2:CLOCKREGION_X1Y2}
 #endgroup

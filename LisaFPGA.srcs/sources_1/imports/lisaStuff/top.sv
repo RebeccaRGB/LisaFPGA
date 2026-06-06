@@ -29,6 +29,7 @@ module top(
         output logic [5:0] CONT,
         input logic INVID,
         input logic SCANLINES,
+        input logic FRAMERATE_SEL,
 
         output logic TONE,
         output logic [2:0] VC,
@@ -165,6 +166,14 @@ module top(
     assign INTERNAL_SCC_EN = 1'b1;
     // Stick something random on the GPIO pins for now
     //assign GPIO = {_VSYNC, _HSYNC, VID, TONE, LEFT_ESFLOPPY, OK_ESFLOPPY};
+
+    // Pass the LEFT, OK, and RIGHT signals from the ESFloppy control buttons straight back out to the ESP32 again
+    // Just pick three of the ESFLOPPY_COMM_BUS lines for this
+    assign ESFLOPPY_COMM_BUS[0] = LEFT_ESFLOPPY;
+    assign ESFLOPPY_COMM_BUS[1] = OK_ESFLOPPY;
+    assign ESFLOPPY_COMM_BUS[2] = RIGHT_ESFLOPPY;
+    // Set the rest of the comm bus to a defined state
+    assign ESFLOPPY_COMM_BUS[5:3] = 3'b000;
 
     logic _SL0;
     logic _SH0;
@@ -445,6 +454,42 @@ module top(
         _RSTSW_int <= _RSTSW & ~(ON & ~ON_prev); // Detect the rising edge of ON and use that plus the reset switch to reset the system
     end
 
+    // We also need to do some stuff with the _PWRSW signal to address a bug in the original Lisa system
+    // On the original Lisa, if you held the power button down for too long when trying to turn on, you'd get an Error 52
+    // So the simple fix here is to detect the falling edge of _PWRSW and just assert the power signal for a brief period after that occurs
+    // As opposed to the entire time that _PWRSW is low
+
+    // First, synchronize the _PWRSW signal to the COPCK domain
+    (* ASYNC_REG = "TRUE" *) logic _PWRSW_int, _PWRSW_sync;
+    always_ff @(posedge COPCK_2x) begin
+        _PWRSW_int <= _PWRSW;
+        _PWRSW_sync <= _PWRSW_int;
+    end
+    // Now detect the falling edge of the synchronized version of _PWRSW
+    logic _PWRSW_sync_prev;
+    always_ff @(posedge COPCK_2x) begin
+        _PWRSW_sync_prev <= _PWRSW_sync;
+    end
+    // And now generate a pulse whenever we see a falling edge on _PWRSW_sync
+    logic _PWRSW_falling;
+    logic [15:0] _PWRSW_pulse_counter; // We want the pulse to last a little more than just 1 clock, so make a counter to allow this
+    always_ff @(posedge COPCK_2x) begin
+        if (_PWRSW_sync_prev && !_PWRSW_sync) begin
+            _PWRSW_falling <= 1'b0; // If we see a falling edge, start the pulse
+            _PWRSW_pulse_counter <= 16'h0; // Reset the counter at the start of the pulse just in case it's not already reset
+        end else if (!_PWRSW_falling) begin
+            // We end up here if we're in the middle of a pulse
+            if (_PWRSW_pulse_counter == 16'hFFFF) begin
+                _PWRSW_falling <= 1'b1; // If a (rather arbitrary) FFFF clock cycles have passed, end the pulse
+            end else begin
+                _PWRSW_pulse_counter <= _PWRSW_pulse_counter + 1; // Otherwise, increment the counter and keep going
+            end
+        end else begin
+            _PWRSW_pulse_counter <= 16'h0; //If we're not in a pulse, make sure the counter is reset
+            _PWRSW_falling <= 1'b1; // And make sure the falling signal is deasserted
+        end
+    end
+
     // We need a version of _RSTSW_int synchronized into the DOTCK domain for the CPU board, so do that now
     (* ASYNC_REG = "TRUE" *) logic _RSTSW_dotck_int, _RSTSW_dotck;
     always_ff @(posedge DOTCK_ungated) begin
@@ -476,7 +521,7 @@ module top(
             .sysclk(sysclk_ibuf),
             ._reset(_RESET),
             .DOTCK(DOTCK),
-            .framerate_sel(GPIO[0]), // 0 for 1080p30, 1 for 1080p60
+            .framerate_sel(FRAMERATE_SEL), // 0 for 1080p30, 1 for 1080p60
             .VA_overflow(VA_overflow), // Replaces VSYNC; better reflects the VSYNC time which is actually longer than _VSYNC
             ._clr_vid_clk(_clr_vid_clk), // Replaces _HSYNC; better reflects the HSYNC time which is actually shorter than _HSYNC
             .VID(VID_int),
@@ -693,9 +738,6 @@ module top(
 
     // The floppy drive signals come from either the onboard ESFloppy or an external floppy drive
     // This depends on the FLOPPY_SRC signal, so we need to mux between them
-
-    // Set the ESFloppy comms bus to a random value for now
-    assign ESFLOPPY_COMM_BUS = 6'h55;
 
     // First generate the Sony drive's PWM motor control signal
     // It's derived from MT0, but processed through the Lite Adapter
@@ -1211,7 +1253,7 @@ module top(
         ._CRES_out(_CRES_out),
         ._NMI(_NMI_IO),
         .NMI_OE(NMI_OE_IO),
-        ._PWRSW(_PWRSW),
+        ._PWRSW(_PWRSW_falling),
         .ON(ON),
 
         .sysclk(sysclk_ibuf),
@@ -1235,7 +1277,7 @@ module top(
         .SCC_DOUT(SCC_DOUT),
         .SCC_DIN(SCC_DIN),
         .IO_ROM_SEL(IO_ROM_SEL),
-        .spoof_88(GPIO[1])
+        .spoof_88(GPIO[0])
     );
 
 

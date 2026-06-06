@@ -58,6 +58,7 @@ if {$::dispatch::connected} {
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 4
 set_param xicom.use_bs_reader 1
+set_param tcl.collectionResultDisplayLimit 0
 set_param general.usePosixSpawnForFork 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tcsg324-2
@@ -75,6 +76,12 @@ set_property ip_output_repo /home/alexthecat123/LisaFPGA/LisaFPGA.cache/ip [curr
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
+read_verilog {
+  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/Downloads/logic.inc
+  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/Downloads/chip_6502_nodes.inc
+}
+set_property file_type "Verilog Header" [get_files /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/Downloads/logic.inc]
+set_property file_type "Verilog Header" [get_files /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/Downloads/chip_6502_nodes.inc]
 read_mem {
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/fx68k-master/microrom.mem
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/fx68k-master/nanorom.mem
@@ -90,6 +97,7 @@ read_mem {
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host_rom.mem
 }
 read_verilog -library xil_defaultlib -sv {
+  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/AM9512_FPU.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/HDMI_Interface.sv
@@ -100,6 +108,9 @@ read_verilog -library xil_defaultlib -sv {
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/Lite_Adapter.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/MMU_RAM_2148.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/PROM_6309.sv
+  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/RAM_4164.sv
+  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/RAM_matrix.sv
+  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/SDRAM_Controller_Banked.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/SDRAM_Controller_Flat.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/addressable_latch_LS259.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/hdmi/audio_clock_regeneration_packet.sv
@@ -114,6 +125,7 @@ read_verilog -library xil_defaultlib -sv {
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/fx68k-master/fx68kAlu.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/hdmi/hdmi.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/mem_board_2mb.sv
+  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/mem_board_512k.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/hdmi/packet_assembler.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/hdmi/packet_picker.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/parity_generator_LS280.sv
@@ -123,16 +135,19 @@ read_verilog -library xil_defaultlib -sv {
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/fx68k-master/uaddrPla.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/new/usb_keyboard_interface.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/new/usb_mouse_interface.sv
-  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv
 }
 read_verilog -library xil_defaultlib {
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/6502/6502.v
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/6502/ALU.v
+  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/rxuart.v
+  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v
+  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/txuart.v
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host_rom.v
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/via6522.v
 }
 read_vhdl -library xil_defaultlib {
+  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/t400/t410_rom-e.vhd
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/t400/generic_ram_ena.vhd
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/t400/t400_pack-p.vhd
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/t400/t400_opt_pack-p.vhd

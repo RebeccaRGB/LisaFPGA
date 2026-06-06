@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-2" LaunchTime="1779127371" LaunchWriteIncrSynthDcp="true">
+<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-2" LaunchTime="1780777172" LaunchWriteIncrSynthDcp="true">
   <File Type="VDS-TIMINGSUMMARY" Name="top_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="top.dcp"/>
   <File Type="RDS-UTIL-PB" Name="top_utilization_synth.pb"/>
@@ -29,7 +29,6 @@
     </File>
     <File Path="$PSRCDIR/sources_1/imports/t400/t410_rom-e.vhd">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/t400/t410_rom-e.vhd"/>
         <Attr Name="ImportTime" Val="1675028780"/>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -49,74 +48,6 @@
         <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/ROMs/P6A.mem"/>
         <Attr Name="ImportTime" Val="1758674989"/>
         <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/imports/scc/rxuart.v">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/scc/rxuart.v"/>
-        <Attr Name="ImportTime" Val="1758755407"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/imports/scc/scc.v">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/scc/scc.v"/>
-        <Attr Name="ImportTime" Val="1759550622"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/imports/scc/txuart.v">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/scc/txuart.v"/>
-        <Attr Name="ImportTime" Val="1759549457"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/SDRAM_Controller_Banked.sv">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/imports/lisaStuff/mem_board_512k.sv">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/mem_board_512k.sv"/>
-        <Attr Name="ImportTime" Val="1759467044"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/imports/lisaStuff/RAM_4164.sv">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/RAM_4164.sv"/>
-        <Attr Name="ImportTime" Val="1759184266"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/imports/lisaStuff/RAM_matrix.sv">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/RAM_matrix.sv"/>
-        <Attr Name="ImportTime" Val="1760375409"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
@@ -186,7 +117,6 @@
     </File>
     <File Path="$PSRCDIR/sources_1/imports/Downloads/logic.inc">
       <FileInfo SFType="VHeader">
-        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="ImportPath" Val="$PPRDIR/../Downloads/logic.inc"/>
         <Attr Name="ImportTime" Val="1768971151"/>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -196,12 +126,20 @@
     </File>
     <File Path="$PSRCDIR/sources_1/imports/Downloads/chip_6502_nodes.inc">
       <FileInfo SFType="VHeader">
-        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="ImportPath" Val="$PPRDIR/../Downloads/chip_6502_nodes.inc"/>
         <Attr Name="ImportTime" Val="1768971160"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
         <Attr Name="IsVisible" Val="1"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/lisaStuff/top.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/top.sv"/>
+        <Attr Name="ImportTime" Val="1760483406"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/imports/6502/6502.v">
@@ -217,6 +155,33 @@
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/6502/ALU.v"/>
         <Attr Name="ImportTime" Val="1759558287"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/scc/rxuart.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/scc/rxuart.v"/>
+        <Attr Name="ImportTime" Val="1758755407"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/scc/scc.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/scc/scc.v"/>
+        <Attr Name="ImportTime" Val="1759550622"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/scc/txuart.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/scc/txuart.v"/>
+        <Attr Name="ImportTime" Val="1759549457"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -339,6 +304,31 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/imports/lisaStuff/RAM_4164.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/RAM_4164.sv"/>
+        <Attr Name="ImportTime" Val="1759184266"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/lisaStuff/RAM_matrix.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/RAM_matrix.sv"/>
+        <Attr Name="ImportTime" Val="1760375409"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/SDRAM_Controller_Banked.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/new/SDRAM_Controller_Flat.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -456,6 +446,15 @@
     </File>
     <File Path="$PSRCDIR/sources_1/new/mem_board_2mb.sv">
       <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/lisaStuff/mem_board_512k.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/mem_board_512k.sv"/>
+        <Attr Name="ImportTime" Val="1759467044"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -731,15 +730,6 @@
         <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/t400/t420_notri.vhd"/>
         <Attr Name="ImportTime" Val="1758950655"/>
         <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/imports/lisaStuff/top.sv">
-      <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/top.sv"/>
-        <Attr Name="ImportTime" Val="1760483406"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>

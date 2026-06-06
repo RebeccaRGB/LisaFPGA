@@ -178,6 +178,13 @@ if ! arduino-cli lib list 2>/dev/null | grep -q "^SDFat"; then
 fi
 ok "SDFat: $(arduino-cli lib list 2>/dev/null | grep '^SDFat' | awk '{print $1, $2}')"
 
+# Adafruit SH110X library (required by ESFloppy)
+if ! arduino-cli lib list 2>/dev/null | grep -q "^Adafruit SH110X"; then
+    info "Installing Adafruit SH110X Arduino library..."
+    arduino-cli lib install "Adafruit SH110X"
+fi
+ok "Adafruit SH110X: $(arduino-cli lib list 2>/dev/null | grep '^Adafruit SH110X' | awk '{print $1, $2}')"
+
 # openFPGALoader
 if ! command -v openFPGALoader &>/dev/null; then
     case "$PLATFORM" in
@@ -682,7 +689,7 @@ sleep 3
 # ═══════════════════════════════════════════════════════════════════════════════
 step "Get ESFloppy Firmware"
 
-ESFLOPPY_DIR="$SCRIPT_DIR/ESFloppy"
+ESFLOPPY_DIR="$SCRIPT_DIR/ESFloppy_stub" # Change this line back to ESFloppy once it's working
 # Comment these lines back in once ESFloppy is working!
 #if [[ -d "$ESFLOPPY_DIR/.git" ]]; then
 #    info "ESFloppy repo already exists locally, pulling latest..."
@@ -692,8 +699,8 @@ ESFLOPPY_DIR="$SCRIPT_DIR/ESFloppy"
 #    git clone https://github.com/alexthecat123/ESFloppy.git "$ESFLOPPY_DIR"
 #fi
 
-ESFLOPPY_INO_DIR="$ESFLOPPY_DIR/ESFloppy"
-ESFLOPPY_INO="$ESFLOPPY_INO_DIR/ESFloppy.ino"
+ESFLOPPY_INO_DIR="$ESFLOPPY_DIR/ESFloppy_stub" # Same for these; change back to ESFloppy/ESFloppy.ino once it's working
+ESFLOPPY_INO="$ESFLOPPY_INO_DIR/ESFloppy_stub.ino"
 
 # ESFloppy uses the same LisaFPGA/standalone pattern
 if [[ -f "$ESFLOPPY_INO" ]]; then

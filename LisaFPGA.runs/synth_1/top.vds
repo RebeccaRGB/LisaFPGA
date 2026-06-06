@@ -3,8 +3,8 @@
 # SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Mon May 18 14:02:53 2026
-# Process ID         : 1654387
+# Start of session at: Sat Jun  6 15:13:37 2026
+# Process ID         : 859105
 # Current directory  : /home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1
 # Command line       : vivado -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
 # Log file           : /home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/top.vds
@@ -13,13 +13,13 @@
 # Platform           : Linuxmint
 # Operating System   : Linux Mint 22.1
 # Processor Detail   : AMD Ryzen 7 7745HX with Radeon Graphics
-# CPU Frequency      : 4852.206 MHz
+# CPU Frequency      : 4855.646 MHz
 # CPU Physical cores : 8
 # CPU Logical cores  : 16
 # Host memory        : 32787 MB
 # Swap memory        : 8589 MB
 # Total Virtual      : 41377 MB
-# Available Virtual  : 20465 MB
+# Available Virtual  : 21797 MB
 #-----------------------------------------------------------
 source top.tcl -notrace
 Command: synth_design -top top -part xc7a100tcsg324-2
@@ -29,20 +29,33 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100
 INFO: [Device 21-403] Loading part xc7a100tcsg324-2
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 7 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 1654795
+INFO: [Synth 8-7075] Helper process launched with PID 859476
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2222.691 ; gain = 483.363 ; free physical = 5571 ; free virtual = 18366
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2223.020 ; gain = 481.875 ; free physical = 7053 ; free virtual = 19542
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-11241] undeclared symbol 'C4M', assumed default net type 'wire' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1061]
 WARNING: [Synth 8-6901] identifier '_CAS_sdram' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/mem_board_2mb.sv:210]
 WARNING: [Synth 8-6901] identifier '_RAS_sdram' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/mem_board_2mb.sv:210]
 WARNING: [Synth 8-6901] identifier '_CAS_sdram' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/mem_board_2mb.sv:224]
 WARNING: [Synth 8-6901] identifier '_RAS_sdram' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/mem_board_2mb.sv:224]
-WARNING: [Synth 8-10929] literal value 'h55 truncated to fit in 6 bits [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:698]
+WARNING: [Synth 8-6901] identifier 'disable_parity' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/mem_board_512k.sv:242]
+WARNING: [Synth 8-6901] identifier 'disable_parity' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/mem_board_512k.sv:243]
 WARNING: [Synth 8-6901] identifier 'SEL_A' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/6502/6502.v:80]
 WARNING: [Synth 8-6901] identifier 'SEL_X' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/6502/6502.v:81]
 WARNING: [Synth 8-6901] identifier 'SEL_Y' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/6502/6502.v:82]
 WARNING: [Synth 8-6901] identifier 'SEL_S' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/6502/6502.v:83]
+INFO: [Synth 8-11241] undeclared symbol 'break_a', assumed default net type 'wire' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:851]
+INFO: [Synth 8-11241] undeclared symbol 'parity_err_a', assumed default net type 'wire' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:852]
+INFO: [Synth 8-11241] undeclared symbol 'frame_err_a', assumed default net type 'wire' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:853]
+WARNING: [Synth 8-6901] identifier 'rx_wr_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:163]
+WARNING: [Synth 8-6901] identifier 'tx_busy_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:167]
+WARNING: [Synth 8-6901] identifier 'cts_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:520]
+WARNING: [Synth 8-6901] identifier 'tx_busy_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:524]
+WARNING: [Synth 8-6901] identifier 'tx_busy_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:546]
+WARNING: [Synth 8-6901] identifier 'tx_busy_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:644]
+WARNING: [Synth 8-6901] identifier 'tx_busy_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:647]
+WARNING: [Synth 8-6901] identifier 'cts_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:706]
+WARNING: [Synth 8-6901] identifier 'cts_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:768]
 WARNING: [Synth 8-6901] identifier 'dmi' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v:220]
 WARNING: [Synth 8-6901] identifier 'dpi' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v:222]
 WARNING: [Synth 8-6901] identifier 'dmi' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v:222]
@@ -68,23 +81,23 @@ INFO: [Synth 8-6157] synthesizing module 'IOBUF' [/tools/Xilinx/2025.2/Vivado/sc
 INFO: [Synth 8-6155] done synthesizing module 'IOBUF' (0#1) [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:87566]
 INFO: [Synth 8-6157] synthesizing module 'IBUF' [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:82804]
 INFO: [Synth 8-6155] done synthesizing module 'IBUF' (0#1) [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:82804]
-INFO: [Synth 8-6157] synthesizing module 'clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-1654387-alex-cattop/realtime/clock_divider_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'clock_divider' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-1654387-alex-cattop/realtime/clock_divider_stub.v:6]
-WARNING: [Synth 8-7071] port 'lisa_dotck' of module 'clock_divider' is unconnected for instance 'primary_clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:284]
-WARNING: [Synth 8-7071] port 'reset' of module 'clock_divider' is unconnected for instance 'primary_clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:284]
-WARNING: [Synth 8-7023] instance 'primary_clock_divider' of module 'clock_divider' has 8 connections declared, but only 6 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:284]
-INFO: [Synth 8-6157] synthesizing module 'dotck_mmcm' [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-1654387-alex-cattop/realtime/dotck_mmcm_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'dotck_mmcm' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-1654387-alex-cattop/realtime/dotck_mmcm_stub.v:6]
-WARNING: [Synth 8-7071] port 'reset' of module 'dotck_mmcm' is unconnected for instance 'dotck_generator' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:302]
-WARNING: [Synth 8-7023] instance 'dotck_generator' of module 'dotck_mmcm' has 6 connections declared, but only 5 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:302]
+INFO: [Synth 8-6157] synthesizing module 'clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-859105-alex-cattop/realtime/clock_divider_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'clock_divider' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-859105-alex-cattop/realtime/clock_divider_stub.v:6]
+WARNING: [Synth 8-7071] port 'lisa_dotck' of module 'clock_divider' is unconnected for instance 'primary_clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:293]
+WARNING: [Synth 8-7071] port 'reset' of module 'clock_divider' is unconnected for instance 'primary_clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:293]
+WARNING: [Synth 8-7023] instance 'primary_clock_divider' of module 'clock_divider' has 8 connections declared, but only 6 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:293]
+INFO: [Synth 8-6157] synthesizing module 'dotck_mmcm' [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-859105-alex-cattop/realtime/dotck_mmcm_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'dotck_mmcm' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-859105-alex-cattop/realtime/dotck_mmcm_stub.v:6]
+WARNING: [Synth 8-7071] port 'reset' of module 'dotck_mmcm' is unconnected for instance 'dotck_generator' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:311]
+WARNING: [Synth 8-7023] instance 'dotck_generator' of module 'dotck_mmcm' has 6 connections declared, but only 5 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:311]
 INFO: [Synth 8-6157] synthesizing module 'BUFGMUX' [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2779]
 	Parameter CLK_SEL_TYPE bound to: SYNC - type: string 
 INFO: [Synth 8-6155] done synthesizing module 'BUFGMUX' (0#1) [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2779]
 INFO: [Synth 8-6157] synthesizing module 'BUFGCE' [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2688]
 INFO: [Synth 8-6155] done synthesizing module 'BUFGCE' (0#1) [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2688]
 INFO: [Synth 8-6157] synthesizing module 'HDMI_Interface' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/HDMI_Interface.sv:23]
-INFO: [Synth 8-6157] synthesizing module 'hdmi_clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-1654387-alex-cattop/realtime/hdmi_clock_divider_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'hdmi_clock_divider' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-1654387-alex-cattop/realtime/hdmi_clock_divider_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'hdmi_clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-859105-alex-cattop/realtime/hdmi_clock_divider_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'hdmi_clock_divider' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-859105-alex-cattop/realtime/hdmi_clock_divider_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'BUFG' [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2678]
 INFO: [Synth 8-6155] done synthesizing module 'BUFG' (0#1) [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2678]
 INFO: [Synth 8-6157] synthesizing module 'BUFGMUX__parameterized0' [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2779]
@@ -356,38 +369,38 @@ INFO: [Synth 8-155] case statement is not full and has no default [/home/alexthe
 INFO: [Synth 8-155] case statement is not full and has no default [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v:92]
 INFO: [Synth 8-155] case statement is not full and has no default [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v:106]
 INFO: [Synth 8-6155] done synthesizing module 'usb_hid_host' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v:12]
-WARNING: [Synth 8-7071] port 'conerr' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'key2' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'key3' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'key4' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'game_l' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'game_r' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'game_u' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'game_d' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'game_a' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'game_b' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'game_x' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'game_y' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'game_sel' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'game_sta' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'dbg_hid_report' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7023] instance 'usb_port0' of module 'usb_hid_host' has 29 connections declared, but only 14 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:831]
-WARNING: [Synth 8-7071] port 'conerr' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'key2' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'key3' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'key4' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'game_l' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'game_r' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'game_u' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'game_d' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'game_a' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'game_b' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'game_x' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'game_y' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'game_sel' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'game_sta' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7071] port 'dbg_hid_report' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
-WARNING: [Synth 8-7023] instance 'usb_port1' of module 'usb_hid_host' has 29 connections declared, but only 14 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:885]
+WARNING: [Synth 8-7071] port 'conerr' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'key2' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'key3' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'key4' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'game_l' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'game_r' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'game_u' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'game_d' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'game_a' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'game_b' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'game_x' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'game_y' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'game_sel' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'game_sta' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'dbg_hid_report' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7023] instance 'usb_port0' of module 'usb_hid_host' has 29 connections declared, but only 14 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
+WARNING: [Synth 8-7071] port 'conerr' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'key2' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'key3' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'key4' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'game_l' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'game_r' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'game_u' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'game_d' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'game_a' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'game_b' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'game_x' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'game_y' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'game_sel' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'game_sta' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'dbg_hid_report' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7023] instance 'usb_port1' of module 'usb_hid_host' has 29 connections declared, but only 14 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
 INFO: [Synth 8-6157] synthesizing module 'usb_mouse_interface' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/new/usb_mouse_interface.sv:23]
 INFO: [Synth 8-6155] done synthesizing module 'usb_mouse_interface' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/new/usb_mouse_interface.sv:23]
 INFO: [Synth 8-6157] synthesizing module 'usb_keyboard_interface' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/new/usb_keyboard_interface.sv:23]
@@ -662,7 +675,7 @@ Reason is one or more of the following :
 	3: Invalid write to RAM. 
 	4: No valid clock found for write to RAM. 
 WARNING: [Synth 8-6014] Unused sequential element dataOe_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/fx68k-master/fx68k.sv:2393]
-INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'cpu_board'. This will prevent further optimization [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:503]
+INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'cpu_board'. This will prevent further optimization [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:548]
 INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'M68K'. This will prevent further optimization [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:1354]
 INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'CPU_board_decoder_2'. This will prevent further optimization [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:1011]
 INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'high_MMU_RAM'. This will prevent further optimization [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:623]
@@ -714,11 +727,8 @@ WARNING: [Synth 8-6014] Unused sequential element LBDSL_readop_prev_reg was remo
 WARNING: [Synth 8-6014] Unused sequential element _CAS_prev_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/mem_board_2mb.sv:191]
 WARNING: [Synth 8-3917] design top has port INTERNAL_SCC_EN driven by constant 1
 WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[5] driven by constant 0
-WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[4] driven by constant 1
+WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[4] driven by constant 0
 WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[3] driven by constant 0
-WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[2] driven by constant 1
-WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[1] driven by constant 0
-WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[0] driven by constant 1
 WARNING: [Synth 8-3917] design top has port ESPROFILE_COMM_BUS[2] driven by constant 1
 WARNING: [Synth 8-3917] design top has port ESPROFILE_COMM_BUS[1] driven by constant 0
 WARNING: [Synth 8-3917] design top has port ESPROFILE_COMM_BUS[0] driven by constant 1
@@ -824,18 +834,18 @@ WARNING: [Synth 8-7129] Port Irdecod[ryIsDt] in module nDecoder3 is either uncon
 WARNING: [Synth 8-7129] Port Irdecod[rxIsUsp] in module nDecoder3 is either unconnected or has no load
 INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2516.199 ; gain = 776.871 ; free physical = 5354 ; free virtual = 18157
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2517.527 ; gain = 776.383 ; free physical = 6733 ; free virtual = 19227
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2516.199 ; gain = 776.871 ; free physical = 5354 ; free virtual = 18156
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2517.527 ; gain = 776.383 ; free physical = 6732 ; free virtual = 19227
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2516.199 ; gain = 776.871 ; free physical = 5354 ; free virtual = 18156
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2517.527 ; gain = 776.383 ; free physical = 6732 ; free virtual = 19227
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00.13 ; elapsed = 00:00:00.12 . Memory (MB): peak = 2516.199 ; gain = 0.000 ; free physical = 5352 ; free virtual = 18154
+Netlist sorting complete. Time (s): cpu = 00:00:00.12 ; elapsed = 00:00:00.12 . Memory (MB): peak = 2517.527 ; gain = 0.000 ; free physical = 6740 ; free virtual = 19235
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'C16M_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'C5M_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'DOTCK_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
@@ -844,6 +854,9 @@ INFO: [Netlist 29-17] Analyzing 60 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 WARNING: [Netlist 29-1115] Found multi-term driver net: <const0>.
 WARNING: [Netlist 29-1115] Found multi-term driver net: <const1>.
+WARNING: [Netlist 29-1115] Found multi-term driver net: LEFT_ESFLOPPY.
+WARNING: [Netlist 29-1115] Found multi-term driver net: OK_ESFLOPPY.
+WARNING: [Netlist 29-1115] Found multi-term driver net: RIGHT_ESFLOPPY.
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -901,29 +914,29 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2613.000 ; gain = 0.000 ; free physical = 5342 ; free virtual = 18155
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2606.328 ; gain = 0.000 ; free physical = 6746 ; free virtual = 19241
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 56 instances were transformed.
   BUFGCE => BUFGCTRL: 4 instances
   BUFGMUX => BUFGCTRL (inverted pins: CE0): 5 instances
   IOBUF => IOBUF (IBUF, OBUFT): 47 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.04 . Memory (MB): peak = 2613.035 ; gain = 0.000 ; free physical = 5342 ; free virtual = 18154
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 2606.363 ; gain = 0.000 ; free physical = 6746 ; free virtual = 19240
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2613.035 ; gain = 873.707 ; free physical = 5342 ; free virtual = 18155
+Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2606.363 ; gain = 865.219 ; free physical = 6741 ; free virtual = 19236
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tcsg324-2
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2621.004 ; gain = 881.676 ; free physical = 5341 ; free virtual = 18154
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2614.332 ; gain = 873.188 ; free physical = 6741 ; free virtual = 19236
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2621.004 ; gain = 881.676 ; free physical = 5341 ; free virtual = 18154
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2614.332 ; gain = 873.188 ; free physical = 6741 ; free virtual = 19236
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'busPhase_reg' in module 'busControl'
 INFO: [Synth 8-802] inferred FSM for state register 'dmaPhase_reg' in module 'busArbiter'
@@ -1113,7 +1126,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'res_state_q_reg' using enc
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'si_flt_q_reg' using encoding 'sequential' in module 't400_sio'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 2621.004 ; gain = 881.676 ; free physical = 5333 ; free virtual = 18152
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 2614.332 ; gain = 873.188 ; free physical = 6791 ; free virtual = 19292
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -1176,7 +1189,7 @@ Detailed RTL Component Info :
 	                4 Bit    Registers := 38    
 	                3 Bit    Registers := 25    
 	                2 Bit    Registers := 19    
-	                1 Bit    Registers := 455   
+	                1 Bit    Registers := 459   
 +---RAMs : 
 	             257K Bit	(33000 X 8 bit)          RAMs := 1     
 	               4K Bit	(1024 X 4 bit)          RAMs := 2     
@@ -1257,7 +1270,7 @@ Detailed RTL Component Info :
 	   4 Input    2 Bit        Muxes := 10    
 	   7 Input    2 Bit        Muxes := 2     
 	   8 Input    2 Bit        Muxes := 1     
-	   2 Input    1 Bit        Muxes := 522   
+	   2 Input    1 Bit        Muxes := 523   
 	   5 Input    1 Bit        Muxes := 4     
 	   6 Input    1 Bit        Muxes := 7     
 	   8 Input    1 Bit        Muxes := 19    
@@ -1295,11 +1308,8 @@ DSP Report: operator word_index0 is absorbed into DSP word_index_reg.
 DSP Report: operator word_index_int0 is absorbed into DSP word_index_reg.
 WARNING: [Synth 8-3917] design top has port INTERNAL_SCC_EN driven by constant 1
 WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[5] driven by constant 0
-WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[4] driven by constant 1
+WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[4] driven by constant 0
 WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[3] driven by constant 0
-WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[2] driven by constant 1
-WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[1] driven by constant 0
-WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[0] driven by constant 1
 WARNING: [Synth 8-3917] design top has port ESPROFILE_COMM_BUS[2] driven by constant 1
 WARNING: [Synth 8-3917] design top has port ESPROFILE_COMM_BUS[1] driven by constant 0
 WARNING: [Synth 8-3917] design top has port ESPROFILE_COMM_BUS[0] driven by constant 1
@@ -1383,6 +1393,12 @@ WARNING: [Synth 8-3917] design packet_picker__GB0 has port sub[3][3] driven by c
 WARNING: [Synth 8-3917] design packet_picker__GB0 has port sub[3][2] driven by constant 0
 WARNING: [Synth 8-3917] design packet_picker__GB0 has port sub[3][1] driven by constant 0
 WARNING: [Synth 8-3917] design packet_picker__GB0 has port sub[3][0] driven by constant 0
+WARNING: [Synth 8-3917] design packet_picker__GB0 has port sub[2][55] driven by constant 0
+WARNING: [Synth 8-3917] design packet_picker__GB0 has port sub[2][54] driven by constant 0
+WARNING: [Synth 8-3917] design packet_picker__GB0 has port sub[2][53] driven by constant 0
+WARNING: [Synth 8-3917] design packet_picker__GB0 has port sub[2][52] driven by constant 0
+WARNING: [Synth 8-3917] design packet_picker__GB0 has port sub[2][51] driven by constant 0
+WARNING: [Synth 8-3917] design packet_picker__GB0 has port sub[2][50] driven by constant 0
 INFO: [Common 17-14] Message 'Synth 8-3917' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 INFO: [Common 17-14] Message 'Synth 8-3917' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 INFO: [Synth 8-3886] merging instance 'packet_type_reg[3]' (FDRE) to 'packet_type_reg[4]'
@@ -1549,7 +1565,7 @@ INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/
 WARNING: [Synth 8-3332] Sequential element (reset_b/FSM_sequential_res_state_q_reg[1]) is unused and will be removed from module t400_core.
 WARNING: [Synth 8-3332] Sequential element (reset_b/FSM_sequential_res_state_q_reg[0]) is unused and will be removed from module t400_core.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:50:02 ; elapsed = 00:50:22 . Memory (MB): peak = 3116.023 ; gain = 1376.695 ; free physical = 1361 ; free virtual = 10390
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:46:28 ; elapsed = 00:46:48 . Memory (MB): peak = 3115.352 ; gain = 1374.207 ; free physical = 333 ; free virtual = 12749
 ---------------------------------------------------------------------------------
  Sort Area is HDMI_Interface__GC0 word_index_reg_0 : 0 0 : 540 540 : Used 1 time 100
 ---------------------------------------------------------------------------------
@@ -1625,7 +1641,7 @@ Start Applying XDC Timing Constraints
 WARNING: [Synth 8-3321] set_false_path : Empty to list for constraint at line 110 of /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:110]
 WARNING: [Synth 8-3321] set_false_path : Empty to list for constraint at line 111 of /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:111]
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:50:47 ; elapsed = 00:50:30 . Memory (MB): peak = 3119.941 ; gain = 1380.613 ; free physical = 2650 ; free virtual = 11718
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:47:02 ; elapsed = 00:46:55 . Memory (MB): peak = 3119.270 ; gain = 1378.125 ; free physical = 1617 ; free virtual = 14069
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
@@ -1639,7 +1655,7 @@ WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_tim
 WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_118/i_364 -from I1 -to O'
 WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_118/i_370 -from I1 -to O'
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:50:53 ; elapsed = 00:50:36 . Memory (MB): peak = 3119.941 ; gain = 1380.613 ; free physical = 2664 ; free virtual = 11731
+Finished Timing Optimization : Time (s): cpu = 00:47:08 ; elapsed = 00:47:01 . Memory (MB): peak = 3119.270 ; gain = 1378.125 ; free physical = 1650 ; free virtual = 14103
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -1668,147 +1684,35 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
-Found timing loop:
-     0: io_boardi_2800/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
-     1: io_boardi_2800/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Found timing loop:
-     0: io_boardi_2799/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
-     1: io_boardi_2799/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Found timing loop:
-     0: io_boardi_2798/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
-     1: io_boardi_2798/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Found timing loop:
-     0: cpu_board/i_25/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:110]
-     1: cpu_board/i_25/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-Found timing loop:
-     0: cpu_board/i_24/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:110]
-     1: cpu_board/i_24/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-Found timing loop:
-     0: BD_inferredi_3016/O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-     1: BD_inferredi_3016/I4 (LUT5)
-     2: i_2961/O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     3: i_2961/I1 (LUT2)
-     4: i_2890/O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     5: i_2890/I4 (LUT5)
-     6: io_boardi_2803/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
-     7: io_boardi_2803/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I4 -to O BD_inferredi_3016"
-Found timing loop:
-     0: cpu_board/i_22/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:110]
-     1: cpu_board/i_22/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-Found timing loop:
-     0: BD_inferredi_3015/O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-     1: BD_inferredi_3015/I4 (LUT5)
-     2: i_2962/O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     3: i_2962/I1 (LUT2)
-     4: i_2889/O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     5: i_2889/I4 (LUT5)
-     6: io_boardi_2802/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
-     7: io_boardi_2802/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I4 -to O BD_inferredi_3015"
-Found timing loop:
-     0: cpu_board/i_21/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:110]
-     1: cpu_board/i_21/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-Found timing loop:
-     0: BD_inferredi_3014/O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-     1: BD_inferredi_3014/I4 (LUT5)
-     2: i_2963/O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     3: i_2963/I1 (LUT2)
-     4: i_2888/O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     5: i_2888/I4 (LUT5)
-     6: io_boardi_2801/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
-     7: io_boardi_2801/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I4 -to O BD_inferredi_3014"
-Found timing loop:
-     0: BD_inferredi_3010/O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-     1: BD_inferredi_3010/I4 (LUT5)
-     2: i_2967/O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     3: i_2967/I1 (LUT2)
-     4: i_2884/O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     5: i_2884/I4 (LUT5)
-     6: io_boardi_2797/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
-     7: io_boardi_2797/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I4 -to O BD_inferredi_3010"
-Found timing loop:
-     0: cpu_board/i_28/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:110]
-     1: cpu_board/i_28/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-Found timing loop:
-     0: cpu_board/i_27/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:110]
-     1: cpu_board/i_27/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-Found timing loop:
-     0: cpu_board/i_26/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:110]
-     1: cpu_board/i_26/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-Found timing loop:
-     0: BD_inferredi_3017/O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-     1: BD_inferredi_3017/I4 (LUT5)
-     2: i_2960/O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     3: i_2960/I1 (LUT2)
-     4: i_2891/O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     5: i_2891/I4 (LUT5)
-     6: io_boardi_2804/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
-     7: io_boardi_2804/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I4 -to O BD_inferredi_3017"
-Found timing loop:
-     0: cpu_board/i_23/z (tricell)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:110]
-     1: cpu_board/i_23/z (tricell)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through BD_inferredi_3021/O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through BD_inferredi_3022/O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through BD_inferredi_3023/O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through BD_inferredi_3024/O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through BD_inferredi_3025/O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through BD_inferredi_3017/O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through BD_inferredi_3016/O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through BD_inferredi_3015/O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through i_2885/O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through i_2886/O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through i_2887/O'
+INFO: [Synth 8-7052] The timing for the instance lisa_hdmi_outputi_5/lisa_framebuffer_reg_1_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance lisa_hdmi_outputi_5/lisa_framebuffer_reg_1_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance lisa_hdmi_outputi_5/lisa_framebuffer_reg_1_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance lisa_hdmi_outputi_5/lisa_framebuffer_reg_1_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance lisa_hdmi_outputi_5/lisa_framebuffer_reg_1_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance lisa_hdmi_outputi_5/lisa_framebuffer_reg_1_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance lisa_hdmi_outputi_5/lisa_framebuffer_reg_1_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance lisa_hdmi_outputi_5/lisa_framebuffer_reg_1_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance cpu_board/M68K/i_1/uRom/microOutput_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_0/usb_port0/ukp/ukprom/data_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_0/usb_port0/ukp/ukprom/data_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_0/io_board/MA_reg_rep (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_0/io_board/MA_reg_rep__0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_0/io_board/cop421/pmem_b/D_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:47:10 ; elapsed = 00:47:05 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1368 ; free virtual = 13828
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
 INFO: [Synth 8-7052] The timing for the instance cpu_board/M68K/uRom/microOutput_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance lisa_hdmi_output/lisa_framebuffer_reg_1_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance lisa_hdmi_output/lisa_framebuffer_reg_1_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
@@ -1824,21 +1728,6 @@ INFO: [Synth 8-7052] The timing for the instance io_board/MA_reg_rep (implemente
 INFO: [Synth 8-7052] The timing for the instance io_board/MA_reg_rep__0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance io_board/cop421/pmem_b/D_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:50:59 ; elapsed = 00:50:43 . Memory (MB): peak = 3119.941 ; gain = 1380.613 ; free physical = 2669 ; free virtual = 11742
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
-Start IO Insertion
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
-Start Flattening Before IO Insertion
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
-Finished Flattening Before IO Insertion
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
-Start Final Netlist Cleanup
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 CRITICAL WARNING: [Synth 8-4442] BlackBox module primary_clock_divider has unconnected pin reset
@@ -1848,34 +1737,34 @@ CRITICAL WARNING: [Synth 8-5744] Inout buffer is not created at top module top f
 CRITICAL WARNING: [Synth 8-5744] Inout buffer is not created at top module top for the pin A_SRAM[18], other connections may not have buffer connection [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 CRITICAL WARNING: [Synth 8-5744] Inout buffer is not created at top module top for the pin A_SRAM[17], other connections may not have buffer connection [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:51:02 ; elapsed = 00:50:45 . Memory (MB): peak = 3119.941 ; gain = 1380.613 ; free physical = 2674 ; free virtual = 11746
+Finished IO Insertion : Time (s): cpu = 00:47:14 ; elapsed = 00:47:09 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1301 ; free virtual = 13790
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:51:02 ; elapsed = 00:50:45 . Memory (MB): peak = 3119.941 ; gain = 1380.613 ; free physical = 2674 ; free virtual = 11746
+Finished Renaming Generated Instances : Time (s): cpu = 00:47:14 ; elapsed = 00:47:09 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1301 ; free virtual = 13790
 ---------------------------------------------------------------------------------
 Found timing loop:
-     0: \genblk4[0].SCC_DBuf_i_1 /O (LUT6)
+     0: \genblk4[0].SCC_DBuf_i_7 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[0].SCC_DBuf_i_1 /I5 (LUT6)
-     2: \genblk4[0].SCC_DBuf_i_7 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     3: \genblk4[0].SCC_DBuf_i_7 /I2 (LUT5)
-     4: cpu_board_i_18/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-     5: cpu_board_i_18/I5 (LUT6)
-     6: cpu_board_i_38/O (LUT6)
+     1: \genblk4[0].SCC_DBuf_i_7 /I2 (LUT5)
+     2: cpu_board_i_18/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     3: cpu_board_i_18/I5 (LUT6)
+     4: cpu_board_i_38/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     7: cpu_board_i_38/I4 (LUT6)
-     8: \genblk4[0].SCC_DBuf_i_1 /O (LUT6)
+     5: cpu_board_i_38/I4 (LUT6)
+     6: \genblk4[0].SCC_DBuf_i_1 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \genblk4[0].SCC_DBuf_i_1 /I5 (LUT6)
+     8: \genblk4[0].SCC_DBuf_i_7 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I5 -to O \genblk4[0].SCC_DBuf_i_1 "
+Inferred a: "set_disable_timing -from I2 -to O \genblk4[0].SCC_DBuf_i_7 "
 Found timing loop:
      0: cpu_board_i_18/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
      1: cpu_board_i_18/I2 (LUT6)
       : cpu_board/BD_out[0]
      2: cpu_board/\BD_out[0]_INST_0 /O (LUT2)
@@ -1889,29 +1778,29 @@ Found timing loop:
      7: cpu_board/\BD_out[0]_INST_0_i_3 /I1 (LUT6)
       : cpu_board/BD_in[0]
      8: cpu_board_i_18/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_18"
 Found timing loop:
-     0: \genblk4[1].SCC_DBuf_i_1 /O (LUT6)
+     0: \genblk4[1].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[1].SCC_DBuf_i_1 /I5 (LUT6)
-     2: \genblk4[1].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     3: \genblk4[1].SCC_DBuf_i_2 /I2 (LUT5)
-     4: cpu_board_i_17/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-     5: cpu_board_i_17/I5 (LUT6)
-     6: cpu_board_i_37/O (LUT6)
+     1: \genblk4[1].SCC_DBuf_i_2 /I2 (LUT5)
+     2: cpu_board_i_17/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     3: cpu_board_i_17/I5 (LUT6)
+     4: cpu_board_i_37/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     7: cpu_board_i_37/I4 (LUT6)
-     8: \genblk4[1].SCC_DBuf_i_1 /O (LUT6)
+     5: cpu_board_i_37/I4 (LUT6)
+     6: \genblk4[1].SCC_DBuf_i_1 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \genblk4[1].SCC_DBuf_i_1 /I5 (LUT6)
+     8: \genblk4[1].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I5 -to O \genblk4[1].SCC_DBuf_i_1 "
+Inferred a: "set_disable_timing -from I2 -to O \genblk4[1].SCC_DBuf_i_2 "
 Found timing loop:
      0: cpu_board_i_17/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
      1: cpu_board_i_17/I2 (LUT6)
       : cpu_board/BD_out[1]
      2: cpu_board/\BD_out[1]_INST_0 /O (LUT2)
@@ -1925,29 +1814,29 @@ Found timing loop:
      7: cpu_board/\BD_out[1]_INST_0_i_3 /I1 (LUT6)
       : cpu_board/BD_in[1]
      8: cpu_board_i_17/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_17"
 Found timing loop:
-     0: \genblk4[2].SCC_DBuf_i_1 /O (LUT6)
+     0: \genblk4[2].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[2].SCC_DBuf_i_1 /I5 (LUT6)
-     2: \genblk4[2].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     3: \genblk4[2].SCC_DBuf_i_2 /I2 (LUT5)
-     4: cpu_board_i_16/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-     5: cpu_board_i_16/I5 (LUT6)
-     6: cpu_board_i_36/O (LUT6)
+     1: \genblk4[2].SCC_DBuf_i_2 /I2 (LUT5)
+     2: cpu_board_i_16/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     3: cpu_board_i_16/I5 (LUT6)
+     4: cpu_board_i_36/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     7: cpu_board_i_36/I4 (LUT6)
-     8: \genblk4[2].SCC_DBuf_i_1 /O (LUT6)
+     5: cpu_board_i_36/I4 (LUT6)
+     6: \genblk4[2].SCC_DBuf_i_1 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \genblk4[2].SCC_DBuf_i_1 /I5 (LUT6)
+     8: \genblk4[2].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I5 -to O \genblk4[2].SCC_DBuf_i_1 "
+Inferred a: "set_disable_timing -from I2 -to O \genblk4[2].SCC_DBuf_i_2 "
 Found timing loop:
      0: cpu_board_i_16/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
      1: cpu_board_i_16/I2 (LUT6)
       : cpu_board/BD_out[2]
      2: cpu_board/\BD_out[2]_INST_0 /O (LUT2)
@@ -1961,29 +1850,29 @@ Found timing loop:
      7: cpu_board/\BD_out[2]_INST_0_i_3 /I1 (LUT6)
       : cpu_board/BD_in[2]
      8: cpu_board_i_16/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_16"
 Found timing loop:
-     0: \genblk4[3].SCC_DBuf_i_1 /O (LUT6)
+     0: \genblk4[3].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[3].SCC_DBuf_i_1 /I5 (LUT6)
-     2: \genblk4[3].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     3: \genblk4[3].SCC_DBuf_i_2 /I2 (LUT5)
-     4: cpu_board_i_15/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-     5: cpu_board_i_15/I5 (LUT6)
-     6: cpu_board_i_35/O (LUT6)
+     1: \genblk4[3].SCC_DBuf_i_2 /I2 (LUT5)
+     2: cpu_board_i_15/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     3: cpu_board_i_15/I5 (LUT6)
+     4: cpu_board_i_35/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     7: cpu_board_i_35/I4 (LUT6)
-     8: \genblk4[3].SCC_DBuf_i_1 /O (LUT6)
+     5: cpu_board_i_35/I4 (LUT6)
+     6: \genblk4[3].SCC_DBuf_i_1 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \genblk4[3].SCC_DBuf_i_1 /I5 (LUT6)
+     8: \genblk4[3].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I5 -to O \genblk4[3].SCC_DBuf_i_1 "
+Inferred a: "set_disable_timing -from I2 -to O \genblk4[3].SCC_DBuf_i_2 "
 Found timing loop:
      0: cpu_board_i_15/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
      1: cpu_board_i_15/I2 (LUT6)
       : cpu_board/BD_out[3]
      2: cpu_board/\BD_out[3]_INST_0 /O (LUT2)
@@ -1997,29 +1886,29 @@ Found timing loop:
      7: cpu_board/\BD_out[3]_INST_0_i_3 /I1 (LUT6)
       : cpu_board/BD_in[3]
      8: cpu_board_i_15/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_15"
 Found timing loop:
-     0: \genblk4[4].SCC_DBuf_i_1 /O (LUT6)
+     0: \genblk4[4].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[4].SCC_DBuf_i_1 /I5 (LUT6)
-     2: \genblk4[4].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     3: \genblk4[4].SCC_DBuf_i_2 /I2 (LUT5)
-     4: cpu_board_i_14/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-     5: cpu_board_i_14/I5 (LUT6)
-     6: cpu_board_i_34/O (LUT6)
+     1: \genblk4[4].SCC_DBuf_i_2 /I2 (LUT5)
+     2: cpu_board_i_14/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     3: cpu_board_i_14/I5 (LUT6)
+     4: cpu_board_i_34/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     7: cpu_board_i_34/I4 (LUT6)
-     8: \genblk4[4].SCC_DBuf_i_1 /O (LUT6)
+     5: cpu_board_i_34/I4 (LUT6)
+     6: \genblk4[4].SCC_DBuf_i_1 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \genblk4[4].SCC_DBuf_i_1 /I5 (LUT6)
+     8: \genblk4[4].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I5 -to O \genblk4[4].SCC_DBuf_i_1 "
+Inferred a: "set_disable_timing -from I2 -to O \genblk4[4].SCC_DBuf_i_2 "
 Found timing loop:
      0: cpu_board_i_14/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
      1: cpu_board_i_14/I2 (LUT6)
       : cpu_board/BD_out[4]
      2: cpu_board/\BD_out[4]_INST_0 /O (LUT3)
@@ -2030,29 +1919,29 @@ Found timing loop:
      5: cpu_board/\BD_out[4]_INST_0_i_1 /I1 (LUT6)
       : cpu_board/BD_in[4]
      6: cpu_board_i_14/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_14"
 Found timing loop:
-     0: \genblk4[5].SCC_DBuf_i_1 /O (LUT6)
+     0: \genblk4[5].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[5].SCC_DBuf_i_1 /I5 (LUT6)
-     2: \genblk4[5].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     3: \genblk4[5].SCC_DBuf_i_2 /I2 (LUT5)
-     4: cpu_board_i_13/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-     5: cpu_board_i_13/I5 (LUT6)
-     6: cpu_board_i_33/O (LUT6)
+     1: \genblk4[5].SCC_DBuf_i_2 /I2 (LUT5)
+     2: cpu_board_i_13/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     3: cpu_board_i_13/I5 (LUT6)
+     4: cpu_board_i_33/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     7: cpu_board_i_33/I4 (LUT6)
-     8: \genblk4[5].SCC_DBuf_i_1 /O (LUT6)
+     5: cpu_board_i_33/I4 (LUT6)
+     6: \genblk4[5].SCC_DBuf_i_1 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \genblk4[5].SCC_DBuf_i_1 /I5 (LUT6)
+     8: \genblk4[5].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I5 -to O \genblk4[5].SCC_DBuf_i_1 "
+Inferred a: "set_disable_timing -from I2 -to O \genblk4[5].SCC_DBuf_i_2 "
 Found timing loop:
      0: cpu_board_i_13/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
      1: cpu_board_i_13/I2 (LUT6)
       : cpu_board/BD_out[5]
      2: cpu_board/\BD_out[5]_INST_0 /O (LUT6)
@@ -2060,29 +1949,29 @@ Found timing loop:
      3: cpu_board/\BD_out[5]_INST_0 /I3 (LUT6)
       : cpu_board/BD_in[5]
      4: cpu_board_i_13/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_13"
 Found timing loop:
-     0: \genblk4[6].SCC_DBuf_i_1 /O (LUT6)
+     0: \genblk4[6].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[6].SCC_DBuf_i_1 /I5 (LUT6)
-     2: \genblk4[6].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     3: \genblk4[6].SCC_DBuf_i_2 /I2 (LUT5)
-     4: cpu_board_i_12/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-     5: cpu_board_i_12/I5 (LUT6)
-     6: cpu_board_i_32/O (LUT6)
+     1: \genblk4[6].SCC_DBuf_i_2 /I2 (LUT5)
+     2: cpu_board_i_12/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     3: cpu_board_i_12/I5 (LUT6)
+     4: cpu_board_i_32/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     7: cpu_board_i_32/I4 (LUT6)
-     8: \genblk4[6].SCC_DBuf_i_1 /O (LUT6)
+     5: cpu_board_i_32/I4 (LUT6)
+     6: \genblk4[6].SCC_DBuf_i_1 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \genblk4[6].SCC_DBuf_i_1 /I5 (LUT6)
+     8: \genblk4[6].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I5 -to O \genblk4[6].SCC_DBuf_i_1 "
+Inferred a: "set_disable_timing -from I2 -to O \genblk4[6].SCC_DBuf_i_2 "
 Found timing loop:
      0: cpu_board_i_12/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
      1: cpu_board_i_12/I2 (LUT6)
       : cpu_board/BD_out[6]
      2: cpu_board/\BD_out[6]_INST_0 /O (LUT6)
@@ -2090,29 +1979,29 @@ Found timing loop:
      3: cpu_board/\BD_out[6]_INST_0 /I3 (LUT6)
       : cpu_board/BD_in[6]
      4: cpu_board_i_12/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_12"
 Found timing loop:
-     0: \genblk4[7].SCC_DBuf_i_1 /O (LUT6)
+     0: \genblk4[7].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[7].SCC_DBuf_i_1 /I5 (LUT6)
-     2: \genblk4[7].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     3: \genblk4[7].SCC_DBuf_i_2 /I2 (LUT5)
-     4: cpu_board_i_11/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-     5: cpu_board_i_11/I5 (LUT6)
-     6: cpu_board_i_31/O (LUT6)
+     1: \genblk4[7].SCC_DBuf_i_2 /I2 (LUT5)
+     2: cpu_board_i_11/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     3: cpu_board_i_11/I5 (LUT6)
+     4: cpu_board_i_31/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     7: cpu_board_i_31/I4 (LUT6)
-     8: \genblk4[7].SCC_DBuf_i_1 /O (LUT6)
+     5: cpu_board_i_31/I4 (LUT6)
+     6: \genblk4[7].SCC_DBuf_i_1 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \genblk4[7].SCC_DBuf_i_1 /I5 (LUT6)
+     8: \genblk4[7].SCC_DBuf_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I5 -to O \genblk4[7].SCC_DBuf_i_1 "
+Inferred a: "set_disable_timing -from I2 -to O \genblk4[7].SCC_DBuf_i_2 "
 Found timing loop:
      0: cpu_board_i_11/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
      1: cpu_board_i_11/I2 (LUT6)
       : cpu_board/BD_out[7]
      2: cpu_board/\BD_out[7]_INST_0 /O (LUT2)
@@ -2126,32 +2015,172 @@ Found timing loop:
      7: cpu_board/\BD_out[7]_INST_0_i_3 /I3 (LUT4)
       : cpu_board/BD_in[7]
      8: cpu_board_i_11/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:526]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_11"
+Found timing loop:
+     0: cpu_board/\BD_out[8]_INST_0 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[8]_INST_0 /I3 (LUT6)
+      : cpu_board/BD_in[8]
+     2: cpu_board_i_10/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     3: cpu_board_i_10/I1 (LUT2)
+      : cpu_board/BD_out[8]
+     4: cpu_board/\BD_out[8]_INST_0 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I3 -to O cpu_board/\BD_out[8]_INST_0 "
+Found timing loop:
+     0: cpu_board/\BD_out[9]_INST_0 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[9]_INST_0 /I3 (LUT6)
+      : cpu_board/BD_in[9]
+     2: cpu_board_i_9/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     3: cpu_board_i_9/I1 (LUT2)
+      : cpu_board/BD_out[9]
+     4: cpu_board/\BD_out[9]_INST_0 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I3 -to O cpu_board/\BD_out[9]_INST_0 "
+Found timing loop:
+     0: cpu_board/\BD_out[10]_INST_0_i_1 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[10]_INST_0_i_1 /I5 (LUT6)
+     2: cpu_board/\BD_out[10]_INST_0_i_3 /O (LUT4)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     3: cpu_board/\BD_out[10]_INST_0_i_3 /I3 (LUT4)
+      : cpu_board/BD_in[10]
+     4: cpu_board_i_8/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     5: cpu_board_i_8/I1 (LUT2)
+      : cpu_board/BD_out[10]
+     6: cpu_board/\BD_out[10]_INST_0 /O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     7: cpu_board/\BD_out[10]_INST_0 /I0 (LUT2)
+     8: cpu_board/\BD_out[10]_INST_0_i_1 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I5 -to O cpu_board/\BD_out[10]_INST_0_i_1 "
+Found timing loop:
+     0: cpu_board/\BD_out[11]_INST_0_i_1 /O (LUT5)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[11]_INST_0_i_1 /I4 (LUT5)
+     2: cpu_board/\BD_out[11]_INST_0_i_3 /O (LUT4)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     3: cpu_board/\BD_out[11]_INST_0_i_3 /I3 (LUT4)
+      : cpu_board/BD_in[11]
+     4: cpu_board_i_7/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     5: cpu_board_i_7/I1 (LUT2)
+      : cpu_board/BD_out[11]
+     6: cpu_board/\BD_out[11]_INST_0 /O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     7: cpu_board/\BD_out[11]_INST_0 /I0 (LUT2)
+     8: cpu_board/\BD_out[11]_INST_0_i_1 /O (LUT5)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I4 -to O cpu_board/\BD_out[11]_INST_0_i_1 "
+Found timing loop:
+     0: cpu_board/\BD_out[12]_INST_0_i_1 /O (LUT5)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[12]_INST_0_i_1 /I4 (LUT5)
+     2: cpu_board/\BD_out[12]_INST_0_i_3 /O (LUT4)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     3: cpu_board/\BD_out[12]_INST_0_i_3 /I3 (LUT4)
+      : cpu_board/BD_in[12]
+     4: cpu_board_i_6/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     5: cpu_board_i_6/I1 (LUT2)
+      : cpu_board/BD_out[12]
+     6: cpu_board/\BD_out[12]_INST_0 /O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     7: cpu_board/\BD_out[12]_INST_0 /I0 (LUT2)
+     8: cpu_board/\BD_out[12]_INST_0_i_1 /O (LUT5)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I4 -to O cpu_board/\BD_out[12]_INST_0_i_1 "
+Found timing loop:
+     0: cpu_board/\BD_out[13]_INST_0_i_1 /O (LUT3)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[13]_INST_0_i_1 /I2 (LUT3)
+     2: cpu_board/\BD_out[13]_INST_0_i_3 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     3: cpu_board/\BD_out[13]_INST_0_i_3 /I1 (LUT6)
+      : cpu_board/BD_in[13]
+     4: cpu_board_i_5/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     5: cpu_board_i_5/I1 (LUT2)
+      : cpu_board/BD_out[13]
+     6: cpu_board/\BD_out[13]_INST_0 /O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     7: cpu_board/\BD_out[13]_INST_0 /I0 (LUT2)
+     8: cpu_board/\BD_out[13]_INST_0_i_1 /O (LUT3)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I2 -to O cpu_board/\BD_out[13]_INST_0_i_1 "
+Found timing loop:
+     0: cpu_board/\BD_out[14]_INST_0_i_1 /O (LUT4)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[14]_INST_0_i_1 /I3 (LUT4)
+     2: cpu_board/\BD_out[14]_INST_0_i_3 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     3: cpu_board/\BD_out[14]_INST_0_i_3 /I1 (LUT6)
+      : cpu_board/BD_in[14]
+     4: cpu_board_i_4/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     5: cpu_board_i_4/I1 (LUT2)
+      : cpu_board/BD_out[14]
+     6: cpu_board/\BD_out[14]_INST_0 /O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     7: cpu_board/\BD_out[14]_INST_0 /I0 (LUT2)
+     8: cpu_board/\BD_out[14]_INST_0_i_1 /O (LUT4)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I3 -to O cpu_board/\BD_out[14]_INST_0_i_1 "
+Found timing loop:
+     0: cpu_board/\BD_out[15]_INST_0_i_1 /O (LUT4)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[15]_INST_0_i_1 /I3 (LUT4)
+     2: cpu_board/\BD_out[15]_INST_0_i_3 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     3: cpu_board/\BD_out[15]_INST_0_i_3 /I1 (LUT6)
+      : cpu_board/BD_in[15]
+     4: cpu_board_i_3/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     5: cpu_board_i_3/I1 (LUT2)
+      : cpu_board/BD_out[15]
+     6: cpu_board/\BD_out[15]_INST_0 /O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     7: cpu_board/\BD_out[15]_INST_0 /I0 (LUT2)
+     8: cpu_board/\BD_out[15]_INST_0_i_1 /O (LUT4)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I3 -to O cpu_board/\BD_out[15]_INST_0_i_1 "
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:51:03 ; elapsed = 00:50:47 . Memory (MB): peak = 3119.941 ; gain = 1380.613 ; free physical = 2678 ; free virtual = 11750
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:47:16 ; elapsed = 00:47:10 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1269 ; free virtual = 13758
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:51:03 ; elapsed = 00:50:47 . Memory (MB): peak = 3119.941 ; gain = 1380.613 ; free physical = 2678 ; free virtual = 11750
+Finished Renaming Generated Ports : Time (s): cpu = 00:47:16 ; elapsed = 00:47:10 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1269 ; free virtual = 13758
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:51:03 ; elapsed = 00:50:47 . Memory (MB): peak = 3119.941 ; gain = 1380.613 ; free physical = 2678 ; free virtual = 11750
+Finished Handling Custom Attributes : Time (s): cpu = 00:47:16 ; elapsed = 00:47:11 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1269 ; free virtual = 13758
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:51:03 ; elapsed = 00:50:47 . Memory (MB): peak = 3119.941 ; gain = 1380.613 ; free physical = 2678 ; free virtual = 11750
+Finished Renaming Generated Nets : Time (s): cpu = 00:47:16 ; elapsed = 00:47:11 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1269 ; free virtual = 13758
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -2200,15 +2229,15 @@ Report Cell Usage:
 |4     |BUFG               |     4|
 |5     |BUFGCE             |     4|
 |6     |BUFGMUX            |     5|
-|7     |CARRY4             |   164|
+|7     |CARRY4             |   168|
 |8     |DSP48E1            |     1|
-|9     |LUT1               |   171|
-|10    |LUT2               |   564|
-|11    |LUT3               |   988|
-|12    |LUT4               |   733|
-|13    |LUT5               |  4923|
-|14    |LUT6               | 11493|
-|15    |MUXF7              |  4101|
+|9     |LUT1               |   173|
+|10    |LUT2               |   567|
+|11    |LUT3               |  1007|
+|12    |LUT4               |   740|
+|13    |LUT5               |  4908|
+|14    |LUT6               | 11486|
+|15    |MUXF7              |  4102|
 |16    |MUXF8              |   910|
 |17    |OSERDESE2          |     8|
 |19    |RAM256X1S          |    32|
@@ -2218,34 +2247,33 @@ Report Cell Usage:
 |28    |SRL16E             |    21|
 |29    |FDCE               |   543|
 |30    |FDPE               |   107|
-|31    |FDRE               |  3269|
+|31    |FDRE               |  3287|
 |32    |FDSE               |    59|
 |33    |LD                 | 12296|
 |34    |LDC                |     3|
-|35    |IBUF               |    37|
+|35    |IBUF               |    40|
 |36    |IOBUF              |    47|
 |37    |OBUF               |    93|
 |38    |OBUFDS             |     4|
 +------+-------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:51:03 ; elapsed = 00:50:47 . Memory (MB): peak = 3119.941 ; gain = 1380.613 ; free physical = 2678 ; free virtual = 11751
+Finished Writing Synthesis Report : Time (s): cpu = 00:47:16 ; elapsed = 00:47:11 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1269 ; free virtual = 13758
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 38 critical warnings and 1540 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:51:00 ; elapsed = 00:50:48 . Memory (MB): peak = 3119.941 ; gain = 1283.777 ; free physical = 7823 ; free virtual = 16896
-Synthesis Optimization Complete : Time (s): cpu = 00:51:03 ; elapsed = 00:50:51 . Memory (MB): peak = 3119.941 ; gain = 1380.613 ; free physical = 7843 ; free virtual = 16907
+Synthesis finished with 0 errors, 30 critical warnings and 1524 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:47:13 ; elapsed = 00:47:13 . Memory (MB): peak = 3127.277 ; gain = 1297.297 ; free physical = 6469 ; free virtual = 18958
+Synthesis Optimization Complete : Time (s): cpu = 00:47:16 ; elapsed = 00:47:16 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 6475 ; free virtual = 18954
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00.14 ; elapsed = 00:00:00.14 . Memory (MB): peak = 3119.941 ; gain = 0.000 ; free physical = 7846 ; free virtual = 16909
+Netlist sorting complete. Time (s): cpu = 00:00:00.13 ; elapsed = 00:00:00.13 . Memory (MB): peak = 3127.277 ; gain = 0.000 ; free physical = 6507 ; free virtual = 18985
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'C16M_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'C5M_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'DOTCK_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'SCCCK_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
-INFO: [Netlist 29-17] Analyzing 17592 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 17597 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 WARNING: [Constraints 18-550] Could not create 'PULLTYPE' constraint because net 'GPIO_IBUF[0]' is not directly connected to top level port. 'PULLTYPE' is ignored for synthesis but preserved for implementation.
-WARNING: [Constraints 18-550] Could not create 'PULLTYPE' constraint because net 'GPIO_IBUF[1]' is not directly connected to top level port. 'PULLTYPE' is ignored for synthesis but preserved for implementation.
 INFO: [Opt 31-138] Pushed 6 inverter(s) to 59 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3164.047 ; gain = 0.000 ; free physical = 7864 ; free virtual = 16928
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3171.379 ; gain = 0.000 ; free physical = 6618 ; free virtual = 19094
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 12391 instances were transformed.
   BUFGCE => BUFGCTRL: 4 instances
@@ -2257,15 +2285,15 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   RAM256X1S => RAM256X1S (inverted pins: WCLK) (MUXF7(x2), MUXF8, RAMS64E(x4)): 32 instances
   RAM64X1S => RAM64X1S (RAMS64E): 4 instances
 
-Synth Design complete | Checksum: a44b53ac
+Synth Design complete | Checksum: 827227c
 INFO: [Common 17-83] Releasing license: Synthesis
-541 Infos, 583 Warnings, 54 Critical Warnings and 0 Errors encountered.
+558 Infos, 584 Warnings, 46 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:51:10 ; elapsed = 00:51:37 . Memory (MB): peak = 3164.082 ; gain = 1541.281 ; free physical = 7867 ; free virtual = 16931
-INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 8966.435; main = 2312.839; forked = 6950.535
-INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 18036.410; main = 3164.051; forked = 14936.391
+synth_design: Time (s): cpu = 00:47:22 ; elapsed = 00:48:02 . Memory (MB): peak = 3171.414 ; gain = 1548.566 ; free physical = 6627 ; free virtual = 19102
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 8998.470; main = 2391.966; forked = 6963.377
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 18050.992; main = 3171.383; forked = 14935.637
 INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
-Write ShapeDB Complete: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3188.059 ; gain = 0.000 ; free physical = 7865 ; free virtual = 16933
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3195.391 ; gain = 0.000 ; free physical = 6625 ; free virtual = 19104
 INFO: [Common 17-1381] The checkpoint '/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/top.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Mon May 18 15:15:24 2026...
+INFO: [Common 17-206] Exiting Vivado at Sat Jun  6 16:01:44 2026...

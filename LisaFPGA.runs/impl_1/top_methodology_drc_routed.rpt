@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-| Date         : Mon May 18 15:25:42 2026
+| Date         : Sat Jun  6 16:22:24 2026
 | Host         : alex-cattop running 64-bit Linux Mint 22.1
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -20,7 +20,7 @@ Table of Contents
 1. REPORT SUMMARY
 -----------------
             Netlist: netlist
-          Floorplan: design_1
+          Floorplan: checkpoint_top
       Design limits: <entire design considered>
              Max checks: <unlimited>
              Checks found: 1623
@@ -8078,42 +8078,42 @@ Related violations: <none>
 
 TIMING-23#9 Warning
 Combinational loop found  
-A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/FDC_state_shiftreg/cpu_board_i_11/I5 and io_board/FDC_state_shiftreg/cpu_board_i_11/O to disable the timing loop
+A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/high_FDC_RAM/cpu_board_i_11/I5 and io_board/high_FDC_RAM/cpu_board_i_11/O to disable the timing loop
 Related violations: <none>
 
 TIMING-23#10 Warning
 Combinational loop found  
-A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/FDC_state_shiftreg/cpu_board_i_12/I5 and io_board/FDC_state_shiftreg/cpu_board_i_12/O to disable the timing loop
+A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/high_FDC_RAM/cpu_board_i_12/I5 and io_board/high_FDC_RAM/cpu_board_i_12/O to disable the timing loop
 Related violations: <none>
 
 TIMING-23#11 Warning
 Combinational loop found  
-A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/FDC_state_shiftreg/cpu_board_i_13/I5 and io_board/FDC_state_shiftreg/cpu_board_i_13/O to disable the timing loop
+A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/high_FDC_RAM/cpu_board_i_13/I5 and io_board/high_FDC_RAM/cpu_board_i_13/O to disable the timing loop
 Related violations: <none>
 
 TIMING-23#12 Warning
 Combinational loop found  
-A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/FDC_state_shiftreg/cpu_board_i_14/I5 and io_board/FDC_state_shiftreg/cpu_board_i_14/O to disable the timing loop
+A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/high_FDC_RAM/cpu_board_i_14/I5 and io_board/high_FDC_RAM/cpu_board_i_14/O to disable the timing loop
 Related violations: <none>
 
 TIMING-23#13 Warning
 Combinational loop found  
-A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/FDC_state_shiftreg/cpu_board_i_15/I5 and io_board/FDC_state_shiftreg/cpu_board_i_15/O to disable the timing loop
+A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/low_FDC_RAM/cpu_board_i_15/I5 and io_board/low_FDC_RAM/cpu_board_i_15/O to disable the timing loop
 Related violations: <none>
 
 TIMING-23#14 Warning
 Combinational loop found  
-A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/FDC_state_shiftreg/cpu_board_i_16/I5 and io_board/FDC_state_shiftreg/cpu_board_i_16/O to disable the timing loop
+A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/low_FDC_RAM/cpu_board_i_16/I5 and io_board/low_FDC_RAM/cpu_board_i_16/O to disable the timing loop
 Related violations: <none>
 
 TIMING-23#15 Warning
 Combinational loop found  
-A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/FDC_state_shiftreg/cpu_board_i_17/I5 and io_board/FDC_state_shiftreg/cpu_board_i_17/O to disable the timing loop
+A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/low_FDC_RAM/cpu_board_i_17/I5 and io_board/low_FDC_RAM/cpu_board_i_17/O to disable the timing loop
 Related violations: <none>
 
 TIMING-23#16 Warning
 Combinational loop found  
-A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/FDC_state_shiftreg/cpu_board_i_18/I5 and io_board/FDC_state_shiftreg/cpu_board_i_18/O to disable the timing loop
+A timing loop has been detected on a combinational path. A timing arc has been disabled between io_board/low_FDC_RAM/cpu_board_i_18/I5 and io_board/low_FDC_RAM/cpu_board_i_18/O to disable the timing loop
 Related violations: <none>
 
 TIMING-28#1 Warning
@@ -8158,7 +8158,7 @@ Related violations: <none>
 
 ULMTCS-2#1 Warning
 Control Sets use limits require reduction  
-This design uses 3339 control sets (vs. available limit of 15850, determined by 1 control set per CLB). This exceeds the control set use guideline of 15 percent. This is at a level where reduction is REQUIRED (see UG949). Use report_control_sets to get more details.
+This design uses 3340 control sets (vs. available limit of 15850, determined by 1 control set per CLB). This exceeds the control set use guideline of 15 percent. This is at a level where reduction is REQUIRED (see UG949). Use report_control_sets to get more details.
 Related violations: <none>
 
 LATCH-1#1 Advisory

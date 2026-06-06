@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-| Date                      : Mon May 18 15:24:43 2026
+| Date                      : Sat Jun  6 16:21:04 2026
 | Host                      : alex-cattop running 64-bit Linux Mint 22.1
 | Command                   : report_io -file top_io_placed.rpt
 | Design                    : top
@@ -25,7 +25,7 @@ Table of Contents
 +---------------+
 | Total User IO |
 +---------------+
-|           199 |
+|           200 |
 +---------------+
 
 
@@ -248,7 +248,7 @@ Table of Contents
 | M13        | ESFLOPPY_COMM_BUS[0]  | High Range | IO_L6N_T0_D08_VREF_14        | BIDIR       | LVCMOS33    |      14 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |              |                   |              |
 | M14        |                       | High Range | IO_L2N_T0_D03_14             | User IO     |             |      14 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | M15        |                       |            | GND                          | GND         |             |         |            |      |                     |                      |     0.0 |            |           |          |      |                  |              |                   |              |
-| M16        |                       | High Range | IO_L10P_T1_D14_14            | User IO     |             |      14 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
+| M16        | FRAMERATE_SEL         | High Range | IO_L10P_T1_D14_14            | INPUT       | LVCMOS33    |      14 |            |      |                     |                 NONE |         | FIXED      |           |          |      | NONE             |              |                   |              |
 | M17        | PWM_ESFLOPPY          | High Range | IO_L10N_T1_D15_14            | OUTPUT      | LVCMOS33    |      14 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |              |                   |              |
 | M18        | _RSTSW                | High Range | IO_L4N_T0_D05_14             | INPUT       | LVCMOS33    |      14 |            |      |                     |                 NONE |         | FIXED      |           |          |      | NONE             |              |                   |              |
 | N1         | A_SRAM[2]             | High Range | IO_L3N_T0_DQS_34             | OUTPUT      | LVCMOS33    |      34 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |              |                   |              |

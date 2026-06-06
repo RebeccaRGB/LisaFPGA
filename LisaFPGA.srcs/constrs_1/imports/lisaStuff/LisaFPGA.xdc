@@ -142,6 +142,7 @@ set_property -dict {PACKAGE_PIN C2 IOSTANDARD LVCMOS33} [get_ports {CONT[4]}]
 set_property -dict {PACKAGE_PIN G2 IOSTANDARD LVCMOS33} [get_ports {CONT[5]}]
 set_property -dict {PACKAGE_PIN B14 IOSTANDARD LVCMOS33} [get_ports INVID]
 set_property -dict {PACKAGE_PIN P18 IOSTANDARD LVCMOS33} [get_ports SCANLINES]
+set_property -dict {PACKAGE_PIN M16 IOSTANDARD LVCMOS33} [get_ports FRAMERATE_SEL]
 set_property -dict {PACKAGE_PIN B13 IOSTANDARD LVCMOS33} [get_ports TONE]
 set_property -dict {PACKAGE_PIN D5 IOSTANDARD LVCMOS33} [get_ports {VC[0]}]
 set_property -dict {PACKAGE_PIN D2 IOSTANDARD LVCMOS33} [get_ports {VC[1]}]
@@ -350,3 +351,5 @@ set_property -dict {PACKAGE_PIN B7 IOSTANDARD LVCMOS33} [get_ports {SPEED_SEL[0]
 set_property -dict {PACKAGE_PIN C5 IOSTANDARD LVCMOS33} [get_ports {SPEED_SEL[1]}]
 set_property -dict {PACKAGE_PIN C6 IOSTANDARD LVCMOS33} [get_ports CPU_ROM_SEL]
 set_property -dict {PACKAGE_PIN F5 IOSTANDARD LVCMOS33} [get_ports IO_ROM_SEL]
+
+
