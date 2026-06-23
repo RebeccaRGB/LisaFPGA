@@ -76,7 +76,7 @@ module IO_board(
     output logic KBD_out,
     input logic [6:0] M,
 
-    // Serial signals not currently implemented
+    // Serial port signals from the internal SCC
     input logic SYNCA,
     output logic TXDA,
     output logic RTSA,
@@ -110,18 +110,6 @@ module IO_board(
     input logic DOTCK, // The dot clock
     input logic E_either_edge, // The E clock, which is CPUCK/10
     output logic [2:0] VC, // 3-bit volume control for the external speaker amp
-    
-    // All the signals that go to the external SCC
-    output logic SCC_C4M,
-    output logic SCC_WR,
-    output logic SCC_RD,
-    input logic _SCC_RSIR,
-    output logic SCC_A2,
-    output logic SCC_A1,
-    output logic _SCC_CS,
-    input logic _SCC_PSI,
-    output logic [7:0] SCC_DOUT,
-    input logic [7:0] SCC_DIN,
     
     input logic IO_ROM_SEL, // Selects whether the I/O board uses ROM revision A8 or 40
     input logic spoof_88 // If set, this makes the FDC RAM at address 0x018 (FCC030) return 0x88 instead of its actual contents
@@ -812,90 +800,73 @@ module IO_board(
     assign IO_D = (~_9512_RD & ~_SEL9512) ? D_out_9512 : 8'bz;
 
     // Now we'll move onto the 8530 SCC
-    // The SCC implementation I found is from the NanoMac project, and it's missing some of the output lines that the Lisa needs
-    // But it'll at least get the job done for testing
-    // This SCC core requires multiple clock phases, so we need to generate those, but we'll do that later with the other clocks
-    logic C4M_en_p;
-    logic C4M_en_n;
+    // Originally I was using a real external SCC as no good cores existed
+    // But thanks to some excellent efforts by Naftaly Blum, now one does, so we'll use that
 
-    // Now we can instantiate the SCC itself, but not before defining a few signals
+    // Define a few signals before instantiating the SCC core
     // First, the output data bus from the SCC
     logic [7:0] D_out_SCC;
     // Chip select and write enable for the SCC
     logic CS_SCC;
-    logic WE_SCC;
-    // We don't use the SCC's WREQ output, so just tie it to a dummy wire
-    logic dummy_wreq;
 
     // The SCC is selected whenever both VMA and AS are asserted
     assign CS_SCC = ~_VMA & ~_AS;
 
     // A write enable signal for the SCC that we'll generate later
     logic _WSIO;
-    // We write to the SCC whenever _WSIO is asserted and we're not in reset, or when _WSIO is deasserted and we're in reset
-    assign WE_SCC = (~_RESET ^ _WSIO) ? 1'b0 : 1'b1;
 
     // Only put the SCC's output on the I/O board data bus when it's being selected and read from
     // We use another yet-to-be-made signal, _RSIO, for this, and do the same XOR with reset as before to see if we should be reading
     // In addition to the CS check, of course
     logic _RSIO;
-    assign IO_D = (~(~_RESET ^ _RSIO) & CS_SCC) ? D_out_SCC : 8'bz;
+    assign IO_D = (~(~_RESET_SYSTEM ^ _RSIO) & CS_SCC) ? D_out_SCC : 8'bz;
 
     logic _PSI;
-    `ifdef SIMULATION
-        // In simulation, use the dumb broken NanoMac SCC core
-        // It's horrible, but at least it gets us through the self-tests
-        logic rxd, txd, cts, rts, dcd_a, dcd_b;
-        assign rxd = 1'b1;
-        assign cts = 1'b0;
-        assign dcd_a = 1'b0;
-        assign dcd_b = 1'b0;
-        assign _PSI = 1'b1; // Just tie _PSI high for now since the NanoMac SCC doesn't have it
-        scc lisa_scc(
-            .clk(C16M), // 16MHz "fast" clock input
-            .cep(C4M_en_p), // The two clock phases used for the actual timing
-            .cen(C4M_en_n),
-            .reset_hw(~_RESET), // Systemwide reset
-            .cs(CS_SCC), // 
-            .we(WE_SCC),
-            .rs(A[2:1]), // Register select lines come from A1 and A2; A1 selects serial port A or B, A2 selects data or control
-            .wdata(IO_D), // Data input comes from the global I/O board data bus
-            .rdata(D_out_SCC),
-            ._irq(_RSIR), // IRQ hooks to _RSIR (RS-232 interrupt)
-            // And all its serial I/O lines, which ARE DIFFERENT FROM THOSE OF THE ORIGINAL SCC FOR SOME REASON
-            // This is the discrepancy between the NanoMac SCC and the real SCC
-            .rxd(rxd),
-            .txd(txd),
-            .cts(cts),
-            .rts(rts),
-            .dcd_a(dcd_a),
-            .dcd_b(dcd_b),
-            .wreq(dummy_wreq) // Dummy WREQ that we don't care about
-        );
-    `else
-        // In real life, use a real external SCC until I can develop a better core
-        // Which I may never do, but at least the PCB supports it
-        assign SCC_C4M = C4M;
-        assign SCC_WR = ~_RESET ^ _WSIO;
-        assign SCC_RD = ~_RESET ^ _RSIO;
-        assign _RSIR = _SCC_RSIR;
-        assign SCC_A2 = A[2];
-        assign SCC_A1 = A[1];
-        assign _SCC_CS = ~(~_VMA & ~_AS);
-        assign _PSI = _SCC_PSI;
-        assign SCC_DOUT = IO_D;
-        assign D_out_SCC = SCC_DIN;
-    `endif
+    // The _PSI signal goes to the DCDB pin on the SCC, which is an input, and also goes to form part of the system NMI signal
+    // If either PSI or the COP NMI is asserted, then the system NMI is asserted
+    // So then what drives PSI if the SCC is an input not an output?
+    // Well, it's tied to a set of NAND gates that are hard-wired to pull it high all the time, so it never actually does anything
+    // My guess is that it was planned to be used for something else but never was
+    // Regardless, we can just tie it high ourselves too
+    assign _PSI = 1'b1;
 
-    // Since the SCC isn't implemented internally, just tie off its unused outputs 
-    assign TXDA = 1'b1;
-    assign RTSA = 1'b1;
-    assign DTRA = 1'b1;
-    assign TRXCA = 1'b1;
-    assign TXDB = 1'b1;
-    assign DTRB = 1'b1;
-    assign RTSB = 1'b1;
-
+    // Now go ahead and instantiate the SCC core
+    z8530_scc absolutely_amazing_scc_implementation (
+        .clk(DOTCK), // Use the DOTCK as the main "fast clock" for the SCC
+        .pclk(C4M), // Also feed in our 4MHz clock for use on Serial A
+        .sclk(SCCCK), // And then feed the 3.68MHz clock for Serial B as well
+        .reset_n(_RESET_SYSTEM), // Active-low reset; make sure to use the DOTCK-synchronized one not the C16M one
+        .cs_n(~CS_SCC), // Chip select, read, and write strobes, all active-low
+        .rd_n(_RSIO), 
+        .wr_n(_WSIO),
+        .a_b(A[1]), // Channel select is just A[1]
+        .d_c(A[2]), // And data/control select is A[2]
+        .data_in(IO_D), // Data bus input/output from IO_D
+        .data_out(D_out_SCC),
+        .data_oe(), // We don't need to use the data output enable since we're doing it with tri-state logic on IO_D
+        .int_n(_RSIR), // The SCC's interrupt line
+        .intack_n(1'b1), // We don't use the SCC's interupt acknowledge functionality, so just tie it high (inactive)
+        // Now wire up the Serial A port
+        .rxca(RTXCA), // RX clock input
+        .txca(TRXCA), // TX clock input
+        .rxda(RXDA), // RX data input
+        .txda(TXDA), // TX data output
+        .ctsa_n(CTSA), // CTS input, active low
+        .dcda_n(DCDA), // DCD input, active low
+        .synca_n(SYNCA), // DSR input, active low
+        .rtsa_n(RTSA), // RTS output, active low
+        .dtra_n(DTRA), // DTR output, active low
+        // And the Serial B port
+        .rxcb(SCCCK), // RX clock input, hooks to the 3.68MHz crystal on the I/O board
+        .txcb(CTSB_TRXCB), // TX clock input, tied together with CTSB
+        .rxdb(RXDB), // RX data input
+        .txdb(TXDB), // TX data output
+        .ctsb_n(CTSB_TRXCB), // CTS input, active low, tied together with TXCB
+        .dcdb_n(_PSI), // DCD input, active low, always tied high unless a PFG is connected
+        .syncb_n(1'b0), // Tied to the 3.68MHz crystal on the real Lisa, grounded here
+        .rtsb_n(RTSB), // RTS output, active low
+        .dtrb_n(DTRB) // DTR output, active low
+    );
 
     // Now we can do the parallel port VIA, which is pretty much exclusively dedicated to handling comms with the ProFile
     // We'll be using a 6522 VIA core from the NanoMac project again, but unlike the SCC, this one's full-featured and very accurate
@@ -1042,8 +1013,6 @@ module IO_board(
 
     // Now onto Page 2, which contains a little bit of address decoding and clock logic, as well as the COP421 and keyboard VIA
     // First, let's generate two clocks, C4M and C2M, by dividing C16M down
-    // We only use C2M here (for the 9512) because the SCC (which used C4M in real life) is clocked by those phase signals instead
-    // But we'll generate C4M anyway in case we ever do need it
     logic [2:0] clock_divider;
     always_ff @(posedge C16M, negedge _RESET) begin
         if (!_RESET) begin
@@ -1055,12 +1024,17 @@ module IO_board(
         end
     end
 
-    // Make the enable signals for the two phases of C4M
-    assign C4M_en_p = (clock_divider[0] & !C4M);
-    assign C4M_en_n = (clock_divider[0] & C4M);
-    assign C4M = clock_divider[1]; // C4M is the second bit of the clock divider (divided by 4)
-    assign C2M = clock_divider[2]; // C2M is the third bit of the clock divider (divided by 8)
+    // And now use BUFGs to put the divided-down clocks onto global clock nets
+    BUFG C4M_bufg(
+        .I(clock_divider[1]), // C4M is the second bit of the clock divider (divided by 4)
+        .O(C4M)
+    );
 
+    BUFG C2M_bufg(
+        .I(clock_divider[2]), // C2M is the third bit of the clock divider (divided by 8)
+        .O(C2M)
+    );
+    
     // Now let's do some address decoding stuff to generate _DSKPT, _SEL9512 _VPA, _RSIO, and _WSIO
     // The (non-FDC portion of the) I/O board is only selected when A12 high and _INTIO is asserted
     // When selected, the particular device is chosen based on A9, A10, and A11

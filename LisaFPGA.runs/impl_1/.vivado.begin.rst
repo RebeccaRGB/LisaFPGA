@@ -1,60 +1,20 @@
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="477138" HostCore="16" HostMemory="32019484">
+    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="1113421" HostCore="16" HostMemory="32019480">
     </Process>
 </ProcessHandle>
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="539359" HostCore="16" HostMemory="32019484">
+    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="1168163" HostCore="16" HostMemory="32019480">
     </Process>
 </ProcessHandle>
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="639023" HostCore="16" HostMemory="32019484">
+    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="1642738" HostCore="16" HostMemory="32019480">
     </Process>
 </ProcessHandle>
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="696759" HostCore="16" HostMemory="32019484">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="722183" HostCore="16" HostMemory="32019484">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="780709" HostCore="16" HostMemory="32019484">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="789004" HostCore="16" HostMemory="32019484">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="855172" HostCore="16" HostMemory="32019484">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="883268" HostCore="16" HostMemory="32019484">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="941132" HostCore="16" HostMemory="32019484">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="943275" HostCore="16" HostMemory="32019484">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="999721" HostCore="16" HostMemory="32019484">
+    <Process Command="vivado" Owner="alexthecat123" Host="alex-cattop" Pid="1703087" HostCore="16" HostMemory="32019480">
     </Process>
 </ProcessHandle>

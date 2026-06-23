@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-| Date             : Sat Jun  6 16:22:31 2026
+| Date             : Mon Jun 22 19:19:27 2026
 | Host             : alex-cattop running 64-bit Linux Mint 22.1
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 1.278        |
+| Total On-Chip Power (W)  | 1.175        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 1.176        |
+| Dynamic (W)              | 1.073        |
 | Device Static (W)        | 0.102        |
 | Effective TJA (C/W)      | 4.6          |
-| Max Ambient (C)          | 79.2         |
-| Junction Temperature (C) | 30.8         |
+| Max Ambient (C)          | 79.6         |
+| Junction Temperature (C) | 30.4         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,23 +52,23 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.019 |       22 |       --- |             --- |
-| Slice Logic              |     0.134 |    40681 |       --- |             --- |
-|   LUT as Logic           |     0.132 |    17132 |     63400 |           27.02 |
-|   F7/F8 Muxes            |     0.001 |     5108 |     63400 |            8.06 |
-|   CARRY4                 |    <0.001 |      168 |     15850 |            1.06 |
-|   Register               |    <0.001 |    16305 |    126800 |           12.86 |
+| Clocks                   |     0.019 |       23 |       --- |             --- |
+| Slice Logic              |     0.136 |    42107 |       --- |             --- |
+|   LUT as Logic           |     0.134 |    17662 |     63400 |           27.86 |
+|   F7/F8 Muxes            |     0.001 |     5109 |     63400 |            8.06 |
+|   CARRY4                 |    <0.001 |      178 |     15850 |            1.12 |
+|   Register               |    <0.001 |    17050 |    126800 |           13.45 |
 |   LUT as Shift Register  |    <0.001 |       13 |     19000 |            0.07 |
 |   LUT as Distributed RAM |    <0.001 |      132 |     19000 |            0.69 |
-|   BUFG                   |    <0.001 |        2 |        32 |            6.25 |
-|   Others                 |     0.000 |      114 |       --- |             --- |
-| Signals                  |     0.488 |    28273 |       --- |             --- |
+|   BUFG                   |    <0.001 |        3 |        32 |            9.38 |
+|   Others                 |     0.000 |      124 |       --- |             --- |
+| Signals                  |     0.383 |    29438 |       --- |             --- |
 | Block RAM                |     0.038 |     19.5 |       135 |           14.44 |
 | MMCM                     |     0.324 |        3 |         6 |           50.00 |
 | DSPs                     |     0.001 |        1 |       240 |            0.42 |
-| I/O                      |     0.172 |      188 |       210 |           89.52 |
+| I/O                      |     0.171 |      179 |       210 |           85.24 |
 | Static Power             |     0.102 |          |           |                 |
-| Total                    |     1.278 |          |           |                 |
+| Total                    |     1.175 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -78,8 +78,8 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.703 |       0.684 |      0.019 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.199 |       0.180 |      0.018 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.600 |       0.581 |      0.019 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.198 |       0.180 |      0.018 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.054 |       0.050 |      0.004 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -137,6 +137,7 @@ Table of Contents
 | C16M_clock_divider     | primary_clock_divider/inst/C16M_clock_divider                   |            62.2 |
 | C5M_clock_divider      | primary_clock_divider/inst/C5M_clock_divider                    |           199.5 |
 | COPCK_2x_clock_divider | primary_clock_divider/inst/COPCK_2x_clock_divider               |           127.7 |
+| SCCCK_2x_clock_divider | primary_clock_divider/inst/SCCCK_2x_clock_divider               |           135.7 |
 | clk_audio              | lisa_hdmi_output/clk_audio                                      |         20830.3 |
 | clk_feedback_out       | lisa_hdmi_output/hdmi_clock_generator/inst/clkfb_out            |            16.0 |
 | clk_pixel_1080p30      | lisa_hdmi_output/hdmi_clock_generator/inst/clk_pixel_1080p30    |            13.5 |
@@ -161,26 +162,27 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+--------------------------------------+-----------+
-| Name                                 | Power (W) |
-+--------------------------------------+-----------+
-| top                                  |     1.176 |
-|   cpu_board                          |     0.618 |
-|     M68K                             |     0.012 |
-|       excUnit                        |     0.008 |
-|     low_MMU_RAM                      |     0.323 |
-|     mid_MMU_RAM                      |     0.261 |
-|   dotck_generator                    |     0.121 |
-|     inst                             |     0.121 |
-|   io_board                           |     0.003 |
-|   lisa_hdmi_output                   |     0.164 |
-|     hdmi                             |     0.013 |
-|       serializer                     |     0.004 |
-|       true_hdmi_output.packet_picker |     0.007 |
-|     hdmi_clock_generator             |     0.109 |
-|       inst                           |     0.109 |
-|   primary_clock_divider              |     0.096 |
-|     inst                             |     0.096 |
-+--------------------------------------+-----------+
++-------------------------------------------+-----------+
+| Name                                      | Power (W) |
++-------------------------------------------+-----------+
+| top                                       |     1.073 |
+|   cpu_board                               |     0.513 |
+|     M68K                                  |     0.012 |
+|       excUnit                             |     0.008 |
+|     low_MMU_RAM                           |     0.246 |
+|     mid_MMU_RAM                           |     0.232 |
+|   dotck_generator                         |     0.121 |
+|     inst                                  |     0.121 |
+|   io_board                                |     0.006 |
+|     absolutely_amazing_scc_implementation |     0.003 |
+|   lisa_hdmi_output                        |     0.163 |
+|     hdmi                                  |     0.013 |
+|       serializer                          |     0.004 |
+|       true_hdmi_output.packet_picker      |     0.006 |
+|     hdmi_clock_generator                  |     0.109 |
+|       inst                                |     0.109 |
+|   primary_clock_divider                   |     0.096 |
+|     inst                                  |     0.096 |
++-------------------------------------------+-----------+
 
 

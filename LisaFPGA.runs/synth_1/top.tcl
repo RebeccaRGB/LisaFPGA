@@ -58,7 +58,6 @@ if {$::dispatch::connected} {
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 4
 set_param xicom.use_bs_reader 1
-set_param tcl.collectionResultDisplayLimit 0
 set_param general.usePosixSpawnForFork 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tcsg324-2
@@ -135,13 +134,11 @@ read_verilog -library xil_defaultlib -sv {
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/fx68k-master/uaddrPla.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/new/usb_keyboard_interface.sv
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/new/usb_mouse_interface.sv
+  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv
 }
 read_verilog -library xil_defaultlib {
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/6502/6502.v
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/6502/ALU.v
-  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/rxuart.v
-  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v
-  /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/txuart.v
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host_rom.v
   /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/via6522.v

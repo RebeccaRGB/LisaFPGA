@@ -3,8 +3,8 @@
 # SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Sat Jun  6 15:13:37 2026
-# Process ID         : 859105
+# Start of session at: Mon Jun 22 18:03:56 2026
+# Process ID         : 1603943
 # Current directory  : /home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1
 # Command line       : vivado -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
 # Log file           : /home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/top.vds
@@ -13,13 +13,13 @@
 # Platform           : Linuxmint
 # Operating System   : Linux Mint 22.1
 # Processor Detail   : AMD Ryzen 7 7745HX with Radeon Graphics
-# CPU Frequency      : 4855.646 MHz
+# CPU Frequency      : 4191.717 MHz
 # CPU Physical cores : 8
 # CPU Logical cores  : 16
 # Host memory        : 32787 MB
 # Swap memory        : 8589 MB
 # Total Virtual      : 41377 MB
-# Available Virtual  : 21797 MB
+# Available Virtual  : 19559 MB
 #-----------------------------------------------------------
 source top.tcl -notrace
 Command: synth_design -top top -part xc7a100tcsg324-2
@@ -29,11 +29,11 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100
 INFO: [Device 21-403] Loading part xc7a100tcsg324-2
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 7 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 859476
+INFO: [Synth 8-7075] Helper process launched with PID 1604443
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2223.020 ; gain = 481.875 ; free physical = 7053 ; free virtual = 19542
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2222.723 ; gain = 482.594 ; free physical = 4168 ; free virtual = 17352
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-11241] undeclared symbol 'C4M', assumed default net type 'wire' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1061]
+INFO: [Synth 8-11241] undeclared symbol 'C4M', assumed default net type 'wire' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:836]
 WARNING: [Synth 8-6901] identifier '_CAS_sdram' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/mem_board_2mb.sv:210]
 WARNING: [Synth 8-6901] identifier '_RAS_sdram' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/mem_board_2mb.sv:210]
 WARNING: [Synth 8-6901] identifier '_CAS_sdram' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/mem_board_2mb.sv:224]
@@ -44,18 +44,6 @@ WARNING: [Synth 8-6901] identifier 'SEL_A' is used before its declaration [/home
 WARNING: [Synth 8-6901] identifier 'SEL_X' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/6502/6502.v:81]
 WARNING: [Synth 8-6901] identifier 'SEL_Y' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/6502/6502.v:82]
 WARNING: [Synth 8-6901] identifier 'SEL_S' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/6502/6502.v:83]
-INFO: [Synth 8-11241] undeclared symbol 'break_a', assumed default net type 'wire' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:851]
-INFO: [Synth 8-11241] undeclared symbol 'parity_err_a', assumed default net type 'wire' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:852]
-INFO: [Synth 8-11241] undeclared symbol 'frame_err_a', assumed default net type 'wire' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:853]
-WARNING: [Synth 8-6901] identifier 'rx_wr_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:163]
-WARNING: [Synth 8-6901] identifier 'tx_busy_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:167]
-WARNING: [Synth 8-6901] identifier 'cts_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:520]
-WARNING: [Synth 8-6901] identifier 'tx_busy_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:524]
-WARNING: [Synth 8-6901] identifier 'tx_busy_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:546]
-WARNING: [Synth 8-6901] identifier 'tx_busy_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:644]
-WARNING: [Synth 8-6901] identifier 'tx_busy_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:647]
-WARNING: [Synth 8-6901] identifier 'cts_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:706]
-WARNING: [Synth 8-6901] identifier 'cts_a' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/scc/scc.v:768]
 WARNING: [Synth 8-6901] identifier 'dmi' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v:220]
 WARNING: [Synth 8-6901] identifier 'dpi' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v:222]
 WARNING: [Synth 8-6901] identifier 'dmi' is used before its declaration [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v:222]
@@ -81,23 +69,23 @@ INFO: [Synth 8-6157] synthesizing module 'IOBUF' [/tools/Xilinx/2025.2/Vivado/sc
 INFO: [Synth 8-6155] done synthesizing module 'IOBUF' (0#1) [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:87566]
 INFO: [Synth 8-6157] synthesizing module 'IBUF' [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:82804]
 INFO: [Synth 8-6155] done synthesizing module 'IBUF' (0#1) [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:82804]
-INFO: [Synth 8-6157] synthesizing module 'clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-859105-alex-cattop/realtime/clock_divider_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'clock_divider' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-859105-alex-cattop/realtime/clock_divider_stub.v:6]
-WARNING: [Synth 8-7071] port 'lisa_dotck' of module 'clock_divider' is unconnected for instance 'primary_clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:293]
-WARNING: [Synth 8-7071] port 'reset' of module 'clock_divider' is unconnected for instance 'primary_clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:293]
-WARNING: [Synth 8-7023] instance 'primary_clock_divider' of module 'clock_divider' has 8 connections declared, but only 6 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:293]
-INFO: [Synth 8-6157] synthesizing module 'dotck_mmcm' [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-859105-alex-cattop/realtime/dotck_mmcm_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'dotck_mmcm' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-859105-alex-cattop/realtime/dotck_mmcm_stub.v:6]
-WARNING: [Synth 8-7071] port 'reset' of module 'dotck_mmcm' is unconnected for instance 'dotck_generator' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:311]
-WARNING: [Synth 8-7023] instance 'dotck_generator' of module 'dotck_mmcm' has 6 connections declared, but only 5 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:311]
+INFO: [Synth 8-6157] synthesizing module 'clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-1603943-alex-cattop/realtime/clock_divider_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'clock_divider' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-1603943-alex-cattop/realtime/clock_divider_stub.v:6]
+WARNING: [Synth 8-7071] port 'lisa_dotck' of module 'clock_divider' is unconnected for instance 'primary_clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:281]
+WARNING: [Synth 8-7071] port 'reset' of module 'clock_divider' is unconnected for instance 'primary_clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:281]
+WARNING: [Synth 8-7023] instance 'primary_clock_divider' of module 'clock_divider' has 8 connections declared, but only 6 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:281]
+INFO: [Synth 8-6157] synthesizing module 'dotck_mmcm' [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-1603943-alex-cattop/realtime/dotck_mmcm_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'dotck_mmcm' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-1603943-alex-cattop/realtime/dotck_mmcm_stub.v:6]
+WARNING: [Synth 8-7071] port 'reset' of module 'dotck_mmcm' is unconnected for instance 'dotck_generator' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:299]
+WARNING: [Synth 8-7023] instance 'dotck_generator' of module 'dotck_mmcm' has 6 connections declared, but only 5 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:299]
 INFO: [Synth 8-6157] synthesizing module 'BUFGMUX' [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2779]
 	Parameter CLK_SEL_TYPE bound to: SYNC - type: string 
 INFO: [Synth 8-6155] done synthesizing module 'BUFGMUX' (0#1) [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2779]
 INFO: [Synth 8-6157] synthesizing module 'BUFGCE' [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2688]
 INFO: [Synth 8-6155] done synthesizing module 'BUFGCE' (0#1) [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2688]
 INFO: [Synth 8-6157] synthesizing module 'HDMI_Interface' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/HDMI_Interface.sv:23]
-INFO: [Synth 8-6157] synthesizing module 'hdmi_clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-859105-alex-cattop/realtime/hdmi_clock_divider_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'hdmi_clock_divider' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-859105-alex-cattop/realtime/hdmi_clock_divider_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'hdmi_clock_divider' [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-1603943-alex-cattop/realtime/hdmi_clock_divider_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'hdmi_clock_divider' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/.Xil/Vivado-1603943-alex-cattop/realtime/hdmi_clock_divider_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'BUFG' [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2678]
 INFO: [Synth 8-6155] done synthesizing module 'BUFG' (0#1) [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2678]
 INFO: [Synth 8-6157] synthesizing module 'BUFGMUX__parameterized0' [/tools/Xilinx/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2779]
@@ -369,38 +357,38 @@ INFO: [Synth 8-155] case statement is not full and has no default [/home/alexthe
 INFO: [Synth 8-155] case statement is not full and has no default [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v:92]
 INFO: [Synth 8-155] case statement is not full and has no default [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v:106]
 INFO: [Synth 8-6155] done synthesizing module 'usb_hid_host' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v:12]
-WARNING: [Synth 8-7071] port 'conerr' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'key2' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'key3' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'key4' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'game_l' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'game_r' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'game_u' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'game_d' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'game_a' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'game_b' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'game_x' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'game_y' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'game_sel' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'game_sta' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'dbg_hid_report' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7023] instance 'usb_port0' of module 'usb_hid_host' has 29 connections declared, but only 14 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:873]
-WARNING: [Synth 8-7071] port 'conerr' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'key2' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'key3' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'key4' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'game_l' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'game_r' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'game_u' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'game_d' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'game_a' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'game_b' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'game_x' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'game_y' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'game_sel' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'game_sta' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7071] port 'dbg_hid_report' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
-WARNING: [Synth 8-7023] instance 'usb_port1' of module 'usb_hid_host' has 29 connections declared, but only 14 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:927]
+WARNING: [Synth 8-7071] port 'conerr' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'key2' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'key3' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'key4' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'game_l' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'game_r' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'game_u' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'game_d' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'game_a' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'game_b' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'game_x' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'game_y' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'game_sel' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'game_sta' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'dbg_hid_report' of module 'usb_hid_host' is unconnected for instance 'usb_port0' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7023] instance 'usb_port0' of module 'usb_hid_host' has 29 connections declared, but only 14 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:856]
+WARNING: [Synth 8-7071] port 'conerr' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'key2' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'key3' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'key4' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'game_l' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'game_r' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'game_u' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'game_d' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'game_a' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'game_b' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'game_x' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'game_y' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'game_sel' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'game_sta' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7071] port 'dbg_hid_report' of module 'usb_hid_host' is unconnected for instance 'usb_port1' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
+WARNING: [Synth 8-7023] instance 'usb_port1' of module 'usb_hid_host' has 29 connections declared, but only 14 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:910]
 INFO: [Synth 8-6157] synthesizing module 'usb_mouse_interface' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/new/usb_mouse_interface.sv:23]
 INFO: [Synth 8-6155] done synthesizing module 'usb_mouse_interface' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/new/usb_mouse_interface.sv:23]
 INFO: [Synth 8-6157] synthesizing module 'usb_keyboard_interface' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/new/usb_keyboard_interface.sv:23]
@@ -430,22 +418,28 @@ INFO: [Synth 8-3876] $readmem data file 'P6A.mem' is read successfully [/home/al
 INFO: [Synth 8-6155] done synthesizing module 'PROM_6309__parameterized1' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/PROM_6309.sv:23]
 INFO: [Synth 8-6157] synthesizing module 'AM9512_FPU' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/AM9512_FPU.sv:23]
 INFO: [Synth 8-6155] done synthesizing module 'AM9512_FPU' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/AM9512_FPU.sv:23]
+INFO: [Synth 8-6157] synthesizing module 'z8530_scc' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:24]
+INFO: [Synth 8-6157] synthesizing module 'scc_async_fifo' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1655]
+	Parameter DW bound to: 8 - type: integer 
+	Parameter AW bound to: 2 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'scc_async_fifo' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1655]
+INFO: [Synth 8-6155] done synthesizing module 'z8530_scc' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:24]
 INFO: [Synth 8-6157] synthesizing module 'via6522' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/via6522.v:15]
 INFO: [Synth 8-6155] done synthesizing module 'via6522' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/via6522.v:15]
-WARNING: [Synth 8-7071] port 'phi2_ref' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:942]
-WARNING: [Synth 8-7071] port 'port_a_t' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:942]
-WARNING: [Synth 8-7071] port 'ca2_t' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:942]
-WARNING: [Synth 8-7071] port 'cb1_o' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:942]
-WARNING: [Synth 8-7071] port 'cb1_t' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:942]
-WARNING: [Synth 8-7071] port 'cb2_o' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:942]
-WARNING: [Synth 8-7071] port 'cb2_t' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:942]
-WARNING: [Synth 8-7023] instance 'pp_via' of module 'via6522' has 27 connections declared, but only 20 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:942]
+WARNING: [Synth 8-7071] port 'phi2_ref' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:913]
+WARNING: [Synth 8-7071] port 'port_a_t' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:913]
+WARNING: [Synth 8-7071] port 'ca2_t' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:913]
+WARNING: [Synth 8-7071] port 'cb1_o' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:913]
+WARNING: [Synth 8-7071] port 'cb1_t' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:913]
+WARNING: [Synth 8-7071] port 'cb2_o' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:913]
+WARNING: [Synth 8-7071] port 'cb2_t' of module 'via6522' is unconnected for instance 'pp_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:913]
+WARNING: [Synth 8-7023] instance 'pp_via' of module 'via6522' has 27 connections declared, but only 20 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:913]
 INFO: [Synth 8-6157] synthesizing module 'parity_generator_LS280' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/parity_generator_LS280.sv:23]
 INFO: [Synth 8-6155] done synthesizing module 'parity_generator_LS280' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/parity_generator_LS280.sv:23]
-WARNING: [Synth 8-7071] port 'ODD' of module 'parity_generator_LS280' is unconnected for instance 'ProFile_input_parity_checker' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1003]
-WARNING: [Synth 8-7023] instance 'ProFile_input_parity_checker' of module 'parity_generator_LS280' has 3 connections declared, but only 2 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1003]
-WARNING: [Synth 8-7071] port 'EVEN' of module 'parity_generator_LS280' is unconnected for instance 'ProFile_output_parity_generator' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1037]
-WARNING: [Synth 8-7023] instance 'ProFile_output_parity_generator' of module 'parity_generator_LS280' has 3 connections declared, but only 2 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1037]
+WARNING: [Synth 8-7071] port 'ODD' of module 'parity_generator_LS280' is unconnected for instance 'ProFile_input_parity_checker' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:974]
+WARNING: [Synth 8-7023] instance 'ProFile_input_parity_checker' of module 'parity_generator_LS280' has 3 connections declared, but only 2 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:974]
+WARNING: [Synth 8-7071] port 'EVEN' of module 'parity_generator_LS280' is unconnected for instance 'ProFile_output_parity_generator' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1008]
+WARNING: [Synth 8-7023] instance 'ProFile_output_parity_generator' of module 'parity_generator_LS280' has 3 connections declared, but only 2 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1008]
 INFO: [Synth 8-638] synthesizing module 't420_notri' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/t400/t420_notri.vhd:96]
 	Parameter opt_type_g bound to: 1 - type: integer 
 	Parameter opt_ck_div_g bound to: 2 - type: integer 
@@ -541,18 +535,18 @@ INFO: [Synth 8-638] synthesizing module 't400_por' [/home/alexthecat123/LisaFPGA
 	Parameter cnt_width_g bound to: 3 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 't400_por' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/t400/t400_por.vhd:69]
 INFO: [Synth 8-256] done synthesizing module 't420_notri' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/t400/t420_notri.vhd:96]
-WARNING: [Synth 8-7071] port 'cko_i' of module 't420_notri' is unconnected for instance 'cop421' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1168]
-WARNING: [Synth 8-7071] port 'io_l_en_o' of module 't420_notri' is unconnected for instance 'cop421' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1168]
-WARNING: [Synth 8-7071] port 'io_d_en_o' of module 't420_notri' is unconnected for instance 'cop421' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1168]
-WARNING: [Synth 8-7071] port 'io_g_en_o' of module 't420_notri' is unconnected for instance 'cop421' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1168]
-WARNING: [Synth 8-7071] port 'so_en_o' of module 't420_notri' is unconnected for instance 'cop421' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1168]
-WARNING: [Synth 8-7071] port 'sk_en_o' of module 't420_notri' is unconnected for instance 'cop421' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1168]
-WARNING: [Synth 8-7023] instance 'cop421' of module 't420_notri' has 18 connections declared, but only 12 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1168]
-WARNING: [Synth 8-7071] port 'phi2_ref' of module 'via6522' is unconnected for instance 'kbd_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1208]
-WARNING: [Synth 8-7071] port 'cb1_o' of module 'via6522' is unconnected for instance 'kbd_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1208]
-WARNING: [Synth 8-7071] port 'cb1_t' of module 'via6522' is unconnected for instance 'kbd_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1208]
-WARNING: [Synth 8-7071] port 'cb2_t' of module 'via6522' is unconnected for instance 'kbd_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1208]
-WARNING: [Synth 8-7023] instance 'kbd_via' of module 'via6522' has 27 connections declared, but only 23 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1208]
+WARNING: [Synth 8-7071] port 'cko_i' of module 't420_notri' is unconnected for instance 'cop421' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1142]
+WARNING: [Synth 8-7071] port 'io_l_en_o' of module 't420_notri' is unconnected for instance 'cop421' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1142]
+WARNING: [Synth 8-7071] port 'io_d_en_o' of module 't420_notri' is unconnected for instance 'cop421' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1142]
+WARNING: [Synth 8-7071] port 'io_g_en_o' of module 't420_notri' is unconnected for instance 'cop421' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1142]
+WARNING: [Synth 8-7071] port 'so_en_o' of module 't420_notri' is unconnected for instance 'cop421' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1142]
+WARNING: [Synth 8-7071] port 'sk_en_o' of module 't420_notri' is unconnected for instance 'cop421' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1142]
+WARNING: [Synth 8-7023] instance 'cop421' of module 't420_notri' has 18 connections declared, but only 12 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1142]
+WARNING: [Synth 8-7071] port 'phi2_ref' of module 'via6522' is unconnected for instance 'kbd_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1182]
+WARNING: [Synth 8-7071] port 'cb1_o' of module 'via6522' is unconnected for instance 'kbd_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1182]
+WARNING: [Synth 8-7071] port 'cb1_t' of module 'via6522' is unconnected for instance 'kbd_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1182]
+WARNING: [Synth 8-7071] port 'cb2_t' of module 'via6522' is unconnected for instance 'kbd_via' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1182]
+WARNING: [Synth 8-7023] instance 'kbd_via' of module 'via6522' has 27 connections declared, but only 23 given [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1182]
 INFO: [Synth 8-6155] done synthesizing module 'IO_board' (0#1) [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
 INFO: [Synth 8-6157] synthesizing module 'mem_board_2mb' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/mem_board_2mb.sv:22]
 INFO: [Synth 8-6157] synthesizing module 'SDRAM_Controller_Flat' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/SDRAM_Controller_Flat.sv:22]
@@ -675,7 +669,7 @@ Reason is one or more of the following :
 	3: Invalid write to RAM. 
 	4: No valid clock found for write to RAM. 
 WARNING: [Synth 8-6014] Unused sequential element dataOe_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/fx68k-master/fx68k.sv:2393]
-INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'cpu_board'. This will prevent further optimization [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:548]
+INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'cpu_board'. This will prevent further optimization [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:532]
 INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'M68K'. This will prevent further optimization [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:1354]
 INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'CPU_board_decoder_2'. This will prevent further optimization [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:1011]
 INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'high_MMU_RAM'. This will prevent further optimization [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:623]
@@ -700,6 +694,28 @@ WARNING: [Synth 8-7137] Register mouse_dx_reg in module usb_mouse_interface has 
 WARNING: [Synth 8-7137] Register mouse_dy_reg in module usb_mouse_interface has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/new/usb_mouse_interface.sv:51]
 WARNING: [Synth 8-6014] Unused sequential element brk_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/6502/6502.v:1211]
 WARNING: [Synth 8-7137] Register IRHOLD_reg in module cpu has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/6502/6502.v:866]
+WARNING: [Synth 8-7137] Register mem_reg in module scc_async_fifo has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code 
+WARNING: [Synth 8-4767] Trying to implement RAM 'mem_reg' in registers. Block RAM or DRAM implementation is not possible; see log for reasons. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1695]
+Reason is one or more of the following :
+	1: RAM is sensitive to asynchronous reset signal. this RTL style is not supported. 
+WARNING: [Synth 8-6014] Unused sequential element rxca_sync_c_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:372]
+WARNING: [Synth 8-6014] Unused sequential element rxcb_sync_c_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:373]
+WARNING: [Synth 8-6014] Unused sequential element txca_sync_c_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:374]
+WARNING: [Synth 8-6014] Unused sequential element txcb_sync_c_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:375]
+WARNING: [Synth 8-6014] Unused sequential element rx_active_a_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:917]
+WARNING: [Synth 8-6014] Unused sequential element rx_framing_err_a_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:919]
+WARNING: [Synth 8-6014] Unused sequential element rx_active_b_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1025]
+WARNING: [Synth 8-6014] Unused sequential element rx_framing_err_b_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1027]
+WARNING: [Synth 8-6014] Unused sequential element rx_framing_err_a_sync_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1177]
+WARNING: [Synth 8-6014] Unused sequential element rx_framing_err_b_sync_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1178]
+WARNING: [Synth 8-6014] Unused sequential element wr0_a_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1495]
+WARNING: [Synth 8-6014] Unused sequential element wr6_a_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1496]
+WARNING: [Synth 8-6014] Unused sequential element wr7_a_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1496]
+WARNING: [Synth 8-6014] Unused sequential element wr10_a_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1497]
+WARNING: [Synth 8-6014] Unused sequential element wr0_b_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1500]
+WARNING: [Synth 8-6014] Unused sequential element wr6_b_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1501]
+WARNING: [Synth 8-6014] Unused sequential element wr7_b_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1501]
+WARNING: [Synth 8-6014] Unused sequential element wr10_b_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/naftaly_blum_scc/z8530_scc.sv:1502]
 WARNING: [Synth 8-7137] Register ca1_c_reg in module via6522 has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/via6522.v:115]
 WARNING: [Synth 8-7137] Register ca2_c_reg in module via6522 has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/via6522.v:120]
 WARNING: [Synth 8-7137] Register cb1_c_reg in module via6522 has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/via6522.v:126]
@@ -720,12 +736,12 @@ WARNING: [Synth 8-7137] Register timer_b_tick_reg in module via6522 has both Set
 WARNING: [Synth 8-7137] Register cb2_c2_reg in module via6522 has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/via6522.v:522]
 WARNING: [Synth 8-7137] Register shift_timer_tick_reg in module via6522 has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/via6522.v:513]
 WARNING: [Synth 8-6014] Unused sequential element skip_int_q_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/t400/t400_skip.vhd:104]
-WARNING: [Synth 8-6014] Unused sequential element state_machine_clk_prev_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:749]
-WARNING: [Synth 8-7137] Register WCNT_sync_prev_reg in module IO_board has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1360]
+WARNING: [Synth 8-6014] Unused sequential element state_machine_clk_prev_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:737]
+WARNING: [Synth 8-7137] Register WCNT_sync_prev_reg in module IO_board has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:1334]
 WARNING: [Synth 8-6014] Unused sequential element invalid_parity_latched_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/mem_board_2mb.sv:190]
 WARNING: [Synth 8-6014] Unused sequential element LBDSL_readop_prev_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/mem_board_2mb.sv:189]
 WARNING: [Synth 8-6014] Unused sequential element _CAS_prev_reg was removed.  [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/new/mem_board_2mb.sv:191]
-WARNING: [Synth 8-3917] design top has port INTERNAL_SCC_EN driven by constant 1
+WARNING: [Synth 8-3917] design top has port INTERNAL_SCC_EN driven by constant 0
 WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[5] driven by constant 0
 WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[4] driven by constant 0
 WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[3] driven by constant 0
@@ -772,6 +788,7 @@ WARNING: [Synth 8-7129] Port dec_data_i[8] in module t400_dmem_ctrl is either un
 WARNING: [Synth 8-7129] Port dec_data_i[7] in module t400_dmem_ctrl is either unconnected or has no load
 WARNING: [Synth 8-7129] Port dec_data_i[6] in module t400_dmem_ctrl is either unconnected or has no load
 WARNING: [Synth 8-7129] Port io_in_i[0] in module t400_core is either unconnected or has no load
+WARNING: [Synth 8-7129] Port intack_n in module z8530_scc is either unconnected or has no load
 WARNING: [Synth 8-7129] Port C_D in module AM9512_FPU is either unconnected or has no load
 WARNING: [Synth 8-7129] Port _RD in module AM9512_FPU is either unconnected or has no load
 WARNING: [Synth 8-7129] Port _WR in module AM9512_FPU is either unconnected or has no load
@@ -806,15 +823,7 @@ WARNING: [Synth 8-7129] Port _VPA_in in module IO_board is either unconnected or
 WARNING: [Synth 8-7129] Port _DTACK_in in module IO_board is either unconnected or has no load
 WARNING: [Synth 8-7129] Port _LDS in module IO_board is either unconnected or has no load
 WARNING: [Synth 8-7129] Port _UDS in module IO_board is either unconnected or has no load
-WARNING: [Synth 8-7129] Port SYNCA in module IO_board is either unconnected or has no load
-WARNING: [Synth 8-7129] Port RXDA in module IO_board is either unconnected or has no load
-WARNING: [Synth 8-7129] Port CTSA in module IO_board is either unconnected or has no load
-WARNING: [Synth 8-7129] Port DCDA in module IO_board is either unconnected or has no load
-WARNING: [Synth 8-7129] Port RTXCA in module IO_board is either unconnected or has no load
-WARNING: [Synth 8-7129] Port RXDB in module IO_board is either unconnected or has no load
-WARNING: [Synth 8-7129] Port CTSB_TRXCB in module IO_board is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sysclk in module IO_board is either unconnected or has no load
-WARNING: [Synth 8-7129] Port SCCCK in module IO_board is either unconnected or has no load
 WARNING: [Synth 8-7129] Port mouse_btn_in[7] in module usb_mouse_interface is either unconnected or has no load
 WARNING: [Synth 8-7129] Port mouse_btn_in[6] in module usb_mouse_interface is either unconnected or has no load
 WARNING: [Synth 8-7129] Port mouse_btn_in[5] in module usb_mouse_interface is either unconnected or has no load
@@ -832,25 +841,32 @@ WARNING: [Synth 8-7129] Port Irdecod[toCcr] in module nDecoder3 is either unconn
 WARNING: [Synth 8-7129] Port Irdecod[rxIsDt] in module nDecoder3 is either unconnected or has no load
 WARNING: [Synth 8-7129] Port Irdecod[ryIsDt] in module nDecoder3 is either unconnected or has no load
 WARNING: [Synth 8-7129] Port Irdecod[rxIsUsp] in module nDecoder3 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Irdecod[rxIsMovem] in module nDecoder3 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Irdecod[movemPreDecr] in module nDecoder3 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Irdecod[isByte] in module nDecoder3 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Irdecod[isMovep] in module nDecoder3 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Irdecod[rx][2] in module nDecoder3 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Irdecod[rx][1] in module nDecoder3 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Irdecod[rx][0] in module nDecoder3 is either unconnected or has no load
 INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2517.527 ; gain = 776.383 ; free physical = 6733 ; free virtual = 19227
+Finished RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 2533.230 ; gain = 793.102 ; free physical = 3845 ; free virtual = 17037
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2517.527 ; gain = 776.383 ; free physical = 6732 ; free virtual = 19227
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 2533.230 ; gain = 793.102 ; free physical = 3846 ; free virtual = 17038
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2517.527 ; gain = 776.383 ; free physical = 6732 ; free virtual = 19227
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 2533.230 ; gain = 793.102 ; free physical = 3846 ; free virtual = 17038
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00.12 ; elapsed = 00:00:00.12 . Memory (MB): peak = 2517.527 ; gain = 0.000 ; free physical = 6740 ; free virtual = 19235
+Netlist sorting complete. Time (s): cpu = 00:00:00.21 ; elapsed = 00:00:00.21 . Memory (MB): peak = 2533.230 ; gain = 0.000 ; free physical = 3848 ; free virtual = 17040
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'C16M_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'C5M_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'DOTCK_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'SCCCK_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
-INFO: [Netlist 29-17] Analyzing 60 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 52 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 WARNING: [Netlist 29-1115] Found multi-term driver net: <const0>.
 WARNING: [Netlist 29-1115] Found multi-term driver net: <const1>.
@@ -868,84 +884,305 @@ Finished Parsing XDC File [/home/alexthecat123/LisaFPGA/LisaFPGA.gen/sources_1/i
 Parsing XDC File [/home/alexthecat123/LisaFPGA/LisaFPGA.gen/sources_1/ip/hdmi_clock_divider/hdmi_clock_divider/hdmi_clock_divider_in_context.xdc] for cell 'lisa_hdmi_output/hdmi_clock_generator'
 Finished Parsing XDC File [/home/alexthecat123/LisaFPGA/LisaFPGA.gen/sources_1/ip/hdmi_clock_divider/hdmi_clock_divider/hdmi_clock_divider_in_context.xdc] for cell 'lisa_hdmi_output/hdmi_clock_generator'
 Parsing XDC File [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc]
-WARNING: [Vivado 12-646] clock 'dotck_20M_dotck_mmcm' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:101]
-WARNING: [Vivado 12-646] clock 'dotck_40M_dotck_mmcm' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:101]
-WARNING: [Vivado 12-646] clock 'dotck_60M_dotck_mmcm' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:101]
-WARNING: [Vivado 12-646] clock 'dotck_80M_dotck_mmcm' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:101]
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group dotck_20M_dotck_mmcm'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:101]
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/GND' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/VCC' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_a_s_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_a_s_i__0' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_a_s_i__1' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_a_s_i__2' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_a_s_i__3' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_a_s_i__4' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_a_s_i__5' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_a_s_i__6' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_a_s_i__7' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_b_s_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_b_s_i__0' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_b_s_i__1' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_b_s_i__2' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_b_s_i__3' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_b_s_i__4' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_b_s_i__5' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_b_s_i__6' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_b_s_i__7' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_change_a_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_change_b_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_a0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_a0_i__0' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_a_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_a_i__0' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_a_i__1' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_a_i__2' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_a_i__3' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_a_i__4' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_a_i__5' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_b0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_b0_i__0' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_b_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_b_i__0' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_b_i__1' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_b_i__2' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_b_i__3' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_b_i__4' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/break_cnt_b_i__5' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_counter_a0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_counter_a_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_counter_a_i__0' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_counter_a_i__1' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_counter_b0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_counter_b_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_counter_b_i__0' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_counter_b_i__1' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_divisor_b_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_out_a0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_out_a_d0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_out_a_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_out_a_i__0' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_out_a_i__1' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_out_a_i__2' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_out_b0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_out_b_d0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_out_b_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_out_b_i__0' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_out_b_i__1' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_out_b_i__2' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_reload_a_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_reload_b_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_rise_a_s_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/brg_rise_b_s_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/chip_sel_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/chreset_a_cmd0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/chreset_a_cmd_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/chreset_b_cmd0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/chreset_b_cmd_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/clk_mult_a_s_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/clk_mult_b_s_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/cts_change_a_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/cts_change_b_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/data_out_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/data_out_i__0' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/data_out_i__1' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/data_out_i__2' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/data_out_i__3' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/data_out_i__4' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/dcd_change_a_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/dcd_change_b_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/dtra_n_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/dtrb_n_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/err_rst_pulse_a_s_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/err_rst_pulse_b_s_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/err_rst_toggle_a0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/err_rst_toggle_b0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/error_reset_cmd_a0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/error_reset_cmd_a0_i__0' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/error_reset_cmd_a1_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/error_reset_cmd_a_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/error_reset_cmd_b0_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/error_reset_cmd_b1_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/error_reset_cmd_b_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/ext_int_active_a_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/ext_int_active_b_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/ext_int_pend_a_i' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/ext_int_pend_a_i__0' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'io_board/absolutely_amazing_scc_implementation/ext_int_pend_a_i__1' is not a valid endpoint. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+INFO: [Common 17-14] Message 'Constraints 18-401' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:88]
+WARNING: [Vivado 12-646] clock 'dotck_20M_dotck_mmcm' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:118]
+WARNING: [Vivado 12-646] clock 'dotck_40M_dotck_mmcm' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:118]
+WARNING: [Vivado 12-646] clock 'dotck_60M_dotck_mmcm' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:118]
+WARNING: [Vivado 12-646] clock 'dotck_80M_dotck_mmcm' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:118]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group dotck_20M_dotck_mmcm'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:118]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:101]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:118]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group dotck_40M_dotck_mmcm'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:101]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group dotck_40M_dotck_mmcm'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:118]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:101]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:118]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group dotck_60M_dotck_mmcm'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:101]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group dotck_60M_dotck_mmcm'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:118]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:101]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:118]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group dotck_80M_dotck_mmcm'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:101]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group dotck_80M_dotck_mmcm'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:118]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:101]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:118]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-WARNING: [Vivado 12-646] clock 'clk_pixel_1080p30' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:104]
-WARNING: [Vivado 12-646] clock 'clk_pixel_1080p60' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:104]
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group clk_pixel_1080p30'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:104]
+WARNING: [Vivado 12-646] clock 'clk_pixel_1080p30' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:121]
+WARNING: [Vivado 12-646] clock 'clk_pixel_1080p60' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:121]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group clk_pixel_1080p30'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:121]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:104]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:121]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group clk_pixel_1080p60'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:104]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group clk_pixel_1080p60'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:121]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:104]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:121]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-WARNING: [Vivado 12-646] clock 'clk_pixel_x5_1080p30' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:105]
-WARNING: [Vivado 12-646] clock 'clk_pixel_x5_1080p60' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:105]
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group clk_pixel_x5_1080p30'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:105]
+WARNING: [Vivado 12-646] clock 'clk_pixel_x5_1080p30' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:122]
+WARNING: [Vivado 12-646] clock 'clk_pixel_x5_1080p60' not found. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:122]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group clk_pixel_x5_1080p30'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:122]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:105]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:122]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group clk_pixel_x5_1080p60'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:105]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group clk_pixel_x5_1080p60'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:122]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:105]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:122]
 Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+WARNING: [Vivado 12-584] No ports matched 'SCC_C4M'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:327]
+WARNING: [Vivado 12-584] No ports matched 'SCC_WR'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:328]
+WARNING: [Vivado 12-584] No ports matched 'SCC_RD'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:329]
+WARNING: [Vivado 12-584] No ports matched '_SCC_RSIR'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:330]
+WARNING: [Vivado 12-584] No ports matched 'SCC_A2'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:331]
+WARNING: [Vivado 12-584] No ports matched 'SCC_A1'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:332]
+WARNING: [Vivado 12-584] No ports matched '_SCC_CS'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:333]
+WARNING: [Vivado 12-584] No ports matched '_SCC_PSI'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:334]
+WARNING: [Vivado 12-584] No ports matched 'SCC_D[0]'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:335]
+WARNING: [Vivado 12-584] No ports matched 'SCC_D[1]'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:336]
+WARNING: [Vivado 12-584] No ports matched 'SCC_D[2]'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:337]
+WARNING: [Vivado 12-584] No ports matched 'SCC_D[3]'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:338]
+WARNING: [Vivado 12-584] No ports matched 'SCC_D[4]'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:339]
+WARNING: [Vivado 12-584] No ports matched 'SCC_D[5]'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:340]
+WARNING: [Vivado 12-584] No ports matched 'SCC_D[6]'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:341]
+WARNING: [Vivado 12-584] No ports matched 'SCC_D[7]'. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:342]
 Finished Parsing XDC File [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc]
 WARNING: [Project 1-498] One or more constraints failed evaluation while reading constraint file [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc] and the design contains unresolved black boxes. These constraints will be read post-synthesis (as long as their source constraint file is marked as used_in_implementation) and should be applied correctly then. You should review the constraints listed in the file [.Xil/top_propImpl.xdc] and check the run log file to verify that these constraints were correctly applied.
 INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/top_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2606.328 ; gain = 0.000 ; free physical = 6746 ; free virtual = 19241
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2619.031 ; gain = 0.000 ; free physical = 3818 ; free virtual = 17014
 INFO: [Project 1-111] Unisim Transformation Summary:
-  A total of 56 instances were transformed.
+  A total of 48 instances were transformed.
   BUFGCE => BUFGCTRL: 4 instances
   BUFGMUX => BUFGCTRL (inverted pins: CE0): 5 instances
-  IOBUF => IOBUF (IBUF, OBUFT): 47 instances
+  IOBUF => IOBUF (IBUF, OBUFT): 39 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 2606.363 ; gain = 0.000 ; free physical = 6746 ; free virtual = 19240
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.07 . Memory (MB): peak = 2619.066 ; gain = 0.000 ; free physical = 3818 ; free virtual = 17015
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2606.363 ; gain = 865.219 ; free physical = 6741 ; free virtual = 19236
+Finished Constraint Validation : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2619.066 ; gain = 878.938 ; free physical = 3825 ; free virtual = 17020
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tcsg324-2
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2614.332 ; gain = 873.188 ; free physical = 6741 ; free virtual = 19236
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2627.035 ; gain = 886.906 ; free physical = 3825 ; free virtual = 17020
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2614.332 ; gain = 873.188 ; free physical = 6741 ; free virtual = 19236
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 2627.035 ; gain = 886.906 ; free physical = 3825 ; free virtual = 17020
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'busPhase_reg' in module 'busControl'
 INFO: [Synth 8-802] inferred FSM for state register 'dmaPhase_reg' in module 'busArbiter'
 INFO: [Synth 8-802] inferred FSM for state register 'tState_reg' in module 'fx68k'
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'ukp'
 INFO: [Synth 8-802] inferred FSM for state register 'kbd_reset_sequence_reg' in module 'usb_keyboard_interface'
+INFO: [Synth 8-802] inferred FSM for state register 'tx_state_a_reg' in module 'z8530_scc'
+INFO: [Synth 8-802] inferred FSM for state register 'tx_state_b_reg' in module 'z8530_scc'
+INFO: [Synth 8-802] inferred FSM for state register 'rx_state_a_reg' in module 'z8530_scc'
+INFO: [Synth 8-802] inferred FSM for state register 'rx_state_b_reg' in module 'z8530_scc'
 INFO: [Synth 8-802] inferred FSM for state register 'res_state_q_reg' in module 't400_reset'
 INFO: [Synth 8-802] inferred FSM for state register 'si_flt_q_reg' in module 't400_sio'
-WARNING: [Synth 8-3936] Found unconnected internal register 'MA_reg' and it is trimmed from '16' to '13' bits. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:180]
+WARNING: [Synth 8-3936] Found unconnected internal register 'MA_reg' and it is trimmed from '16' to '13' bits. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:168]
 WARNING: [Synth 8-327] inferring latch for variable 'RAM_array_reg[0]' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/MMU_RAM_2148.sv:38]
 WARNING: [Synth 8-327] inferring latch for variable 'RAM_array_reg[1]' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/MMU_RAM_2148.sv:38]
 WARNING: [Synth 8-327] inferring latch for variable 'RAM_array_reg[2]' [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/MMU_RAM_2148.sv:38]
@@ -1110,6 +1347,48 @@ INFO: [Synth 8-3354] encoded FSM with state register 'kbd_reset_sequence_reg' us
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
+                 TX_IDLE |                              000 |                             0000
+                TX_START |                              001 |                             0001
+                 TX_DATA |                              010 |                             0010
+               TX_PARITY |                              011 |                             0011
+                TX_STOP1 |                              100 |                             0100
+                TX_STOP2 |                              101 |                             0101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'tx_state_b_reg' using encoding 'sequential' in module 'z8530_scc'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 RX_IDLE |                              000 |                             0000
+                RX_START |                              001 |                             0001
+                 RX_DATA |                              010 |                             0010
+               RX_PARITY |                              011 |                             0011
+                 RX_STOP |                              100 |                             0100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'rx_state_b_reg' using encoding 'sequential' in module 'z8530_scc'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 TX_IDLE |                              000 |                             0000
+                TX_START |                              001 |                             0001
+                 TX_DATA |                              010 |                             0010
+               TX_PARITY |                              011 |                             0011
+                TX_STOP1 |                              100 |                             0100
+                TX_STOP2 |                              101 |                             0101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'tx_state_a_reg' using encoding 'sequential' in module 'z8530_scc'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 RX_IDLE |                              000 |                             0000
+                RX_START |                              001 |                             0001
+                 RX_DATA |                              010 |                             0010
+               RX_PARITY |                              011 |                             0011
+                 RX_STOP |                              100 |                             0100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'rx_state_a_reg' using encoding 'sequential' in module 'z8530_scc'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
                     idle |                               00 |                               00
                     res1 |                               01 |                               01
                     res2 |                               10 |                               10
@@ -1126,7 +1405,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'res_state_q_reg' using enc
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'si_flt_q_reg' using encoding 'sequential' in module 't400_sio'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 2614.332 ; gain = 873.188 ; free physical = 6791 ; free virtual = 19292
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 2627.035 ; gain = 886.906 ; free physical = 3874 ; free virtual = 17075
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -1146,35 +1425,37 @@ Detailed RTL Component Info :
 	   2 Input   10 Bit       Adders := 4     
 	   3 Input    9 Bit       Adders := 2     
 	   2 Input    9 Bit       Adders := 1     
-	   2 Input    8 Bit       Adders := 17    
-	   2 Input    7 Bit       Adders := 2     
+	   2 Input    8 Bit       Adders := 19    
+	   2 Input    7 Bit       Adders := 5     
 	   2 Input    6 Bit       Adders := 2     
 	   2 Input    5 Bit       Adders := 9     
 	   4 Input    5 Bit       Adders := 6     
 	   3 Input    5 Bit       Adders := 10    
 	   8 Input    4 Bit       Adders := 6     
-	   2 Input    4 Bit       Adders := 18    
-	   2 Input    3 Bit       Adders := 10    
+	   2 Input    4 Bit       Adders := 28    
+	   2 Input    3 Bit       Adders := 26    
 	   2 Input    2 Bit       Adders := 3     
 +---XORs : 
 	   2 Input     16 Bit         XORs := 1     
 	   2 Input      9 Bit         XORs := 1     
 	   2 Input      8 Bit         XORs := 18    
 	   2 Input      5 Bit         XORs := 1     
+	   2 Input      3 Bit         XORs := 8     
 	   2 Input      2 Bit         XORs := 1     
-	   2 Input      1 Bit         XORs := 59    
+	   2 Input      1 Bit         XORs := 66    
 	   3 Input      1 Bit         XORs := 1     
 	   4 Input      1 Bit         XORs := 1     
 	   9 Input      1 Bit         XORs := 4     
 +---XORs : 
 	               27 Bit    Wide XORs := 8     
+	                8 Bit    Wide XORs := 4     
 +---Registers : 
 	               68 Bit    Registers := 2     
 	               32 Bit    Registers := 2     
 	               26 Bit    Registers := 1     
 	               24 Bit    Registers := 26    
 	               19 Bit    Registers := 1     
-	               17 Bit    Registers := 2     
+	               17 Bit    Registers := 4     
 	               16 Bit    Registers := 81    
 	               14 Bit    Registers := 4     
 	               13 Bit    Registers := 2     
@@ -1182,14 +1463,14 @@ Detailed RTL Component Info :
 	               11 Bit    Registers := 7     
 	               10 Bit    Registers := 13    
 	                9 Bit    Registers := 1     
-	                8 Bit    Registers := 118   
-	                7 Bit    Registers := 9     
+	                8 Bit    Registers := 190   
+	                7 Bit    Registers := 12    
 	                6 Bit    Registers := 10    
 	                5 Bit    Registers := 11    
-	                4 Bit    Registers := 38    
-	                3 Bit    Registers := 25    
-	                2 Bit    Registers := 19    
-	                1 Bit    Registers := 459   
+	                4 Bit    Registers := 48    
+	                3 Bit    Registers := 75    
+	                2 Bit    Registers := 31    
+	                1 Bit    Registers := 501   
 +---RAMs : 
 	             257K Bit	(33000 X 8 bit)          RAMs := 1     
 	               4K Bit	(1024 X 4 bit)          RAMs := 2     
@@ -1237,12 +1518,13 @@ Detailed RTL Component Info :
 	   2 Input    9 Bit        Muxes := 5     
 	   6 Input    9 Bit        Muxes := 1     
 	   4 Input    9 Bit        Muxes := 1     
-	   5 Input    8 Bit        Muxes := 2     
-	   2 Input    8 Bit        Muxes := 103   
-	   4 Input    8 Bit        Muxes := 8     
+	   5 Input    8 Bit        Muxes := 4     
+	   2 Input    8 Bit        Muxes := 120   
+	   4 Input    8 Bit        Muxes := 12    
 	  11 Input    8 Bit        Muxes := 6     
 	   3 Input    8 Bit        Muxes := 15    
-	   2 Input    7 Bit        Muxes := 24    
+	   6 Input    8 Bit        Muxes := 2     
+	   2 Input    7 Bit        Muxes := 27    
 	   2 Input    6 Bit        Muxes := 5     
 	   3 Input    6 Bit        Muxes := 1     
 	   8 Input    6 Bit        Muxes := 1     
@@ -1252,37 +1534,42 @@ Detailed RTL Component Info :
 	   5 Input    5 Bit        Muxes := 1     
 	   3 Input    5 Bit        Muxes := 3     
 	   7 Input    5 Bit        Muxes := 1     
-	   2 Input    4 Bit        Muxes := 51    
-	   4 Input    4 Bit        Muxes := 1     
-	   5 Input    4 Bit        Muxes := 9     
+	   2 Input    4 Bit        Muxes := 69    
+	   4 Input    4 Bit        Muxes := 3     
+	   5 Input    4 Bit        Muxes := 13    
 	  17 Input    4 Bit        Muxes := 2     
-	   6 Input    4 Bit        Muxes := 2     
+	  14 Input    4 Bit        Muxes := 1     
+	  16 Input    4 Bit        Muxes := 1     
+	   6 Input    4 Bit        Muxes := 6     
 	   3 Input    4 Bit        Muxes := 2     
-	   2 Input    3 Bit        Muxes := 58    
+	   2 Input    3 Bit        Muxes := 60    
 	   5 Input    3 Bit        Muxes := 2     
 	   7 Input    3 Bit        Muxes := 3     
 	   3 Input    3 Bit        Muxes := 7     
 	   4 Input    3 Bit        Muxes := 5     
 	   8 Input    3 Bit        Muxes := 4     
-	   9 Input    3 Bit        Muxes := 1     
-	   2 Input    2 Bit        Muxes := 44    
+	   9 Input    3 Bit        Muxes := 3     
+	  10 Input    3 Bit        Muxes := 2     
+	   6 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 45    
 	   3 Input    2 Bit        Muxes := 10    
 	   4 Input    2 Bit        Muxes := 10    
 	   7 Input    2 Bit        Muxes := 2     
 	   8 Input    2 Bit        Muxes := 1     
-	   2 Input    1 Bit        Muxes := 523   
-	   5 Input    1 Bit        Muxes := 4     
-	   6 Input    1 Bit        Muxes := 7     
+	   2 Input    1 Bit        Muxes := 638   
+	   5 Input    1 Bit        Muxes := 22    
+	   6 Input    1 Bit        Muxes := 21    
 	   8 Input    1 Bit        Muxes := 19    
-	   3 Input    1 Bit        Muxes := 21    
+	   3 Input    1 Bit        Muxes := 23    
 	   7 Input    1 Bit        Muxes := 29    
 	   4 Input    1 Bit        Muxes := 36    
 	  13 Input    1 Bit        Muxes := 19    
 	   9 Input    1 Bit        Muxes := 1     
 	  10 Input    1 Bit        Muxes := 6     
-	  14 Input    1 Bit        Muxes := 1     
+	  14 Input    1 Bit        Muxes := 10    
 	  11 Input    1 Bit        Muxes := 26    
 	  15 Input    1 Bit        Muxes := 7     
+	  16 Input    1 Bit        Muxes := 11    
 	  36 Input    1 Bit        Muxes := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
@@ -1306,7 +1593,7 @@ DSP Report: register word_index_reg is absorbed into DSP word_index_reg.
 DSP Report: register word_index_int_reg is absorbed into DSP word_index_reg.
 DSP Report: operator word_index0 is absorbed into DSP word_index_reg.
 DSP Report: operator word_index_int0 is absorbed into DSP word_index_reg.
-WARNING: [Synth 8-3917] design top has port INTERNAL_SCC_EN driven by constant 1
+WARNING: [Synth 8-3917] design top has port INTERNAL_SCC_EN driven by constant 0
 WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[5] driven by constant 0
 WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[4] driven by constant 0
 WARNING: [Synth 8-3917] design top has port ESFLOPPY_COMM_BUS[3] driven by constant 0
@@ -1536,6 +1823,8 @@ INFO: [Synth 8-5544] ROM "ukp/sb" won't be mapped to Block RAM because address s
 WARNING: [Synth 8-3936] Found unconnected internal register 'ukp/save_b_reg' and it is trimmed from '4' to '3' bits. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/src/usb_hid_host.v:285]
 WARNING: [Synth 8-6040] Register ukp/pc_reg_rep driving address of a ROM cannot be packed in BRAM/URAM because of presence of initial value.
 INFO: [Synth 8-5544] ROM "ukp/sb" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "get_rx_bits" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "get_rx_bits" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "timer_a_latch2" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "timer_a_latch2" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5546] ROM "multi_byte_v" won't be mapped to RAM because it is too sparse
@@ -1550,7 +1839,10 @@ INFO: [Synth 8-3333] propagating constant 0 across sequential element (\usb_kbd_
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (\usb_kbd_interface/decoder_state_reg[3] )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (\usb_kbd_interface/kbd_state_reg[4] )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/FDC_6504/NMI_1_reg)
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/absolutely_amazing_scc_implementation/tx_underrun_b_reg)
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/absolutely_amazing_scc_implementation/tx_underrun_a_reg)
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/\cop421/core_b /\reset_b/FSM_sequential_res_state_q_reg[1] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (io_board/absolutely_amazing_scc_implementation/\dcdb_sync_reg[0] )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/FDC_6504/NMI_edge_reg)
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/kbd_via/\port_b_c_reg[7] )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/pp_via/ca2_c_reg)
@@ -1559,13 +1851,21 @@ INFO: [Synth 8-3333] propagating constant 0 across sequential element (\usb_port
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (\usb_port0/ukp/mbit_reg[1] )
 INFO: [Synth 8-3333] propagating constant 1 across sequential element (\slot1/LBDSL_reg )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/\cop421/core_b /\reset_b/res_q_reg )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (io_board/absolutely_amazing_scc_implementation/\dcdb_sync_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/absolutely_amazing_scc_implementation/\tx_underrun_b_sync_reg[0] )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/kbd_via/\irb_reg[7] )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/pp_via/ca2_c_reg)
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/kbd_via/ca2_c_reg)
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (io_board/absolutely_amazing_scc_implementation/\dcdb_sync_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/absolutely_amazing_scc_implementation/\tx_underrun_b_sync_reg[0] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (io_board/absolutely_amazing_scc_implementation/\dcdb_sync_reg[0] )
 WARNING: [Synth 8-3332] Sequential element (reset_b/FSM_sequential_res_state_q_reg[1]) is unused and will be removed from module t400_core.
 WARNING: [Synth 8-3332] Sequential element (reset_b/FSM_sequential_res_state_q_reg[0]) is unused and will be removed from module t400_core.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/absolutely_amazing_scc_implementation/\txca_sync_s_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/absolutely_amazing_scc_implementation/\txca_sync_s_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (io_board/absolutely_amazing_scc_implementation/\txca_sync_s_reg[0] )
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:46:28 ; elapsed = 00:46:48 . Memory (MB): peak = 3115.352 ; gain = 1374.207 ; free physical = 333 ; free virtual = 12749
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 01:08:37 ; elapsed = 01:08:57 . Memory (MB): peak = 3119.055 ; gain = 1378.926 ; free physical = 918 ; free virtual = 11687
 ---------------------------------------------------------------------------------
  Sort Area is HDMI_Interface__GC0 word_index_reg_0 : 0 0 : 540 540 : Used 1 time 100
 ---------------------------------------------------------------------------------
@@ -1638,24 +1938,24 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
-WARNING: [Synth 8-3321] set_false_path : Empty to list for constraint at line 110 of /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:110]
-WARNING: [Synth 8-3321] set_false_path : Empty to list for constraint at line 111 of /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:111]
+WARNING: [Synth 8-3321] set_false_path : Empty to list for constraint at line 127 of /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:127]
+WARNING: [Synth 8-3321] set_false_path : Empty to list for constraint at line 128 of /home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/constrs_1/imports/lisaStuff/LisaFPGA.xdc:128]
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:47:02 ; elapsed = 00:46:55 . Memory (MB): peak = 3119.270 ; gain = 1378.125 ; free physical = 1617 ; free virtual = 14069
+Finished Applying XDC Timing Constraints : Time (s): cpu = 01:10:00 ; elapsed = 01:09:11 . Memory (MB): peak = 3122.973 ; gain = 1382.844 ; free physical = 2260 ; free virtual = 13084
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_118/i_328 -from I1 -to O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_118/i_334 -from I1 -to O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_118/i_340 -from I1 -to O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_118/i_346 -from I1 -to O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_118/i_352 -from I1 -to O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_118/i_358 -from I1 -to O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_118/i_364 -from I1 -to O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_118/i_370 -from I1 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_117/i_381 -from I1 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_117/i_375 -from I1 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_117/i_369 -from I1 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_117/i_363 -from I1 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_117/i_357 -from I1 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_117/i_351 -from I1 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_117/i_345 -from I1 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/io_board/i_117/i_339 -from I1 -to O'
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:47:08 ; elapsed = 00:47:01 . Memory (MB): peak = 3119.270 ; gain = 1378.125 ; free physical = 1650 ; free virtual = 14103
+Finished Timing Optimization : Time (s): cpu = 01:10:10 ; elapsed = 01:09:22 . Memory (MB): peak = 3122.973 ; gain = 1382.844 ; free physical = 2272 ; free virtual = 13098
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -1693,13 +1993,61 @@ INFO: [Synth 8-7052] The timing for the instance lisa_hdmi_outputi_5/lisa_frameb
 INFO: [Synth 8-7052] The timing for the instance lisa_hdmi_outputi_5/lisa_framebuffer_reg_1_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance lisa_hdmi_outputi_5/lisa_framebuffer_reg_1_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance cpu_board/M68K/i_1/uRom/microOutput_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+Found timing loop:
+     0: i_0/io_boardi_2397/z (tricell)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
+     1: i_0/io_boardi_2397/z (tricell)
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:190]
+Found timing loop:
+     0: i_0/io_boardi_2396/z (tricell)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
+     1: i_0/io_boardi_2396/z (tricell)
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:190]
+Found timing loop:
+     0: i_0/io_boardi_2395/z (tricell)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
+     1: i_0/io_boardi_2395/z (tricell)
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:190]
+Found timing loop:
+     0: i_0/io_boardi_2394/z (tricell)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
+     1: i_0/io_boardi_2394/z (tricell)
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:190]
+Found timing loop:
+     0: i_0/io_boardi_2393/z (tricell)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
+     1: i_0/io_boardi_2393/z (tricell)
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:190]
+Found timing loop:
+     0: i_0/io_boardi_2392/z (tricell)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
+     1: i_0/io_boardi_2392/z (tricell)
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:190]
+Found timing loop:
+     0: i_0/io_boardi_2391/z (tricell)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
+     1: i_0/io_boardi_2391/z (tricell)
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:190]
+Found timing loop:
+     0: i_0/io_boardi_2390/z (tricell)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IO_board.sv:22]
+     1: i_0/io_boardi_2390/z (tricell)
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:190]
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/i_2480 -from I4 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/i_2481 -from I4 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/i_2482 -from I4 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/i_2483 -from I4 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/i_2484 -from I4 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/i_2485 -from I4 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/i_2486 -from I4 -to O'
+WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_disable_timing i_0/i_2487 -from I4 -to O'
 INFO: [Synth 8-7052] The timing for the instance i_0/usb_port0/ukp/ukprom/data_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance i_0/usb_port0/ukp/ukprom/data_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance i_0/io_board/MA_reg_rep (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance i_0/io_board/MA_reg_rep__0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance i_0/io_board/cop421/pmem_b/D_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:47:10 ; elapsed = 00:47:05 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1368 ; free virtual = 13828
+Finished Technology Mapping : Time (s): cpu = 01:10:16 ; elapsed = 01:09:30 . Memory (MB): peak = 3130.980 ; gain = 1390.852 ; free physical = 1975 ; free virtual = 12807
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -1736,296 +2084,297 @@ CRITICAL WARNING: [Synth 8-5744] Inout buffer is not created at top module top f
 CRITICAL WARNING: [Synth 8-5744] Inout buffer is not created at top module top for the pin A_SRAM[19], other connections may not have buffer connection [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 CRITICAL WARNING: [Synth 8-5744] Inout buffer is not created at top module top for the pin A_SRAM[18], other connections may not have buffer connection [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
 CRITICAL WARNING: [Synth 8-5744] Inout buffer is not created at top module top for the pin A_SRAM[17], other connections may not have buffer connection [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+INFO: [Synth 8-4560] design has 13 instantiated BUFGs while the limit set by the -bufg synthesis option is 12
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:47:14 ; elapsed = 00:47:09 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1301 ; free virtual = 13790
+Finished IO Insertion : Time (s): cpu = 01:10:22 ; elapsed = 01:09:37 . Memory (MB): peak = 3130.980 ; gain = 1390.852 ; free physical = 1914 ; free virtual = 12776
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:47:14 ; elapsed = 00:47:09 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1301 ; free virtual = 13790
+Finished Renaming Generated Instances : Time (s): cpu = 01:10:22 ; elapsed = 01:09:37 . Memory (MB): peak = 3130.980 ; gain = 1390.852 ; free physical = 1905 ; free virtual = 12766
 ---------------------------------------------------------------------------------
 Found timing loop:
-     0: \genblk4[0].SCC_DBuf_i_7 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[0].SCC_DBuf_i_7 /I2 (LUT5)
-     2: cpu_board_i_18/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     3: cpu_board_i_18/I5 (LUT6)
-     4: cpu_board_i_38/O (LUT6)
+     0: cpu_board_i_19/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     1: cpu_board_i_19/I5 (LUT6)
+     2: cpu_board_i_41/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     5: cpu_board_i_38/I4 (LUT6)
-     6: \genblk4[0].SCC_DBuf_i_1 /O (LUT6)
+     3: cpu_board_i_41/I4 (LUT6)
+     4: \mem[0][0]_i_1 /O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     7: \genblk4[0].SCC_DBuf_i_1 /I5 (LUT6)
-     8: \genblk4[0].SCC_DBuf_i_7 /O (LUT5)
+     5: \mem[0][0]_i_1 /I5 (LUT6)
+     6: \mem[0][0]_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \mem[0][0]_i_2 /I2 (LUT5)
+     8: cpu_board_i_19/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O \genblk4[0].SCC_DBuf_i_7 "
+Inferred a: "set_disable_timing -from I5 -to O cpu_board_i_19"
+Found timing loop:
+     0: cpu_board/\BD_out[0]_INST_0_i_1 /O (LUT5)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[0]_INST_0_i_1 /I4 (LUT5)
+     2: cpu_board/\BD_out[0]_INST_0_i_3 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     3: cpu_board/\BD_out[0]_INST_0_i_3 /I1 (LUT6)
+      : cpu_board/BD_in[0]
+     4: cpu_board_i_19/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     5: cpu_board_i_19/I2 (LUT6)
+      : cpu_board/BD_out[0]
+     6: cpu_board/\BD_out[0]_INST_0 /O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     7: cpu_board/\BD_out[0]_INST_0 /I0 (LUT2)
+     8: cpu_board/\BD_out[0]_INST_0_i_1 /O (LUT5)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I4 -to O cpu_board/\BD_out[0]_INST_0_i_1 "
 Found timing loop:
      0: cpu_board_i_18/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     1: cpu_board_i_18/I2 (LUT6)
-      : cpu_board/BD_out[0]
-     2: cpu_board/\BD_out[0]_INST_0 /O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     3: cpu_board/\BD_out[0]_INST_0 /I0 (LUT2)
-     4: cpu_board/\BD_out[0]_INST_0_i_1 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     5: cpu_board/\BD_out[0]_INST_0_i_1 /I4 (LUT5)
-     6: cpu_board/\BD_out[0]_INST_0_i_3 /O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     7: cpu_board/\BD_out[0]_INST_0_i_3 /I1 (LUT6)
-      : cpu_board/BD_in[0]
-     8: cpu_board_i_18/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_18"
-Found timing loop:
-     0: \genblk4[1].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[1].SCC_DBuf_i_2 /I2 (LUT5)
-     2: cpu_board_i_17/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     3: cpu_board_i_17/I5 (LUT6)
-     4: cpu_board_i_37/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     1: cpu_board_i_18/I5 (LUT6)
+     2: cpu_board_i_40/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     5: cpu_board_i_37/I4 (LUT6)
-     6: \genblk4[1].SCC_DBuf_i_1 /O (LUT6)
+     3: cpu_board_i_40/I4 (LUT6)
+     4: \mem[0][1]_i_1 /O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     7: \genblk4[1].SCC_DBuf_i_1 /I5 (LUT6)
-     8: \genblk4[1].SCC_DBuf_i_2 /O (LUT5)
+     5: \mem[0][1]_i_1 /I5 (LUT6)
+     6: \mem[0][1]_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \mem[0][1]_i_2 /I2 (LUT5)
+     8: cpu_board_i_18/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O \genblk4[1].SCC_DBuf_i_2 "
+Inferred a: "set_disable_timing -from I5 -to O cpu_board_i_18"
+Found timing loop:
+     0: cpu_board/\BD_out[1]_INST_0_i_1 /O (LUT5)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[1]_INST_0_i_1 /I4 (LUT5)
+     2: cpu_board/\BD_out[1]_INST_0_i_3 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     3: cpu_board/\BD_out[1]_INST_0_i_3 /I1 (LUT6)
+      : cpu_board/BD_in[1]
+     4: cpu_board_i_18/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     5: cpu_board_i_18/I2 (LUT6)
+      : cpu_board/BD_out[1]
+     6: cpu_board/\BD_out[1]_INST_0 /O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     7: cpu_board/\BD_out[1]_INST_0 /I0 (LUT2)
+     8: cpu_board/\BD_out[1]_INST_0_i_1 /O (LUT5)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I4 -to O cpu_board/\BD_out[1]_INST_0_i_1 "
 Found timing loop:
      0: cpu_board_i_17/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     1: cpu_board_i_17/I2 (LUT6)
-      : cpu_board/BD_out[1]
-     2: cpu_board/\BD_out[1]_INST_0 /O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     3: cpu_board/\BD_out[1]_INST_0 /I0 (LUT2)
-     4: cpu_board/\BD_out[1]_INST_0_i_1 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     5: cpu_board/\BD_out[1]_INST_0_i_1 /I4 (LUT5)
-     6: cpu_board/\BD_out[1]_INST_0_i_3 /O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     7: cpu_board/\BD_out[1]_INST_0_i_3 /I1 (LUT6)
-      : cpu_board/BD_in[1]
-     8: cpu_board_i_17/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_17"
-Found timing loop:
-     0: \genblk4[2].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[2].SCC_DBuf_i_2 /I2 (LUT5)
-     2: cpu_board_i_16/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     3: cpu_board_i_16/I5 (LUT6)
-     4: cpu_board_i_36/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     1: cpu_board_i_17/I5 (LUT6)
+     2: cpu_board_i_39/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     5: cpu_board_i_36/I4 (LUT6)
-     6: \genblk4[2].SCC_DBuf_i_1 /O (LUT6)
+     3: cpu_board_i_39/I4 (LUT6)
+     4: \mem[0][2]_i_1 /O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     7: \genblk4[2].SCC_DBuf_i_1 /I5 (LUT6)
-     8: \genblk4[2].SCC_DBuf_i_2 /O (LUT5)
+     5: \mem[0][2]_i_1 /I5 (LUT6)
+     6: \mem[0][2]_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \mem[0][2]_i_2 /I2 (LUT5)
+     8: cpu_board_i_17/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O \genblk4[2].SCC_DBuf_i_2 "
+Inferred a: "set_disable_timing -from I5 -to O cpu_board_i_17"
+Found timing loop:
+     0: cpu_board/\BD_out[2]_INST_0_i_1 /O (LUT5)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[2]_INST_0_i_1 /I4 (LUT5)
+     2: cpu_board/\BD_out[2]_INST_0_i_3 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     3: cpu_board/\BD_out[2]_INST_0_i_3 /I1 (LUT6)
+      : cpu_board/BD_in[2]
+     4: cpu_board_i_17/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     5: cpu_board_i_17/I2 (LUT6)
+      : cpu_board/BD_out[2]
+     6: cpu_board/\BD_out[2]_INST_0 /O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     7: cpu_board/\BD_out[2]_INST_0 /I0 (LUT2)
+     8: cpu_board/\BD_out[2]_INST_0_i_1 /O (LUT5)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I4 -to O cpu_board/\BD_out[2]_INST_0_i_1 "
 Found timing loop:
      0: cpu_board_i_16/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     1: cpu_board_i_16/I2 (LUT6)
-      : cpu_board/BD_out[2]
-     2: cpu_board/\BD_out[2]_INST_0 /O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     3: cpu_board/\BD_out[2]_INST_0 /I0 (LUT2)
-     4: cpu_board/\BD_out[2]_INST_0_i_1 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     5: cpu_board/\BD_out[2]_INST_0_i_1 /I4 (LUT5)
-     6: cpu_board/\BD_out[2]_INST_0_i_3 /O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     7: cpu_board/\BD_out[2]_INST_0_i_3 /I1 (LUT6)
-      : cpu_board/BD_in[2]
-     8: cpu_board_i_16/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_16"
-Found timing loop:
-     0: \genblk4[3].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[3].SCC_DBuf_i_2 /I2 (LUT5)
-     2: cpu_board_i_15/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     3: cpu_board_i_15/I5 (LUT6)
-     4: cpu_board_i_35/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     1: cpu_board_i_16/I5 (LUT6)
+     2: cpu_board_i_38/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     5: cpu_board_i_35/I4 (LUT6)
-     6: \genblk4[3].SCC_DBuf_i_1 /O (LUT6)
+     3: cpu_board_i_38/I4 (LUT6)
+     4: \mem[0][3]_i_1 /O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     7: \genblk4[3].SCC_DBuf_i_1 /I5 (LUT6)
-     8: \genblk4[3].SCC_DBuf_i_2 /O (LUT5)
+     5: \mem[0][3]_i_1 /I5 (LUT6)
+     6: \mem[0][3]_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \mem[0][3]_i_2 /I2 (LUT5)
+     8: cpu_board_i_16/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O \genblk4[3].SCC_DBuf_i_2 "
+Inferred a: "set_disable_timing -from I5 -to O cpu_board_i_16"
+Found timing loop:
+     0: cpu_board/\BD_out[3]_INST_0_i_1 /O (LUT5)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[3]_INST_0_i_1 /I4 (LUT5)
+     2: cpu_board/\BD_out[3]_INST_0_i_3 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     3: cpu_board/\BD_out[3]_INST_0_i_3 /I1 (LUT6)
+      : cpu_board/BD_in[3]
+     4: cpu_board_i_16/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     5: cpu_board_i_16/I2 (LUT6)
+      : cpu_board/BD_out[3]
+     6: cpu_board/\BD_out[3]_INST_0 /O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     7: cpu_board/\BD_out[3]_INST_0 /I0 (LUT2)
+     8: cpu_board/\BD_out[3]_INST_0_i_1 /O (LUT5)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I4 -to O cpu_board/\BD_out[3]_INST_0_i_1 "
 Found timing loop:
      0: cpu_board_i_15/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     1: cpu_board_i_15/I2 (LUT6)
-      : cpu_board/BD_out[3]
-     2: cpu_board/\BD_out[3]_INST_0 /O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     3: cpu_board/\BD_out[3]_INST_0 /I0 (LUT2)
-     4: cpu_board/\BD_out[3]_INST_0_i_1 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     5: cpu_board/\BD_out[3]_INST_0_i_1 /I4 (LUT5)
-     6: cpu_board/\BD_out[3]_INST_0_i_3 /O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     7: cpu_board/\BD_out[3]_INST_0_i_3 /I1 (LUT6)
-      : cpu_board/BD_in[3]
-     8: cpu_board_i_15/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_15"
-Found timing loop:
-     0: \genblk4[4].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[4].SCC_DBuf_i_2 /I2 (LUT5)
-     2: cpu_board_i_14/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     3: cpu_board_i_14/I5 (LUT6)
-     4: cpu_board_i_34/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     1: cpu_board_i_15/I5 (LUT6)
+     2: cpu_board_i_37/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     5: cpu_board_i_34/I4 (LUT6)
-     6: \genblk4[4].SCC_DBuf_i_1 /O (LUT6)
+     3: cpu_board_i_37/I4 (LUT6)
+     4: \mem[0][4]_i_1 /O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     7: \genblk4[4].SCC_DBuf_i_1 /I5 (LUT6)
-     8: \genblk4[4].SCC_DBuf_i_2 /O (LUT5)
+     5: \mem[0][4]_i_1 /I5 (LUT6)
+     6: \mem[0][4]_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \mem[0][4]_i_2 /I2 (LUT5)
+     8: cpu_board_i_15/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O \genblk4[4].SCC_DBuf_i_2 "
+Inferred a: "set_disable_timing -from I5 -to O cpu_board_i_15"
+Found timing loop:
+     0: cpu_board/\BD_out[4]_INST_0 /O (LUT3)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[4]_INST_0 /I0 (LUT3)
+     2: cpu_board/\BD_out[4]_INST_0_i_1 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     3: cpu_board/\BD_out[4]_INST_0_i_1 /I1 (LUT6)
+      : cpu_board/BD_in[4]
+     4: cpu_board_i_15/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     5: cpu_board_i_15/I2 (LUT6)
+      : cpu_board/BD_out[4]
+     6: cpu_board/\BD_out[4]_INST_0 /O (LUT3)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I0 -to O cpu_board/\BD_out[4]_INST_0 "
 Found timing loop:
      0: cpu_board_i_14/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     1: cpu_board_i_14/I2 (LUT6)
-      : cpu_board/BD_out[4]
-     2: cpu_board/\BD_out[4]_INST_0 /O (LUT3)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     3: cpu_board/\BD_out[4]_INST_0 /I0 (LUT3)
-     4: cpu_board/\BD_out[4]_INST_0_i_1 /O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     5: cpu_board/\BD_out[4]_INST_0_i_1 /I1 (LUT6)
-      : cpu_board/BD_in[4]
-     6: cpu_board_i_14/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_14"
-Found timing loop:
-     0: \genblk4[5].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[5].SCC_DBuf_i_2 /I2 (LUT5)
-     2: cpu_board_i_13/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     3: cpu_board_i_13/I5 (LUT6)
-     4: cpu_board_i_33/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     1: cpu_board_i_14/I5 (LUT6)
+     2: cpu_board_i_36/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     5: cpu_board_i_33/I4 (LUT6)
-     6: \genblk4[5].SCC_DBuf_i_1 /O (LUT6)
+     3: cpu_board_i_36/I4 (LUT6)
+     4: \mem[0][5]_i_1 /O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     7: \genblk4[5].SCC_DBuf_i_1 /I5 (LUT6)
-     8: \genblk4[5].SCC_DBuf_i_2 /O (LUT5)
+     5: \mem[0][5]_i_1 /I5 (LUT6)
+     6: \mem[0][5]_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \mem[0][5]_i_2 /I2 (LUT5)
+     8: cpu_board_i_14/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O \genblk4[5].SCC_DBuf_i_2 "
+Inferred a: "set_disable_timing -from I5 -to O cpu_board_i_14"
+Found timing loop:
+     0: cpu_board/\BD_out[5]_INST_0 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[5]_INST_0 /I3 (LUT6)
+      : cpu_board/BD_in[5]
+     2: cpu_board_i_14/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     3: cpu_board_i_14/I2 (LUT6)
+      : cpu_board/BD_out[5]
+     4: cpu_board/\BD_out[5]_INST_0 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I3 -to O cpu_board/\BD_out[5]_INST_0 "
 Found timing loop:
      0: cpu_board_i_13/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     1: cpu_board_i_13/I2 (LUT6)
-      : cpu_board/BD_out[5]
-     2: cpu_board/\BD_out[5]_INST_0 /O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     3: cpu_board/\BD_out[5]_INST_0 /I3 (LUT6)
-      : cpu_board/BD_in[5]
-     4: cpu_board_i_13/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_13"
-Found timing loop:
-     0: \genblk4[6].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[6].SCC_DBuf_i_2 /I2 (LUT5)
-     2: cpu_board_i_12/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     3: cpu_board_i_12/I5 (LUT6)
-     4: cpu_board_i_32/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     1: cpu_board_i_13/I5 (LUT6)
+     2: cpu_board_i_35/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     5: cpu_board_i_32/I4 (LUT6)
-     6: \genblk4[6].SCC_DBuf_i_1 /O (LUT6)
+     3: cpu_board_i_35/I4 (LUT6)
+     4: \mem[0][6]_i_1 /O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     7: \genblk4[6].SCC_DBuf_i_1 /I5 (LUT6)
-     8: \genblk4[6].SCC_DBuf_i_2 /O (LUT5)
+     5: \mem[0][6]_i_1 /I5 (LUT6)
+     6: \mem[0][6]_i_2 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \mem[0][6]_i_2 /I2 (LUT5)
+     8: cpu_board_i_13/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O \genblk4[6].SCC_DBuf_i_2 "
+Inferred a: "set_disable_timing -from I5 -to O cpu_board_i_13"
+Found timing loop:
+     0: cpu_board/\BD_out[6]_INST_0 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     1: cpu_board/\BD_out[6]_INST_0 /I3 (LUT6)
+      : cpu_board/BD_in[6]
+     2: cpu_board_i_13/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     3: cpu_board_i_13/I2 (LUT6)
+      : cpu_board/BD_out[6]
+     4: cpu_board/\BD_out[6]_INST_0 /O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+Inferred a: "set_disable_timing -from I3 -to O cpu_board/\BD_out[6]_INST_0 "
 Found timing loop:
      0: cpu_board_i_12/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     1: cpu_board_i_12/I2 (LUT6)
-      : cpu_board/BD_out[6]
-     2: cpu_board/\BD_out[6]_INST_0 /O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     3: cpu_board/\BD_out[6]_INST_0 /I3 (LUT6)
-      : cpu_board/BD_in[6]
-     4: cpu_board_i_12/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_12"
-Found timing loop:
-     0: \genblk4[7].SCC_DBuf_i_2 /O (LUT5)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     1: \genblk4[7].SCC_DBuf_i_2 /I2 (LUT5)
-     2: cpu_board_i_11/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     3: cpu_board_i_11/I5 (LUT6)
-     4: cpu_board_i_31/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     1: cpu_board_i_12/I5 (LUT6)
+     2: cpu_board_i_34/O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/IOROM_2732.sv:48]
-     5: cpu_board_i_31/I4 (LUT6)
-     6: \genblk4[7].SCC_DBuf_i_1 /O (LUT6)
+     3: cpu_board_i_34/I4 (LUT6)
+     4: \mem[0][7]_i_2 /O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-     7: \genblk4[7].SCC_DBuf_i_1 /I5 (LUT6)
-     8: \genblk4[7].SCC_DBuf_i_2 /O (LUT5)
+     5: \mem[0][7]_i_2 /I5 (LUT6)
+     6: \mem[0][7]_i_8 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
+     7: \mem[0][7]_i_8 /I2 (LUT5)
+     8: cpu_board_i_12/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O \genblk4[7].SCC_DBuf_i_2 "
+Inferred a: "set_disable_timing -from I5 -to O cpu_board_i_12"
 Found timing loop:
-     0: cpu_board_i_11/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     1: cpu_board_i_11/I2 (LUT6)
-      : cpu_board/BD_out[7]
-     2: cpu_board/\BD_out[7]_INST_0 /O (LUT2)
+     0: cpu_board/\BD_out[7]_INST_0_i_1 /O (LUT5)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     3: cpu_board/\BD_out[7]_INST_0 /I0 (LUT2)
-     4: cpu_board/\BD_out[7]_INST_0_i_1 /O (LUT5)
+     1: cpu_board/\BD_out[7]_INST_0_i_1 /I4 (LUT5)
+     2: cpu_board/\BD_out[7]_INST_0_i_3 /O (LUT4)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     5: cpu_board/\BD_out[7]_INST_0_i_1 /I4 (LUT5)
-     6: cpu_board/\BD_out[7]_INST_0_i_3 /O (LUT4)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
-     7: cpu_board/\BD_out[7]_INST_0_i_3 /I3 (LUT4)
+     3: cpu_board/\BD_out[7]_INST_0_i_3 /I3 (LUT4)
       : cpu_board/BD_in[7]
-     8: cpu_board_i_11/O (LUT6)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
+     4: cpu_board_i_12/O (LUT6)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     5: cpu_board_i_12/I2 (LUT6)
+      : cpu_board/BD_out[7]
+     6: cpu_board/\BD_out[7]_INST_0 /O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
+     7: cpu_board/\BD_out[7]_INST_0 /I0 (LUT2)
+     8: cpu_board/\BD_out[7]_INST_0_i_1 /O (LUT5)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
 CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:23]
-Inferred a: "set_disable_timing -from I2 -to O cpu_board_i_11"
+Inferred a: "set_disable_timing -from I4 -to O cpu_board/\BD_out[7]_INST_0_i_1 "
 Found timing loop:
      0: cpu_board/\BD_out[8]_INST_0 /O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
      1: cpu_board/\BD_out[8]_INST_0 /I3 (LUT6)
       : cpu_board/BD_in[8]
-     2: cpu_board_i_10/O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     3: cpu_board_i_10/I1 (LUT2)
+     2: cpu_board_i_11/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     3: cpu_board_i_11/I1 (LUT2)
       : cpu_board/BD_out[8]
      4: cpu_board/\BD_out[8]_INST_0 /O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
@@ -2036,9 +2385,9 @@ Found timing loop:
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
      1: cpu_board/\BD_out[9]_INST_0 /I3 (LUT6)
       : cpu_board/BD_in[9]
-     2: cpu_board_i_9/O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     3: cpu_board_i_9/I1 (LUT2)
+     2: cpu_board_i_10/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     3: cpu_board_i_10/I1 (LUT2)
       : cpu_board/BD_out[9]
      4: cpu_board/\BD_out[9]_INST_0 /O (LUT6)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
@@ -2052,9 +2401,9 @@ Found timing loop:
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
      3: cpu_board/\BD_out[10]_INST_0_i_3 /I3 (LUT4)
       : cpu_board/BD_in[10]
-     4: cpu_board_i_8/O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     5: cpu_board_i_8/I1 (LUT2)
+     4: cpu_board_i_9/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     5: cpu_board_i_9/I1 (LUT2)
       : cpu_board/BD_out[10]
      6: cpu_board/\BD_out[10]_INST_0 /O (LUT2)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
@@ -2071,9 +2420,9 @@ Found timing loop:
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
      3: cpu_board/\BD_out[11]_INST_0_i_3 /I3 (LUT4)
       : cpu_board/BD_in[11]
-     4: cpu_board_i_7/O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     5: cpu_board_i_7/I1 (LUT2)
+     4: cpu_board_i_8/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     5: cpu_board_i_8/I1 (LUT2)
       : cpu_board/BD_out[11]
      6: cpu_board/\BD_out[11]_INST_0 /O (LUT2)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
@@ -2090,9 +2439,9 @@ Found timing loop:
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
      3: cpu_board/\BD_out[12]_INST_0_i_3 /I3 (LUT4)
       : cpu_board/BD_in[12]
-     4: cpu_board_i_6/O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     5: cpu_board_i_6/I1 (LUT2)
+     4: cpu_board_i_7/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     5: cpu_board_i_7/I1 (LUT2)
       : cpu_board/BD_out[12]
      6: cpu_board/\BD_out[12]_INST_0 /O (LUT2)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
@@ -2109,9 +2458,9 @@ Found timing loop:
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
      3: cpu_board/\BD_out[13]_INST_0_i_3 /I1 (LUT6)
       : cpu_board/BD_in[13]
-     4: cpu_board_i_5/O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     5: cpu_board_i_5/I1 (LUT2)
+     4: cpu_board_i_6/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     5: cpu_board_i_6/I1 (LUT2)
       : cpu_board/BD_out[13]
      6: cpu_board/\BD_out[13]_INST_0 /O (LUT2)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
@@ -2128,9 +2477,9 @@ Found timing loop:
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
      3: cpu_board/\BD_out[14]_INST_0_i_3 /I1 (LUT6)
       : cpu_board/BD_in[14]
-     4: cpu_board_i_4/O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     5: cpu_board_i_4/I1 (LUT2)
+     4: cpu_board_i_5/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     5: cpu_board_i_5/I1 (LUT2)
       : cpu_board/BD_out[14]
      6: cpu_board/\BD_out[14]_INST_0 /O (LUT2)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
@@ -2147,9 +2496,9 @@ Found timing loop:
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
      3: cpu_board/\BD_out[15]_INST_0_i_3 /I1 (LUT6)
       : cpu_board/BD_in[15]
-     4: cpu_board_i_3/O (LUT2)
-      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:571]
-     5: cpu_board_i_3/I1 (LUT2)
+     4: cpu_board_i_4/O (LUT2)
+      [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/top.sv:555]
+     5: cpu_board_i_4/I1 (LUT2)
       : cpu_board/BD_out[15]
      6: cpu_board/\BD_out[15]_INST_0 /O (LUT2)
       [/home/alexthecat123/LisaFPGA/LisaFPGA.srcs/sources_1/imports/lisaStuff/CPU_board.sv:23]
@@ -2162,25 +2511,25 @@ Inferred a: "set_disable_timing -from I3 -to O cpu_board/\BD_out[15]_INST_0_i_1 
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:47:16 ; elapsed = 00:47:10 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1269 ; free virtual = 13758
+Finished Rebuilding User Hierarchy : Time (s): cpu = 01:10:24 ; elapsed = 01:09:40 . Memory (MB): peak = 3130.980 ; gain = 1390.852 ; free physical = 1902 ; free virtual = 12763
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:47:16 ; elapsed = 00:47:10 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1269 ; free virtual = 13758
+Finished Renaming Generated Ports : Time (s): cpu = 01:10:24 ; elapsed = 01:09:40 . Memory (MB): peak = 3130.980 ; gain = 1390.852 ; free physical = 1895 ; free virtual = 12756
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:47:16 ; elapsed = 00:47:11 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1269 ; free virtual = 13758
+Finished Handling Custom Attributes : Time (s): cpu = 01:10:25 ; elapsed = 01:09:40 . Memory (MB): peak = 3130.980 ; gain = 1390.852 ; free physical = 1893 ; free virtual = 12755
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:47:16 ; elapsed = 00:47:11 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1269 ; free virtual = 13758
+Finished Renaming Generated Nets : Time (s): cpu = 01:10:25 ; elapsed = 01:09:40 . Memory (MB): peak = 3130.980 ; gain = 1390.852 ; free physical = 1892 ; free virtual = 12754
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -2226,18 +2575,18 @@ Report Cell Usage:
 |1     |clock_divider      |     1|
 |2     |dotck_mmcm         |     1|
 |3     |hdmi_clock_divider |     1|
-|4     |BUFG               |     4|
+|4     |BUFG               |     5|
 |5     |BUFGCE             |     4|
 |6     |BUFGMUX            |     5|
-|7     |CARRY4             |   168|
+|7     |CARRY4             |   178|
 |8     |DSP48E1            |     1|
-|9     |LUT1               |   173|
-|10    |LUT2               |   567|
-|11    |LUT3               |  1007|
-|12    |LUT4               |   740|
-|13    |LUT5               |  4908|
-|14    |LUT6               | 11486|
-|15    |MUXF7              |  4102|
+|9     |LUT1               |   179|
+|10    |LUT2               |   655|
+|11    |LUT3               |  1075|
+|12    |LUT4               |   863|
+|13    |LUT5               |  5006|
+|14    |LUT6               | 11761|
+|15    |MUXF7              |  4103|
 |16    |MUXF8              |   910|
 |17    |OSERDESE2          |     8|
 |19    |RAM256X1S          |    32|
@@ -2245,55 +2594,56 @@ Report Cell Usage:
 |21    |RAMB18E1           |     3|
 |24    |RAMB36E1           |    18|
 |28    |SRL16E             |    21|
-|29    |FDCE               |   543|
-|30    |FDPE               |   107|
-|31    |FDRE               |  3287|
+|29    |FDCE               |  1111|
+|30    |FDPE               |   152|
+|31    |FDRE               |  3417|
 |32    |FDSE               |    59|
 |33    |LD                 | 12296|
 |34    |LDC                |     3|
-|35    |IBUF               |    40|
-|36    |IOBUF              |    47|
-|37    |OBUF               |    93|
+|35    |IBUF               |    45|
+|36    |IOBUF              |    39|
+|37    |OBUF               |    86|
 |38    |OBUFDS             |     4|
+|39    |OBUFT              |     1|
 +------+-------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:47:16 ; elapsed = 00:47:11 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 1269 ; free virtual = 13758
+Finished Writing Synthesis Report : Time (s): cpu = 01:10:25 ; elapsed = 01:09:40 . Memory (MB): peak = 3130.980 ; gain = 1390.852 ; free physical = 1891 ; free virtual = 12753
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 30 critical warnings and 1524 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:47:13 ; elapsed = 00:47:13 . Memory (MB): peak = 3127.277 ; gain = 1297.297 ; free physical = 6469 ; free virtual = 18958
-Synthesis Optimization Complete : Time (s): cpu = 00:47:16 ; elapsed = 00:47:16 . Memory (MB): peak = 3127.277 ; gain = 1386.133 ; free physical = 6475 ; free virtual = 18954
+Synthesis finished with 0 errors, 38 critical warnings and 1525 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 01:10:20 ; elapsed = 01:09:37 . Memory (MB): peak = 3130.980 ; gain = 1305.016 ; free physical = 6743 ; free virtual = 17605
+Synthesis Optimization Complete : Time (s): cpu = 01:10:25 ; elapsed = 01:09:42 . Memory (MB): peak = 3130.980 ; gain = 1390.852 ; free physical = 6752 ; free virtual = 17603
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00.13 ; elapsed = 00:00:00.13 . Memory (MB): peak = 3127.277 ; gain = 0.000 ; free physical = 6507 ; free virtual = 18985
+Netlist sorting complete. Time (s): cpu = 00:00:00.22 ; elapsed = 00:00:00.22 . Memory (MB): peak = 3130.980 ; gain = 0.000 ; free physical = 6792 ; free virtual = 17643
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'C16M_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'C5M_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'DOTCK_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
 WARNING: [Netlist 29-345] The value of SIM_DEVICE on instance 'SCCCK_bufg' of type 'BUFGCE' is 'ULTRASCALE'; it is being changed to match the current FPGA architecture, '7SERIES'. For functional simulation to match hardware behavior, the value of SIM_DEVICE should be changed in the source netlist. 
-INFO: [Netlist 29-17] Analyzing 17597 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 17600 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 WARNING: [Constraints 18-550] Could not create 'PULLTYPE' constraint because net 'GPIO_IBUF[0]' is not directly connected to top level port. 'PULLTYPE' is ignored for synthesis but preserved for implementation.
 INFO: [Opt 31-138] Pushed 6 inverter(s) to 59 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3171.379 ; gain = 0.000 ; free physical = 6618 ; free virtual = 19094
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3175.082 ; gain = 0.000 ; free physical = 6917 ; free virtual = 17768
 INFO: [Project 1-111] Unisim Transformation Summary:
-  A total of 12391 instances were transformed.
+  A total of 12383 instances were transformed.
   BUFGCE => BUFGCTRL: 4 instances
   BUFGMUX => BUFGCTRL (inverted pins: CE0): 5 instances
-  IOBUF => IOBUF (IBUF, OBUFT): 47 instances
+  IOBUF => IOBUF (IBUF, OBUFT): 39 instances
   LD => LDCE: 12288 instances
   LD => LDCE (inverted pins: G): 8 instances
   LDC => LDCE (inverted pins: G): 3 instances
   RAM256X1S => RAM256X1S (inverted pins: WCLK) (MUXF7(x2), MUXF8, RAMS64E(x4)): 32 instances
   RAM64X1S => RAM64X1S (RAMS64E): 4 instances
 
-Synth Design complete | Checksum: 827227c
+Synth Design complete | Checksum: 692f2207
 INFO: [Common 17-83] Releasing license: Synthesis
-558 Infos, 584 Warnings, 46 Critical Warnings and 0 Errors encountered.
+582 Infos, 719 Warnings, 54 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:47:22 ; elapsed = 00:48:02 . Memory (MB): peak = 3171.414 ; gain = 1548.566 ; free physical = 6627 ; free virtual = 19102
-INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 8998.470; main = 2391.966; forked = 6963.377
-INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 18050.992; main = 3171.383; forked = 14935.637
+synth_design: Time (s): cpu = 01:10:35 ; elapsed = 01:10:32 . Memory (MB): peak = 3175.117 ; gain = 1551.285 ; free physical = 6950 ; free virtual = 17801
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 8944.702; main = 2191.938; forked = 6917.479
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 18080.578; main = 3175.086; forked = 14961.520
 INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
-Write ShapeDB Complete: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3195.391 ; gain = 0.000 ; free physical = 6625 ; free virtual = 19104
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.11 ; elapsed = 00:00:00.05 . Memory (MB): peak = 3199.094 ; gain = 0.000 ; free physical = 6951 ; free virtual = 17807
 INFO: [Common 17-1381] The checkpoint '/home/alexthecat123/LisaFPGA/LisaFPGA.runs/synth_1/top.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sat Jun  6 16:01:44 2026...
+INFO: [Common 17-206] Exiting Vivado at Mon Jun 22 19:14:36 2026...

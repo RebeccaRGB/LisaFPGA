@@ -240,33 +240,6 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/scc/rxuart.v">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/scc/rxuart.v"/>
-          <Attr Name="ImportTime" Val="1758755407"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/scc/scc.v">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/scc/scc.v"/>
-          <Attr Name="ImportTime" Val="1759550622"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/scc/txuart.v">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/scc/txuart.v"/>
-          <Attr Name="ImportTime" Val="1759549457"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/imports/src/usb_hid_host.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/USB_Testing/USB_Testing.srcs/sources_1/imports/src/usb_hid_host.v"/>
@@ -810,6 +783,15 @@
           <Attr Name="ImportPath" Val="$PPRDIR/../vivadoProjects/lisaStuff/t400/t420_notri.vhd"/>
           <Attr Name="ImportTime" Val="1758950655"/>
           <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/naftaly_blum_scc/z8530_scc.sv">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Downloads/naftaly_blum_scc/z8530_scc.sv"/>
+          <Attr Name="ImportTime" Val="1781393194"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>

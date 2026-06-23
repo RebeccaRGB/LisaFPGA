@@ -68,6 +68,9 @@ set_false_path -to [get_cells cpu_board/_VTIR_int_reg]
 ## This RSTSW-related false path goes from the COPCK_2x to the DOTCK domain; RSTSW is gated with ON in a FF which is why it's in COPCK at all
 set_false_path -to [get_cells _RSTSW_dotck_int_reg]
 
+## This false path goes into the synchronizer that syncronizes the _RESET signal to the SCCCK_2x domain for the SCCCK divide by 2 logic
+set_false_path -to [get_cells _RESET_SCCCK_int_reg]
+
 ## Here's a false path between the 6522 and the COP for our extended-length DDRA data strobe signal
 ## I'm synchronizing this signal into the COPCK_2x domain, so we just need to declare a false path into the synchronizer
 set_false_path -to [get_cells io_board/KBD_via_DDRA_extended_int_reg]
@@ -75,6 +78,20 @@ set_false_path -to [get_cells io_board/KBD_via_DDRA_extended_int_reg]
 ## The CONT register on the I/O board is clocked by the DOTCK, but we read the contrast in the 1080p30/60 domain
 ## We have a synchronizer for this, so we just need to declare a false path for it
 set_false_path -to [get_cells {lisa_hdmi_output/CONT_int_reg[*]}]
+
+## We need yet another false path on the I/O board for a really crazy path that never actually happens in real life but Vivado flags
+## The path is FDC MA bus -> BD_out -> IO_D -> the SCC write registers
+## Obviously that never happens; we never communicate directly from the FDC to the SCC without the CPU in the middle, so it's a false path
+## Vivado generated this _xlnx_shared_i0 line for me (I previously had it inline with each of my false path constraints)
+## No idea why it did this, but it makes things simpler, so I'm not complaining
+set _xlnx_shared_i0 [get_cells -hierarchical -filter {NAME =~ io_board/absolutely_amazing_scc_implementation/*}]
+set_false_path -from [get_cells {io_board/MA_reg[*]}] -to $_xlnx_shared_i0
+## Same deal for a path from the FDC counter to the SCC
+set_false_path -from [get_cells {io_board/FDC_counter_reg[*]}] -to $_xlnx_shared_i0
+## And from FDC_RAM_addr_select to the SCC
+set_false_path -from [get_cells io_board/FDC_RAM_addr_select_reg] -to $_xlnx_shared_i0
+## And _FDC_RAM_CS_processed to the SCC
+set_false_path -from [get_cells io_board/_FDC_RAM_CS_processed_reg] -to $_xlnx_shared_i0
 
 ## There's an annoying DRC rule during implementation that gives us an error if we try to drive 3 or more MMCMs from one IBUF
 ## You can do it, but the MMCMs have to placed in certain places relative to the IBUF, which doesn't work out for us

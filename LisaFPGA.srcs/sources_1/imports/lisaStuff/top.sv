@@ -117,16 +117,6 @@ module top(
 
         (* PULLTYPE = "PULLDOWN" *) input logic [5:0] GPIO,
 
-        output logic SCC_C4M,
-        output logic SCC_WR,
-        output logic SCC_RD,
-        input logic _SCC_RSIR,
-        output logic SCC_A2,
-        output logic SCC_A1,
-        output logic _SCC_CS,
-        input logic _SCC_PSI,
-        inout logic [7:0] SCC_D,
-
         input logic SYNCA,
         output logic TXDA,
         output logic RTSA,
@@ -162,10 +152,8 @@ module top(
     // It's also exposed as a field in the identity register
     localparam logic LisaFPGA_Desktop = 1'b1;
 
-    // The internal Verilog SCC isn't working yet, so disable the transceivers that hook it to the serial bus
-    assign INTERNAL_SCC_EN = 1'b1;
-    // Stick something random on the GPIO pins for now
-    //assign GPIO = {_VSYNC, _HSYNC, VID, TONE, LEFT_ESFLOPPY, OK_ESFLOPPY};
+    // The internal Verilog SCC is now working, so enable the transceivers that hook it to the serial bus instead of using the external SCC
+    assign INTERNAL_SCC_EN = 1'b0;
 
     // Pass the LEFT, OK, and RIGHT signals from the ESFloppy control buttons straight back out to the ESP32 again
     // Just pick three of the ESFLOPPY_COMM_BUS lines for this
@@ -360,7 +348,6 @@ module top(
         .O(DOTCK_ungated) // Final DOTCK output
     );
 
-    //assign COPCK = rpio_24_r;
     // Here's that division by 2
     always_ff @(posedge COPCK_2x) begin
         // In simulation, we need to give COPCK a defined state on reset
@@ -377,8 +364,15 @@ module top(
         `endif
     end
 
-    always_ff @(posedge SCCCK_2x, negedge _RESET) begin
-        if (!_RESET) begin
+    // We need to do something similar for the SCCCK, but we also need to synchronize the reset signal into its clock domain before feeding it in
+    (* ASYNC_REG = "TRUE" *) logic _RESET_SCCCK_int, _RESET_SCCCK_sync;
+    always_ff @(posedge SCCCK_2x) begin
+        _RESET_SCCCK_int <= _RESET;
+        _RESET_SCCCK_sync <= _RESET_SCCCK_int;
+    end
+    // And now do the actual division by 2, using the synchronized reset signal
+    always_ff @(posedge SCCCK_2x, negedge _RESET_SCCCK_sync) begin
+        if (!_RESET_SCCCK_sync) begin
             SCCCK_ungated <= 1'b0;
         end else begin
             SCCCK_ungated <= ~SCCCK_ungated;
@@ -501,14 +495,6 @@ module top(
     logic _VSYNC_int;
     assign _VSYNC = ~_VSYNC_int;
     assign VID = ~VID_int;
-    // 1 means don't invert, 0 means invert
-    // From the CPU board's perspective, a 1 actually inverts the video, but the aforementioned LS132 inverts it back again
-    //assign INVID = 1'b1;
-
-    /*assign _RSIR = 1'b1;
-    assign _KBIR = 1'b1;
-    assign _IOIR = 1'b1;
-    assign _VPA = 1'b1;*/
 
     logic tmds_clock;
     logic [2:0] tmds;
@@ -516,25 +502,23 @@ module top(
     logic VA_overflow;
     logic _clr_vid_clk;
 
-    `ifndef SIMULATION
-        HDMI_Interface lisa_hdmi_output(
-            .sysclk(sysclk_ibuf),
-            ._reset(_RESET),
-            .DOTCK(DOTCK),
-            .framerate_sel(FRAMERATE_SEL), // 0 for 1080p30, 1 for 1080p60
-            .VA_overflow(VA_overflow), // Replaces VSYNC; better reflects the VSYNC time which is actually longer than _VSYNC
-            ._clr_vid_clk(_clr_vid_clk), // Replaces _HSYNC; better reflects the HSYNC time which is actually shorter than _HSYNC
-            .VID(VID_int),
-            .CONT(CONT),
-            .TONE(TONE),
-            .VC(VC),
-            .CPU_ROM_SEL(CPU_ROM_SEL),
-            .blank_video(~ON), // When the Lisa is off, we want to blank the video output
-            .scanlines(SCANLINES), // When high, put scanlines on the video output to make it look cool
-            .tmds_clock(tmds_clock),
-            .tmds(tmds)
-        );
-    `endif
+    HDMI_Interface lisa_hdmi_output(
+        .sysclk(sysclk_ibuf),
+        ._reset(_RESET),
+        .DOTCK(DOTCK),
+        .framerate_sel(FRAMERATE_SEL), // 0 for 1080p30, 1 for 1080p60
+        .VA_overflow(VA_overflow), // Replaces VSYNC; better reflects the VSYNC time which is actually longer than _VSYNC
+        ._clr_vid_clk(_clr_vid_clk), // Replaces _HSYNC; better reflects the HSYNC time which is actually shorter than _HSYNC
+        .VID(VID_int),
+        .CONT(CONT),
+        .TONE(TONE),
+        .VC(VC),
+        .CPU_ROM_SEL(CPU_ROM_SEL),
+        .blank_video(~ON), // When the Lisa is off, we want to blank the video output
+        .scanlines(SCANLINES), // When high, put scanlines on the video output to make it look cool
+        .tmds_clock(tmds_clock),
+        .tmds(tmds)
+    );
 
     genvar i;
     generate
@@ -734,7 +718,6 @@ module top(
     assign _INT2 = 1'b1;
 
     assign _IRQ = 1'b1;
-    //assign SPKRIN = 1'b0;
 
     // The floppy drive signals come from either the onboard ESFloppy or an external floppy drive
     // This depends on the FLOPPY_SRC signal, so we need to mux between them
@@ -1177,9 +1160,6 @@ module top(
         end
     end
 
-    logic [7:0] SCC_DOUT;
-    logic [7:0] SCC_DIN;
-
     IO_board io_board(
         .PH(PH),
         .WRD(WRD),
@@ -1266,39 +1246,9 @@ module top(
         .DOTCK(DOTCK),
         .E_either_edge(E_either_edge),
         .VC(VC),
-        .SCC_C4M(SCC_C4M),
-        .SCC_WR(SCC_WR),
-        .SCC_RD(SCC_RD),
-        ._SCC_RSIR(_SCC_RSIR),
-        .SCC_A2(SCC_A2),
-        .SCC_A1(SCC_A1),
-        ._SCC_CS(_SCC_CS),
-        ._SCC_PSI(_SCC_PSI),
-        .SCC_DOUT(SCC_DOUT),
-        .SCC_DIN(SCC_DIN),
         .IO_ROM_SEL(IO_ROM_SEL),
         .spoof_88(GPIO[0])
     );
-
-
-    `ifndef SIMULATION
-        // The external SCC uses a bidrectional data bus, so we need IOBUFs for it
-        generate
-            for (i = 0; i < 8; i++) begin
-                IOBUF SCC_DBuf (
-                    // Incoming data from the SCC goes into SCC_DIN[i]
-                    .O(SCC_DIN[i]),
-                    // The bidirectional SCC bus is SCC_D[7:0]
-                    .IO(SCC_D[i]),
-                    // Outgoing data to the SCC is SCC_DOUT[i]
-                    .I(SCC_DOUT[i]),
-                    // Direction is determined by SCC_WR; high means SCC->Lisa, low means Lisa->SCC
-                    .T(SCC_WR)
-                );
-            end
-        endgenerate
-    `endif
-
 
     logic [15:0] DIN_SRAM;
     logic [15:0] DOUT_SRAM;
