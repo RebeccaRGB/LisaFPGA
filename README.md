@@ -63,14 +63,14 @@ For more info on the actual HDL code running on the FPGA, check the [Dev Notes](
 
 # Buying or Building a Board
 ## Buying a Board
-I offer LisaFPGA boards for sale through both [MacEffects](https://maceffects.com/products/lisafpga) and [Joe's Computer Museum](https://jcm-1.com/product/lisafpga/). The boards are listed for $300 apiece on both sites; the choice of who to buy from purely comes down to who you prefer to do business with.
+I offer LisaFPGA boards for sale through both [MacEffects](https://maceffects.com/products/lisafpga) and [Joe's Computer Museum](https://jcm-1.com/product/lisafpga/). The boards are listed for $350 apiece on both sites; the choice of who to buy from purely comes down to who you prefer to do business with.
 
 These boards are pretty popular and there's a several-week lead time on each batch that I fabricate, so there's a good chance that they'll frequently be out of stock, especially at first. Hopefully this will get better as we get later into 2026 and demand starts to drop!
 
 If you bought a board and you see a big empty socket near the top-center, then don't worry; you have a Rev. 3 board where it's empty by design! You're not missing any parts, and future revisions get rid of the socket entirely.
 
 ## Building Your Own
-If you want to fabricate/assemble your own batch of boards through a PCB manufacturing service, then that's absolutely an option as well! It isn't particularly hard, and I'll walk you through it here. Just keep in mind that it's very expensive to purchase these boards in small quantities thanks to the large fixed production costs, which go down a lot when you buy in bulk. So you'll probably be looking at $500-ish apiece with a minimum order quantity of 2 ($1000 total) if you fabricate your own versus $300 if you just buy one from one of my bulk orders.
+If you want to fabricate/assemble your own batch of boards through a PCB manufacturing service, then that's absolutely an option as well! It isn't particularly hard, and I'll walk you through it here. Just keep in mind that it's very expensive to purchase these boards in small quantities thanks to the large fixed production costs, which go down a lot when you buy in bulk. So you'll probably be looking at $500-ish apiece with a minimum order quantity of 2 ($1000 total) if you fabricate your own versus $350 if you just buy one from one of my bulk orders.
 
 I use [JLCPCB](https://jlcpcb.com/) for all of my PCB orders, and I'd highly recommend that you do the same. Especially for this project; the entire bill of materials is tailored to what JLC normally stocks, and the PCB's trace spacings/widths for impedance matching were designed to match one of JLC's board stackups.
 
